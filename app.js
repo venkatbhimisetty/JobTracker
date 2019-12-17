@@ -5,17 +5,18 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage} = require('./routes/index');
+const {getHomePage,getJobStatusdrop} = require('./routes/index');
+
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 2000;
 
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
 const db = mysql.createConnection ({
-    host: 'localhost',
+    host: 'HYTSP00031',
     user: 'root',
     password: 'root@123',
-    database: 'socka'
+    database: 'jobtracker'
 });
 
 // connect to database
@@ -27,7 +28,7 @@ db.connect((err) => {
 });
 global.db = db;
 
-
+// configure middleware
 app.set('port', process.env.port || port); // set express to use this port
 app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
 app.set('view engine', 'ejs'); // configure template engine
@@ -44,6 +45,9 @@ app.get('/edit/:id', editPlayerPage);
 app.get('/delete/:id', deletePlayer);
 app.post('/add', addPlayer);
 app.post('/edit/:id', editPlayer);
+
+app.get('/jobstatus', getJobStatusdrop);
+
 
 // set the app to listen on the port
 app.listen(port, () => {
