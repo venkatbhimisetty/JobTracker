@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>JobPortal</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">   
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">   
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">       
-    <!-- <link rel="stylesheet" href="fonts/flaticon.css">
-    <link rel="stylesheet" href="fonts/icomoon.css"> -->
-	<link rel="stylesheet" href="css/style.css">
-<!-- 	
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
+	<title>JobPortal</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/aos.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
+	<link rel="stylesheet" href="fonts/flaticon.css">
+	<link rel="stylesheet" href="fonts/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
   <script>
-	$(document).ready(function(){ 
-		
-		
-		$("#v-pills-1-tab").click(function () {
-
-			$("#myCollapsible").collapse('toggle');
-			$("#jobdetails").collapse('toggle');
-		
-		
-	});
+	$(document).ready(function () {
+			$("#v-pills-1-tab").click(function () {
+				$("#myCollapsible").collapse('toggle');
+				$("#jobdetails").collapse('toggle');
+			});
+			
 		$("#canceljob").click(function(){
 		
-			$("#myCollapsible").hide('toggle');
-			$("#jobdetails").hide('toggle');
-		
+		$("#myCollapsible").hide('toggle');
+		$("#jobdetails").hide('toggle');
 	
-	});
-		jobstatus();     
 
-	});
+});
+	        jobstatus();    
+			budropdown();
+			salesdropdown();
+			salesrepdropdown();
+			customerdropdown();
+		});
+
+
+	
 	
 //   document.getElementById('choosefile').onchange = uploadOnChange;
 
 function uploadOnChange() {
-  var path = $("#choosefile").val();
- 
+  var path = $("#choosefile").val(); 
   filetext = path.split('\\').pop().split('/').pop();
-					
-					$("#filename").val(filetext);
+	$("#filename").val(filetext);
 }
 
 
 function jobstatus() {
+	console.log("hai");
 		jobstatusdrop='';
             var url = "http://localhost:2000/jobstatus";
             $.ajax({
                 url: url,
                 type: "GET",
                 success: function (result) {
+					console.log(result);
                     for (var i = 0; i < result[0].length; i++) {
                         jobstatusdrop = jobstatusdrop +
                             '<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
@@ -75,6 +73,137 @@ function jobstatus() {
             });
         }
 
+	function budropdown() {
+		var budropdown = "";
+		var url = "http://localhost:2000/bu";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				for (var i = 0; i < result[0].length; i++) {
+					budropdown = budropdown +
+						'<option value="' + result[0][i].bussinessunitId + '">' + result[0][i].bussinessunit + '</option>';
+				}
+				$("#bunit").html(budropdown);
+			}
+		});
+	}
+
+	function salesdropdown() {
+		var salesdropdown = "";
+		var url = "http://localhost:2000/sales";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				for (var i = 0; i < result[0].length; i++) {
+					salesdropdown = salesdropdown +
+						'<option value="' + result[0][i].salesregionsId + '">' + result[0][i].salesregions + '</option>';
+				}
+				$("#salesregion").html(salesdropdown);
+			}
+		});
+	}
+	
+	function salesrepdropdown() {
+		var salesrepdropdown = "";
+		var url = "http://localhost:2000/salesrep";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				for (var i = 0; i < result[0].length; i++) {
+					salesrepdropdown = salesrepdropdown +
+						'<option value="' + result[0][i].salesrepId + '">' + result[0][i].salesrep + '</option>';
+				}
+				$("#salesrepresent").html(salesrepdropdown);
+			}
+		});
+	}
+	
+	function customerdropdown() {
+		var customerdropdown = "";
+		var url = "http://localhost:2000/customer";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				for (var i = 0; i < result[0].length; i++) {
+					customerdropdown = customerdropdown +
+						'<option value="' + result[0][i].customersId + '">' + result[0][i].customers + '</option>';
+				}
+				$("#cus").html(customerdropdown);
+			}
+		});
+	}
+
+
+	// function addjd() {
+	// 	console.log("buid");
+	// 	var dateofreq='17-12-2017';
+	// 		var buid = $("#bunit").val();
+	// 		console.log(buid);
+	// 		var salesregionid = $("#salesregion").val();
+	// 		var salesrepid = $("#stats").val();
+	// 		var customerid = $("#cus").val();
+	// 		var Comments = $("#comment").val();
+	// 		var Requirement = $("#requirement").val(); 
+	// 		var Role = $("#role").val(); 
+	// 		var Expected = $("#edate").val(); 
+	// 		var Position = $("#Positions").val(); 
+	// 		var Exp = $("#experience").val(); 
+	// 		var Status = $("#role").val(); 			
+	// 		var PSkill = $("#piskills").val(); 
+	// 		var SSkill= $("#seskills").val(); 
+	// 		var joblocation= $("#jloc").val(); 
+	// 		var locationflex= $("#locflex").val(); 
+	// 		var jDescription=("#jdesp").val(); 
+	// 		var Comments = $("#comm").val();
+	// 		var createdate= ''; 
+	// 		var updateby= ''; 
+	// 		var updatetime=''; 
+	// 		var createdby = '';
+
+	// 		var data = {
+    //             "bu": buid,
+    //             "salesreg": salesregionid,
+    //             "salesrep": salesrepid,
+	// 			"customer": customerid,
+	// 			"com":Comments,
+	// 			"Req":Requirement,
+	// 			"Rle":Role,
+	// 			"EXP":Expected,
+	// 			"pos":Position,
+	// 			"experince":Exp,
+	// 			"status":Status,
+	// 			"primaryskill":PSkill,
+	// 			"seconskill":SSkill,
+	// 			"jobl":joblocation,
+	// 			"locaflex":locationflex,
+	// 			"jobdesp":jDescription,
+	// 			"comm":Comments,
+	// 			"cdate":createdate,
+	// 			"udate":updateby,
+	// 			"utime":updatetime,
+	// 			"create":createdby,
+
+	// 		}
+	// 		alert(data);
+	// 		data = JSON.stringify(data);
+	// 		$.ajax({
+    //                 url: "http://localhost:2000/jdescription",
+    //                 type: "POST",
+    //                 async: false,
+    //                 data: data,
+    //                 contentType: "application/json",
+    //                 dataType: "json",
+    //                 success: function (result) {                        
+    //                 },
+    //                 error: function () { 
+    //                 }
+    //             });
+
+	// }
   </script>
   <body>
     
@@ -100,87 +229,72 @@ function jobstatus() {
 	  </nav>
     <!-- END nav -->
     
-	<div class="hero-wrap js-fullheight" style="background-image: url('/assets/img/bg_2.jpg'); height:572px;"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
-				data-scrollax-parent="true">
-				<div class="col-xl-10 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
-					<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have <span
-							class="number" data-number="8">0</span> great job offers you observe!</p>
-					<h1 class="mb-5" style="font-weight: 100;font-size:40px;"
-						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1>
-	
-					<div class="ftco-search">
-						<div class="row">
-							<div class="col-md-12 nav-link-wrap">
-								<div class="nav nav-pills text-center" id="v-pills-tab" role="tablist"
-									aria-orientation="vertical">
-									<a class="nav-link active mr-sm-1 " id="v-pills-1-tab" data-toggle="pill"
-										href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New
-										Job</a>
-	
-									<!-- <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Vendors</a> -->
-	
-								</div>
-							</div>
-							<div class="col-md-12 tab-wrap">
-	
-								<div class="tab-content" id="v-pills-tabContent">
-	
-									<div class="tab-pane fade show active " id="v-pills-1" role="tabpanel"
-										aria-labelledby="v-pills-nextgen-tab">
-	
-										<form action="#" class="search-job">
-	
-											<div id="jobdetails" class="collapse hide">
-												<br>
-												<!-- <div class="row">
-												<div class="col-lg-12"></div>
-											</div> -->
-												<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="overflow-y: scroll;height:500px;">
-													<div class="card">
-														<h5 class="card-header" style="background-color: #73c7e7">Details
-														</h5>
-														<div class="card-body">
-															<form id="validationform" data-parsley-validate="" novalidate="">
-																<div class="row">
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 ">
-																	</div>
-																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		<label><span style="color:red;">*</span>Business
-																			Unit:</label></div>
-																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select class="form-control" required></select>
-																	</div>
-												
-																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		<label><span style="color:red;">*</span>Sales
-																			Region:</label></div>
-																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select class="form-control" required></select>
-																	</div>
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																	</div>
-												
+    <div class="hero-wrap js-fullheight" style="background-image: url('/assets/img/bg_2.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-xl-10 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
+          	<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have <span class="number" data-number="8">0</span> great job offers you observe!</p>
+            <h1 class="mb-5" style="font-weight: 100;font-size:40px;"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1>
+
+						<div class="ftco-search">
+							<div class="row">
+		            <div class="col-md-12 nav-link-wrap">
+			            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+			              <a class="nav-link active mr-sm-1 " id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New Job</a>
+
+			              <!-- <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Vendors</a> -->
+
+			            </div>
+			          </div>
+			           <div class="col-md-12 tab-wrap">
+			            
+			            <div class="tab-content" id="v-pills-tabContent">
+
+			              <div class="tab-pane fade show active " id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab" >
+								
+							<form action="/jdescription"  method="post"class="search-job">
+								
+								  <div id="jobdetails" class="collapse hide">
+										<br>
+										<!-- <div class="row">
+											<div class="col-lg-12"></div>
+										</div> -->
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="overflow-y: scroll;height:500px;">
+												<div class="card">
+													<h5 class="card-header" style="background-color: #73c7e7">Details</h5>
+													<div class="card-body">
+														
+															<div class="row">
+																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 "></div>
+																<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																<label><span style="color:red;">*</span>Business Unit:</label></div>
+																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																	<select  class="form-control" id="bunit" name="bu_unit"></select>
 																</div>
-																<div class="row">
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																	</div>
-																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		<label><span style="color:red;">*</span>Sales
-																			Representative:</label></div>
+																
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	<label><span style="color:red;">*</span>Sales Regions:</label></div>
 																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select class="form-control" required></select>
+																		<select  class="form-control"  id="salesregion" name="sales_region" required ></select>
+																	</div>
+																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+
+															</div>
+															<div class="row">
+																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																<label><span style="color:red;">*</span>Sales Representatives:</label></div>
+																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																	<select  class="form-control" id="salesrepresent" name="sale_rep" required></select>
+																</div>
+																
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	<label><span style="color:red;">*</span>Customers:</label></div>
+																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																		<select  class="form-control" id="cus" name="customer" required ></select>
 																	</div>
 												
-																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		<label><span style="color:red;">*</span>Customer:</label>
-																	</div>
-																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select class="form-control" required></select>
-																	</div>
 																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
 																	</div>
 												
@@ -192,207 +306,175 @@ function jobstatus() {
 																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																		<label>Comments:</label></div>
 																	<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																		<textarea style="width: 90%;border-radius: 5px;"></textarea>
+																		<textarea style="width: 90%;border-radius: 5px;" id="comment" name="bucomments" ></textarea>
 																	</div>
 																</div>
 												
 												
-															</form>
+															
 														</div>
 													</div>
-												
-												
-												
-												
-												
-													<div id="myCollapsible" class="collapse hide">
-														<br>
-														<div class="card">
-															<h5 class="card-header" style="background-color: #73c7e7">Job
-																Description</h5>
-															<div class="card-body">
-												
-																<form id="validationform" data-parsley-validate="" validate="">
-																	<div class="row">
-												
-																		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<input type="file" id="choosefile" onchange="uploadOnChange()" name="myFile" multiple
-																				style="color: black;font-size: 13px;">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		</div>
-												
-																		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" id="filename" style="width: 100%;" disabled>
-																		</div>
-												
-																	</div>
-												
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Requirement
-																				I'd:</label></div>
-																		<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Role/Domain:</label>
-																		</div>
-																		<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-												
-																	</div>
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Expected
-																				Date:</label></div>
-																		<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="date" class="form-control" required>
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>No of
-																				Positions :</label></div>
-																		<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-												
-																	</div>
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Experience:</label>
-																		</div>
-																		<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Status:</label>
-																		</div>
-																		<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<select class="form-control" id="jobstatus" required></select>
-																		</div>
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-												
-																	</div>
-												
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Primary
-																				Skill:</label></div>
-																		<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Secondary
-																				Skill:</label></div>
-																		<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-												
-																	</div>
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Job
-																				Location:</label></div>
-																		<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<input type="text" class="form-control" required>
-																		</div>
-												
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label>Location Flexiblity:</label></div>
-																		<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																			<select class="form-control" required>
-												
-																				<option>Yes</option>
-												
-																				<option>No</option>
-												
-																			</select>
-																		</div>
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-												
-																	</div>
-												
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label><span style="color:red;">*</span>Job
-																				Description:</label></div>
-																		<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																			<textarea style="width: 90%;border-radius: 5px;" required></textarea>
-																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																		</div>
-																		<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																			<label>Comments:</label></div>
-																		<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																			<textarea style="width: 90%;border-radius: 5px;"></textarea>
-																		</div>
-																	</div>
-												
-												
-																</form>
-												
+											
+											
+
+
+
+
+											<div id="myCollapsible" class="collapse hide">
+													<br>
+															<div class="card">
+																<h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
+																<div class="card-body">
+				
+																																				
+																				<div class="row">
+																					
+																						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
+																				
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							<input type="file"   id="choosefile" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
+																						</div>
+																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></div>
+																						
+																						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																						<input type="text" class="form-control" id="filename"  style="width: 100%;" disabled>
+																						</div>
+																						
+																				</div>
+
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					<label><span style="color:red;">*</span>Requirement I'd:</label></div>
+																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																						<input type="text" id="requirement" name="Requirementid" class="form-control" required >
+																					</div>
+																					
+																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						<label><span style="color:red;">*</span>Role/Domain:</label></div>
+																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
+																							<input type="text" id="role" name="role" class="form-control" >
+																						</div>
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+					
+																				</div>
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					<label><span style="color:red;">*</span>Expected Date:</label></div>
+																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																						<input type="date" id="edate" name="ex_date" class="form-control" required >
+																					</div>
+																					
+																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						<label><span style="color:red;">*</span>No of Positions :</label></div>
+																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							<input type="text" id="positions" name="positions" class="form-control" required>
+																						</div>
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+					
+																				</div>
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					<label><span style="color:red;">*</span>Experience:</label></div>
+																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																						<input type="text" id="experience" name="experience" class="form-control" required>
+																					</div>
+																					
+																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						<label><span style="color:red;">*</span>Status:</label></div>
+																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								<select id="jobstatus"  name="status" class="form-control" required></select>
+																						</div>
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+					
+																				</div>
+				
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					<label><span style="color:red;">*</span>Primary Skill:</label></div>
+																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							<input type="text"  class="form-control" name="primary_skill" id="piskills" required>
+																					</div>
+																					
+																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																				<label><span style="color:red;">*</span>Secondary Skill:</label></div>
+																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								<input type="text" id="seskills" name="secondry_skill"  class="form-control" required>
+																						</div>
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+					
+																				</div>
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					<label><span style="color:red;">*</span>Job Location:</label></div>
+																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							<input type="text" id="jloc" name="job_location" class="form-control" required>
+																					</div>
+																					
+																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																				<label>Location Flexiblity:</label></div>
+																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								<select id="locflex"  class="form-control" name="loc_flex" required>
+																									<option value="Y">Yes</option>
+                                                												    <option value="N">No</option> 
+																								</select>
+																						</div>
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+					
+																				</div>
+
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						<label><span style="color:red;">*</span>Job Description:</label></div>
+																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+																							<textarea id="jdesp" name="job_description" style="width: 90%;border-radius: 5px;" ></textarea>
+																						</div>
+																					</div>
+																				<div class="row">
+																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						<label>Comments:</label></div>
+																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+																							<textarea id="comm" name="jd_comments" style="width: 90%;border-radius: 5px;" ></textarea>
+																						</div>
+																					</div>
+				
+																		
+																	
+																
+																</div>
+																
 															</div>
 												
 														</div>
 												
-													</div>
-												</div>
+													
+												
 												<div class="footer" style="margin:3%;">
 													<div class="form-group row text-right" style="right:-24%;top:-13px;">
 														<div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-															<button type="submit" class="btn btn-info">Submit</button>
+															<button type="submit"  class="btn btn-info">Submit</button>
 															<button type="button" id="canceljob"
 																class="btn btn-info">Cancel</button>
 	
 														</div>
 													</div>
 												</div>
-	
 											</div>
-	
-	
-	
-	
-	
-	
+										</div>
 										</form>
-	
-	
 	
 									</div>
 	
+								</div>
 	
 	
+								</div>
 	
 	
 								</div>
@@ -463,13 +545,13 @@ function jobstatus() {
 			<div class="col-md-12 text-center">
   
 			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+	 L&T Technology Services <i class="icon-heart text-danger" aria-hidden="true"></i> 
 	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
 		  </div>
 		</div>
 	  </footer>
-  <script src="js/jquery.min.js"></script>
+  <!-- <script src="js/jquery.min.js"></script> -->
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
