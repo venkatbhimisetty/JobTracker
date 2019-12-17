@@ -21,13 +21,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
+  
   <script>
-	$(document).ready(function () {
-			$("#v-pills-1-tab").click(function () {
-				$("#myCollapsible").collapse('toggle');
-				$("#jobdetails").collapse('toggle');
-			});
+	$(document).ready(function(){ 
+		
+		
+		$("#v-pills-1-tab").click(function () {
+
+			$("#myCollapsible").collapse('toggle');
+			$("#jobdetails").collapse('toggle');
 			
+			
+		
+		
+	});
+
 		$("#canceljob").click(function(){
 		
 		$("#myCollapsible").hide('toggle');
@@ -40,17 +48,48 @@
 			salesdropdown();
 			salesrepdropdown();
 			customerdropdown();
-		});
+	
 
 
 	
 	
 //   document.getElementById('choosefile').onchange = uploadOnChange;
+	
+	$("#v-pills-2-tab").click(function(){
+		
+		$("#jobslisting").collapse('toggle');
+	
+
+});
+$("#v-pills-2-tab").hide();
+	$("#v-pills-3-tab").hide();
+	$("#v-pills-4-tab").hide();	// jobstatus(); 
+		// togglejobs();    
+
+	});
+
 
 function uploadOnChange() {
   var path = $("#choosefile").val(); 
   filetext = path.split('\\').pop().split('/').pop();
 	$("#filename").val(filetext);
+}
+function toggleoperations(){
+	$("#myCollapsible").hide('toggle');
+	$("#jobdetails").hide('toggle');
+	$("#v-pills-1-tab").hide();
+	$("#v-pills-2-tab").show();
+	$("#v-pills-3-tab").show();
+	$("#v-pills-4-tab").show();
+}
+function togglejobs(){
+	$("#myCollapsible").collapse('toggle');
+	$("#jobdetails").collapse('toggle');
+	$("#jobslisting").hide('toggle');
+	$("#v-pills-1-tab").show();
+	$("#v-pills-2-tab").hide();
+	$("#v-pills-3-tab").hide();
+	$("#v-pills-4-tab").hide();
 }
 
 
@@ -219,8 +258,8 @@ function jobstatus() {
 	          <!-- <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li> 
 	          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li> -->
-	          <li class="nav-item active" ><a href="/contact" class="nav-link " style="font-size: 20px;color: #73c7e7;font-weight: 900;" >Jobs</a></li> 
-	          <li class="nav-item "><a href="/postjob" class="nav-link" style="font-size: 20px;color: #73c7e7;font-weight: 900;">Operations</a></li> 
+	          <li class="nav-item active" ><a onclick="togglejobs();" class="nav-link " style="font-size: 20px;color: #73c7e7;font-weight: 900;" >Jobs</a></li> 
+	          <li class="nav-item "><a  onclick="toggleoperations();" class="nav-link" style="font-size: 20px;color: #73c7e7;font-weight: 900;">Operations</a></li> 
 	          <li class="nav-item "><a href="/newpost" class="nav-link" style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
 
 	        </ul>
@@ -241,10 +280,11 @@ function jobstatus() {
 							<div class="row">
 		            <div class="col-md-12 nav-link-wrap">
 			            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			              <a class="nav-link active mr-sm-1 " id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New Job</a>
+			              <a class="nav-link active mr-sm-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New Job</a>
 
-			              <!-- <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Vendors</a> -->
-
+			              <a class="nav-link active mr-sm-1 " id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Jobs</a>
+						  <a class="nav-link active mr-sm-1 " id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Profiles</a>
+						  <a class="nav-link active mr-sm-1 " id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">vendors</a>
 			            </div>
 			          </div>
 			           <div class="col-md-12 tab-wrap">
@@ -468,6 +508,76 @@ function jobstatus() {
 											</div>
 										</div>
 										</form>
+	
+	
+
+
+										<div id="jobslisting" class="collapse hide" >
+											<br>
+											<div class="card" >
+												<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
+												<div class="card-body" id="joblistingbody">
+									
+													
+														
+															<!-- <div class="row">
+																<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
+																<div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+																		<label><h3>Recently Added Jobs</h3></label>	</div>										 
+																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
+															</div> -->
+															
+																
+											
+														
+											
+														
+															<div class="card">
+															<div class="row">
+															 <div class="col-lg-3"><p style="color: black;">Requirment ID</p></div>
+															 <div class="col-lg-3"><p style="color: black;">Job Name</p></div>
+															 <div class="col-lg-3"><p style="color: black;">Customer</p></div>
+															</div>
+															<div class="row">
+																<div class="col-lg-3"><p style="color: black;">Job Location</p></div>
+																<div class="col-lg-3"><p style="color: black;">No Of Positions</p></div>
+																<div class="col-lg-3"><p style="color: black;">Skills</p></div>
+																<div style="margin-top: -22px;
+																
+																margin-left: 102px">
+																	<a href="#" class="btn btn-info ">View</a>
+																	
+																  </div>
+															   </div>
+															
+															
+															   
+											
+														  
+														</div>
+													
+													
+											
+													  
+													  
+													
+													 
+													 
+											
+													 
+													 
+													 
+															
+									
+									
+													
+									
+												
+									
+											
+									
+										</div>
+
 	
 									</div>
 	
