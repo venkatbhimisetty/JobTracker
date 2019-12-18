@@ -542,10 +542,8 @@ function jobstatus() {
 																<div class="col-lg-3"><p style="color: black;">Job Location</p></div>
 																<div class="col-lg-3"><p style="color: black;">No Of Positions</p></div>
 																<div class="col-lg-3"><p style="color: black;">Skills</p></div>
-																<div style="margin-top: -22px;
-																
-																margin-left: 102px">
-																	<a href="#" class="btn btn-info ">View</a>
+																<div style="margin-top: -22px;margin-left: 102px">
+																	<a href="#" class="btn btn-info " data-toggle="modal" data-target="#jobModal">View</a>
 																	
 																  </div>
 															   </div>
@@ -661,6 +659,235 @@ function jobstatus() {
 		  </div>
 		</div>
 	  </footer>
+
+
+	  
+	  
+		<!-- Modal -->
+		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 15%;" >
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header" style="background-color: #73c7e7">
+				<h4 class="modal-title">Job Description</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				
+			  </div>
+			  <div class="modal-body" style="overflow:auto;height:205px;">
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>Requirement ID:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text"  class="form-control" id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">Job Location:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="text" class="form-control"  id="tit">
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div> 
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>Experience:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text" class="form-control"  id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">Expected date:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="date" class="form-control"  id="tit" >
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div> 	
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>Location Flexibility:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text" class="form-control"   id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">created by :</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="text" class="form-control"  id="tit">
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div> 
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						  <label>Business Unit:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <select class="form-control"   id="prio" name="priority" >
+						  </select>
+					  </div>
+					  
+					  <div class="col-sm-2">
+						   <label>Sales Regions:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <select class="form-control"  id="stat" name="status">
+						  </select>
+					  </div>
+					  <div class="col-sm-1"></div>
+				  </div>
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						  <label>sales representative:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <select class="form-control"  id="prio" name="priority" >
+						  </select>
+					  </div>
+					  
+					  <div class="col-sm-2">
+						   <label>Status:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <select class="form-control"  id="stat" name="status">
+						  </select>
+					  </div>
+					  <div class="col-sm-1"></div>
+				  </div>
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>Primary Skill:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text" class="form-control"  id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">Secondary Skill:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="text" class="form-control"  id="tit">
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div> 
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>created by </label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text" class="form-control"  id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">updated by  </label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="text" class="form-control"  id="tit">
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div> 
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>No of Positions : </label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="text" class="form-control"  id="tit">
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">Role/Domain:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="text" class="form-control"  id="tit">
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div>
+				  
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>created by date :</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="Date" class="form-control"   id="tit" >
+					  </div>
+					  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">updated by date:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="Date" class="form-control"  id="tit" >
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div>
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						   <label><span style="color:red">*</span>Date of request:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						   <input type="Date" class="form-control"  id="tit" >
+					  </div>
+				  
+					  <div class="col-sm-2">
+						  <label style="width: 113px;">Expected Date:</label>
+					  </div>
+					  <div class="col-sm-3">
+						  <input type="Date" class="form-control"  id="tit" >
+					  </div>
+					  <div class="col-sm-1"> </div>
+				  </div>
+				  <div class="row">
+				  <div class="col-sm-1"></div>
+					  <div class="col-sm-2">
+						  <label><span style="color:red">*</span>job description:</label>
+					  </div>
+					  <div class="col-sm-3">
+						   <p id="leadid" style="display:none;"></p>
+						  <input type="text" class="form-control" id="tit">
+					  </div>
+				   
+						  <div class="col-sm-2">
+							  <label style="width: 113px;">customers:</label>
+						  </div>
+						  <div class="col-sm-3">
+							  <select class="form-control" id="qual" name="quali">
+							  </select>
+						  </div>
+						  <div class="col-sm-1"> </div>
+				  </div>
+	  
+				  
+			  </div>
+			  <div class="modal-footer">
+				  <button type="submit" class="btn btn-info" data-dismiss="modal">Save</button>
+				  <button type="button" class="btn btn-info" data-dismiss="modal"> Cancel</button>                                                      
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  
+
+
   <!-- <script src="js/jquery.min.js"></script> -->
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
