@@ -69,6 +69,16 @@ module.exports = {
         });
     },
 
+    joblistingdetails: (req, res) => {
+        let customerquery = "CALL proclistjobdescription()";
+        db.query(customerquery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            console.log(result);
+        });
+    },
 
     addjd : (req, res) => {
 

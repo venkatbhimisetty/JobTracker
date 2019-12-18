@@ -176,6 +176,31 @@ function jobstatus() {
 		});
 	}
 
+	function joblistingdetails() {
+		var listdisplay= "";
+		var url = "http://localhost:2000/joblistingdetails";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+			console.log(result[0]);
+
+			for (var i = 0; i < result[0].length; i++) {
+				$("#reqidjoblist").text(result[0][i].requirmentId);
+				$("#roleidjoblist").text(result[0][i].role);
+				$("#locidjoblist").text(result[0][i].joblocation);
+				$("#jobdesidjoblist").text(result[0][i].jobdescription);
+				$("#posidjoblist").text(result[0][i].noofpositions);
+				$("#expidjoblist").text(result[0][i].experience);
+
+
+				}
+				
+			}
+		});
+	}
+
+
 
 	// function addjd() {
 	// 	console.log("buid");
@@ -282,7 +307,7 @@ function jobstatus() {
 			            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 			              <a class="nav-link active mr-sm-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New Job</a>
 
-			              <a class="nav-link active mr-sm-1 " id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Jobs</a>
+			              <a class="nav-link active mr-sm-1 " id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false" onclick="joblistingdetails();">Jobs</a>
 						  <a class="nav-link active mr-sm-1 " id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Profiles</a>
 						  <a class="nav-link active mr-sm-1 " id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">vendors</a>
 			            </div>
@@ -534,47 +559,25 @@ function jobstatus() {
 														
 															<div class="card">
 															<div class="row">
-															 <div class="col-lg-3"><p style="color: black;">Requirment ID</p></div>
-															 <div class="col-lg-3"><p style="color: black;">Job Name</p></div>
-															 <div class="col-lg-3"><p style="color: black;">Customer</p></div>
+															 <div class="col-lg-3"><label>Requirment ID :</label><span<p id="reqidjoblist" style="color: black;font-size: 13px;"></span></div>
+															 <div class="col-lg-3"><label>Job Type :</label><span id="roleidjoblist" style="color: black;font-size: 13px;"></span></div>
+															 <div class="col-lg-3"><label>Location :</label><span  id="locidjoblist" style="color: black;font-size: 13px;"></span></div>
 															</div>
 															<div class="row">
-																<div class="col-lg-3"><p style="color: black;">Job Location</p></div>
-																<div class="col-lg-3"><p style="color: black;">No Of Positions</p></div>
-																<div class="col-lg-3"><p style="color: black;">Skills</p></div>
-																<div style="margin-top: -22px;margin-left: 102px">
-																	<a href="#" class="btn btn-info " data-toggle="modal" data-target="#jobModal">View</a>
+																<div class="col-lg-3"><label>Job Type :</label><span id="jobdesidjoblist" style="color: black;font-size: 13px;"></span></div>
+																<div class="col-lg-3"><label>No Of Positions :</label><span  id="posidjoblist" style="color: black;font-size: 13px;"></span></div>
+																<div class="col-lg-3"><label>Experience :</label><span id="expidjoblist" style="color: black;font-size: 13px;"></span></div>
+																<div style="margin-top: -22px;
+																
+																margin-left: 102px">
+																	<a href="#" class="btn btn-info ">View</a>
 																	
 																  </div>
 															   </div>
-															
-															
-															   
-											
-														  
+														
 														</div>
 													
-													
-											
-													  
-													  
-													
-													 
-													 
-											
-													 
-													 
-													 
-															
-									
-									
-													
-									
-												
-									
-											
-									
-										</div>
+															</div>
 
 	
 									</div>

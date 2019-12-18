@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd} = require('./routes/index');
+const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 2000;
 
@@ -52,7 +52,7 @@ app.get('/customer', getcustomers);
 app.post('/jdescription', addjd);
 
 app.get('/jobstatus', getJobStatusdrop);
-
+app.get('/joblistingdetails', joblistingdetails);
 
 // set the app to listen on the port
 app.listen(port, () => {
