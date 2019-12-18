@@ -76,9 +76,68 @@ module.exports = {
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
+            
+        });
+    },
+
+    joblisting: (req, res) => {
+        
+        let jdid = req.params.i;
+        
+
+        let query = "CALL proclistjobdescriptionbyid('"+jdid+"')";
+      
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            
+        });
+    },
+
+    updatejoblisting: (req, res) => {
+        
+        let jobdescriptionid = req.body.jdiddisplayhidden;  
+        console.log(jobdescriptionid);
+        let reqID = req.body.reqid_display;
+        let joblocation = req.body.jlid_edit;
+        let experience = req.body.exp_edit;
+        let expecteddate = req.body.expdate_edit;
+        let locationfelx = req.body.lf_edit;
+        let jobdescription = req.body.jd_edit;
+        let bussinessunit = req.body.bu_edit;
+        let salesregion = req.body.sregion_edit; 
+        let salesrep = req.body.srep_edit;
+        let status = req.body.statusp_edit;
+        let primaryskill = req.body.ps_edit;
+        let secondaryskill = req.body.ss_edit;
+      //  let createdby = req.body.cby_edit;
+        let updateby = req.body.uby_edit;
+        let noofpositions = req.body.npos_edit;
+        let role = req.body.role_edit;
+       // let createddate = req.body.cbydate_edit;
+        let updatedtime =  req.body.ubydate_edit;
+        let dateofreq =   req.body.datereq_edit;
+        let customers =   req.body.cust_edit;
+        let jdcomments =   req.body.jdcomments;
+        let bucomments =   req.body.bucomments;
+       
+
+        let query = "CALL procUpdatejobdescription('"+jobdescriptionid+"','"+reqID+"','"+role+"','"+noofpositions+"','"+dateofreq+"','"+experience+
+        "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
+        "','"+salesrep+"',,'"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updatedtime+"')";
+        
+        console.log(query);
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
             console.log(result);
         });
     },
+
 
     addjd : (req, res) => {
 
@@ -102,15 +161,15 @@ module.exports = {
         let jDescription = req.body.job_description;
         let jdComments = req.body.jd_comments;
         let createdate = '2019-09-17 17:03:39';
-        let updateby =  '2019-09-17 17:03:39';
-        let updatetime =  '2019-09-17 17:03:39';
-        let createdby =  '2019-09-17 17:03:39';
+        let updateby =  'admin';
+         let updatetime =  '2019-09-17 17:03:39';
+         let createdby =  'admin';
     
         let query = "call procinsertjobdescription('" +
-        Requirement + "', '" + Role + "', '" + Position + "', '" + dateofreq + "','" + Exp + "','" + PSkill +
+        Requirement + "', '" + Role + "', '" + Position + "',  now() ,'" + Exp + "','" + PSkill +
             "',  '" + SSkill + "',  '" + Expected + "',  '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
-            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "','" + createdate + "','" + updateby + "','" + updatetime + "')";
+            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "', now() ,'" + updateby + "',now() )";
         
     
         db.query(query, (err, result) => {

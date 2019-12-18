@@ -117,7 +117,7 @@ function jobstatus() {
                             '<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
                     }
                     $("#jobstatus").html(jobstatusdrop);
-                   
+				    $("#statuspedit").html(jobstatusdrop);
                 }
             });
         }
@@ -134,6 +134,8 @@ function jobstatus() {
 						'<option value="' + result[0][i].bussinessunitId + '">' + result[0][i].bussinessunit + '</option>';
 				}
 				$("#bunit").html(budropdown);
+				$("#buedit").html(budropdown);
+
 			}
 		});
 	}
@@ -150,6 +152,7 @@ function jobstatus() {
 						'<option value="' + result[0][i].salesregionsId + '">' + result[0][i].salesregions + '</option>';
 				}
 				$("#salesregion").html(salesdropdown);
+				$("#sregionedit").html(salesdropdown);
 			}
 		});
 	}
@@ -166,6 +169,7 @@ function jobstatus() {
 						'<option value="' + result[0][i].salesrepId + '">' + result[0][i].salesrep + '</option>';
 				}
 				$("#salesrepresent").html(salesrepdropdown);
+				$("#srepedit").html(salesrepdropdown);
 			}
 		});
 	}
@@ -182,12 +186,14 @@ function jobstatus() {
 						'<option value="' + result[0][i].customersId + '">' + result[0][i].customers + '</option>';
 				}
 				$("#cus").html(customerdropdown);
+				$("#custedit").html(customerdropdown);
 			}
 		});
 	}
 
 	function joblistingdetails() {
-		var listdisplay= "";
+		var cardData = "";
+
 		var url = "http://localhost:2000/joblistingdetails";
 		$.ajax({
 			url: url,
@@ -196,21 +202,102 @@ function jobstatus() {
 			console.log(result[0]);
 
 			for (var i = 0; i < result[0].length; i++) {
-				$("#reqidjoblist").text(result[0][i].requirmentId);
-				$("#roleidjoblist").text(result[0][i].role);
-				$("#locidjoblist").text(result[0][i].joblocation);
-				$("#jobdesidjoblist").text(result[0][i].jobdescription);
-				$("#posidjoblist").text(result[0][i].noofpositions);
-				$("#expidjoblist").text(result[0][i].experience);
 
+				var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
+				
+             cardData= cardData +"<div class='card'>"+
+															"<div class='row'>"+
+															 "<div class='col-lg-3'>"+
+																 "<label>"+"Requirment ID :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].requirmentId+"</span>"+"</div>"+
+															 "<div class='col-lg-3'>"+
+																 "<label>"+"Job Type :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].role+"</span>"+"</div>"+
+															 "<div class='col-lg-3'>"+
+																 "<label>"+"Location :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].joblocation+"</span>"+"</div>"+
+															"</div>"+
+															"<div class='row'>"+
+															 "<div class='col-lg-3'>"+
+																	"<label>"+"Job Type :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].jobdescription+"</span>"+"</div>"+
+															 "<div class='col-lg-3'>"+
+																	"<label>"+"No Of Positions :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].noofpositions+"</span>"+"</div>"+
+															 "<div class='col-lg-3'>"+
+																	"<label>"+"Experience :"+"</label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].experience+"</span>"+"</div>"+
+																"<div style='margin-top: -22px;	margin-left: 102px'>"+
+																"<a href='#jobModal' data-toggle='modal' class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
+																	
+																 "</div>"+
+															  " </div>"+
+														
+														"</div>"
 
 				}
-				
+				$("#joblistingbody").html(cardData);
 			}
 		});
 	}
 
+	function jobdisplay(i){
 
+		var url = "http://localhost:2000/joblisting/" + i;
+		console.log(url);
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (result) {
+                      console.log(result);
+
+					  $("#jdiddisplayhidden").text(result[0][0].jobdescriptionId);
+					$("#reqiddisplay").text(result[0][0].requirmentId);
+                    $("#jlidedit").val(result[0][0].joblocation);
+                    $("#expedit").val(result[0][0].experience);
+                  
+                    $("#lfedit").val(result[0][0].locationflexibility);
+                    $("#jdedit").val(result[0][0].jobdescription);
+					$("buedit").val(result[0][0].bussinessunit).attr('selected', 'selected');
+                    $("#sregionedit").val(result[0][0].salesregions).attr('selected', 'selected');
+                    $("#srepedit").val(result[0][0].salesrep).attr('selected', 'selected');
+                    $("#statuspedit").val(result[0][0].status).attr('selected', 'selected');;
+                    $("#psedit").val(result[0][0].primaryskills);
+                    $("#ssedit").val(result[0][0].secondaryskills);
+                    $("#cbyedit").val(result[0][0].createdby);
+                    $("#ubyedit").val(result[0][0].updateby);
+                    $("#nposedit").val(result[0][0].noofpositions);
+                    $("#roleedit").val(result[0][0].role);
+                    $("#cbydateedit").val(result[0][0].createddate);
+					$("#ubydateedit").val(result[0][0].updatedtime);
+                    $("#datereqedit").val(result[0][0].dateofreq);
+                    $("#expdateedit").val(result[0][0].expecteddate);
+					$("#custedit").val(result[0][0].customers).attr('selected', 'selected');
+					$("#JD_comment").val(result[0][0].jdcomments);
+					$("#BU_comment").val(result[0][0].bucomments);
+                }
+            });
+	}
+
+
+	function enablejoblist(){		
+		$("#jlidedit").attr('disabled',false);
+		$("#expedit").attr('disabled',false);
+	
+		$("#lfedit").attr('disabled',false);
+		$("#jdedit").attr('disabled',false);
+		$("#buedit").attr('disabled',false);
+		$("#sregionedit").attr('disabled',false);
+		$("#srepedit").attr('disabled',false);
+		$("#statuspedit").attr('disabled',false);
+		$("#psedit").attr('disabled',false);
+		$("#ssedit").attr('disabled',false);
+		$("#cbyedit").attr('disabled',false);
+		$("#ubyedit").attr('disabled',false);
+		$("#nposedit").attr('disabled',false);
+		$("#roleedit").attr('disabled',false);
+		$("#cbydateedit").attr('disabled',false);
+		$("#ubydateedit").attr('disabled',false);
+		$("#datereqedit").attr('disabled',false);
+		$("#expdateedit").attr('disabled',false);
+		$("#custedit").attr('disabled',false);
+		$("#JD_comment").attr('disabled',false);
+		$("#BU_comment").attr('disabled',false);
+	}
 
 	
   </script>
@@ -236,7 +323,7 @@ function jobstatus() {
 			  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"  herf='#' style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 23px;">Operations
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu" style="left: 19px;background-color: #73c7e7;text-align: center;">
-					<li><a href="#operationsTab"  data-toggle="tab" style="color: white;">Jobs</a></li>
+					<li><a href="#operationsTab"  data-toggle="tab" style="color: white;" onclick="joblistingdetails()">Jobs</a></li>
 					<li><a href="#Profiles"  data-toggle="tab" style="color: white;">Profiles</a></li>
 					<li><a href="#Vendors" data-toggle="tab" style="color: white;">Vendors</a></li>                        
 				  </ul>		
@@ -500,26 +587,7 @@ function jobstatus() {
 													
 										
 													
-														<div class="card">
-														<div class="row">
-														 <div class="col-lg-3"><p style="color: black;">Requirment ID</p></div>
-														 <div class="col-lg-3"><p style="color: black;">Job Name</p></div>
-														 <div class="col-lg-3"><p style="color: black;">Customer</p></div>
-														</div>
-														<div class="row">
-															<div class="col-lg-3"><p style="color: black;">Job Location</p></div>
-															<div class="col-lg-3"><p style="color: black;">No Of Positions</p></div>
-															<div class="col-lg-3"><p style="color: black;">Skills</p></div>
-															<div style="margin-top: -22px;
-															
-															margin-left: 102px">
-																<a href="#" class="btn btn-info ">View</a>
-																
-															  </div>
-														   </div>
-														
-													
-													</div>
+												
 											
 									</div>
 
@@ -586,21 +654,23 @@ function jobstatus() {
 				
 			  </div>
 			  <div class="modal-body" style="overflow:auto;height:205px;">
+				<form action="/updatejoblisting" method="post">
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
 						   <label><span style="color:red">*</span>Requirement ID:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text"  class="form-control" id="tit">
+						   <p id="reqiddisplay" name="reqid_display" style="color: black;font-size: 13px;" ></p>
+						     
 					  </div>
 					  
 					  <div class="col-sm-2">
 						  <label style="width: 113px;">Job Location:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="text" class="form-control"  id="tit">
+						
+						  <input type="text" id="jlidedit" name="jlid_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 
@@ -610,15 +680,16 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>Experience:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text" class="form-control"  id="tit">
+						  
+						   <input type="text" id="expedit" name="exp_edit" class="form-control"  disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
 						  <label style="width: 113px;">Expected date:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="date" class="form-control"  id="tit" >
+							
+						  <input type="text" id="expdateedit" name="expdate_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 	
@@ -628,15 +699,16 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>Location Flexibility:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text" class="form-control"   id="tit">
+						  
+						   <input type="text" id="lfedit" name="lf_edit" class="form-control" disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">Created By :</label>
+							<label><span style="color:red">*</span>Job description:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="text" class="form-control"  id="tit">
+							<p id="jdiddisplayhidden" name="jdiddisplay_hidden" style="display:none;"></p>
+						  <input type="text" id="jdedit" name="jd_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 
@@ -646,7 +718,8 @@ function jobstatus() {
 						  <label>Business Unit:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <select class="form-control"   id="prio" name="priority" >
+							
+						  <select class="form-control" id="buedit" name="bu_edit" class="form-control" disabled>
 						  </select>
 					  </div>
 					  
@@ -654,7 +727,8 @@ function jobstatus() {
 						   <label>Sales Regions:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <select class="form-control"  id="stat" name="status">
+							
+						  <select class="form-control"  id="sregionedit" name="sregion_edit" class="form-control" disabled>
 						  </select>
 					  </div>
 					  <div class="col-sm-1"></div>
@@ -665,7 +739,8 @@ function jobstatus() {
 						  <label>Sales Representative:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <select class="form-control"  id="prio" name="priority" >
+							
+						  <select class="form-control"  id="srepedit" name="srep_edit" class="form-control" disabled>
 						  </select>
 					  </div>
 					  
@@ -673,7 +748,8 @@ function jobstatus() {
 						   <label>Status:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <select class="form-control"  id="stat" name="status">
+						
+						  <select class="form-control" id="statuspedit" name="statusp_edit" class="form-control" disabled>
 						  </select>
 					  </div>
 					  <div class="col-sm-1"></div>
@@ -684,15 +760,16 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>Primary Skill:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text" class="form-control"  id="tit">
+						   
+						   <input type="text" id="psedit" name="ps_edit" class="form-control" disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
 						  <label style="width: 113px;">Secondary Skill:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="text" class="form-control"  id="tit">
+							
+						  <input type="text"  id="ssedit" name="ss_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 
@@ -702,15 +779,15 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>Created by </label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text" class="form-control"  id="tit">
+						 
+						   <input type="text" id="cbyedit" name="cby_edit" class="form-control" disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
 						  <label style="width: 113px;">Updated by  </label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="text" class="form-control"  id="tit">
+						  <input type="text" id="ubyedit" name="uby_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 
@@ -720,15 +797,15 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>No of Positions : </label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="text" class="form-control"  id="tit">
+						 
+						   <input type="text"   id="nposedit" name="npos_edit" class="form-control" disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
 						  <label style="width: 113px;">Role/Domain:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="text" class="form-control"  id="tit">
+						  <input type="text"  id="roleedit" name="role_edit" class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div>
@@ -736,18 +813,18 @@ function jobstatus() {
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
-						   <label><span style="color:red">*</span>Created by date:</label>
+						   <label><span style="color:red">*</span>Created date:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="Date" class="form-control"   id="tit" >
+						  
+						   <input type="text"   id="cbydateedit" name="cbydate_edit"  class="form-control" disabled>
 					  </div>
 					  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">Updated by date:</label>
+						  <label style="width: 113px;">Updated date:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="Date" class="form-control"  id="tit" >
+						  <input type="text"  id="ubydateedit" name="ubydate_edit"  class="form-control" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div>
@@ -757,42 +834,44 @@ function jobstatus() {
 						   <label><span style="color:red">*</span>Date of request:</label>
 					  </div>
 					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						   <input type="Date" class="form-control"  id="tit" >
+						 
+						   <input type="text"  id="datereqedit" name="datereq_edit" class="form-control" disabled>
 					  </div>
 				  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">Expected Date:</label>
+						  <label style="width: 113px;">Customers:</label>
 					  </div>
 					  <div class="col-sm-3">
-						  <input type="Date" class="form-control"  id="tit" >
+							<select class="form-control" id="custedit" name="cust_edit" disabled></select>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div>
-				  <div class="row">
-				  <div class="col-sm-1"></div>
-					  <div class="col-sm-2">
-						  <label><span style="color:red">*</span>Job description:</label>
-					  </div>
-					  <div class="col-sm-3">
-						   <p id="leadid" style="display:none;"></p>
-						  <input type="text" class="form-control" id="tit">
-					  </div>
-				   
-						  <div class="col-sm-2">
-							  <label style="width: 113px;">Customers:</label>
-						  </div>
-						  <div class="col-sm-3">
-							  <select class="form-control" id="qual" name="quali">
-							  </select>
-						  </div>
-						  <div class="col-sm-1"> </div>
-				  </div>
-	  
 				  
+						<div class="row">
+								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+								</div>
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+									<label>JD Comments:</label></div>
+								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+									<textarea style="width: 90%;border-radius: 5px;" id="JD_comment" name="jdcomments"></textarea>
+								</div>
+						</div>
+						<div class="row">
+								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+								</div>
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+									<label>BU Comments:</label></div>
+								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+									<textarea style="width: 90%;border-radius: 5px;" id="BU_comment" name="bucomments"></textarea>
+								</div>
+						</div>
+				 
+	  
+					</form>
 			  </div>
 			  <div class="modal-footer">
-				  <button type="submit" class="btn btn-info" data-dismiss="modal">Save</button>
+					<button type="button" class="btn btn-info" onclick="enablejoblist()">Edit</button>
+				  <button type="submit" class="btn btn-info" id="updatehide" data-dismiss="modal" >Update</button>
 				  <button type="button" class="btn btn-info" data-dismiss="modal"> Cancel</button>                                                      
 			  </div>
 			</div>
