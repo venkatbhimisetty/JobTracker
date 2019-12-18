@@ -47,7 +47,7 @@ module.exports = {
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-            console.log(result);
+            
         });
     },
     getsalesrepunit: (req, res) => {
@@ -111,11 +111,11 @@ module.exports = {
             "',  '" + SSkill + "',  '" + Expected + "',  '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
             "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "','" + createdate + "','" + updateby + "','" + updatetime + "')";
-        console.log(query);
+        
     
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err)
+               
                 return res.status(500).send(err);
             }  
             res.status(200).json(result);

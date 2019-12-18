@@ -20,29 +20,33 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
   </head>
   
   <script>
 	$(document).ready(function(){ 
 		
 		
-		$("#v-pills-1-tab").click(function () {
+// 		$("#v-pills-1-tab").click(function () {
 
-			$("#myCollapsible").collapse('toggle');
-			$("#jobdetails").collapse('toggle');
+// 			$("#myCollapsible").collapse('toggle');
+// 			$("#jobdetails").collapse('toggle');
 			
 			
 		
 		
-	});
+// 	});
 
-		$("#canceljob").click(function(){
+// 		$("#canceljob").click(function(){
 		
-		$("#myCollapsible").hide('toggle');
-		$("#jobdetails").hide('toggle');
+// 		$("#myCollapsible").hide('toggle');
+// 		$("#jobdetails").hide('toggle');
 	
 
-});
+// });
 	        jobstatus();    
 			budropdown();
 			salesdropdown();
@@ -55,16 +59,16 @@
 	
 //   document.getElementById('choosefile').onchange = uploadOnChange;
 	
-	$("#v-pills-2-tab").click(function(){
+// 	$("#v-pills-2-tab").click(function(){
 		
-		$("#jobslisting").collapse('toggle');
+// 		$("#jobslisting").collapse('toggle');
 	
 
-});
-$("#v-pills-2-tab").hide();
-	$("#v-pills-3-tab").hide();
-	$("#v-pills-4-tab").hide();	// jobstatus(); 
-		// togglejobs();    
+// });
+// $("#v-pills-2-tab").hide();
+// 	$("#v-pills-3-tab").hide();
+// 	$("#v-pills-4-tab").hide();	// jobstatus(); 
+// 		// togglejobs();    
 
 	});
 
@@ -74,23 +78,29 @@ function uploadOnChange() {
   filetext = path.split('\\').pop().split('/').pop();
 	$("#filename").val(filetext);
 }
-function toggleoperations(){
-	$("#myCollapsible").hide('toggle');
-	$("#jobdetails").hide('toggle');
-	$("#v-pills-1-tab").hide();
-	$("#v-pills-2-tab").show();
-	$("#v-pills-3-tab").show();
-	$("#v-pills-4-tab").show();
-}
-function togglejobs(){
-	$("#myCollapsible").collapse('toggle');
-	$("#jobdetails").collapse('toggle');
-	$("#jobslisting").hide('toggle');
-	$("#v-pills-1-tab").show();
-	$("#v-pills-2-tab").hide();
-	$("#v-pills-3-tab").hide();
-	$("#v-pills-4-tab").hide();
-}
+// function toggleoperations(){
+// 	$("#myCollapsible").hide('toggle');
+// 	$("#jobdetails").hide('toggle');
+// 	$("#v-pills-1-tab").hide();
+// 	$("#v-pills-2-tab").show();
+// 	$("#v-pills-3-tab").show();
+// 	$("#v-pills-4-tab").show();
+// }
+// function togglejobs(){
+// 	$("#myCollapsible").collapse('toggle');
+// 	$("#jobdetails").collapse('toggle');
+// 	$("#jobslisting").hide('toggle');
+// 	$("#v-pills-1-tab").show();
+// 	$("#v-pills-2-tab").hide();
+// 	$("#v-pills-3-tab").hide();
+// 	$("#v-pills-4-tab").hide();
+// }
+// function jobspill(){
+// 	$("#myCollapsible").hide('toggle');
+// 	$("#jobdetails").hide('toggle');
+// 	$("#jobslisting").collapse('toggle');
+	
+// }
 
 
 function jobstatus() {
@@ -202,95 +212,42 @@ function jobstatus() {
 
 
 
-	// function addjd() {
-	// 	console.log("buid");
-	// 	var dateofreq='17-12-2017';
-	// 		var buid = $("#bunit").val();
-	// 		console.log(buid);
-	// 		var salesregionid = $("#salesregion").val();
-	// 		var salesrepid = $("#stats").val();
-	// 		var customerid = $("#cus").val();
-	// 		var Comments = $("#comment").val();
-	// 		var Requirement = $("#requirement").val(); 
-	// 		var Role = $("#role").val(); 
-	// 		var Expected = $("#edate").val(); 
-	// 		var Position = $("#Positions").val(); 
-	// 		var Exp = $("#experience").val(); 
-	// 		var Status = $("#role").val(); 			
-	// 		var PSkill = $("#piskills").val(); 
-	// 		var SSkill= $("#seskills").val(); 
-	// 		var joblocation= $("#jloc").val(); 
-	// 		var locationflex= $("#locflex").val(); 
-	// 		var jDescription=("#jdesp").val(); 
-	// 		var Comments = $("#comm").val();
-	// 		var createdate= ''; 
-	// 		var updateby= ''; 
-	// 		var updatetime=''; 
-	// 		var createdby = '';
-
-	// 		var data = {
-    //             "bu": buid,
-    //             "salesreg": salesregionid,
-    //             "salesrep": salesrepid,
-	// 			"customer": customerid,
-	// 			"com":Comments,
-	// 			"Req":Requirement,
-	// 			"Rle":Role,
-	// 			"EXP":Expected,
-	// 			"pos":Position,
-	// 			"experince":Exp,
-	// 			"status":Status,
-	// 			"primaryskill":PSkill,
-	// 			"seconskill":SSkill,
-	// 			"jobl":joblocation,
-	// 			"locaflex":locationflex,
-	// 			"jobdesp":jDescription,
-	// 			"comm":Comments,
-	// 			"cdate":createdate,
-	// 			"udate":updateby,
-	// 			"utime":updatetime,
-	// 			"create":createdby,
-
-	// 		}
-	// 		alert(data);
-	// 		data = JSON.stringify(data);
-	// 		$.ajax({
-    //                 url: "http://localhost:2000/jdescription",
-    //                 type: "POST",
-    //                 async: false,
-    //                 data: data,
-    //                 contentType: "application/json",
-    //                 dataType: "json",
-    //                 success: function (result) {                        
-    //                 },
-    //                 error: function () { 
-    //                 }
-    //             });
-
-	// }
+	
   </script>
   <body>
-    
+	<div class="container">
+		<div class="row">
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
+	   
+			
+				<div class="col-sm-8">
 	      <a class="navbar-brand" href="index.html"><h1 style="font-weight: 600;font-size:50px;color:#6bf682;">JobTracker</h1></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto" >
+		</div>
+		<div class="col-sm-4">
+	      <div class="collapse navbar-collapse" id="ftco-nav" >
+	        <ul class="nav">
 	          <!-- <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li> 
 	          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li> -->
-	          <li class="nav-item active" ><a onclick="togglejobs();" class="nav-link " style="font-size: 20px;color: #73c7e7;font-weight: 900;" >Jobs</a></li> 
-	          <li class="nav-item "><a  onclick="toggleoperations();" class="nav-link" style="font-size: 20px;color: #73c7e7;font-weight: 900;">Operations</a></li> 
-	          <li class="nav-item "><a href="/newpost" class="nav-link" style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
+	          <li class="active"><a  data-toggle="tab" href="#jobsTab" style="font-size: 20px;color: #73c7e7;font-weight: 900;" >Jobs</li>
+			  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"  herf='#' style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 23px;">Operations
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu" style="left: 19px;background-color: #73c7e7;text-align: center;">
+					<li><a href="#operationsTab"  data-toggle="tab" style="color: white;">Jobs</a></li>
+					<li><a href="#Profiles"  data-toggle="tab" style="color: white;">Profiles</a></li>
+					<li><a href="#Vendors" data-toggle="tab" style="color: white;">Vendors</a></li>                        
+				  </ul>		
+			</li> 
+	          <li class=""><a data-toggle="tab" href="/interviewTab"  style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
 
-	        </ul>
-	      </div>
+			</ul>
+			
+	      </div></div>
 	    </div>
-	  </nav>
+	  </nav></div>
     <!-- END nav -->
     
     <div class="hero-wrap js-fullheight" style="background-image: url('/assets/img/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -301,286 +258,292 @@ function jobstatus() {
           	<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have <span class="number" data-number="8">0</span> great job offers you observe!</p>
             <h1 class="mb-5" style="font-weight: 100;font-size:40px;"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1>
 
-						<div class="ftco-search">
-							<div class="row">
-		            <div class="col-md-12 nav-link-wrap">
-			            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			              <a class="nav-link active mr-sm-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">New Job</a>
+						
+							<div class="tab-content">
+								<div id="jobsTab" class="tab-pane fade in active" style="
+								background-color: white;">
+									<form action="/jdescription"  method="post" class="search-job">
+								
+										<div id="jobdetails" class="">
+											  <br>
+											  <!-- <div class="row">
+												  <div class="col-lg-12"></div>
+											  </div> -->
+											  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="overflow-y: scroll;height:500px;">
+													  <div class="card">
+														  <h5 class="card-header" style="background-color: #73c7e7">Details</h5>
+														  <div class="card-body">
+															  
+																  <div class="row">
+																		  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 "></div>
+																	  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	  <label><span style="color:red;">*</span>Business Unit:</label></div>
+																	  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																		  <select  class="form-control" id="bunit" name="bu_unit"></select>
+																	  </div>
+																	  
+																  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																		  <label><span style="color:red;">*</span>Sales Regions:</label></div>
+																		  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																			  <select  class="form-control"  id="salesregion" name="sales_region" required ></select>
+																		  </div>
+																		  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+	  
+																  </div>
+																  <div class="row">
+																		  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																	  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	  <label><span style="color:red;">*</span>Sales Representatives:</label></div>
+																	  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																		  <select  class="form-control" id="salesrepresent" name="sale_rep" required></select>
+																	  </div>
+																	  
+																  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																		  <label><span style="color:red;">*</span>Customers:</label></div>
+																		  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																			  <select  class="form-control" id="cus" name="customer" required ></select>
+																		  </div>
+													  
+																		  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+																		  </div>
+													  
+																	  </div>
+													  
+																	  <div class="row">
+																		  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+																		  </div>
+																		  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																			  <label>Comments:</label></div>
+																		  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+																			  <textarea style="width: 90%;border-radius: 5px;" id="comment" name="bucomments" ></textarea>
+																		  </div>
+																	  </div>
+													  
+													  
+																  
+															  </div>
+														  </div>
+												  
+												  
+	  
+	  
+	  
+	  
+												  <div id="myCollapsible" class="">
+														  <br>
+																  <div class="card">
+																	  <h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
+																	  <div class="card-body">
+					  
+																																					  
+																					  <div class="row">
+																						  
+																							  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
+																					  
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																								  <input type="file"   id="choosefile" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
+																							  </div>
+																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></div>
+																							  
+																							  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							  <input type="text" class="form-control" id="filename"  style="width: 100%;" disabled>
+																							  </div>
+																							  
+																					  </div>
+	  
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						  <label><span style="color:red;">*</span>Requirement I'd:</label></div>
+																						  <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							  <input type="text" id="requirement" name="Requirementid" class="form-control" required >
+																						  </div>
+																						  
+																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							  <label><span style="color:red;">*</span>Role/Domain:</label></div>
+																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
+																								  <input type="text" id="role" name="role" class="form-control" >
+																							  </div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+						  
+																					  </div>
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						  <label><span style="color:red;">*</span>Expected Date:</label></div>
+																						  <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							  <input type="date" id="edate" name="ex_date" class="form-control" required >
+																						  </div>
+																						  
+																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							  <label><span style="color:red;">*</span>No of Positions :</label></div>
+																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								  <input type="text" id="positions" name="positions" class="form-control" required>
+																							  </div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+						  
+																					  </div>
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						  <label><span style="color:red;">*</span>Experience:</label></div>
+																						  <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																							  <input type="text" id="experience" name="experience" class="form-control" required>
+																						  </div>
+																						  
+																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							  <label><span style="color:red;">*</span>Status:</label></div>
+																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																									  <select id="jobstatus"  name="status" class="form-control" required></select>
+																							  </div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+						  
+																					  </div>
+					  
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						  <label><span style="color:red;">*</span>Primary Skill:</label></div>
+																						  <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								  <input type="text"  class="form-control" name="primary_skill" id="piskills" required>
+																						  </div>
+																						  
+																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					  <label><span style="color:red;">*</span>Secondary Skill:</label></div>
+																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																									  <input type="text" id="seskills" name="secondry_skill"  class="form-control" required>
+																							  </div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+						  
+																					  </div>
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																						  <label><span style="color:red;">*</span>Job Location:</label></div>
+																						  <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																								  <input type="text" id="jloc" name="job_location" class="form-control" required>
+																						  </div>
+																						  
+																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																					  <label>Location Flexiblity:</label></div>
+																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																									  <select id="locflex"  class="form-control" name="loc_flex" required>
+																										  <option value="Y">Yes</option>
+	                                                  												    <option value="N">No</option> 
+																									  </select>
+																							  </div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+						  
+																					  </div>
+	  
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							  <label><span style="color:red;">*</span>Job Description:</label></div>
+																							  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+																								  <textarea id="jdesp" name="job_description" style="width: 90%;border-radius: 5px;" ></textarea>
+																							  </div>
+																						  </div>
+																					  <div class="row">
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																							  <label>Comments:</label></div>
+																							  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+																								  <textarea id="comm" name="jd_comments" style="width: 90%;border-radius: 5px;" ></textarea>
+																							  </div>
+																						  </div>
+					  
+																			  
+																		  
+																	  
+																	  </div>
+																	  
+																  </div>
+													  
+															  </div>
+													  
+														  
+													  
+													  <div class="footer" style="margin:3%;">
+														  <div class="form-group row text-right" style="right:-24%;top:-13px;">
+															  <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+																  <button type="submit"  class="btn btn-info">Submit</button>
+																  <button type="button" id="canceljob"
+																	  class="btn btn-info">Cancel</button>
+		  
+															  </div>
+														  </div>
+													  </div>
+												  </div>
+											  </div>
+											  </form>
 
-			              <a class="nav-link active mr-sm-1 " id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false" onclick="joblistingdetails();">Jobs</a>
-						  <a class="nav-link active mr-sm-1 " id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Profiles</a>
-						  <a class="nav-link active mr-sm-1 " id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">vendors</a>
-			            </div>
-			          </div>
-			           <div class="col-md-12 tab-wrap">
+								</div>
+								<div id="operationsTab" class="tab-pane fade">
+									<div id="jobslisting" class="" >
+										<br>
+										<div class="card" >
+											<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
+											<div class="card-body" id="joblistingbody">
+								
+												
+													
+														<!-- <div class="row">
+															<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
+															<div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+																	<label><h3>Recently Added Jobs</h3></label>	</div>										 
+															<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
+														</div> -->
+														
+															
+										
+													
+										
+													
+														<div class="card">
+														<div class="row">
+														 <div class="col-lg-3"><p style="color: black;">Requirment ID</p></div>
+														 <div class="col-lg-3"><p style="color: black;">Job Name</p></div>
+														 <div class="col-lg-3"><p style="color: black;">Customer</p></div>
+														</div>
+														<div class="row">
+															<div class="col-lg-3"><p style="color: black;">Job Location</p></div>
+															<div class="col-lg-3"><p style="color: black;">No Of Positions</p></div>
+															<div class="col-lg-3"><p style="color: black;">Skills</p></div>
+															<div style="margin-top: -22px;
+															
+															margin-left: 102px">
+																<a href="#" class="btn btn-info ">View</a>
+																
+															  </div>
+														   </div>
+														
+													
+													</div>
+											
+									</div>
+
+
+								</div>
+
+							</div>
+								</div>
+								<div id="jobsTab" class="tab-pane fade"></div>
+
+							</div>
+		            
+			           <!-- <div class="col-md-12 tab-wrap">
 			            
-			            <div class="tab-content" id="v-pills-tabContent">
+			            <div class="tab-content" id="">
 
 			              <div class="tab-pane fade show active " id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab" >
 								
-							<form action="/jdescription"  method="post"class="search-job">
-								
-								  <div id="jobdetails" class="collapse hide">
-										<br>
-										<!-- <div class="row">
-											<div class="col-lg-12"></div>
-										</div> -->
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="overflow-y: scroll;height:500px;">
-												<div class="card">
-													<h5 class="card-header" style="background-color: #73c7e7">Details</h5>
-													<div class="card-body">
-														
-															<div class="row">
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 "></div>
-																<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																<label><span style="color:red;">*</span>Business Unit:</label></div>
-																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																	<select  class="form-control" id="bunit" name="bu_unit"></select>
-																</div>
-																
-															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																	<label><span style="color:red;">*</span>Sales Regions:</label></div>
-																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select  class="form-control"  id="salesregion" name="sales_region" required ></select>
-																	</div>
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-
-															</div>
-															<div class="row">
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																<label><span style="color:red;">*</span>Sales Representatives:</label></div>
-																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																	<select  class="form-control" id="salesrepresent" name="sale_rep" required></select>
-																</div>
-																
-															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																	<label><span style="color:red;">*</span>Customers:</label></div>
-																	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		<select  class="form-control" id="cus" name="customer" required ></select>
-																	</div>
-												
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																	</div>
-												
-																</div>
-												
-																<div class="row">
-																	<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-																	</div>
-																	<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																		<label>Comments:</label></div>
-																	<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																		<textarea style="width: 90%;border-radius: 5px;" id="comment" name="bucomments" ></textarea>
-																	</div>
-																</div>
-												
-												
-															
-														</div>
-													</div>
-											
-											
-
-
-
-
-											<div id="myCollapsible" class="collapse hide">
-													<br>
-															<div class="card">
-																<h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
-																<div class="card-body">
-				
-																																				
-																				<div class="row">
-																					
-																						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
-																				
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																							<input type="file"   id="choosefile" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
-																						</div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></div>
-																						
-																						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" class="form-control" id="filename"  style="width: 100%;" disabled>
-																						</div>
-																						
-																				</div>
-
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Requirement I'd:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" id="requirement" name="Requirementid" class="form-control" required >
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Role/Domain:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
-																							<input type="text" id="role" name="role" class="form-control" >
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Expected Date:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="date" id="edate" name="ex_date" class="form-control" required >
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>No of Positions :</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text" id="positions" name="positions" class="form-control" required>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Experience:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" id="experience" name="experience" class="form-control" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Status:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<select id="jobstatus"  name="status" class="form-control" required></select>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-				
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Primary Skill:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text"  class="form-control" name="primary_skill" id="piskills" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																				<label><span style="color:red;">*</span>Secondary Skill:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<input type="text" id="seskills" name="secondry_skill"  class="form-control" required>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Job Location:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text" id="jloc" name="job_location" class="form-control" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																				<label>Location Flexiblity:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<select id="locflex"  class="form-control" name="loc_flex" required>
-																									<option value="Y">Yes</option>
-                                                												    <option value="N">No</option> 
-																								</select>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Job Description:</label></div>
-																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																							<textarea id="jdesp" name="job_description" style="width: 90%;border-radius: 5px;" ></textarea>
-																						</div>
-																					</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label>Comments:</label></div>
-																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																							<textarea id="comm" name="jd_comments" style="width: 90%;border-radius: 5px;" ></textarea>
-																						</div>
-																					</div>
-				
-																		
-																	
-																
-																</div>
-																
-															</div>
-												
-														</div>
-												
-													
-												
-												<div class="footer" style="margin:3%;">
-													<div class="form-group row text-right" style="right:-24%;top:-13px;">
-														<div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-															<button type="submit"  class="btn btn-info">Submit</button>
-															<button type="button" id="canceljob"
-																class="btn btn-info">Cancel</button>
-	
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										</form>
+							
 	
 	
 
 
-										<div id="jobslisting" class="collapse hide" >
-											<br>
-											<div class="card" >
-												<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
-												<div class="card-body" id="joblistingbody">
 									
-													
-														
-															<!-- <div class="row">
-																<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
-																<div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
-																		<label><h3>Recently Added Jobs</h3></label>	</div>										 
-																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
-															</div> -->
-															
-																
-											
-														
-											
-														
-															<div class="card">
-															<div class="row">
-															 <div class="col-lg-3"><label>Requirment ID :</label><span<p id="reqidjoblist" style="color: black;font-size: 13px;"></span></div>
-															 <div class="col-lg-3"><label>Job Type :</label><span id="roleidjoblist" style="color: black;font-size: 13px;"></span></div>
-															 <div class="col-lg-3"><label>Location :</label><span  id="locidjoblist" style="color: black;font-size: 13px;"></span></div>
-															</div>
-															<div class="row">
-																<div class="col-lg-3"><label>Job Type :</label><span id="jobdesidjoblist" style="color: black;font-size: 13px;"></span></div>
-																<div class="col-lg-3"><label>No Of Positions :</label><span  id="posidjoblist" style="color: black;font-size: 13px;"></span></div>
-																<div class="col-lg-3"><label>Experience :</label><span id="expidjoblist" style="color: black;font-size: 13px;"></span></div>
-																<div style="margin-top: -22px;																margin-left: 102px">
-																<a href="#jobModal" data-toggle="modal" class="btn btn-info ">View</a>
-																	
-																  </div>
-															   </div>
-														
-														</div>
-													
-															</div>
-
-	
-									</div>
-	
-								</div>
 	
 	
 								</div>
@@ -588,10 +551,10 @@ function jobstatus() {
 	
 								</div>
 	
-							</div>
+							</div> -->
 	
-						</div>
-					</div>
+						
+					
 				</div>
 			</div>
 		</div>
@@ -599,58 +562,7 @@ function jobstatus() {
 
 	<footer >
 		<div class="container">
-		  <!-- <div class="row mb-5">
-			  <div class="col-md">
-			   <div class="ftco-footer-widget mb-4">
-				<h2 class="ftco-heading-2">About</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-				<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-				  <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-				  <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-				  <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-				</ul>
-			  </div>
-			</div>
-			<div class="col-md">
-			  <div class="ftco-footer-widget mb-4">
-				<h2 class="ftco-heading-2">Employers</h2>
-				<ul class="list-unstyled">
-				  <li><a href="#" class="py-2 d-block">How it works</a></li>
-				  <li><a href="#" class="py-2 d-block">Register</a></li>
-				  <li><a href="#" class="py-2 d-block">Post a Job</a></li>
-				  <li><a href="#" class="py-2 d-block">Advance Skill Search</a></li>
-				  <li><a href="#" class="py-2 d-block">Recruiting Service</a></li>
-				  <li><a href="#" class="py-2 d-block">Blog</a></li>
-				  <li><a href="#" class="py-2 d-block">Faq</a></li>
-				</ul>
-			  </div>
-			</div>
-			<div class="col-md">
-			  <div class="ftco-footer-widget mb-4 ml-md-4">
-				<h2 class="ftco-heading-2">Workers</h2>
-				<ul class="list-unstyled">
-				  <li><a href="#" class="py-2 d-block">How it works</a></li>
-				  <li><a href="#" class="py-2 d-block">Register</a></li>
-				  <li><a href="#" class="py-2 d-block">Post Your Skills</a></li>
-				  <li><a href="#" class="py-2 d-block">Job Search</a></li>
-				  <li><a href="#" class="py-2 d-block">Emploer Search</a></li>
-				</ul>
-			  </div>
-			</div>
-			<div class="col-md">
-			  <div class="ftco-footer-widget mb-4">
-				  <h2 class="ftco-heading-2">Have a Questions?</h2>
-				  <div class="block-23 mb-3">
-					<ul>
-					  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-					  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-					  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-					</ul>
-				  </div>
-			  </div>
-			</div>
-		  </div> -->
-		  <div class="row">
+		  	  <div class="row">
 			<div class="col-md-12 text-center">
   
 			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
