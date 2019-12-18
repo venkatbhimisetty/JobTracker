@@ -567,10 +567,8 @@ function jobstatus() {
 																<div class="col-lg-3"><label>Job Type :</label><span id="jobdesidjoblist" style="color: black;font-size: 13px;"></span></div>
 																<div class="col-lg-3"><label>No Of Positions :</label><span  id="posidjoblist" style="color: black;font-size: 13px;"></span></div>
 																<div class="col-lg-3"><label>Experience :</label><span id="expidjoblist" style="color: black;font-size: 13px;"></span></div>
-																<div style="margin-top: -22px;
-																
-																margin-left: 102px">
-																	<a href="#jobModal" class="btn btn-info ">View</a>
+																<div style="margin-top: -22px;																margin-left: 102px">
+																<a href="#jobModal" data-toggle="modal" class="btn btn-info ">View</a>
 																	
 																  </div>
 															   </div>
@@ -667,7 +665,7 @@ function jobstatus() {
 	  
 	  
 		<!-- Modal -->
-		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 15%;" >
+		<div class="modal fade" id="jobModal"role="dialog" style="margin-top: 15%;" >
 		  <div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			  <div class="modal-header" style="background-color: #73c7e7">
@@ -723,7 +721,7 @@ function jobstatus() {
 					  </div>
 					  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">created by :</label>
+						  <label style="width: 113px;">Created By :</label>
 					  </div>
 					  <div class="col-sm-3">
 						  <input type="text" class="form-control"  id="tit">
@@ -752,7 +750,7 @@ function jobstatus() {
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
-						  <label>sales representative:</label>
+						  <label>Sales Representative:</label>
 					  </div>
 					  <div class="col-sm-3">
 						  <select class="form-control"  id="prio" name="priority" >
@@ -789,7 +787,7 @@ function jobstatus() {
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
-						   <label><span style="color:red">*</span>created by </label>
+						   <label><span style="color:red">*</span>Created by </label>
 					  </div>
 					  <div class="col-sm-3">
 						   <p id="leadid" style="display:none;"></p>
@@ -797,7 +795,7 @@ function jobstatus() {
 					  </div>
 					  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">updated by  </label>
+						  <label style="width: 113px;">Updated by  </label>
 					  </div>
 					  <div class="col-sm-3">
 						  <input type="text" class="form-control"  id="tit">
@@ -826,7 +824,7 @@ function jobstatus() {
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
-						   <label><span style="color:red">*</span>created by date :</label>
+						   <label><span style="color:red">*</span>Created by date:</label>
 					  </div>
 					  <div class="col-sm-3">
 						   <p id="leadid" style="display:none;"></p>
@@ -834,7 +832,7 @@ function jobstatus() {
 					  </div>
 					  
 					  <div class="col-sm-2">
-						  <label style="width: 113px;">updated by date:</label>
+						  <label style="width: 113px;">Updated by date:</label>
 					  </div>
 					  <div class="col-sm-3">
 						  <input type="Date" class="form-control"  id="tit" >
@@ -862,7 +860,7 @@ function jobstatus() {
 				  <div class="row">
 				  <div class="col-sm-1"></div>
 					  <div class="col-sm-2">
-						  <label><span style="color:red">*</span>job description:</label>
+						  <label><span style="color:red">*</span>Job description:</label>
 					  </div>
 					  <div class="col-sm-3">
 						   <p id="leadid" style="display:none;"></p>
@@ -870,7 +868,7 @@ function jobstatus() {
 					  </div>
 				   
 						  <div class="col-sm-2">
-							  <label style="width: 113px;">customers:</label>
+							  <label style="width: 113px;">Customers:</label>
 						  </div>
 						  <div class="col-sm-3">
 							  <select class="form-control" id="qual" name="quali">
