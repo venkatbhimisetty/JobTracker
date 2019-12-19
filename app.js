@@ -55,7 +55,7 @@ app.post('/jdescription', addjd);
 app.get('/jobstatus', getJobStatusdrop);
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
-app.post('/updatejoblisting', updatejoblisting);
+app.post('/updatejoblisting/:id', updatejoblisting);
 
 // set the app to listen on the port
 app.listen(port, () => {

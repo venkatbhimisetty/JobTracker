@@ -47,8 +47,8 @@
 	
 
 // });
-	        jobstatus();    
 			budropdown();
+	        jobstatus();    
 			salesdropdown();
 			salesrepdropdown();
 			customerdropdown();
@@ -111,7 +111,7 @@ function jobstatus() {
                 url: url,
                 type: "GET",
                 success: function (result) {
-					
+					jobstatusdrop = jobstatusdrop+"<option value selected>--Select--</option>";
                     for (var i = 0; i < result[0].length; i++) {
                         jobstatusdrop = jobstatusdrop +
                             '<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
@@ -130,6 +130,8 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
+				budropdown = budropdown+"<option value selected>--Select--</option>";
+
 				for (var i = 0; i < result[0].length; i++) {
 					budropdown = budropdown +
 						'<option value="' + result[0][i].bussinessunitId + '">' + result[0][i].bussinessunit + '</option>';
@@ -148,6 +150,8 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
+				salesdropdown = salesdropdown+"<option value selected>--Select--</option>";
+
 				for (var i = 0; i < result[0].length; i++) {
 					salesdropdown = salesdropdown +
 						'<option value="' + result[0][i].salesregionsId + '">' + result[0][i].salesregions + '</option>';
@@ -165,6 +169,8 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
+				salesrepdropdown = salesrepdropdown+"<option value selected>--Select--</option>";
+
 				for (var i = 0; i < result[0].length; i++) {
 					salesrepdropdown = salesrepdropdown +
 						'<option value="' + result[0][i].salesrepId + '">' + result[0][i].salesrep + '</option>';
@@ -182,6 +188,7 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
+				customerdropdown = customerdropdown+"<option value selected>--Select--</option>";
 				for (var i = 0; i < result[0].length; i++) {
 					customerdropdown = customerdropdown +
 						'<option value="' + result[0][i].customersId + '">' + result[0][i].customers + '</option>';
@@ -200,7 +207,7 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
-			console.log(result[0]);
+		
 
 			for (var i = 0; i < result[0].length; i++) {
 
@@ -237,16 +244,18 @@ function jobstatus() {
 	}
 
 	function jobdisplay(i){
-
+		$("#updatehide").hide();
 		var url = "http://localhost:2000/joblisting/" + i;
-		console.log(url);
+	
             $.ajax({
                 url: url,
                 type: "GET",
                 success: function (result) {
-                      console.log(result);
+                     // console.log(result);
 
-					  $("#jdiddisplayhidden").text(result[0][0].jobdescriptionId);
+					 
+
+					$("#jdiddisplayhidden").text(result[0][0].jobdescriptionId);
 					$("#reqiddisplay").text(result[0][0].requirmentId);
                     $("#jlidedit").val(result[0][0].joblocation);
                     $("#expedit").val(result[0][0].experience);
@@ -263,19 +272,23 @@ function jobstatus() {
                     $("#ubyedit").val(result[0][0].updateby);
                     $("#nposedit").val(result[0][0].noofpositions);
                     $("#roleedit").val(result[0][0].role);
-                    $("#cbydateedit").val(result[0][0].createddate);
-					$("#ubydateedit").val(result[0][0].updatedtime);
-                    $("#datereqedit").val(result[0][0].dateofreq);
-                    $("#expdateedit").val(result[0][0].expecteddate);
+                    $("#cbydateedit").val(result[0][0].createddate.slice(0,19));
+					$("#ubydateedit").val(result[0][0].updatedtime.slice(0,19));
+                    $("#datereqedit").val(result[0][0].dateofreq.slice(0,19));
+                    $("#expdateedit").val(result[0][0].expecteddate.slice(0,19));
 					$("#custedit").val(result[0][0].customers).attr('selected', 'selected');
 					$("#JD_comment").val(result[0][0].jdcomments);
 					$("#BU_comment").val(result[0][0].bucomments);
-                }
+				}
+				
             });
 	}
 
 
-	function enablejoblist(){		
+	function enablejoblist(){	
+		$("#updatehide").show();
+			$("#edithide").hide();
+
 		$("#jlidedit").attr('disabled',false);
 		$("#expedit").attr('disabled',false);
 	
@@ -299,6 +312,107 @@ function jobstatus() {
 		$("#JD_comment").attr('disabled',false);
 		$("#BU_comment").attr('disabled',false);
 	}
+	function cancelenable(){
+	
+			$("#edithide").show();
+
+		$("#jlidedit").attr('disabled',true);
+		$("#expedit").attr('disabled',true);
+		$("#lfedit").attr('disabled',true);
+		$("#jdedit").attr('disabled',true);
+		$("#buedit").attr('disabled',true);
+		$("#sregionedit").attr('disabled',true);
+		$("#srepedit").attr('disabled',true);
+		$("#statuspedit").attr('disabled',true);
+		$("#psedit").attr('disabled',true);
+		$("#ssedit").attr('disabled',true);
+		$("#cbyedit").attr('disabled',true);
+		$("#ubyedit").attr('disabled',true);
+		$("#nposedit").attr('disabled',true);
+		$("#roleedit").attr('disabled',true);
+		$("#cbydateedit").attr('disabled',true);
+		$("#ubydateedit").attr('disabled',true);
+		$("#datereqedit").attr('disabled',true);
+		$("#expdateedit").attr('disabled',true);
+		$("#custedit").attr('disabled',true);
+		$("#JD_comment").attr('disabled',true);
+		$("#BU_comment").attr('disabled',true);
+	}
+function updatejd(){
+			$("#edithide").show();
+			$("#updatehide").hide();
+            var jobdescriptionId = $('[name="jdiddisplay_hidden"]').text();
+			//console.log(jobdescriptionId);
+			var reqid = $('[name="reqid_display"]').text();
+			var joblocation = $('[name="jlid_edit"]').val();
+			var experience = $('[name="exp_edit"]').val();
+			var expecteddate = $('[name="expdate_edit"]').val();
+			var locaflex = $('[name="lf_edit"]').val();
+			var jobdescription = $('[name="jd_edit"]').val();
+			var bussinessunit = $('[name="bu_edit"]').val();
+			var salesregion = $('[name="sregion_edit"]').val();
+			var salerep = $('[name="srep_edit"]').val();
+			var status = $('[name="statusp_edit"]').val();
+			var primaryskill = $('[name="ps_edit"]').val();
+			var secondaryskill = $('[name="ss_edit"]').val();
+			var updateby = $('[name="uby_edit"]').val();
+			var noofpos = $('[name="npos_edit"]').val();
+			var role = $('[name="role_edit"]').val();
+			var updatedate = $('[name="ubydate_edit"]').val();
+			var dateofreq = $('[name="datereq_edit"]').val();
+			var customer = $('[name="cust_edit"]').val();
+			var jdcomments = $('[name="jdcomments"]').val();
+			var bucomments = $('[name="bucomments"]').val();
+			
+			
+
+			var data = {
+				"jobdescriptionId":jobdescriptionId,
+				"reqid": reqid,
+				"joblocation": joblocation,
+				"experince": experience,
+				"expecteddate": expecteddate,
+				"locaflex": locaflex,
+				"jobdescription": jobdescription,
+				"bussinessunit": bussinessunit,
+				"salesregion": salesregion,
+				"salerep": salerep,
+				"status": status,
+				"primaryskill": primaryskill,
+				"secondaryskill": secondaryskill,
+				"updateby": updateby,
+				"noofpos": noofpos,
+				"role": role,
+				"updatedate": updatedate,
+				"dateofreq": dateofreq,
+				"customer": customer,
+				"jdcomments": jdcomments,
+				"bucomments": bucomments
+			
+			}
+			
+			data = JSON.stringify(data);
+			var url="http://localhost:2000/updatejoblisting/"+jobdescriptionId;
+			console.log(url);
+
+			$.ajax({
+				url: url,
+				type: "POST",
+				async: false,
+				data: data,
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					
+				},
+				error: function () {
+				}
+			});
+			joblistingdetails();
+
+		}
+
+	
 
 	
   </script>
@@ -367,7 +481,7 @@ function jobstatus() {
 																	  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																	  <label><span style="color:red;">*</span>Business Unit:</label></div>
 																	  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																		  <select  class="form-control" id="bunit" name="bu_unit"></select>
+																		  <select  class="form-control" id="bunit" name="bu_unit" required></select>
 																	  </div>
 																	  
 																  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -450,7 +564,7 @@ function jobstatus() {
 																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																							  <label><span style="color:red;">*</span>Role/Domain:</label></div>
 																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
-																								  <input type="text" id="role" name="role" class="form-control" >
+																								  <input type="text" id="role" name="role" class="form-control" required>
 																							  </div>
 																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 						  
@@ -568,194 +682,19 @@ function jobstatus() {
 											  </div>
 											  </form>
 
-								</div>
+								</div>		
 								<div id="operationsTab" class="tab-pane fade">
 									<div id="jobslisting" class="" >
 										<br>
 										<div class="card" >
 											<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
-											<div class="card-body" id="joblistingbody">
-								
-												
-													
-														<!-- <div class="row">
-															<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
-															<div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
-																	<label><h3>Recently Added Jobs</h3></label>	</div>										 
-															<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
-														</div> -->
-														
-															
-										
-													
-										
-													
-												
-											
-									</div>
-
-
+											<div class="card-body" id="joblistingbody"></div>
 								</div>
-
 							</div>
 								</div>
 								<div id="jobsTab" class="tab-pane fade"></div>
 
-											<div id="myCollapsible" class="collapse hide">
-													<br>
-															<div class="card">
-																<h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
-																<div class="card-body">
-				
-																																				
-																				<div class="row">
-																					
-																						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
-																				
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																							<input type="file"   id="choosefile" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
-																						</div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></div>
-																						
-																						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" class="form-control" id="filename"  style="width: 100%;" disabled>
-																						</div>
-																						
-																				</div>
-
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Requirement I'd:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" id="requirement" name="Requirementid" class="form-control" required >
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Role/Domain:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
-																							<input type="text" id="role" name="role" class="form-control" required>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Expected Date:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="date" id="edate" name="ex_date" class="form-control" required >
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>No of Positions :</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text" id="positions" name="positions" class="form-control" required>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Experience:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																						<input type="text" id="experience" name="experience" class="form-control" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Status:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<select id="jobstatus"  name="status" class="form-control" required></select>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-				
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Primary Skill:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text"  class="form-control" name="primary_skill" id="piskills" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																				<label><span style="color:red;">*</span>Secondary Skill:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<input type="text" id="seskills" name="secondry_skill"  class="form-control" required>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																					<label><span style="color:red;">*</span>Job Location:</label></div>
-																					<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																							<input type="text" id="jloc" name="job_location" class="form-control" required>
-																					</div>
-																					
-																				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																				<label>Location Flexiblity:</label></div>
-																						<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																								<select id="locflex"  class="form-control" name="loc_flex" required>
-																									<option value="Y">Yes</option>
-                                                												    <option value="N">No</option> 
-																								</select>
-																						</div>
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-					
-																				</div>
-
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label><span style="color:red;">*</span>Job Description:</label></div>
-																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																							<textarea id="jdesp" name="job_description" style="width: 90%;border-radius: 5px;" required ></textarea>
-																						</div>
-																					</div>
-																				<div class="row">
-																						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-																						<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																						<label>Comments:</label></div>
-																						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																							<textarea id="comm" name="jd_comments" style="width: 90%;border-radius: 5px;" ></textarea>
-																						</div>
-																					</div>
-				
-																		
-																	
-																
-																</div>
-																
-															</div>
-												
-														</div>
-												
-													</div>
-												
-												
-											
-										</div>
-										</form>
-	
-	
-
-
-									
-	
-	
-								</div>
-	
-	
-								</div>
-	
-							</div> 
-	
-						
-					
+							</div>
 				</div>
 			</div>
 		</div>
@@ -767,12 +706,12 @@ function jobstatus() {
 	  
 	  
 		<!-- Modal -->
-		<div class="modal fade" id="jobModal"role="dialog" style="margin-top: 3%;" >
+		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 3%;" >
 		  <div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			  <div class="modal-header" style="background-color: #73c7e7">
-				<h5 class="modal-title">Job Description</h5>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Job Description</h4>
+				<button type="button" class="close" data-dismiss="modal"  onclick="cancelenable()">&times;</button>
 				
 			  </div>
 			  <div class="modal-body" style="overflow:auto;height:450px;">
@@ -792,7 +731,7 @@ function jobstatus() {
 					  </div>
 					  <div class="col-sm-3">
 						
-						  <input type="text" id="jlidedit" name="jlid_edit" class="form-control" disabled>
+						  <input type="text" id="jlidedit" name="jlid_edit" class="" disabled>
 					  </div>
 					  <div class="col-sm-1"> </div>
 				  </div> 
@@ -989,18 +928,37 @@ function jobstatus() {
 						</div>
 				 
 	  
-					</form>
+					
 			  </div>
 			  <div class="modal-footer">
-					<button type="button" class="btn-sm btn-info" onclick="enablejoblist()">Edit</button>
-				  <button type="submit" class="btn-sm btn-info" id="updatehide" data-dismiss="modal" >Update</button>
-				  <button type="button" class="btn-sm btn-info" data-dismiss="modal"> Cancel</button>                                                      
+					<button type="button" class="btn btn-info" id="edithide" onclick="enablejoblist()">Edit</button>
+				  <button type="submit" class="btn btn-info" id="updatehide" data-dismiss="modal"  onclick="updatejd();">Update</button>
+				  <button type="button" class="btn btn-info" data-dismiss="modal" onclick="cancelenable()"> Cancel</button>                                                      
 			  </div>
+			</form>
 			</div>
 		  </div>
 		</div>
 	  
+<!--Succes Modal-->
+<div class="container">
+	<div class="modal fade" id="#successmodal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header" style="background: #47c9a2;">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<img src="/assets/img/success.png" style="height: 105px;width:103px;">
+					<h4>SUCCESS</h4>
+					<p>Your Job has been created successfully.</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
+
+</div>
 
   <!-- <script src="js/jquery.min.js"></script> -->
   <script src="js/jquery-migrate-3.0.1.min.js"></script>

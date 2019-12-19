@@ -97,41 +97,43 @@ module.exports = {
     },
 
     updatejoblisting: (req, res) => {
-        
-        let jobdescriptionid = req.body.jdiddisplayhidden;  
+        console.log("haiii");
+        let jobdescriptionid = req.body.jobdescriptionId;  
         console.log(jobdescriptionid);
-        let reqID = req.body.reqid_display;
-        let joblocation = req.body.jlid_edit;
-        let experience = req.body.exp_edit;
-        let expecteddate = req.body.expdate_edit;
-        let locationfelx = req.body.lf_edit;
-        let jobdescription = req.body.jd_edit;
-        let bussinessunit = req.body.bu_edit;
-        let salesregion = req.body.sregion_edit; 
-        let salesrep = req.body.srep_edit;
-        let status = req.body.statusp_edit;
-        let primaryskill = req.body.ps_edit;
-        let secondaryskill = req.body.ss_edit;
+        let reqID = req.body.reqid;
+        let joblocation = req.body.joblocation;
+        let experience = req.body.experince;
+        let expecteddate = req.body.expecteddate;
+        let locationfelx = req.body.locaflex;
+        let jobdescription = req.body.jobdescription;
+        let bussinessunit = req.body.bussinessunit;
+        let salesregion = req.body.salesregion; 
+        let salesrep = req.body.salerep;
+        let status = req.body.status;
+        let primaryskill = req.body.primaryskill;
+        let secondaryskill = req.body.secondaryskill;
       //  let createdby = req.body.cby_edit;
-        let updateby = req.body.uby_edit;
-        let noofpositions = req.body.npos_edit;
-        let role = req.body.role_edit;
+        let updateby = req.body.updateby;
+        let noofpositions = req.body.noofpos;
+        let role = req.body.role;
        // let createddate = req.body.cbydate_edit;
-        let updatedtime =  req.body.ubydate_edit;
-        let dateofreq =   req.body.datereq_edit;
-        let customers =   req.body.cust_edit;
+        let updatedtime =  req.body.updatedate;
+        let dateofreq =   req.body.dateofreq;
+        let customers =   req.body.customer;
         let jdcomments =   req.body.jdcomments;
         let bucomments =   req.body.bucomments;
        
 
         let query = "CALL procUpdatejobdescription('"+jobdescriptionid+"','"+reqID+"','"+role+"','"+noofpositions+"','"+dateofreq+"','"+experience+
         "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
-        "','"+salesrep+"',,'"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updatedtime+"')";
+        "','"+salesrep+"','"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updateby+"','"+updatedtime+"')";
         
         console.log(query);
         db.query(query, (err, result) => {
             if (err) {
+                console.log(err);
                 return res.status(500).send(err);
+                
             }
             res.status(200).json(result);
             console.log(result);
