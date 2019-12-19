@@ -8723,3 +8723,7 @@ input[type=date]{
   box-shadow: none !important;
   margin-bottom: 10px;
 }
+.card{
+  margin: 5px 0px;
+    padding: 0px 5px;
+}
