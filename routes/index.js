@@ -140,7 +140,6 @@ module.exports = {
         });
     },
 
-
     addjd : (req, res) => {
 
         let buid = req.body.bu_unit;
@@ -163,15 +162,15 @@ module.exports = {
         let jDescription = req.body.job_description;
         let jdComments = req.body.jd_comments;
         let createdate = '2019-09-17 17:03:39';
-        let updateby =  'admin';
-         let updatetime =  '2019-09-17 17:03:39';
-         let createdby =  'admin';
+        let updateby =  '2019-09-17 17:03:39';
+        let updatetime =  '2019-09-17 17:03:39';
+        let createdby =  '2019-09-17 17:03:39';
     
         let query = "call procinsertjobdescription('" +
-        Requirement + "', '" + Role + "', '" + Position + "',  now() ,'" + Exp + "','" + PSkill +
+        Requirement + "', '" + Role + "', '" + Position + "', '" + dateofreq + "','" + Exp + "','" + PSkill +
             "',  '" + SSkill + "',  '" + Expected + "',  '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
-            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "', now() ,'" + updateby + "',now() )";
+            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "','" + createdate + "','" + updateby + "','" + updatetime + "')";
         
     
         db.query(query, (err, result) => {
