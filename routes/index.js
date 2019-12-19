@@ -97,9 +97,9 @@ module.exports = {
     },
 
     updatejoblisting: (req, res) => {
-        console.log("haiii");
+        
         let jobdescriptionid = req.body.jobdescriptionId;  
-        console.log(jobdescriptionid);
+  
         let reqID = req.body.reqid;
         let joblocation = req.body.joblocation;
         let experience = req.body.experince;
@@ -128,50 +128,47 @@ module.exports = {
         "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
         "','"+salesrep+"','"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updateby+"','"+updatedtime+"')";
         
-        console.log(query);
+        
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+             ;
                 return res.status(500).send(err);
                 
             }
             res.status(200).json(result);
-            console.log(result);
+           
         });
     },
 
     addjd : (req, res) => {
-
-        let buid = req.body.bu_unit;
-        
-        let salesregionid = req.body.sales_region;
-        let salesrepid = req.body.sale_rep;
-        let customerid = req.body.customer;
+        let Requirement = req.body.Requirement;
+        let Role = req.body.Role;
+        let Position = req.body.Position;
+        let Expected = req.body.Expected;
+        let Exp = req.body.Exp;
+        let PSkill = req.body.PSkill;
+        let SSkill = req.body.SSkill;
+        let locationflex = req.body.locationflex;
+        let customerid = req.body.customerid;
+        let Status = req.body.Status;
+        let buid = req.body.buid;
+        let salesregionid = req.body.salesregionid;
+        let salesrepid = req.body.salesrepid;
+        let joblocation = req.body.joblocation;
+        let jDescription = req.body.jDescription;
         let buComments = req.body.buComments;
-        let Requirement = req.body.Requirementid;
-        let Role = req.body.role;
-        let Expected = req.body.ex_date;
-        let dateofreq = '2019-09-17 17:03:39'; 
-        let Position = req.body.positions;
-        let Exp = req.body.experience;
-        let Status = req.body.status;
-        let PSkill = req.body.primary_skill;
-        let SSkill = req.body.secondry_skill;
-        let joblocation = req.body.job_location;
-        let locationflex = req.body.loc_flex;
-        let jDescription = req.body.job_description;
-        let jdComments = req.body.jd_comments;
-        let createdate = '2019-09-17 17:03:39';
-        let updateby =  '2019-09-17 17:03:39';
-        let updatetime =  '2019-09-17 17:03:39';
-        let createdby =  '2019-09-17 17:03:39';
+        let jdComments = req.body.jdComments;
+        let createdby =  req.body.createdby;
+        let updateby =  req.body.updateby;
+        
+        
     
         let query = "call procinsertjobdescription('" +
-        Requirement + "', '" + Role + "', '" + Position + "', '" + dateofreq + "','" + Exp + "','" + PSkill +
-            "',  '" + SSkill + "',  '" + Expected + "',  '" + locationflex + "', '" + customerid + "','" +
+        Requirement + "', '" + Role + "', '" + Position + "', now(),'" + Exp + "','" + PSkill +
+            "',  '" + SSkill + "','" + Expected + "', '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
-            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "','" + createdate + "','" + updateby + "','" + updatetime + "')";
-        
+            "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "',now(),'" + updateby + "',now())";
+       
     
         db.query(query, (err, result) => {
             if (err) {
@@ -179,7 +176,7 @@ module.exports = {
                 return res.status(500).send(err);
             }  
             res.status(200).json(result);
-    
+          
         });
     }
 }
