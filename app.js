@@ -5,8 +5,9 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit
-    ,getcustomers,addjd,joblistingdetails,joblisting,updatejoblisting,profileslistingdetails} = require('./routes/index');
+const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
+    joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
+    profileslistingdetails} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 2000;
 
@@ -58,6 +59,13 @@ app.get('/joblisting/:i', joblisting);
 app.post('/updatejoblisting/:id', updatejoblisting);
 // app.get('/profileslistingdetails', profileslistingdetails);
 
+//profileTab lookup's
+app.get('/curentlocation', getcurrentlocation);
+app.get('/salutation', getsalutation);
+app.get('/highestqual', gethighestqual);
+app.get('/profilestatus', getprofilestatus);
+app.get('/profilecountry', getprofilecountry);
+app.get('/statebycountry/:profilecountry', getprofilestatebycountry);
 // set the app to listen on the port
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

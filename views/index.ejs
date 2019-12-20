@@ -40,6 +40,12 @@
 			salesdropdown();
 			salesrepdropdown();
 			customerdropdown();
+			salutationdropdown();
+			highestqualdropdown();
+			currentlocationdropdown();
+			profilestatusdropdown();
+			profiletabcountrydropdown();
+
 			
 	});
 	
@@ -149,7 +155,125 @@ function jobstatus() {
 			}
 		});
 	}
+//profileTab lookup's
+function salutationdropdown() {
+		var salutation = "";
+		var url = "http://localhost:2000/salutation";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				
+				salutation = salutation+"<option>--Select--</option>";
 
+				for (var i = 0; i < result[0].length; i++) {
+					salutation = salutation +
+						'<option value="' + result[0][i].salutationid + '">' + result[0][i].salutation + '</option>';
+				}
+				$("#salutation").html(salutation);
+				//$("#srepedit").html(salesrepdropdown);
+			}
+		});
+	}
+	function profiletabcountrydropdown() {
+		var profilecountry = "";
+		var url = "http://localhost:2000/profilecountry";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				
+				profilecountry = profilecountry+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					profilecountry = profilecountry +
+						'<option value="' + result[0][i].countryid + '">' + result[0][i].country + '</option>';
+				}
+				$("#country").html(profilecountry);
+				//$("#srepedit").html(salesrepdropdown);
+			}
+		});
+	}
+	function profiletabstatedropdown() {
+		let profilecountry = $('[name="country"]').find(":selected").val();
+	
+		
+		var profilestatebycountry = "";
+		var url = "http://localhost:2000/statebycountry/" +profilecountry;
+		console.log(url);
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				
+				//profilestatebycountry = profilestatebycountry+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					profilestatebycountry = profilestatebycountry +
+						'<option value="' + result[0][i].stateid + '">' + result[0][i].state + '</option>';
+				}
+				$("#state").html(profilestatebycountry);
+				//$("#srepedit").html(salesrepdropdown);
+			}
+		});
+	}
+	function highestqualdropdown() {
+		var highestqual = "";
+		var url = "http://localhost:2000/highestqual";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				
+				highestqual = highestqual+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					highestqual = highestqual +
+						'<option value="' + result[0][i].highestqualificationid + '">' + result[0][i].highestqualification + '</option>';
+				}
+				$("#highestquali").html(highestqual);
+				//$("#srepedit").html(salesrepdropdown);
+			}
+		});
+	}
+function currentlocationdropdown() {
+		var currentlocation = "";
+		var url = "http://localhost:2000/curentlocation";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+			
+				currentlocation = currentlocation+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					currentlocation = currentlocation +
+						'<option value="' + result[0][i].stateid + '">' + result[0][i].state + '</option>';
+				}
+				$("#currentlocation").html(currentlocation);
+			//	$("#state").html(currentlocation);
+			}
+		});
+	}
+	function profilestatusdropdown() {
+		var profilestatus = "";
+		var url = "http://localhost:2000/profilestatus";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+			
+				profilestatus = profilestatus+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					profilestatus = profilestatus +
+						'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
+				}
+				$("#status").html(profilestatus);
+				//$("#srepedit").html(salesrepdropdown);
+			}
+		});
+	}
 	function joblistingdetails() {
 		var cardData = "";
 
@@ -830,7 +954,7 @@ function jobstatus() {
 												<h5>Profiles
 											</div>
 												
-											<div class="col-sm-1"><button type="button" class="btn" data-toggle="modal" data-target="#profilesmodal">New</button></h5>
+											<div class="col-sm-1"><button type="button"  data-toggle="modal" data-target="#profilesmodal"  class="btn">New</button></h5>
 											</div>
 										</div>
 										
@@ -1139,14 +1263,14 @@ function jobstatus() {
 					 <label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
 				</div>
 				<div class="col-sm-3">
-				<select id="salutation" name="salutation" required class="form-control" disabled></select>     
+				<select id="salutation" name="salutation" required class="form-control" required></select>     
 				</div>
 				<div class="col-sm-2">
 					 <label style="width: 113px;"><span style="color:red">*</span>First Name:</label>
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text" id="firstname" name="firstname" class="form-control" required disabled>
+					 <input type="text" id="firstname" name="firstname" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-1"> </div>
@@ -1158,14 +1282,14 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-3">
 					  
-					<input type="text" id="lastname" name="lastname" class="form-control" required disabled>
+					<input type="text" id="lastname" name="lastname" class="form-control" required>
 				</div>
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
 				</div>
 				<div class="col-sm-3">
 				  
-					<input type="text" id="dob" name="dob" class="form-control" required disabled>
+					<input type="date" id="dob" name="dob" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 	
@@ -1176,7 +1300,7 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text" id="email" name="email" class="form-control" required disabled>
+					 <input type="text" id="email" name="email" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
@@ -1184,7 +1308,7 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-3">
 					  
-					<input type="text" id="mobile" name="mobile" class="form-control" required disabled>
+					<input type="text" id="mobile" name="mobile" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 
@@ -1199,7 +1323,7 @@ function jobstatus() {
 					<label><span style="color:red">*</span>Address1:<label>
 				</div>
 				<div class="col-sm-3">
-						<input type="text"id="address1" name="address1" class="form-control" required disabled>
+						<input type="text"id="address1" name="address1" class="form-control" required>
 					
 				</div>
 				
@@ -1207,7 +1331,7 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Address2:</label>
 				</div>
 				<div class="col-sm-3">
-					  <input type="text" id="address2" name="address2" class="form-control" required disabled>
+					  <input type="text" id="address2" name="address2" class="form-control" required>
 				</div>
 				<div class="col-sm-1"></div>
 			</div>
@@ -1217,14 +1341,14 @@ function jobstatus() {
 					<label><span style="color:red">*</span>City:</label>
 				</div>
 				<div class="col-sm-3">	
-				<input type="text" id="city" name="city" class="form-control" required disabled>
+				<input type="text" id="city" name="city" class="form-control" required>
 				   
 				</div>
 				<div class="col-sm-2">
 					 <label><span style="color:red">*</span>State:</label>
 				</div>
 				<div class="col-sm-3">						
-					<select class="form-control" id="state" name="state" class="form-control" required disabled>
+					<select class="form-control" id="state"  name="state" class="form-control" required>
 					</select>
 				</div>
 				<div class="col-sm-1"></div>
@@ -1235,7 +1359,7 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Country:</label>
 				</div>
 				<div class="col-sm-3">
-					 <select class="form-control"  id="country" name="country"  class="form-control" required disabled>
+					 <select class="form-control"  id="country" name="country" onclick="profiletabstatedropdown()" class="form-control" required>
 					</select>						   
 				</div>
 				
@@ -1243,7 +1367,7 @@ function jobstatus() {
 					<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
 				</div>
 				<div class="col-sm-3">							
-					<input type="text"  id="postalcode" name="postalcode" class="form-control" required disabled>
+					<input type="text"  id="postalcode" name="postalcode" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1258,7 +1382,7 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Highest Qualification:</label>
 				</div>
 				<div class="col-sm-3">
-				   <select class="form-control" id="highestquali" name="highestquali" required disabled></select>
+				   <select class="form-control" id="highestquali" name="highestquali" required></select>
 					
 				</div>
 				
@@ -1266,7 +1390,7 @@ function jobstatus() {
 					<label style="width: 113px;"><span style="color:red">*</span>Current Jobtitle:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text" id="currentjobtitle" name="currentjobtitle" class="form-control" required disabled>
+					<input type="text" id="currentjobtitle" name="currentjobtitle" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 
@@ -1277,14 +1401,14 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-3">
 				   
-					 <input type="text" id="currentsalary" name="currentsalary" class="form-control" required disabled>
+					 <input type="text" id="currentsalary" name="currentsalary" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Expected Salary:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text"  id="expectedsalary" name="expectedsalary" class="form-control" required disabled>
+					<input type="text"  id="expectedsalary" name="expectedsalary" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1296,14 +1420,14 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text"   id="skillset" name="skillset"  class="form-control" required disabled>
+					 <input type="text"   id="skillset" name="skillset"  class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Skypeid:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text"  id="skypeid" name="skypeid"  class="form-control" required disabled>
+					<input type="text"  id="skypeid" name="skypeid"  class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1313,14 +1437,14 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Notice Period:</label>
 				</div>
 				<div class="col-sm-3">
-					 <input type="text"  id="noticeperiod" name="noticeperiod" class="form-control" required disabled>
+					 <input type="text"  id="noticeperiod" name="noticeperiod" class="form-control" required>
 				</div>
 			
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
 				</div>
 				<div class="col-sm-3">
-					  <select class="form-control" id="currentlocation" name="currentlocation" disabled></select>
+					  <select class="form-control" id="currentlocation" name="currentlocation" required></select>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1330,14 +1454,14 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Desired Location:</label>
 				</div>
 				<div class="col-sm-3">
-					 <input type="text"  id="desiredlocation" name="desiredlocation" class="form-control" required disabled>
+					 <input type="text"  id="desiredlocation" name="desiredlocation" class="form-control" required>
 				</div>
 			
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
 				</div>
 				<div class="col-sm-3">
-					   <input type="text"  id="experience" name="experience" class="form-control" required disabled>
+					   <input type="text"  id="experience" name="experience" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1353,7 +1477,7 @@ function jobstatus() {
 					 <label><span style="color:red">*</span>Status:</label>
 				</div>
 				<div class="col-sm-3">
-				 <select class="form-control" id="status" name="status" class="form-control" required disabled>
+				 <select class="form-control" id="status" name="status" class="form-control" required>
 					</select>
 				  
 				</div>

@@ -69,6 +69,71 @@ module.exports = {
         });
     },
 
+// profileTab lookup's
+getsalutation: (req, res) => {
+    let query = "CALL proclookupsalutation()";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+        
+    });
+},
+getprofilecountry: (req, res) => {
+    let query = "CALL proclookupcountry()";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+        
+    });
+},
+getprofilestatebycountry: (req, res) => {
+
+    let countryid = req.params.profilecountry; 
+   
+    let query = "CALL proclookupstatebycountry('"+countryid+"')";
+   
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+      
+    });
+},
+gethighestqual: (req, res) => {
+    let query = "CALL proclookuphighestqualification()";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+      
+    });
+},
+getcurrentlocation: (req, res) => {
+    let query = "CALL proclookupstate()";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+        
+    });
+},
+getprofilestatus: (req, res) => {
+    let query = "CALL proclookupstatus()";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+        
+    });
+},
     joblistingdetails: (req, res) => {
         let customerquery = "CALL proclistjobdescription()";
         db.query(customerquery, (err, result) => {
