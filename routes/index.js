@@ -168,15 +168,15 @@ module.exports = {
             "',  '" + SSkill + "','" + Expected + "', '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
             "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "',now(),'" + updateby + "',now())";
-       
+       console.log(query);
     
         db.query(query, (err, result) => {
             if (err) {
                
                 return res.status(500).send(err);
             }  
-            res.status(200).json(result);
-          
+            res.redirect('/');
+           // console.log(result);
         });
     }
 }
