@@ -292,23 +292,27 @@ function currentlocationdropdown() {
 
 				var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
 				
-             cardData= cardData +"<div class='card'>"+
+             cardData= cardData +"<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>"+
 											
 				"<div class='row'>"+
+					"<div class='col-lg-1' style='margin-right:-7%'>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"Requirment ID :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].requirmentId+"</span>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].role+"</span>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"Location :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].joblocation+"</span>"+"</div>"+
+						
 				"</div>"+
 				"<div class='row'>"+
+					"<div class='col-lg-1'  style='margin-right:-7%'>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].jobdescription+"</span>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"No Of Positions :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].noofpositions+"</span>"+"</div>"+
 					"<div class='col-lg-3'>"+
 						"<label><b>"+"Experience :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].experience+"</span>"+"</div>"+
+						
 				"<div style='margin-top: -22px;	margin-left: 102px'>"+
 						"<a href='#jobModal' data-toggle='modal' class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
 																	
@@ -578,7 +582,7 @@ function currentlocationdropdown() {
 
 				//	var prequirementID = "\"" + result[0][i].prequirementId + "\"";
 
-				cardData = cardData + "<div class='card'>" +
+				cardData = cardData + "<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>" +
 					
 					"<div class='row'>" +
 						"<div class='col-lg-3'>" +
@@ -832,13 +836,13 @@ function currentlocationdropdown() {
 									<form class="search-job">
 								
 										<div id="jobdetails">
-											  <br>
-											  <!-- <div class="row">
-												  <div class="col-lg-12"></div>
-											  </div> -->
+											 
 											  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="overflow-y: scroll;height:500px;">
-													  <div class="card">
-														  <h5 class="card-header" style="background-color: #73c7e7">Details</h5>
+												<h3 style="font-size:22px;font-weight: bold">New Job:</h3>
+												
+												<div class="card" style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)">
+														 
+														<h5 class="card-header" style="background-color: #73c7e7">Details</h5>
 														  <div class="card-body">
 															  
 																  <div class="row">
@@ -894,13 +898,12 @@ function currentlocationdropdown() {
 	  
 												  <div id="myCollapsible" class="">
 														  <br>
-																  <div class="card">
+																  <div class="card" style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)";>
 																	  <h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
 																	  <div class="card-body">
 					  
-																																					  
+																																  
 																					  <div class="row">
-																						  
 																							  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
 																					  
 																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -913,7 +916,7 @@ function currentlocationdropdown() {
 																							  </div>
 																							  
 																					  </div>
-	  
+																					  <hr style="width: 100%;top: -9px;position: relative;">	
 																					  <div class="row">
 																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -1031,7 +1034,7 @@ function currentlocationdropdown() {
 												  </div>
 
 
-												  <div class="submission" style="margin:3%;">
+								<div class="submission" style="margin:3%;">
 
                                 <div class="row">
                                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"></div>
@@ -1052,7 +1055,7 @@ function currentlocationdropdown() {
 						<div id="operationsTab" class="tab-pane fade">
 							<div id="jobslisting" class="">
 								<br>
-								<div class="card">
+								<div class="card" style="background-color:white ">
 									<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
 									<div class="card-body" id="joblistingbody" style="overflow-y: scroll;height:400px;"></div>
 
@@ -1358,7 +1361,7 @@ function currentlocationdropdown() {
 		<div class="modal-body" style="overflow:auto;height:450px;">
 		  <form action="" method="">
 			 <div class="row">
-			<h4 style="margin-left:2%;font-size: 15px;">Basic Information:</h4>
+			<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Basic Information:</h4>
 			</div>
 			<hr style="width: 100%;top: -9px;position: relative;">
 			<div class="row">
@@ -1436,7 +1439,7 @@ function currentlocationdropdown() {
 			</div> 
 		   
 			  <div class="row">
-			<h4 style="margin-left:2%;font-size: 15px;">Address:</h4>
+			<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Address:</h4>
 			</div>
 			 <hr style="width: 100%;top: -9px;position: relative;">
 			<div class="row">
@@ -1495,7 +1498,7 @@ function currentlocationdropdown() {
 			</div>
 
 			  <div class="row">
-			<h4 style="margin-left:2%;font-size: 15px;">Profession:</h4>
+			<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Profession:</h4>
 			</div>
 			 <hr style="width: 100%;top: -9px;position: relative;">
 			<div class="row">
@@ -1590,7 +1593,7 @@ function currentlocationdropdown() {
 			
 			
 			  <div class="row">
-			<h4 style="margin-left:2%;font-size: 15px;">Others:</h4>
+			<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 			</div>
 			 <hr style="width: 100%;top: -9px;position: relative;">
 			
@@ -1618,10 +1621,10 @@ function currentlocationdropdown() {
 			
 			
 			 <div class="row">
-				<h4 style="margin-left:2%;font-size: 15px;">Attachment:</h4>
-			 </div>
-			 <hr style="width: 100%;top: -9px;position: relative;">		
-			 <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Attachment:</h4>
+			</div>
+			 <hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
 			 <div class="col-sm-1"></div>
 			 <div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Resume:</label>
