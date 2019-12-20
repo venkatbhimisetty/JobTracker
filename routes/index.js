@@ -243,5 +243,71 @@ getprofilestatus: (req, res) => {
             res.redirect('/');
            // console.log(result);
         });
-    }
+    },
+
+
+    addprofile : (req, res) => {
+        
+      //  let Profileid = req.body.Profileid;
+        let Jobrecid = req.body.Jobrecid;
+        let Salutation = req.body.Salutation;
+        let Firstname = req.body.Firstname;
+        let Lastname = req.body.Lastname;
+        let Email = req.body.Email;
+        let Mobile = req.body.Mobile;
+        let Dob = req.body.Dob;
+        let Address1 = req.body.Address1;
+        let Address2 = req.body.Address2;
+        let City = req.body.City;
+        let State = req.body.State;
+        let Country = req.body.Country;
+        let Postalcode = req.body.Postalcode;
+        let Experience = req.body.Experience;
+        let Highestquali = req.body.Highestquali;
+        let Currentjobtitle = req.body.Currentjobtitle;
+        let Currentsalary = req.body.Currentsalary;
+        let Expectedsalary = req.body.Expectedsalary;
+        let Skillset = req.body.Skillset;
+        let Skypeid = req.body.Skypeid;
+        let Noticeperiod = req.body.Noticeperiod;
+        let Currentlocation =  req.body.Currentlocation;
+        let Desiredlocation =  req.body.Desiredlocation;
+        let Status =  req.body.Status;
+        let Resume =  req.body.Resume;
+        let Vendorid =  req.body.Vendorid;
+        let Createdby =  req.body.Createdby;
+        let Updateby =  req.body.Updateby;
+
+
+
+        let query = "call procinsertprofile('" + Jobrecid + "', '" + Salutation + "', '" + Firstname + "','" + Lastname + "','" + 
+        Email + "',  '" + Mobile + "','" + Dob + "', '" + Address1 + "', '" + Address2 + "','" +
+            City + "','" + State + "','" + Country + "','" + Postalcode + "','" + Experience + 
+            "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" + 
+            Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
+            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now())";
+     
+            console.log(query);
+    
+        db.query(query, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+            }  
+            res.status(200).json(result);
+          
+        });
+    },
+
+    profilelistingdetails: (req, res) => {
+        let customerquery = "CALL proclistprofiles()";
+        db.query(customerquery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            
+        });
+    },
+
 }

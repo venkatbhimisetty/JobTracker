@@ -7,7 +7,7 @@ const app = express();
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
-    profileslistingdetails} = require('./routes/index');
+    addprofile,profilelistingdetails} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 2000;
 
@@ -57,7 +57,8 @@ app.get('/jobstatus', getJobStatusdrop);
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
 app.post('/updatejoblisting/:id', updatejoblisting);
-// app.get('/profileslistingdetails', profileslistingdetails);
+app.post('/addprofiles', addprofile);
+app.get('/profileslistingdetails', profilelistingdetails);
 
 //profileTab lookup's
 app.get('/curentlocation', getcurrentlocation);

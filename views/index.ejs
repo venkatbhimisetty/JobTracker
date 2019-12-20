@@ -53,8 +53,12 @@
 
 function uploadOnChange() {
   var path = $("#choosefile").val(); 
+  var profiletabpath = $("#resume").val();
   filetext = path.split('\\').pop().split('/').pop();
+  profilefiletext = profiletabpath.split('\\').pop().split('/').pop();
+  
 	$("#filename").val(filetext);
+	$("#pfilename").val(profilefiletext);
 }
 
 function jobstatus() {
@@ -195,7 +199,7 @@ function salutationdropdown() {
 		});
 	}
 	function profiletabstatedropdown() {
-		let profilecountry = $('[name="country"]').find(":selected").val();
+		let profilecountry = $('[name="p_country"]').find(":selected").val();
 	
 		
 		var profilestatebycountry = "";
@@ -251,7 +255,7 @@ function currentlocationdropdown() {
 						'<option value="' + result[0][i].stateid + '">' + result[0][i].state + '</option>';
 				}
 				$("#currentlocation").html(currentlocation);
-			//	$("#state").html(currentlocation);
+				$("#desiredlocation").html(currentlocation);
 			}
 		});
 	}
@@ -384,16 +388,17 @@ function currentlocationdropdown() {
 		$("#JD_comment").attr('disabled',false);
 		$("#BU_comment").attr('disabled',false);
 	}
+	
 	function addjd(){
-		var Requirement = $('[name="Requirementid"]').val();
-		var Role = $('[name="role"]').val();
-		var Position = $('[name="positions"]').val();
-		var Expected = $('[name="ex_date"]').val();
-		//var dateofreq = $('[name="sregion_edit"]').val();
-		var Exp = $('[name="experience"]').val();
-		var PSkill = $('[name="primary_skill"]').val();
-			var SSkill = $('[name="secondry_skill"]').val();
-			
+		
+			var Requirement = $('[name="Requirementid"]').val();
+			var Role = $('[name="role"]').val();
+			var Position = $('[name="positions"]').val();
+			var Expected = $('[name="ex_date"]').val();
+			//var dateofreq = $('[name="sregion_edit"]').val();
+			var Exp = $('[name="experience"]').val();
+			var PSkill = $('[name="primary_skill"]').val();
+			var SSkill = $('[name="secondry_skill"]').val();			
 			var locationflex = $('[name="loc_flex"]').val();
 			var customerid = $('[name="customer"]').val();
 			var Status = $('[name="status"]').val();
@@ -447,7 +452,7 @@ function currentlocationdropdown() {
                 dataType: "json",
                 success: function (result) {
 					
-					jQuery('#successmodal').modal('show');
+					$("#screenloading").css('display', 'show');
 				
 				},
                 error: function () {
@@ -456,9 +461,6 @@ function currentlocationdropdown() {
            
 
         }
-
-
-
 
 	
 	function cancelenable(){
@@ -486,6 +488,7 @@ function currentlocationdropdown() {
 		$("#custedit").attr('disabled',true);
 		$("#JD_comment").attr('disabled',true);
 		$("#BU_comment").attr('disabled',true);
+	
 	}
 
 	function updatejd(){
@@ -589,7 +592,7 @@ function currentlocationdropdown() {
 						"<div class='col-lg-3'>" +
 							"<label>" + "Experience :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].experince + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
-							"<label>" + "Status :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].statusid + "</span>" + "</div>" +
+							"<label>" + "Status :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].status + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
 							"<label>" + "Vendor :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorid + "</span>" + "</div>" +
 						
@@ -598,7 +601,7 @@ function currentlocationdropdown() {
 
 				}
 				
-			//	$("#profileslistingbody").html(cardData);
+				$("#profileslistingbody").html(cardData);
 
 			}
 		});
@@ -640,12 +643,130 @@ function currentlocationdropdown() {
 				}
 				
             });
+	
 	}
 
+	function addprofile() {
+		
+	//	var Profileid = $('[name="profileid"]').val();
+		var Jobrecid = $('[name="pjob_recid"]').val();
+		alert(Jobrecid);
+		var Salutation = $('[name="psalutation_id"]').val();
+		var Firstname = $('[name="pfirst_name"]').val();
+		var Lastname = $('[name="plast_name"]').val();
+		var Email = $('[name="p_email"]').val();
+		var Mobile = $('[name="p_mobile"]').val();
+		var Dob = $('[name="p_dob"]').val();
+		var Address1 = $('[name="p_address1"]').val();
+		var Address2 = $('[name="p_address2"]').val();			
+		var City = $('[name="p_city"]').val();
+		var State = $('[name="p_state"]').val();
+		var Country = $('[name="p_country"]').val();
+		var Postalcode = $('[name="p_postalcode"]').val();
+		var Experience = $('[name="p_experience"]').val();
+		var Highestquali = $('[name="p_highestquali"]').val();
+		var Currentjobtitle = $('[name="pcurrent_jobtitle"]').val();
+		var Currentsalary = $('[name="pcurrent_salary"]').val();
+		var Expectedsalary = $('[name="pexpected_salary"]').val();
+		var Skillset = $('[name="pskill_set"]').val();
+		var Skypeid = $('[name="pskype_id"]').val();
+		var Noticeperiod = $('[name="pnotice_period"]').val();
+	    var Currentlocation = $('[name="pcurrent_location"]').val();
+		var Desiredlocation = $('[name="pdesired_location"]').val();
+		var Status = $('[name="p_status"]').val();
+		var Resume = $('[name="presume_name"]').val();
+		var Vendorid = $('[name="p_vendorid"]').val();
+		var Createdby = 'Admin';
+        var Updateby = 'Admin';
+	  
+			
+
+		var data = {
+			
+		//	"Profileid": Profileid,
+			"Jobrecid": Jobrecid,
+			"Salutation": Salutation,
+			"Firstname": Firstname,
+			"Lastname": Lastname,
+			"Email": Email,
+			"Mobile": Mobile,
+			"Dob": Dob,
+			"Address1": Address1,
+			"Address2": Address2,
+			"City": City,
+			"State": State,
+			"Country": Country,
+			"Postalcode": Postalcode,
+			"Experience": Experience,
+			"Highestquali": Highestquali,
+			"Currentjobtitle": Currentjobtitle,
+			"Currentsalary": Currentsalary,
+			"Expectedsalary": Expectedsalary,
+			"Skillset": Skillset,
+			"Skypeid": Skypeid,
+			"Noticeperiod": Noticeperiod,
+			"Currentlocation": Currentlocation,
+			"Desiredlocation": Desiredlocation,
+			"Status": Status,
+			"Resume": Resume,
+			"Vendorid": Vendorid,
+			"Createdby": Createdby,
+			"Updateby": Updateby
+
+		}
+		
+		data = JSON.stringify(data);
+		
+		var url="http://localhost:2000/addprofiles";
+	   
+
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: false,
+			data: data,
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				
+				$('#successmodal').modal('show');
+			
+			},
+			error: function () {
+			}
+		});
+	   
+
+	}
+
+
 </script>
-	
+
+   
 
 <body>
+	<div id='screenloading'>
+
+	<!-- <div class="container"> -->
+			<div class="modal fade " role="dialog" id="successmodal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background: #47c9a2;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body text-center">
+							<img src="/assets/img/success.png" style="height: 105px;width:103px;">
+							<h4>SUCCESS</h4>
+							<p>Your Job has been created successfully.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		<!-- </div> -->
+	
+	
+	</div>
 	<div class="container" >
 		<div class="row">
 			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -761,7 +882,7 @@ function currentlocationdropdown() {
 																		  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																			  <label>Comments:</label></div>
 																		  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																			  <textarea style="width: 90%;border-radius: 5px;" id="comment" name="bucomments" ></textarea>
+																			  <textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="comment" name="bucomments" ></textarea>
 																		  </div>
 																	  </div>
 													  
@@ -804,7 +925,7 @@ function currentlocationdropdown() {
 																					  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																							  <label><span style="color:red;">*</span>Role/Domain:</label></div>
 																							  <div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" >
-																								  <input type="text" id="role" name="role" class="form-control" >
+																								  <input type="text" id="role" name="role" class="form-control" required >
 																							  </div>
 																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 						  
@@ -883,7 +1004,7 @@ function currentlocationdropdown() {
 																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																							  <label><span style="color:red;">*</span>Job Description:</label></div>
 																							  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																								  <textarea id="jdesp" name="job_description" style="width: 90%;border-radius: 5px;" ></textarea>
+																								  <textarea id="jdesp" name="job_description" style="width: 89%;border-radius: 5px;font-size:13px;" ></textarea>
 																							  </div>
 																						  </div>
 																					  <div class="row">
@@ -891,7 +1012,7 @@ function currentlocationdropdown() {
 																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																							  <label>Comments:</label></div>
 																							  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-																								  <textarea id="comm" name="jd_comments" style="width: 90%;border-radius: 5px;" ></textarea>
+																								  <textarea id="comm" name="jd_comments" style="width: 89%;border-radius: 5px;font-size:13px;" ></textarea>
 																							  </div>
 																						  </div>
 					  
@@ -915,8 +1036,8 @@ function currentlocationdropdown() {
                                 <div class="row">
                                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"></div>
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="margin-bottom:2%;">
-                                        <button type="submit" class="btn btn-info" onclick="addjd();">Submit</button>
-                                        <button type="button" id="canceljob" class="btn btn-info">Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-info" onclick="addjd();">Submit</button>
+                                        <button type="button" id="canceljob" class="btn btn-sm btn-info">Cancel</button>
 
                                     </div>
                                 </div>
@@ -959,7 +1080,7 @@ function currentlocationdropdown() {
 										</div>
 										
 									 </div>
-										<div class="card-body">
+										<div class="card-body" id="profileslistingbody">
 							
 							
 										</div>
@@ -985,24 +1106,7 @@ function currentlocationdropdown() {
 				</div>
 	  
 	  <!--Succes Modal-->
-<div class="container">
-	<div class="modal fade" role="dialog" id="successmodal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" style="background: #47c9a2;">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body text-center">
-					<img src="/assets/img/success.png" style="height: 105px;width:103px;">
-					<h4>SUCCESS</h4>
-					<p>Your Job has been created successfully.</p>
-				</div>
-			</div>
-		</div>
-	</div>
 
-
-</div>
 		<!-- Modal -->
 		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 3%;" >
 		  <div class="modal-dialog modal-lg">
@@ -1212,7 +1316,7 @@ function currentlocationdropdown() {
 							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 								<label>JD Comments:</label></div>
 							<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-								<textarea style="width: 90%;border-radius: 5px;" id="JD_comment"
+								<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="JD_comment"
 									name="jdcomments"></textarea>
 							</div>
 						</div>
@@ -1222,7 +1326,7 @@ function currentlocationdropdown() {
 							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 								<label>BU Comments:</label></div>
 							<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-								<textarea style="width: 90%;border-radius: 5px;" id="BU_comment"
+								<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="BU_comment"
 									name="bucomments"></textarea>
 							</div>
 						</div>
@@ -1258,19 +1362,37 @@ function currentlocationdropdown() {
 			</div>
 			<hr style="width: 100%;top: -9px;position: relative;">
 			<div class="row">
+				<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						 <label style="width: 113px;"><span style="color:red">*</span>Profile ID:</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" id="profileid" name="profileid" class="form-control" required>     
+					</div>
+					<div class="col-sm-2">
+						 <label style="width: 113px;"><span style="color:red">*</span>Job Requirement ID:</label>
+					</div>
+					<div class="col-sm-3">
+						
+						 <input type="text" id="jobrecid" name="pjob_recid" class="form-control" required>
+					</div>
+					
+					<div class="col-sm-1"> </div>
+				</div> 
+			<div class="row">
 			<div class="col-sm-1"></div>
 				<div class="col-sm-2">
 					 <label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
 				</div>
 				<div class="col-sm-3">
-				<select id="salutation" name="salutation" required class="form-control" required></select>     
+				<select id="salutation" name="psalutation_id" required class="form-control" required></select>     
 				</div>
 				<div class="col-sm-2">
 					 <label style="width: 113px;"><span style="color:red">*</span>First Name:</label>
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text" id="firstname" name="firstname" class="form-control" required>
+					 <input type="text" id="firstname" name="pfirst_name" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-1"> </div>
@@ -1282,14 +1404,14 @@ function currentlocationdropdown() {
 				</div>
 				<div class="col-sm-3">
 					  
-					<input type="text" id="lastname" name="lastname" class="form-control" required>
+					<input type="text" id="lastname" name="plast_name" class="form-control" required>
 				</div>
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
 				</div>
 				<div class="col-sm-3">
 				  
-					<input type="date" id="dob" name="dob" class="form-control" required>
+					<input type="date" id="dob" name="p_dob" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 	
@@ -1300,7 +1422,7 @@ function currentlocationdropdown() {
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text" id="email" name="email" class="form-control" required>
+					 <input type="text" id="email" name="p_email" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
@@ -1308,7 +1430,7 @@ function currentlocationdropdown() {
 				</div>
 				<div class="col-sm-3">
 					  
-					<input type="text" id="mobile" name="mobile" class="form-control" required>
+					<input type="text" id="mobile" name="p_mobile" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 
@@ -1323,7 +1445,7 @@ function currentlocationdropdown() {
 					<label><span style="color:red">*</span>Address1:<label>
 				</div>
 				<div class="col-sm-3">
-						<input type="text"id="address1" name="address1" class="form-control" required>
+						<input type="text"id="address1" name="p_address1" class="form-control" required>
 					
 				</div>
 				
@@ -1331,7 +1453,7 @@ function currentlocationdropdown() {
 					 <label><span style="color:red">*</span>Address2:</label>
 				</div>
 				<div class="col-sm-3">
-					  <input type="text" id="address2" name="address2" class="form-control" required>
+					  <input type="text" id="address2" name="p_address2" class="form-control" required>
 				</div>
 				<div class="col-sm-1"></div>
 			</div>
@@ -1341,14 +1463,14 @@ function currentlocationdropdown() {
 					<label><span style="color:red">*</span>City:</label>
 				</div>
 				<div class="col-sm-3">	
-				<input type="text" id="city" name="city" class="form-control" required>
+				<input type="text" id="city" name="p_city" class="form-control" required>
 				   
 				</div>
 				<div class="col-sm-2">
 					 <label><span style="color:red">*</span>State:</label>
 				</div>
 				<div class="col-sm-3">						
-					<select class="form-control" id="state"  name="state" class="form-control" required>
+					<select class="form-control" id="state"  name="p_state" class="form-control" required>
 					</select>
 				</div>
 				<div class="col-sm-1"></div>
@@ -1359,7 +1481,7 @@ function currentlocationdropdown() {
 					 <label><span style="color:red">*</span>Country:</label>
 				</div>
 				<div class="col-sm-3">
-					 <select class="form-control"  id="country" name="country" onclick="profiletabstatedropdown()" class="form-control" required>
+					 <select class="form-control"  id="country" name="p_country" onclick="profiletabstatedropdown()" class="form-control" required>
 					</select>						   
 				</div>
 				
@@ -1367,7 +1489,7 @@ function currentlocationdropdown() {
 					<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
 				</div>
 				<div class="col-sm-3">							
-					<input type="text"  id="postalcode" name="postalcode" class="form-control" required>
+					<input type="text"  id="postalcode" name="p_postalcode" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1382,15 +1504,15 @@ function currentlocationdropdown() {
 					 <label><span style="color:red">*</span>Highest Qualification:</label>
 				</div>
 				<div class="col-sm-3">
-				   <select class="form-control" id="highestquali" name="highestquali" required></select>
+				   <select class="form-control" id="highestquali" name="p_highestquali" required></select>
 					
 				</div>
 				
 				<div class="col-sm-2">
-					<label style="width: 113px;"><span style="color:red">*</span>Current Jobtitle:</label>
+					<label style="width: 113px;"><span style="color:red">*</span>Current Job Title:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text" id="currentjobtitle" name="currentjobtitle" class="form-control" required>
+					<input type="text" id="currentjobtitle" name="pcurrent_jobtitle" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div> 
@@ -1401,14 +1523,14 @@ function currentlocationdropdown() {
 				</div>
 				<div class="col-sm-3">
 				   
-					 <input type="text" id="currentsalary" name="currentsalary" class="form-control" required>
+					 <input type="text" id="currentsalary" name="pcurrent_salary" class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Expected Salary:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text"  id="expectedsalary" name="expectedsalary" class="form-control" required>
+					<input type="text"  id="expectedsalary" name="pexpected_salary" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1416,18 +1538,18 @@ function currentlocationdropdown() {
 			<div class="row">
 			<div class="col-sm-1"></div>
 				<div class="col-sm-2">
-					 <label><span style="color:red">*</span>Skillset:</label>
+					 <label><span style="color:red">*</span>Skill Set:</label>
 				</div>
 				<div class="col-sm-3">
 					
-					 <input type="text"   id="skillset" name="skillset"  class="form-control" required>
+					 <input type="text"   id="skillset" name="pskill_set"  class="form-control" required>
 				</div>
 				
 				<div class="col-sm-2">
-					<label style="width: 113px;"><span style="color:red">*</span>Skypeid:</label>
+					<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
 				</div>
 				<div class="col-sm-3">
-					<input type="text"  id="skypeid" name="skypeid"  class="form-control" required>
+					<input type="text"  id="skypeid" name="pskype_id"  class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1437,14 +1559,14 @@ function currentlocationdropdown() {
 					 <label><span style="color:red">*</span>Notice Period:</label>
 				</div>
 				<div class="col-sm-3">
-					 <input type="text"  id="noticeperiod" name="noticeperiod" class="form-control" required>
+					 <input type="text"  id="noticeperiod" name="pnotice_period" class="form-control" required>
 				</div>
 			
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
 				</div>
 				<div class="col-sm-3">
-					  <select class="form-control" id="currentlocation" name="currentlocation" required></select>
+					  <select class="form-control" id="currentlocation" name="pcurrent_location" required></select>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1454,14 +1576,14 @@ function currentlocationdropdown() {
 					 <label><span style="color:red">*</span>Desired Location:</label>
 				</div>
 				<div class="col-sm-3">
-					 <input type="text"  id="desiredlocation" name="desiredlocation" class="form-control" required>
+					<select class="form-control" id="desiredlocation" name="pdesired_location" required></select>
 				</div>
 			
 				<div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
 				</div>
 				<div class="col-sm-3">
-					   <input type="text"  id="experience" name="experience" class="form-control" required>
+					   <input type="text"  id="experience" name="p_experience" class="form-control" required>
 				</div>
 				<div class="col-sm-1"> </div>
 			</div>
@@ -1471,43 +1593,45 @@ function currentlocationdropdown() {
 			<h4 style="margin-left:2%;font-size: 15px;">Others:</h4>
 			</div>
 			 <hr style="width: 100%;top: -9px;position: relative;">
-			<div class="row">
+			
+			 <div class="row">
 			<div class="col-sm-1"></div>
 				<div class="col-sm-2">
 					 <label><span style="color:red">*</span>Status:</label>
 				</div>
 				<div class="col-sm-3">
-				 <select class="form-control" id="status" name="status" class="form-control" required>
+				 <select class="form-control" id="status" name="p_status" class="form-control" required>
 					</select>
 				  
 				</div>
 			
-			<div class="col-sm-2">
-				  
-				</div>
-				<div class="col-sm-3">
-					  
-				</div>
+				<div class="col-sm-2">
+					<label><span style="color:red">*</span>Vendor ID:</label>
+			   </div>
+			   <div class="col-sm-3">
+					<input type="text"  id="vendorid" name="p_vendorid" class="form-control" required>
+			   </div>
 				<div class="col-sm-1"> </div>
 			
 			</div>
+
 			
 			
 			 <div class="row">
-			<h4 style="margin-left:2%;font-size: 15px;">Attachment:</h4>
-			</div>
-			 <hr style="width: 100%;top: -9px;position: relative;">
-			<div class="row">
+				<h4 style="margin-left:2%;font-size: 15px;">Attachment:</h4>
+			 </div>
+			 <hr style="width: 100%;top: -9px;position: relative;">		
+			 <div class="row">
 			 <div class="col-sm-1"></div>
 			 <div class="col-sm-2">
 					<label style="width: 113px;"><span style="color:red">*</span>Resume:</label>
 				</div>
 				<div class="col-sm-3">
-				<input type="file"   id="resume" name="resume" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
+				<input type="file"   id="resume" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
 			  
 				</div>
 				<div class="col-sm-5">
-					   <input type="text" class="form-control" id="filename"  style="width: 100%;" required disabled>   
+					   <input type="text" class="form-control" id="pfilename"  name="presume_name" style="width: 100%;" required disabled>   
 					
 				</div>
 				
@@ -1517,7 +1641,7 @@ function currentlocationdropdown() {
 
 		</div>
 		<div class="modal-footer">
-		  <button type="Submit" class="btn btn-sm btn-info">Save</button>
+		  <button type="Submit" class="btn btn-sm btn-info" onclick="addprofile()">Save</button>
 		  <button type="button" class="btn btn-sm btn-info">Cancel</button>                                                      
 		</div>
 	  </form>
