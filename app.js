@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit
-    ,getcustomers,addjd,joblistingdetails,joblisting,updatejoblisting} = require('./routes/index');
+    ,getcustomers,addjd,joblistingdetails,joblisting,updatejoblisting,profileslistingdetails} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
 const port = 2000;
 
@@ -56,6 +56,7 @@ app.get('/jobstatus', getJobStatusdrop);
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
 app.post('/updatejoblisting/:id', updatejoblisting);
+// app.get('/profileslistingdetails', profileslistingdetails);
 
 // set the app to listen on the port
 app.listen(port, () => {

@@ -40,8 +40,9 @@
 			salesdropdown();
 			salesrepdropdown();
 			customerdropdown();
-
+			
 	});
+	
 
 
 function uploadOnChange() {
@@ -164,28 +165,29 @@ function jobstatus() {
 				var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
 				
              cardData= cardData +"<div class='card'>"+
-															"<div class='row'>"+
-															 "<div class='col-lg-3'>"+
-																 "<label><b>"+"Requirment ID :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].requirmentId+"</span>"+"</div>"+
-															 "<div class='col-lg-3'>"+
-																 "<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].role+"</span>"+"</div>"+
-															 "<div class='col-lg-3'>"+
-																 "<label><b>"+"Location :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].joblocation+"</span>"+"</div>"+
-															"</div>"+
-															"<div class='row'>"+
-															 "<div class='col-lg-3'>"+
-																	"<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].jobdescription+"</span>"+"</div>"+
-															 "<div class='col-lg-3'>"+
-																	"<label><b>"+"No Of Positions :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].noofpositions+"</span>"+"</div>"+
-															 "<div class='col-lg-3'>"+
-																	"<label><b>"+"Experience :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].experience+"</span>"+"</div>"+
-																"<div style='margin-top: -22px;	margin-left: 102px'>"+
-																"<a href='#jobModal' data-toggle='modal' class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
+											
+				"<div class='row'>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"Requirment ID :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].requirmentId+"</span>"+"</div>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].role+"</span>"+"</div>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"Location :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].joblocation+"</span>"+"</div>"+
+				"</div>"+
+				"<div class='row'>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"Job Type :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].jobdescription+"</span>"+"</div>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"No Of Positions :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].noofpositions+"</span>"+"</div>"+
+					"<div class='col-lg-3'>"+
+						"<label><b>"+"Experience :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].experience+"</span>"+"</div>"+
+				"<div style='margin-top: -22px;	margin-left: 102px'>"+
+						"<a href='#jobModal' data-toggle='modal' class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
 																	
-																 "</div>"+
-															  " </div>"+
+				"</div>"+
+				" </div>"+
 														
-														"</div>"
+				"</div>"
 
 				}
 				$("#joblistingbody").html(cardData);
@@ -320,8 +322,10 @@ function jobstatus() {
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
-                    
-                },
+					
+					jQuery('#successmodal').modal('show');
+				
+				},
                 error: function () {
                 }
             });
@@ -361,18 +365,18 @@ function jobstatus() {
 	}
 
 	function updatejd(){
+			
 			$("#edithide").show();
 			$("#updatehide").hide();
-            var jobdescriptionId = $('[name="jdiddisplay_hidden"]').text();
 			
+			var jobdescriptionId = $('[name="jdiddisplay_hidden"]').text();
 			var reqid = $('[name="reqid_display"]').text();
 			var joblocation = $('[name="jlid_edit"]').val();
 			var experience = $('[name="exp_edit"]').val();
 			var expecteddate = $('[name="expdate_edit"]').val();
 			var locaflex = $('[name="lf_edit"]').val();
 			var jobdescription = $('[name="jd_edit"]').val();
-			var bussinessunit = $('[name="bu_edit"]').val();
-		
+			var bussinessunit = $('[name="bu_edit"]').val();		
 			var salesregion = $('[name="sregion_edit"]').val();
 			var salerep = $('[name="srep_edit"]').val();
 			var status = $('[name="statusp_edit"]').val();
@@ -386,10 +390,10 @@ function jobstatus() {
 			var customer = $('[name="cust_edit"]').val();
 			var jdcomments = $('[name="jdcomments"]').val();
 			var bucomments = $('[name="bucomments"]').val();
-			
-			
+						
 
 			var data = {
+				
 				"jobdescriptionId":jobdescriptionId,
 				"reqid": reqid,
 				"joblocation": joblocation,
@@ -415,12 +419,9 @@ function jobstatus() {
 			}
 			
 			data = JSON.stringify(data);
-			var url="http://localhost:2000/updatejoblisting/"+jobdescriptionId;
 			
-			
-
 			$.ajax({
-				url: url,
+				url: "http://localhost:2000/updatejoblisting/"+jobdescriptionId,
 				type: "POST",
 				async: false,
 				data: data,
@@ -432,6 +433,7 @@ function jobstatus() {
 				error: function () {
 				}
 			});
+			
 			joblistingdetails();
 
 		}
@@ -443,40 +445,37 @@ function jobstatus() {
 		$.ajax({
 			url: url,
 			type: "GET",
-			success: function (result) {
-			
-				
+			success: function (result) {				
 
 				for (var i = 0; i < result[0].length; i++) {
 
-					var prequirementID = "\"" + result[0][i].prequirementId + "\"";
+				//	var prequirementID = "\"" + result[0][i].prequirementId + "\"";
 
-					cardData = cardData + "<div class='card'>" +
-						"<div class='row'>" +
+				cardData = cardData + "<div class='card'>" +
+					
+					"<div class='row'>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Requirment ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].requirmentId + "</span>" + "</div>" +
+							"<label>" + "Requirment ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobrecid + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Candidate Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].role + "</span>" + "</div>" +
+							"<label>" + "Candidate Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].firstname + result[0][i].lastname + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Skill :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].joblocation + "</span>" + "</div>" +
+							"<label>" + "Skill :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].skillset + "</span>" + "</div>" +
 						"</div>" +
-						"<div class='row'>" +
+					"<div class='row'>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Experience :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobdescription + "</span>" + "</div>" +
+							"<label>" + "Experience :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].experince + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Status :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].noofpositions + "</span>" + "</div>" +
+							"<label>" + "Status :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].statusid + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Vendor Source :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].experience + "</span>" + "</div>" +
-						"<div style='margin-top: -22px;	margin-left: 102px'>" +
-						"<a href='#' data-toggle='modal' class='btn btn-info' onclick='jobdisplay(" +  + ")'>" + "View" + "</a>" +
-
-						"</div>" +
+							"<label>" + "Vendor :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorid + "</span>" + "</div>" +
+						
 						" </div>" +
-
 						"</div>"
 
 				}
-				$("#joblistingbody").html(cardData);
+				
+			//	$("#profileslistingbody").html(cardData);
+
 			}
 		});
 	}
@@ -539,10 +538,7 @@ function jobstatus() {
 				</div>
 				<div class="col-sm-4">
 					<div class="collapse navbar-collapse" id="ftco-nav">
-						<ul class="nav">
-							<!-- <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li> 
-	          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li> -->
+						<ul class="nav">							
 							<li class="active"><a data-toggle="tab" href="#jobsTab"
 									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs</li>
 							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" herf='#'
@@ -792,7 +788,7 @@ function jobstatus() {
                                 <div class="row">
                                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"></div>
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="margin-bottom:2%;">
-                                        <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#successmodal" data-backdrop="static" data-keyboard="false" >Submit</button>
+                                        <button type="submit" class="btn btn-info" onclick="addjd();">Submit</button>
                                         <button type="button" id="canceljob" class="btn btn-info">Cancel</button>
 
                                     </div>
@@ -812,28 +808,30 @@ function jobstatus() {
 									<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
 									<div class="card-body" id="joblistingbody" style="overflow-y: scroll;height:400px;"></div>
 
-
-
 									</div>
 
-
-								</div>
 							</div>
+						</div>
 
 
-							<div id="profilesTab" class="tab-pane fade ">
+							<div id="profilesTab" class="tab-pane fade">
 								<div id="profileslisting" class="">
 							
-									<div class="card">
-										<div class="card-header" style="background-color: #73c7e7">
-											<div class="row">
-												<div class="col-sm-11">
-													<h5>Profiles
-												</div>
-												<div class="col-sm-1"><button type="button" class="btn">New</button></h5>
-												</div>
+								<div class="card">
+									
+									<div class="card-header" style="background-color: #73c7e7">
+										
+										<div class="row">
+											
+											<div class="col-sm-11">
+												<h5>Profiles
+											</div>
+												
+											<div class="col-sm-1"><button type="button" class="btn" data-toggle="modal" data-target="#profilesmodal">New</button></h5>
 											</div>
 										</div>
+										
+									 </div>
 										<div class="card-body">
 							
 							
@@ -855,13 +853,29 @@ function jobstatus() {
 
 
 
-						
-
 
 							</div>
 				</div>
 	  
-	  
+	  <!--Succes Modal-->
+<div class="container">
+	<div class="modal fade" role="dialog" id="successmodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background: #47c9a2;">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<img src="/assets/img/success.png" style="height: 105px;width:103px;">
+					<h4>SUCCESS</h4>
+					<p>Your Job has been created successfully.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
 		<!-- Modal -->
 		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 3%;" >
 		  <div class="modal-dialog modal-lg">
@@ -1096,26 +1110,294 @@ function jobstatus() {
 			  </div>
 			</div>
 		</div>
-	  
-<!--Succes Modal-->
-<div class="container">
-	<div class="modal fade" id="#successmodal">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header" style="background: #47c9a2;">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body text-center">
-					<img src="/assets/img/success.png" style="height: 105px;width:103px;">
-					<h4>SUCCESS</h4>
-					<p>Your Job has been created successfully.</p>
-				</div>
-			</div>
+	  </div>
+
+
+
+<!-- Profile Modal-->
+
+<div class="modal fade" id="profilesmodal" role="dialog" style="margin-top: 3%;" >
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header" style="background-color: #73c7e7">
+		  <h5 class="modal-title" >Profile Description</h5>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  
 		</div>
+		<div class="modal-body" style="overflow:auto;height:450px;">
+		  <form action="" method="">
+			 <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;">Basic Information:</h4>
+			</div>
+			<hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
+				</div>
+				<div class="col-sm-3">
+				<select id="salutation" name="salutation" required class="form-control" disabled></select>     
+				</div>
+				<div class="col-sm-2">
+					 <label style="width: 113px;"><span style="color:red">*</span>First Name:</label>
+				</div>
+				<div class="col-sm-3">
+					
+					 <input type="text" id="firstname" name="firstname" class="form-control" required disabled>
+				</div>
+				
+				<div class="col-sm-1"> </div>
+			</div> 
+			<div class="row">
+			<div class="col-sm-1"></div>
+				  <div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Last Name:</label>
+				</div>
+				<div class="col-sm-3">
+					  
+					<input type="text" id="lastname" name="lastname" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
+				</div>
+				<div class="col-sm-3">
+				  
+					<input type="text" id="dob" name="dob" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 	
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Email:</label>
+				</div>
+				<div class="col-sm-3">
+					
+					 <input type="text" id="email" name="email" class="form-control" required disabled>
+				</div>
+				
+				<div class="col-sm-2">
+					  <label><span style="color:red">*</span>Mobile:</label>
+				</div>
+				<div class="col-sm-3">
+					  
+					<input type="text" id="mobile" name="mobile" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 
+		   
+			  <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;">Address:</h4>
+			</div>
+			 <hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<label><span style="color:red">*</span>Address1:<label>
+				</div>
+				<div class="col-sm-3">
+						<input type="text"id="address1" name="address1" class="form-control" required disabled>
+					
+				</div>
+				
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Address2:</label>
+				</div>
+				<div class="col-sm-3">
+					  <input type="text" id="address2" name="address2" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<label><span style="color:red">*</span>City:</label>
+				</div>
+				<div class="col-sm-3">	
+				<input type="text" id="city" name="city" class="form-control" required disabled>
+				   
+				</div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>State:</label>
+				</div>
+				<div class="col-sm-3">						
+					<select class="form-control" id="state" name="state" class="form-control" required disabled>
+					</select>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Country:</label>
+				</div>
+				<div class="col-sm-3">
+					 <select class="form-control"  id="country" name="country"  class="form-control" required disabled>
+					</select>						   
+				</div>
+				
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
+				</div>
+				<div class="col-sm-3">							
+					<input type="text"  id="postalcode" name="postalcode" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+
+			  <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;">Profession:</h4>
+			</div>
+			 <hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Highest Qualification:</label>
+				</div>
+				<div class="col-sm-3">
+				   <select class="form-control" id="highestquali" name="highestquali" required disabled></select>
+					
+				</div>
+				
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Current Jobtitle:</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="text" id="currentjobtitle" name="currentjobtitle" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Current Salary:</label>
+				</div>
+				<div class="col-sm-3">
+				   
+					 <input type="text" id="currentsalary" name="currentsalary" class="form-control" required disabled>
+				</div>
+				
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Expected Salary:</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="text"  id="expectedsalary" name="expectedsalary" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+			
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Skillset:</label>
+				</div>
+				<div class="col-sm-3">
+					
+					 <input type="text"   id="skillset" name="skillset"  class="form-control" required disabled>
+				</div>
+				
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Skypeid:</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="text"  id="skypeid" name="skypeid"  class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Notice Period:</label>
+				</div>
+				<div class="col-sm-3">
+					 <input type="text"  id="noticeperiod" name="noticeperiod" class="form-control" required disabled>
+				</div>
+			
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
+				</div>
+				<div class="col-sm-3">
+					  <select class="form-control" id="currentlocation" name="currentlocation" disabled></select>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+				<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Desired Location:</label>
+				</div>
+				<div class="col-sm-3">
+					 <input type="text"  id="desiredlocation" name="desiredlocation" class="form-control" required disabled>
+				</div>
+			
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
+				</div>
+				<div class="col-sm-3">
+					   <input type="text"  id="experience" name="experience" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+			
+			
+			  <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;">Others:</h4>
+			</div>
+			 <hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Status:</label>
+				</div>
+				<div class="col-sm-3">
+				 <select class="form-control" id="status" name="status" class="form-control" required disabled>
+					</select>
+				  
+				</div>
+			
+			<div class="col-sm-2">
+				  
+				</div>
+				<div class="col-sm-3">
+					  
+				</div>
+				<div class="col-sm-1"> </div>
+			
+			</div>
+			
+			
+			 <div class="row">
+			<h4 style="margin-left:2%;font-size: 15px;">Attachment:</h4>
+			</div>
+			 <hr style="width: 100%;top: -9px;position: relative;">
+			<div class="row">
+			 <div class="col-sm-1"></div>
+			 <div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Resume:</label>
+				</div>
+				<div class="col-sm-3">
+				<input type="file"   id="resume" name="resume" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
+			  
+				</div>
+				<div class="col-sm-5">
+					   <input type="text" class="form-control" id="filename"  style="width: 100%;" required disabled>   
+					
+				</div>
+				
+				<div class="col-sm-1"> </div>
+		   
+			</div>
+
+		</div>
+		<div class="modal-footer">
+		  <button type="Submit" class="btn btn-sm btn-info">Save</button>
+		  <button type="button" class="btn btn-sm btn-info">Cancel</button>                                                      
+		</div>
+	  </form>
+	  </div>
 	</div>
+  </div>
 
-
-</div>
 
 
 
