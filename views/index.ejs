@@ -17,7 +17,6 @@
 	<link rel="stylesheet" href="fonts/flaticon.css">
 	<link rel="stylesheet" href="fonts/icomoon.css">
 	<link rel="stylesheet" href="css/style.css">
-		
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -50,7 +49,24 @@
 	});
 	
 
-
+	function jobstatus() {
+		console.log("hai");
+		jobstatusdrop = '';
+		var url = "http://localhost:2000/jobstatus";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				console.log(result);
+				for (var i = 0; i < result[0].length; i++) {
+					jobstatusdrop = jobstatusdrop +
+						'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
+				}
+			
+				$("#jobstatus").html(jobstatusdrop);
+			}
+			});
+			}
 function uploadOnChange() {
   var path = $("#choosefile").val(); 
   var profiletabpath = $("#resume").val();
@@ -749,9 +765,9 @@ function currentlocationdropdown() {
    
 
 <body>
-	<div id='screenloading'>
+<div id='screenloading'>
 
-	<!-- <div class="container"> -->
+ <div class="container"> 
 			<div class="modal fade " role="dialog" id="successmodal">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -767,7 +783,7 @@ function currentlocationdropdown() {
 				</div>
 			</div>
 	
-		<!-- </div> -->
+	 </div>	
 	
 	
 	</div>
@@ -788,9 +804,7 @@ function currentlocationdropdown() {
 				<div class="col-sm-4">
 					<div class="collapse navbar-collapse" id="ftco-nav">
 						<ul class="nav">
-							<!-- <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li> 
-	          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li> -->
+						
 							<li class="active"><a data-toggle="tab" data-target="#jobsTab"
 									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs</li>
 							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" herf='#'
@@ -812,10 +826,16 @@ function currentlocationdropdown() {
 
 					</div>
 				</div>
+			</nav>
 		</div>
-		</nav>
+		
 	</div>
-	<!-- END nav -->
+	
+
+
+
+
+	
 
 	<div class="hero-wrap js-fullheight" style="background-image: url('/assets/img/bg_2.jpg');"
 		data-stellar-background-ratio="0.5">
@@ -898,7 +918,7 @@ function currentlocationdropdown() {
 	  
 												  <div id="myCollapsible" class="">
 														  <br>
-																  <div class="card" style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)";>
+																  <div class="card" style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)">
 																	  <h5 class="card-header" style="background-color: #73c7e7">Job Description</h5>
 																	  <div class="card-body">
 					  
@@ -1108,9 +1128,9 @@ function currentlocationdropdown() {
 							</div>
 				</div>
 	  
-	  <!--Succes Modal-->
+	  
 
-		<!-- Modal -->
+		
 		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 3%;" >
 		  <div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -1348,7 +1368,7 @@ function currentlocationdropdown() {
 
 
 
-<!-- Profile Modal-->
+
 
 <div class="modal fade" id="profilesmodal" role="dialog" style="margin-top: 3%;" >
 	<div class="modal-dialog modal-lg">
@@ -1645,7 +1665,7 @@ function currentlocationdropdown() {
 		</div>
 		<div class="modal-footer">
 		  <button type="Submit" class="btn btn-sm btn-info" onclick="addprofile()">Save</button>
-		  <button type="button" class="btn btn-sm btn-info">Cancel</button>                                                      
+		  <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" >Cancel</button>                                                      
 		</div>
 	  </form>
 	  </div>
@@ -1654,8 +1674,7 @@ function currentlocationdropdown() {
 
 
 
-
-	<!-- <script src="js/jquery.min.js"></script> -->
+	
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
