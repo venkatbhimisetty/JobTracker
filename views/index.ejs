@@ -85,7 +85,7 @@ function jobstatus() {
                 url: url,
                 type: "GET",
                 success: function (result) {
-					jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
+				//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
                     for (var i = 0; i < result[0].length; i++) {
                         jobstatusdrop = jobstatusdrop +
                             '<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
@@ -105,7 +105,7 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
-				budropdown = budropdown+"<option>--Select--</option>";
+				//budropdown = budropdown+"<option>--Select--</option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					budropdown = budropdown +
@@ -125,7 +125,7 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
-				salesdropdown = salesdropdown+"<option>--Select--</option>";
+			//	salesdropdown = salesdropdown+"<option>--Select--</option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					salesdropdown = salesdropdown +
@@ -144,7 +144,7 @@ function jobstatus() {
 			url: url,
 			type: "GET",
 			success: function (result) {
-				salesrepdropdown = salesrepdropdown+"<option>--Select--</option>";
+				//salesrepdropdown = salesrepdropdown+"<option>--Select--</option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					salesrepdropdown = salesrepdropdown +
@@ -164,7 +164,7 @@ function jobstatus() {
 			type: "GET",
 			success: function (result) {
 				
-				customerdropdown = customerdropdown+"<option>--Select--</option>";
+			//	customerdropdown = customerdropdown+"<option>--Select--</option>";
 				
 				for (var i = 0; i < result[0].length; i++) {
 					customerdropdown = customerdropdown +
@@ -184,7 +184,7 @@ function salutationdropdown() {
 			type: "GET",
 			success: function (result) {
 				
-				salutation = salutation+"<option>--Select--</option>";
+				//salutation = salutation+"<option>--Select--</option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					salutation = salutation +
@@ -203,7 +203,7 @@ function salutationdropdown() {
 			type: "GET",
 			success: function (result) {
 				
-				profilecountry = profilecountry+"<option>--Select--</option>";
+				//profilecountry = profilecountry+"<option>--Select--</option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					profilecountry = profilecountry +
@@ -330,7 +330,7 @@ function currentlocationdropdown() {
 						"<label><b>"+"Experience :"+"</b></label>"+"<span style='color: black;font-size: 13px;'>"+result[0][i].experience+"</span>"+"</div>"+
 						
 				"<div style='margin-top: -22px;	margin-left: 102px'>"+
-						"<a href='#jobModal' data-toggle='modal' class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
+						"<a  data-toggle='modal' href='#jobModal'class='btn btn-info' onclick='jobdisplay("+jobdescriptionID+")'>"+"View"+"</a>"+
 																	
 				"</div>"+
 				" </div>"+
@@ -359,7 +359,7 @@ function currentlocationdropdown() {
 				$("#expedit").val(result[0][0].experience);
 				$("#lfedit").val(result[0][0].locationflexibility);
 				$("#jdedit").val(result[0][0].jobdescription);
-			    $("buedit").attr('selected', 'selected').val(result[0][0].bussinessunit);
+			    $("buedit").val(result[0][0].bussinessunit).attr('selected', 'selected');
 				$("#sregionedit").val(result[0][0].salesregions).attr('selected', 'selected');
 				$("#srepedit").val(result[0][0].salesrep).attr('selected', 'selected');
 				$("#statuspedit").val(result[0][0].status).attr('selected', 'selected');;
@@ -420,11 +420,11 @@ function currentlocationdropdown() {
 			var PSkill = $('[name="primary_skill"]').val();
 			var SSkill = $('[name="secondry_skill"]').val();			
 			var locationflex = $('[name="loc_flex"]').val();
-			var customerid = $('[name="customer"]').val();
-			var Status = $('[name="status"]').val();
-            var buid = $('[name="bu_unit"]').val();
-            var salesregionid = $('[name="sales_region"]').val();
-            var salesrepid = $('[name="sale_rep"]').val();
+			var customerid = $('[name="customer"]').val().attr('selected', 'selected');
+			var Status = $('[name="status"]').val().attr('selected', 'selected');
+            var buid = $('[name="bu_unit"]').val().attr('selected', 'selected');
+            var salesregionid = $('[name="sales_region"]').val().attr('selected', 'selected');
+            var salesrepid = $('[name="sale_rep"]').val().attr('selected', 'selected');
 			var joblocation = $('[name="job_location"]').val();
 			var jDescription = $('[name="job_description"]').val();
             var buComments = $('[name="buComments"]').val();
@@ -472,7 +472,7 @@ function currentlocationdropdown() {
                 dataType: "json",
                 success: function (result) {
 					
-					$("#screenloading").css('display', 'show');
+					$('#successmodal').modal('show');
 				
 				},
                 error: function () {
@@ -804,9 +804,10 @@ function currentlocationdropdown() {
 				<div class="col-sm-4">
 					<div class="collapse navbar-collapse" id="ftco-nav">
 						<ul class="nav">
-						
+							
 							<li class="active"><a data-toggle="tab" data-target="#jobsTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs</li>
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs
+								</li>
 							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" herf='#'
 									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 23px;">Operations
 									<span class="caret"></span></a>
@@ -1359,7 +1360,7 @@ function currentlocationdropdown() {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" id="edithide" onclick="enablejoblist()">Edit</button>
-				  	<button type="submit" class="btn btn-info" id="updatehide" data-dismiss="modal"  onclick="updatejd();">Update</button>
+				  	<button type="submit" class="btn btn-info" id="updatehide" data-dismiss="modal"  onclick="updatejd();cancelenable()">Update</button>
 				  	<button type="button" class="btn btn-info" data-dismiss="modal" onclick="cancelenable()"> Cancel</button>                                                      
 			  </div>
 			</div>

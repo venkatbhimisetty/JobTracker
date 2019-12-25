@@ -192,7 +192,7 @@ getprofilestatus: (req, res) => {
         let query = "CALL procUpdatejobdescription('"+jobdescriptionid+"','"+reqID+"','"+role+"','"+noofpositions+"','"+dateofreq+"','"+experience+
         "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
         "','"+salesrep+"','"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updateby+"','"+updatedtime+"')";
-        
+        console.log(query);
         
         db.query(query, (err, result) => {
             if (err) {
@@ -233,7 +233,7 @@ getprofilestatus: (req, res) => {
             "',  '" + SSkill + "','" + Expected + "', '" + locationflex + "', '" + customerid + "','" +
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
             "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "',now(),'" + updateby + "',now())";
-       console.log(query);
+      
     
         db.query(query, (err, result) => {
             if (err) {
