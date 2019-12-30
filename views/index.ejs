@@ -815,16 +815,15 @@ function currentlocationdropdown() {
 						<ul class="nav">
 							
 							<li class="active"><a data-toggle="tab" data-target="#jobsTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs
-								</li>
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" herf='#'
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Jobs</li>
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" 
 									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 23px;">Operations
 									<span class="caret"></span></a>
 								<ul class="dropdown-menu"
 									style="left: 19px;background-color: #73c7e7;text-align: center;">
-									<li><a data-target="#operationsTab" data-toggle="tab" style="color: white;"
+									<li><a  data-toggle="tab" id="jobstabid"  data-target="#operationsTab" style="color: white;"
 											onclick="joblistingdetails()">Jobs</a></li>
-									<li><a data-target="#profilesTab" data-toggle="tab" style="color: white;"
+									<li><a data-target="#profilesTab" data-toggle="tab" id="profiletabid" style="color: white;"
 								           onclick="profileslistingdetails()">Profiles</a></li>
 									<li><a href="#vendorsTab" data-toggle="tab" style="color: white;">Vendors</a></li>
 								</ul>
@@ -934,19 +933,22 @@ function currentlocationdropdown() {
 					  
 																																  
 																					  <div class="row">
-																							  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"></div>
+																							  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"></div>
 																					  
 																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 																								  <input type="file"   id="choosefile" onchange="uploadOnChange()" name="myFile" multiple style="color: black;font-size: 13px;">
 																							  </div>
-																							  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></div>
+																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 																							  
 																							  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 																							  <input type="text" class="form-control" id="filename"  style="width: 100%;" disabled>
 																							  </div>
 																							  
 																					  </div>
-																					  <hr style="width: 100%;top: -9px;position: relative;">	
+																					  <div class="row">	 <div class="col-sm-5"><hr style="width: 110%;top: -3px;position: relative;"></div>
+																					  <div class="col-sm-2"><label style="left: 66px;position: relative;font-weight: bold">( OR )</label></div>
+																						<div class="col-sm-5">
+																					  <hr style="width: 107%;top: -3px;position: relative;left: -39px;"></div></div>	
 																					  <div class="row">
 																							  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 																						  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -1068,7 +1070,7 @@ function currentlocationdropdown() {
 
                                 <div class="row">
                                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"></div>
-                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="margin-bottom:2%;">
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" style="margin-bottom:2%;left: 89px;">
                                         <button type="submit" class="btn btn-sm btn-info" onclick="addjd();">Submit</button>
                                         <button type="button" id="canceljob" class="btn btn-sm btn-info">Cancel</button>
 
@@ -1693,7 +1695,7 @@ function currentlocationdropdown() {
 		</div>
 		<div class="modal-footer">
 		  <button type="Submit" class="btn btn-sm btn-info" onclick="addprofile()">Save</button>
-		  <button type="button" class="btn btn-sm btn-info">Cancel</button>                                                      
+		  <button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>                                                      
 		</div>
 	  </form>
 	  </div>
@@ -1999,7 +2001,7 @@ function currentlocationdropdown() {
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-sm btn-info" onclick="">Edit</button>
 		  <button type="submit" class="btn btn-sm btn-info" id="updateprofile" data-dismiss="modal" onclick="">Update</button>
-		  <button type="button" class="btn btn-sm btn-info">Cancel</button>                                                      
+		  <button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>                                                      
 		</div>
 	  </form>
 	  </div>
