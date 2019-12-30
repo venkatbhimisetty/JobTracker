@@ -826,7 +826,7 @@ function currentlocationdropdown() {
 											onclick="joblistingdetails()">Jobs</a></li>
 									<li><a data-target="#profilesTab" data-toggle="tab" style="color: white;"
 								           onclick="profileslistingdetails()">Profiles</a></li>
-									<li><a href="#Vendors" data-toggle="tab" style="color: white;">Vendors</a></li>
+									<li><a href="#vendorsTab" data-toggle="tab" style="color: white;">Vendors</a></li>
 								</ul>
 							</li>
 							<li class=""><a data-toggle="tab" href="/interviewTab"
@@ -1105,10 +1105,40 @@ function currentlocationdropdown() {
 										<div class="row">
 											
 											<div class="col-sm-11">
-												<h5>Profiles
+												<h5>Profiles</h5>
 											</div>
 												
-											<div class="col-sm-1"><button type="button"  data-toggle="modal" data-target="#profilesmodal"  class="btn">New</button></h5>
+											<div class="col-sm-1"><button type="button"  data-toggle="modal" data-target="#profilesmodal"  class="btn">New</button>
+											</div>
+										</div>
+										
+									 </div>
+										<div class="card-body" id="profileslistingbody">
+							
+							
+										</div>
+							
+							
+									</div>
+							
+							
+								</div>
+							
+							
+							
+							</div>
+							<div id="vendorsTab" class="tab-pane fade">
+								<div id="profileslisting" class="">
+							
+								<div class="card">
+									
+									<div class="card-header" style="background-color: #73c7e7">
+										
+										<div class="row">				
+											<div class="col-sm-11">
+												<h5>Vendors</h5>
+											</div>
+											<div class="col-sm-1"><button type="button"  data-toggle="modal" data-target="#vendormodal"  class="btn">New</button>
 											</div>
 										</div>
 										
@@ -1130,12 +1160,7 @@ function currentlocationdropdown() {
 						</div>
 						</div>
 						</div>
-						
-
-
-
-
-							</div>
+						</div>
 				</div>
 	  
 	  
@@ -1981,6 +2006,109 @@ function currentlocationdropdown() {
 	</div>
   </div>
 
+<!-- Vendor Modal -->
+<div class="modal fade" id="vendormodal" role="dialog" style="margin-top: 3%;">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header" style="background-color: #73c7e7">
+		  <h5 class="modal-title">New Vendor</h5>
+		  <button type="button" class="close" data-dismiss="modal"  onclick="cancelenable()">&times;</button>				
+		</div>
+	  <div class="modal-body" style="overflow:auto;height:427px;">
+		  <form action="" method="">
+			 <div class="row">
+			<h3 style="margin-left:2%;font-size: 18px;">Vendor Information:</h3>
+			</div>
+			<hr style="width: 100%;top: -9px;position: relative;">				  
+			<div class="row">
+			<div class="col-sm-1"></div>
+				  <div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Vendor I'D:</label>
+				</div>
+				<div class="col-sm-3">
+					  
+					<input type="text" id="lastname" name="lastname" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Vendor Name:</label>
+				</div>
+				<div class="col-sm-3">
+				  
+					<input type="text" id="dob" name="dob" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 	
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Recruiter Email:</label>
+				</div>
+				<div class="col-sm-3">						  
+					 <input type="text" id="email" name="email" class="form-control" required disabled>
+				</div>					  
+				<div class="col-sm-2">
+					  <label><span style="color:red">*</span>Recruiter Mobile:</label>
+				</div>
+				<div class="col-sm-3">							
+					<input type="text" id="mobile" name="mobile" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					 <label><span style="color:red">*</span>Vendor Primary Location:</label>
+				</div>
+				<div class="col-sm-3">
+					 <select class="form-control"  id="Vendorpriloc" name="country"  class="form-control" required disabled>
+					</select>						   
+				</div>					  
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Recruiter Name:</label>
+				</div>
+				<div class="col-sm-3">							
+					<input type="text"  id="recname" name="recruiter_name" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div>
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+				  <label><span style="color:red">*</span>Vendor Specifications:</label>
+				</div>
+				<div class="col-sm-3">						  
+				  <input type="text" id="email" name="email" class="form-control" required disabled>
+				</div>					 
+				<div class="col-sm-2">
+				  <label><span style="color:red">*</span>Vendor Rating:</label>
+				</div>
+				<div class="col-sm-3">							
+				  <input type="text" id="mobile" name="mobile" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-1"> </div>
+			</div> 
+			<div class="row">
+			<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+				  <label><span style="color:red">*</span>Vendor comments:</label>
+				</div>
+				<div class="col-sm-9">
+				  <textarea id="vcomments" name="vendor_comments" style="width: 89%;border-radius: 5px;font-size:13px;"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+			  <button type="Submit" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" >Save</button>
+			  <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" >Cancel</button>                                                      
+			</div>
+		  </form>
+	
+	</div>
+  </div>
+</div>
+</div>
+    
+
+
 
 
 	
@@ -1997,11 +2125,8 @@ function currentlocationdropdown() {
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/jquery.timepicker.min.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-
 </body>
-
 </html>
