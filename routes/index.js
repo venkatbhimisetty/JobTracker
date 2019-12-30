@@ -300,8 +300,9 @@ getprofilestatus: (req, res) => {
     },
 
     profilelistingdetails: (req, res) => {
-        let customerquery = "CALL proclistprofiles()";
-        db.query(customerquery, (err, result) => {
+        
+        let query = "CALL proclistprofiles()";
+        db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
@@ -309,5 +310,19 @@ getprofilestatus: (req, res) => {
             
         });
     },
+
+    profilelisting:(req, res) => {
+        
+        let prid = req.params.i;
+        
+        let query = "CALL proclistprofilesbyid('"+prid+"')";
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            
+        });
+    }
 
 }
