@@ -370,5 +370,57 @@ getprofilestatus: (req, res) => {
             
         });
     },
+
+    vendorlisting:(req, res) => {
+        
+        let ivid = req.params.i;
+        
+        let query = "CALL proclistvendorsbyid('"+ ivid +"')";
+        
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            
+        });
+    },
+
+    updatevendor: (req, res) => {
+       
+       
+        
+        let vendorid = req.body.vendorid; 
+        console.log(vendorid);
+        let Vendorcode = req.body.Vendorcode;   
+        let Vendorname = req.body.Vendorname;
+        let Vendorpriloc = req.body.Vendorpriloc;
+        let Vendorspec = req.body.Vendorspec;
+        let Vendoremail = req.body.Vendoremail;
+        let Recruiterid = req.body.Recruiterid;
+        let Recruitername = req.body.Recruitername;
+        let Recruitercontno = req.body.Recruitercontno;
+        let Vendorrating = req.body.Vendorrating; 
+        let Vendorcomments = req.body.Vendorcomments;
+        let Updateby =  req.body.Updateby;
+               
+    
+        
+        let query = "CALL procUpdatevendor('"+ vendorid +"','"+ Vendorcode +"','"+ Vendorname +"','"+ Vendorpriloc +
+        "','"+ Vendorspec +"','"+ Vendoremail +"','"+ Recruiterid +"','"+ Recruitername +"','"+ Recruitercontno +
+        "','"+ Vendorcomments +"','"+ Vendorrating +"','"+ Updateby +"', now() )";
+        console.log(query);
+        
+        db.query(query, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+                
+            }
+            res.status(200).json(result);
+           
+        });
+    },
+
     
     }

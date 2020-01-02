@@ -274,6 +274,7 @@ function currentlocationdropdown() {
 				$("#currentlocation").html(currentlocation);
 				$("#desiredlocation").html(currentlocation);
 				$("#vendorpriloc").html(currentlocation);
+				$("#editvendorpriloc").html(currentlocation);
 			}
 		});
 	}
@@ -839,9 +840,10 @@ function currentlocationdropdown() {
 			type: "GET",
 			success: function (result) {
 
+				
 				for (var i = 0; i < result[0].length; i++) {
 
-				var profileID = "\"" + result[0][i].profileid + "\"";
+				var vendorid = "\"" + result[0][i].vendorId + "\"";
 
 				cardData = cardData + "<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>" +
 					
@@ -861,7 +863,7 @@ function currentlocationdropdown() {
 						"<div class='col-lg-3'>" +
 							"<label>" + "Vendor Rating :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].rating + "</span>" + "</div>" +
 							"<div style='margin-top: -22px;	margin-left: 102px'>"+
-						"<a href='#vendoreditmodal' data-toggle='modal' class='btn btn-info' onclick='profilesdisplay( " +profileID+ ")'>"+"View"+"</a>"+
+						"<a href='#vendoreditmodal' data-toggle='modal' class='btn btn-info' onclick='vendordisplay( " + vendorid + ")'>"+"View"+"</a>"+
 																	
 						"</div>"+
 						
@@ -875,6 +877,129 @@ function currentlocationdropdown() {
 			}
 		});
 	}
+
+	function vendordisplay(i) {
+
+		$("#updatevendor").hide();
+			var url = "http://localhost:2000/vendorlisting/" + i;
+
+			$.ajax({
+				url: url,
+				type: "GET",
+				success: function (result) {
+
+					console.log(result);
+					$("#vendoridhidden").text(result[0][0].vendorId);
+					$("#editvendorid").val(result[0][0].vendorcode);
+					$("#editvendorname").val(result[0][0].vendorname);
+					$("#editvendorpriloc").val(result[0][0].vendorprimarylocation).attr('selected', 'selected');
+					$("#editvendorspec").val(result[0][0].vendorspecification);
+					$("#editvendoremail").val(result[0][0].vendoremail);
+					$("#editrecruiterid").val(result[0][0].recruiterId);
+					$("#editrecruitername").val(result[0][0].recruitername);
+					$("#editrecruitercontno").val(result[0][0].recruitercontactno);
+					$("#editvendorrating").val(result[0][0].rating);
+					$("#editvendorcomments").val(result[0][0].vendorcomments);
+					
+
+				}
+
+			});
+
+		}
+
+		function enablevendorlist(){	
+		
+		$("#editvendor").hide();
+		$("#updatevendor").show();
+
+		$("#editvendorid").attr('disabled',false);
+		$("#editvendorname").attr('disabled',false);	
+		$("#editvendorpriloc").attr('disabled',false);
+		$("#editvendorspec").attr('disabled',false);
+		$("#editvendoremail").attr('disabled',false);
+		$("#editrecruiterid").attr('disabled',false);
+		$("#editrecruitername").attr('disabled',false);
+		$("#editrecruitercontno").attr('disabled',false);
+		$("#editvendorrating").attr('disabled',false);
+		$("#editvendorcomments").attr('disabled',false);
+
+	}
+
+	
+		function cancelenablevendor() {
+			$("#editvendor").show();
+			$("#updatevendor").hide();
+
+			$("#editvendorid").attr('disabled', true);
+			$("#editvendorname").attr('disabled', true);
+			$("#editvendorpriloc").attr('disabled', true);
+			$("#editvendorspec").attr('disabled', true);
+			$("#editvendoremail").attr('disabled', true);
+			$("#editrecruiterid").attr('disabled', true);
+			$("#editrecruitername").attr('disabled', true);
+			$("#editrecruitercontno").attr('disabled', true);
+			$("#editvendorrating").attr('disabled', true);
+			$("#editvendorcomments").attr('disabled', true);
+
+		}
+
+	function updatevendorbyid(){
+			
+			$("#editvendor").show();
+			
+			var vendorid = $('[name="vendorid_hidden"]').text();
+			console.log(vendorid);
+			var Vendorcode = $('[name="editvendor_id"]').val();
+			var Vendorname = $('[name="editvendor_name"]').val();
+			var Vendorpriloc = $('[name="editvendor_priloc"]').val();
+			var Vendorspec = $('[name="editvendor_spec"]').val();
+			var Vendoremail = $('[name="editvendor_email"]').val();
+			var Recruiterid = $('[name="editrecruiter_id"]').val();			
+			var Recruitername = $('[name="editrecruiter_name"]').val();
+			var Recruitercontno = $('[name="editrecruiter_contno"]').val();	
+			var Vendorrating = $('[name="editvendor_rating"]').val();
+			var Vendorcomments = $('[name="editvendor_comments"]').val();
+        	var Updateby = 'Admin';		
+
+			var data = {
+				
+				"vendorid": vendorid,
+				"Vendorcode": Vendorcode,
+				"Vendorname": Vendorname,
+				"Vendorpriloc": Vendorpriloc,
+				"Vendorspec": Vendorspec,
+				"Vendoremail": Vendoremail,
+				"Recruiterid": Recruiterid,				
+				"Recruitername": Recruitername,
+				"Recruitercontno": Recruitercontno,
+				"Vendorrating": Vendorrating,
+				"Vendorcomments": Vendorcomments,
+				"Updateby": Updateby
+			
+			}
+			console.log(data);
+			data = JSON.stringify(data);
+			var url="http://localhost:2000/updatevendor/"+vendorid;
+			console.log(url);
+			$.ajax({
+				url: url,
+				type: "POST",
+				async: false,
+				data: data,
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					
+				},
+				error: function () {
+				}
+			});
+			
+			vendorlistingdetails();
+
+		}
+	
 
 </script>
 
@@ -2237,7 +2362,7 @@ function currentlocationdropdown() {
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #73c7e7">
 				<h5 class="modal-title">Vendor Description</h5>
-				<button type="button" class="close" data-dismiss="modal" onclick="cancelenable()">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" onclick="cancelenablevendor()">&times;</button>
 			</div>
 			<div class="modal-body" style="overflow:auto;height:390px;">
 				<form action="" method="">
@@ -2251,15 +2376,15 @@ function currentlocationdropdown() {
 								<label style="width: 113px;"><span style="color:red">*</span>Vendor I'D:</label>
 							</div>
 							<div class="col-sm-3">
-								  
-								<input type="text" id="editvendorid" name="editvendor_id" class="form-control" required>
+								<P id="vendoridhidden" name="vendorid_hidden" style="color:black; display:none"></P>  
+								<input type="text" id="editvendorid" name="editvendor_id" class="form-control" required disabled>
 							</div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Vendor Name:</label>
 							</div>
 							<div class="col-sm-3">
 							  
-								<input type="text" id="editvendorname" name="editvendor_name" class="form-control" required>
+								<input type="text" id="editvendorname" name="editvendor_name" class="form-control" required disabled>
 							</div>
 							<div class="col-sm-1"> </div>
 						</div> 	
@@ -2269,14 +2394,14 @@ function currentlocationdropdown() {
 								<label><span style="color:red">*</span>Vendor Primary Location:</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control"  id="editvendorpriloc" name="editvendor_priloc"  class="form-control" required>
+								<select class="form-control"  id="editvendorpriloc" name="editvendor_priloc"  class="form-control" required disabled>
 							</select>						   
 							</div>						  
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Vendor Specifications:</label>
 							  </div>
 							  <div class="col-sm-3">						  
-								<input type="text" id="editvendorspec" name="editvendor_spec" class="form-control" required>
+								<input type="text" id="editvendorspec" name="editvendor_spec" class="form-control" required disabled>
 							  </div>
 							<div class="col-sm-1"> </div>
 						</div> 
@@ -2287,13 +2412,13 @@ function currentlocationdropdown() {
 								<label style="width: 113px;"><span style="color:red">*</span>Vendor Email:</label>
 							</div>
 							<div class="col-sm-3">							
-								<input type="text"  id="editvendoremail" name="editvendor_email" class="form-control" required>
+								<input type="text"  id="editvendoremail" name="editvendor_email" class="form-control" required disabled>
 							</div>
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Recruiter Id:</label>
 							  </div>
 							  <div class="col-sm-3">							
-								<input type="text" id="editrecruiterid" name="editrecruiter_id" class="form-control" required>
+								<input type="text" id="editrecruiterid" name="editrecruiter_id" class="form-control" required disabled>
 							  </div>
 							<div class="col-sm-1"> </div>
 						</div>
@@ -2304,13 +2429,13 @@ function currentlocationdropdown() {
 									<label style="width: 113px;"><span style="color:red">*</span>Recruiter Name:</label>
 								</div>
 								<div class="col-sm-3">							
-									<input type="text"  id="editrecruitername" name="editrecruiter_name" class="form-control" required>
+									<input type="text"  id="editrecruitername" name="editrecruiter_name" class="form-control" required disabled>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Recruiter Contact Number:</label>
 								  </div>
 								  <div class="col-sm-3">							
-									<input type="text" id="editrecruitercontno" name="editrecruiter_contno" class="form-control" required>
+									<input type="text" id="editrecruitercontno" name="editrecruiter_contno" class="form-control" required disabled>
 								  </div>					
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2320,7 +2445,7 @@ function currentlocationdropdown() {
 							  <label><span style="color:red">*</span>Vendor Rating:</label>
 							</div>
 							<div class="col-sm-3">							
-							  <input type="text" id="editvendorrating" name="editvendor_rating" class="form-control" required>
+							  <input type="text" id="editvendorrating" name="editvendor_rating" class="form-control" required disabled>
 							</div>
 							<div class="col-sm-1"> </div>
 						</div> 
@@ -2330,13 +2455,13 @@ function currentlocationdropdown() {
 							  <label>Comments:</label>
 							</div>
 							<div class="col-sm-9">
-							  <textarea id="editvendorcomments" name="editvendor_comments" style="width: 89%;border-radius: 5px;font-size:13px;"></textarea>
+							  <textarea id="editvendorcomments" name="editvendor_comments" style="width: 89%;border-radius: 5px;font-size:13px;" disabled></textarea>
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="Submit" class="btn btn-sm btn-info" data-toggle="modal">Edit</button>
-						<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">update</button>
-						<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-sm btn-info" id="editvendor" onclick="enablevendorlist()" data-toggle="modal">Edit</button>
+						<button type="Submit" class="btn btn-sm btn-info" id="updatevendor" onclick="updatevendorbyid(),cancelenablevendor()" data-dismiss="modal">update</button>
+						<button type="button" class="btn btn-sm btn-info" onclick="cancelenablevendor()" data-dismiss="modal">Cancel</button>
 
 					</div>
 				</form>
