@@ -207,7 +207,7 @@
 
 		var profilestatebycountry = "";
 		var url = "http://localhost:2000/statebycountry/" + profilecountry;
-		console.log(url);
+	
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -360,6 +360,7 @@
 
 				}
 				$("#joblistingbody").html(cardData);
+				
 			}
 		});
 	}
@@ -482,7 +483,7 @@
 
 		data = JSON.stringify(data);
 		var url = "http://localhost:2000/jdescription";
-		console.log(url);
+		
 		if(Requirement!="" && Role!="" && Position!=""&& Expected!=""&& Exp!=""&& PSkill!=""&& SSkill!=""&& locationflex!=""&& customerid!=""
 		&& Status!=""&& buid!=""&& salesregionid!=""&& joblocation!=""&& jDescription!="")
 		  {
@@ -666,7 +667,7 @@
 			type: "GET",
 			success: function (result) {
 
-				console.log(result);
+			
 				$("#editprofilehiddenId").text(result[0][0].profileid); 
 				$("#pprofileid").text(result[0][0].profileid);
 				$("#peditjobrecid").val(result[0][0].jobrecid);
@@ -773,7 +774,7 @@
 		data = JSON.stringify(data);
 
 		var url = "http://localhost:2000/addprofiles";
-		console.log(url)
+	
 
 if (Jobrecid!="" && Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
 &&Address2!="" && City!="" && State!="" && Country!="" &&Postalcode!="" && Experience!="" && Highestquali!="" && Currentjobtitle!=""
@@ -1073,7 +1074,7 @@ function disableprofileedit(){
 			type: "GET",
 			success: function (result) {
 
-				console.log(result);
+			
 				$("#vendoridhidden").text(result[0][0].vendorId);
 				$("#editvendorid").val(result[0][0].vendorcode);
 				$("#editvendorname").val(result[0][0].vendorname);
@@ -1134,7 +1135,6 @@ function disableprofileedit(){
 		$("#editvendor").show();
 
 		var vendorid = $('[name="vendorid_hidden"]').text();
-		console.log(vendorid);
 		var Vendorcode = $('[name="editvendor_id"]').val();
 		var Vendorname = $('[name="editvendor_name"]').val();
 		var Vendorpriloc = $('[name="editvendor_priloc"]').val();
@@ -1163,10 +1163,10 @@ function disableprofileedit(){
 			"Updateby": Updateby
 
 		}
-		console.log(data);
+	
 		data = JSON.stringify(data);
 		var url = "http://localhost:2000/updatevendor/" + vendorid;
-		console.log(url);
+		
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -1220,7 +1220,7 @@ function disableprofileedit(){
 
 				<div class="col-sm-8">
 					<a class="navbar-brand" href="index.html">
-						<h1 style="font-weight: 600;font-size:50px;color:#6bf682;">JobTracker</h1>
+						<h1 style="font-weight:600;font-size:50px;color:#6bf682;">JobTracker</h1>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 						aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

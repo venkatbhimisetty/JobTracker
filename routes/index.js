@@ -192,7 +192,7 @@ getprofilestatus: (req, res) => {
         let query = "CALL procUpdatejobdescription('"+jobdescriptionid+"','"+reqID+"','"+role+"','"+noofpositions+"','"+dateofreq+"','"+experience+
         "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
         "','"+salesrep+"','"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updateby+"','"+updatedtime+"')";
-       // console.log(query);
+      
         
         db.query(query, (err, result) => {
             if (err) {
@@ -234,14 +234,14 @@ getprofilestatus: (req, res) => {
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
             "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "',now(),'" + updateby + "',now())";
       
-    console.log(query);
+  
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+            
                 return res.status(500).send(err);
             }  
             res.status(200).json(result);
-           // console.log(result);
+          
         });
     },
 
@@ -274,7 +274,7 @@ getprofilestatus: (req, res) => {
         let Desiredlocation =  req.body.Desiredlocation;
         let Status =  req.body.Status;
         let Resume =  req.body.Resume;
-        console.log(Resume);
+     
         let Vendorid =  req.body.Vendorid;
         let Createdby =  req.body.Createdby;
         let Updateby =  req.body.Updateby;
@@ -288,11 +288,11 @@ getprofilestatus: (req, res) => {
             Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
             Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now())";
      
-            //console.log(query);
+         
     
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+              
                 return res.status(500).send(err);
             }  
             res.status(200).json(result);
@@ -348,11 +348,11 @@ getprofilestatus: (req, res) => {
         Vendoremail + "',  '" + Recruiterid + "','" + Recruitername + "', '" + Recruitercontno + "','" + Vendorcomments + "', '" + Vendorrating + "','" 
         + Createdby + "',now(),'" + Updateby + "',now())";
        
-        console.log(query);
+     
       
           db.query(query, (err, result) => {
               if (err) {
-                  console.log(err);
+                 
                   return res.status(500).send(err);
               }  
               res.status(200).json(result);
@@ -392,7 +392,7 @@ getprofilestatus: (req, res) => {
        
         
         let vendorid = req.body.vendorid; 
-        console.log(vendorid);
+     
         let Vendorcode = req.body.Vendorcode;   
         let Vendorname = req.body.Vendorname;
         let Vendorpriloc = req.body.Vendorpriloc;
@@ -412,7 +412,7 @@ getprofilestatus: (req, res) => {
         "','"+ Vendorcomments +"','"+ Vendorrating +"','"+ Updateby +"', now() )";
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+               
                 return res.status(500).send(err);
                 
             }
@@ -459,10 +459,10 @@ getprofilestatus: (req, res) => {
         "','"+peditmobile+"','"+peditdob+"','"+peditaddress1+"','"+peditaddress2+"','"+peditcity+"','"+peditstate+"','"+peditcountry+"','"+peditpostalcode+
         "','"+peditexperience+"','"+pedithighestquali+"','"+peditcurrentjobtitle+"','"+peditcurrentsalary+"','"+peditexpectedsalary+"','"+peditskillset+"','"+peditskypeid+"','"+peditnoticeperiod+
         "','"+peditcurrentlocation+"','"+peditdesiredlocation+"','"+peditstatus+"','"+peditresumename+"','"+peditvendorid+"','"+peditupdatedby+"',now())";
-        console.log(query);
+       
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+               
                 return res.status(500).send(err);
                 
             }
