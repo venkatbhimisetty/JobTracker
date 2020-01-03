@@ -5,6 +5,11 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
+app.use(bodyParser.urlencoded({
+    extended: true
+})); 
+app.use(bodyParser.json());
+
 const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
     addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor} = require('./routes/index');

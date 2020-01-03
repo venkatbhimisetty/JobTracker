@@ -288,7 +288,7 @@ getprofilestatus: (req, res) => {
             Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
             Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now())";
      
-            console.log(query);
+            //console.log(query);
     
         db.query(query, (err, result) => {
             if (err) {
@@ -459,9 +459,10 @@ getprofilestatus: (req, res) => {
         "','"+peditmobile+"','"+peditdob+"','"+peditaddress1+"','"+peditaddress2+"','"+peditcity+"','"+peditstate+"','"+peditcountry+"','"+peditpostalcode+
         "','"+peditexperience+"','"+pedithighestquali+"','"+peditcurrentjobtitle+"','"+peditcurrentsalary+"','"+peditexpectedsalary+"','"+peditskillset+"','"+peditskypeid+"','"+peditnoticeperiod+
         "','"+peditcurrentlocation+"','"+peditdesiredlocation+"','"+peditstatus+"','"+peditresumename+"','"+peditvendorid+"','"+peditupdatedby+"',now())";
-        
+        console.log(query);
         db.query(query, (err, result) => {
             if (err) {
+                console.log(err);
                 return res.status(500).send(err);
                 
             }

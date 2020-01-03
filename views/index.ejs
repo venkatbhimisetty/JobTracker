@@ -51,25 +51,6 @@
 	});
 
 
-	function jobstatus() {
-
-		jobstatusdrop = '';
-		var url = "http://localhost:2000/jobstatus";
-		$.ajax({
-			url: url,
-			type: "GET",
-			success: function (result) {
-				console.log(result);
-				for (var i = 0; i < result[0].length; i++) {
-					jobstatusdrop = jobstatusdrop +
-						'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
-				}
-
-				$("#jobstatus").html(jobstatusdrop);
-				
-			}
-		});
-	}
 	function uploadOnChange() {
 		var path = $("#choosefile").val();
 		var profiletabpath = $("#profileresume").val();
@@ -214,7 +195,8 @@
 						'<option value="' + result[0][i].countryid + '">' + result[0][i].country + '</option>';
 				}
 				$("#country").html(profilecountry);
-				//$("#srepedit").html(salesrepdropdown);
+				$("#peditcountry").html(profilecountry);
+				
 			}
 		});
 	}
@@ -513,11 +495,11 @@
 			success: function (result) {
 
 				$('#successmodal').modal('show');
-				console.log("coming into success fucntion")
+				
 
 			},
 			error: function () {
-				console.log("coming into error fucntion")
+				
 			}
 		});
 
@@ -807,12 +789,12 @@ if (Jobrecid!="" && Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" 
 			success: function (result) {
 
 				$('#successmodal').modal('show');
-				console.log("coming into success fucntion")
+				
 
 
 			},
 			error: function () {
-				console.log("coming into error fucntion")
+				
 
 			}
 		});
@@ -1008,7 +990,9 @@ function disableprofileedit(){
 
 		var url = "http://localhost:2000/addvendor";
 
+		if(Vendorid!="" && Vendorname!="" && Vendorpriloc!=""&& Vendorspec!=""&& Vendoremail!=""&& Recruiterid!=""&& Recruitername!=""&& Recruitercontno!=""&&Vendorrating!=""&&Vendorcomments!=""){
 
+		
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -1024,6 +1008,7 @@ function disableprofileedit(){
 			error: function () {
 			}
 		});
+	}
 
 	}
 
@@ -1217,7 +1202,7 @@ function disableprofileedit(){
 						<div class="modal-body text-center">
 							<img src="/assets/img/success.png" style="height: 105px;width:103px;">
 							<h4>SUCCESS</h4>
-							<p>Your Job has been created successfully.</p>
+							<p>Created Successfully.</p>
 						</div>
 					</div>
 				</div>
@@ -1295,7 +1280,7 @@ function disableprofileedit(){
 						<div id="jobsTab" class="tab-pane fade in active"
 							style="
                                                                                                                                 background-color: white;">
-							<form class="search-job" >
+							<form class="search-job" method="post" onsubmit="return false">
 
 								<div id="jobdetails">
 
@@ -1600,7 +1585,7 @@ function disableprofileedit(){
 										</div>
 
 									</div>
-									<div class="card-body" id="profileslistingbody">
+									<div class="card-body" id="profileslistingbody" style="overflow-y: scroll;height:400px;">
 
 
 									</div>
@@ -1628,7 +1613,7 @@ function disableprofileedit(){
 										</div>
 
 									</div>
-									<div class="card-body" id="vendorlistingbody">
+									<div class="card-body" id="vendorlistingbody" style="overflow-y: scroll;height:400px;">
 
 
 									</div>
@@ -1905,7 +1890,7 @@ function disableprofileedit(){
 
 				</div>
 				<div class="modal-body" style="overflow:auto;height:450px;">
-					<form action="" method="">
+					<form action="post" onsubmit="return false">
 						<div class="row">
 							<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Basic Information:</h4>
 						</div>
@@ -2193,7 +2178,7 @@ function disableprofileedit(){
 
 				</div>
 				<div class="modal-footer">
-					<button type="Submit" class="btn btn-sm btn-info" onclick="addprofile()">Save</button>
+					<button type="Submit" class="btn btn-sm btn-info" data-dismiss="modal" onclick="addprofile()">Save</button>
 					<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>
 				</div>
 				</form>
@@ -2518,7 +2503,7 @@ function disableprofileedit(){
 					<button type="button" class="close" data-dismiss="modal" onclick="cancelenable()">&times;</button>
 				</div>
 				<div class="modal-body" style="overflow:auto;height:390px;">
-					<form action="" method="">
+					<form action="post" onsubmit="return false">
 						<!-- <div class="row">
                                                 <h3 style="margin-left:2%;font-size: 18px;">Vendor Information:</h3>
                                                 </div>
