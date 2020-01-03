@@ -50,7 +50,6 @@
 
 	});
 
-
 	function uploadOnChange() {
 		var path = $("#choosefile").val();
 		var profiletabpath = $("#profileresume").val();
@@ -69,8 +68,10 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-				//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
-				for (var i = 0; i < result[0].length; i++) {
+				
+			//	jobstatusdrop = jobstatusdrop+"<option style='display:none;'></option>";
+				
+			for (var i = 0; i < result[0].length; i++) {
 					jobstatusdrop = jobstatusdrop +
 						'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
 				}
@@ -990,7 +991,7 @@ function disableprofileedit(){
 
 		var url = "http://localhost:2000/addvendor";
 
-		if(Vendorid!="" && Vendorname!="" && Vendorpriloc!=""&& Vendorspec!=""&& Vendoremail!=""&& Recruiterid!=""&& Recruitername!=""&& Recruitercontno!=""&&Vendorrating!=""&&Vendorcomments!=""){
+		if(Vendorid!="" && Vendorname!="" && Vendorpriloc!=""&& Vendorspec!=""&& Vendoremail!=""&& Recruiterid!=""&& Recruitername!=""&& Recruitercontno!=""&&Vendorrating!=""){
 
 		
 		$.ajax({
@@ -1036,7 +1037,7 @@ function disableprofileedit(){
 						"<label>" + "Vendor ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorcode + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
 						"<label>" + "Vendor Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorname + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
+						"<div class='col-lg-4'>" +
 						"<label>" + "Vendor Email :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendoremail + "</span>" + "</div>" +
 						"</div>" +
 						"<div class='row'>" +
@@ -2601,7 +2602,7 @@ function disableprofileedit(){
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="Submit" class="btn btn-sm btn-info" onclick="addvendor()">Save</button>
+							<button type="Submit" class="btn btn-sm btn-info" onclick="addvendor()" data-dismiss="modal">Save</button>
 							<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>
 						</div>
 					</form>
