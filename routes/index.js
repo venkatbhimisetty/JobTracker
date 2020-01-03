@@ -192,7 +192,7 @@ getprofilestatus: (req, res) => {
         let query = "CALL procUpdatejobdescription('"+jobdescriptionid+"','"+reqID+"','"+role+"','"+noofpositions+"','"+dateofreq+"','"+experience+
         "','"+primaryskill+"','"+secondaryskill+"','"+expecteddate+"','"+locationfelx+"','"+customers+"','"+status+"','"+bussinessunit+"','"+salesregion+
         "','"+salesrep+"','"+joblocation+"','"+jobdescription+"','"+jdcomments+"','"+bucomments+"','"+updateby+"','"+updatedtime+"')";
-        console.log(query);
+       // console.log(query);
         
         db.query(query, (err, result) => {
             if (err) {
@@ -234,13 +234,13 @@ getprofilestatus: (req, res) => {
             Status + "','" + buid + "','" + salesregionid + "','" + salesrepid + "','" + joblocation + 
             "','" + jDescription + "','" + buComments + "','" + jdComments + "','" + createdby + "',now(),'" + updateby + "',now())";
       
-    
+    console.log(query);
         db.query(query, (err, result) => {
             if (err) {
-               
+                console.log(err);
                 return res.status(500).send(err);
             }  
-            res.redirect('/');
+            res.status(200).json(result);
            // console.log(result);
         });
     },
@@ -274,6 +274,7 @@ getprofilestatus: (req, res) => {
         let Desiredlocation =  req.body.Desiredlocation;
         let Status =  req.body.Status;
         let Resume =  req.body.Resume;
+        console.log(Resume);
         let Vendorid =  req.body.Vendorid;
         let Createdby =  req.body.Createdby;
         let Updateby =  req.body.Updateby;
@@ -409,8 +410,6 @@ getprofilestatus: (req, res) => {
         let query = "CALL procUpdatevendor('"+ vendorid +"','"+ Vendorcode +"','"+ Vendorname +"','"+ Vendorpriloc +
         "','"+ Vendorspec +"','"+ Vendoremail +"','"+ Recruiterid +"','"+ Recruitername +"','"+ Recruitercontno +
         "','"+ Vendorcomments +"','"+ Vendorrating +"','"+ Updateby +"', now() )";
-        console.log(query);
-        
         db.query(query, (err, result) => {
             if (err) {
                 console.log(err);
@@ -421,6 +420,56 @@ getprofilestatus: (req, res) => {
            
         });
     },
+
+    updateprofile: (req, res) => {
+        
+        let peditprofileId = req.body.peditprofileId;  
+  
+        let peditjobdescriptionId = req.body.peditjobdescriptionId;
+        let peditsalutationId = req.body.peditsalutationId;
+        let peditfirstname = req.body.peditfirstname;
+        let peditlastname = req.body.peditlastname;
+        let peditemail = req.body.peditemail;
+        let peditmobile = req.body.peditmobile;
+        let peditdob = req.body.peditdob;
+        let peditaddress1 = req.body.peditaddress1; 
+        let peditaddress2 = req.body.peditaddress2;
+        let peditcity = req.body.peditcity;
+        let peditstate = req.body.peditstate;
+        let peditcountry = req.body.peditcountry;
+       let peditpostalcode = req.body.peditpostalcode;
+        let peditexperience = req.body.peditexperience;
+        let pedithighestquali = req.body.pedithighestquali;  
+        let peditcurrentjobtitle = req.body.peditcurrentjobtitle;
+        let peditcurrentsalary = req.body.peditcurrentsalary;
+        let peditexpectedsalary = req.body.peditexpectedsalary;
+        let peditskillset =  req.body.peditskillset;
+        let peditskypeid =   req.body.peditskypeid;
+        let peditnoticeperiod =   req.body.peditnoticeperiod;
+        let peditcurrentlocation =   req.body.peditcurrentlocation;
+        let peditdesiredlocation =   req.body.peditdesiredlocation;
+        let peditstatus =   req.body.peditstatus;
+        let peditresumename =   req.body.peditresumename;
+        let peditvendorid =   req.body.peditvendorid;
+        let peditupdatedby =   req.body.peditupdatedby;
+    
+        
+
+        let query = "CALL procUpdateprofile('"+peditprofileId+"','"+peditjobdescriptionId+"','"+peditsalutationId+"','"+peditfirstname+"','"+peditlastname+"','"+peditemail+
+        "','"+peditmobile+"','"+peditdob+"','"+peditaddress1+"','"+peditaddress2+"','"+peditcity+"','"+peditstate+"','"+peditcountry+"','"+peditpostalcode+
+        "','"+peditexperience+"','"+pedithighestquali+"','"+peditcurrentjobtitle+"','"+peditcurrentsalary+"','"+peditexpectedsalary+"','"+peditskillset+"','"+peditskypeid+"','"+peditnoticeperiod+
+        "','"+peditcurrentlocation+"','"+peditdesiredlocation+"','"+peditstatus+"','"+peditresumename+"','"+peditvendorid+"','"+peditupdatedby+"',now())";
+        
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+                
+            }
+            res.status(200).json(result);
+           
+        });
+    },
+
 
     
     }
