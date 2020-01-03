@@ -108,7 +108,8 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-				//budropdown = budropdown+"<option>--Select--</option>";
+				
+			//	budropdown = budropdown+"<option style='display:none;'></option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					budropdown = budropdown +
@@ -267,8 +268,9 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-
-			//	currentlocation = currentlocation + "<option>--Select--</option>";
+			
+			//	currentlocation = currentlocation+"<option>--Select--</option>";
+			currentlocation = currentlocation + "<option style='display:none;'></option>";
 
 				for (var i = 0; i < result[0].length; i++) {
 					currentlocation = currentlocation +
@@ -1250,12 +1252,12 @@ function disableprofileedit(){
 									<span class="caret"></span></a>
 								<ul class="dropdown-menu"
 									style="left: 19px;background-color: #73c7e7;text-align: center;">
-									<li><a data-toggle="tab" id="jobstabid" data-target="#operationsTab"
-											style="color: white;" onclick="joblistingdetails()">Jobs</a></li>
-									<li><a data-target="#profilesTab" data-toggle="tab" id="profiletabid"
-											style="color: white;" onclick="profileslistingdetails()">Profiles</a></li>
-									<li><a data-target="#vendorsTab" data-toggle="tab" style="color: white;"
-											onclick="vendorlistingdetails()">Vendors</a></li>
+									<li><a  data-toggle="tab" id="jobstabid"  data-target="#operationsTab" style="color: white;"
+											onclick="joblistingdetails()">Jobs</a></li>
+									<li><a data-target="#profilesTab" data-toggle="tab" id="profiletabid" style="color: white;"
+								           onclick="profileslistingdetails()">Profiles</a></li>
+									<li><a data-target="#vendorsTab" data-toggle="tab" id="vendortabid" style="color: white;"
+										onclick="vendorlistingdetails()">Vendors</a></li>
 								</ul>
 							</li>
 							<li class=""><a data-toggle="tab" href="/interviewTab"
@@ -1297,9 +1299,11 @@ function disableprofileedit(){
 
 								<div id="jobdetails">
 
+									<h3 style="font-size:22px;font-weight: bold">New Job:</h3>
+
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
-										style="overflow-y: scroll;height:500px;">
-										<h3 style="font-size:22px;font-weight: bold">New Job:</h3>
+										style="overflow-y: scroll;height:400px;">
+										
 
 										<div class="card"
 											style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)">
@@ -1606,13 +1610,10 @@ function disableprofileedit(){
 
 
 							</div>
-
-
-
 						</div>
-						<div id="vendorsTab" class="tab-pane fade">
-							<div id="vendorslisting" class="">
-
+							<div id="vendorsTab" class="tab-pane fade">
+								<div id="vendorslisting" class="">
+							
 								<div class="card">
 
 									<div class="card-header" style="background-color: #73c7e7">
@@ -1641,7 +1642,7 @@ function disableprofileedit(){
 
 
 						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
