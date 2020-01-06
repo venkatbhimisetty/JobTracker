@@ -10,27 +10,28 @@ module.exports = {
             });
         
     },
-
-    
-    getJobStatusdrop : (req, res) => {
+    getJobStatusdrop: (req, res) => {
 
         let query = "CALL proclookupstatus()"; // query database to get all the status
-    
+
         db.query(query, (err, result) => {
-            
             if (err) {
                 res.redirect('/');
-    
             }
             else {
                 res.status(200).json(result);
-    
             }
         });
-
     },
-
-
+    getexpdropdown: (req, res) => {
+        let buquery = "CALL proclookupexperince()";
+        db.query(buquery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+        });
+    },
     getbusinessunit: (req, res) => {
         let buquery = "CALL proclookupbu()";
         db.query(buquery, (err, result) => {

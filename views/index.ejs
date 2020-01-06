@@ -31,6 +31,16 @@
 		background-color: #ddd;
 	}
 </style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datatable').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+		});
+    });
+    </script>
 <script>
 	$(document).ready(function () {
 
@@ -38,6 +48,7 @@
 		budropdown();
 		jobstatus();
 		jobreqiddropdown()
+		expdropdown();
 		salesdropdown();
 		salesrepdropdown();
 		customerdropdown();
@@ -46,6 +57,7 @@
 		currentlocationdropdown();
 		profilestatusdropdown();
 		profiletabcountrydropdown();
+
 		
 
 
@@ -62,7 +74,6 @@
 	}
 
 	function jobstatus() {
-
 		jobstatusdrop = '';
 		var url = "http://localhost:2000/jobstatus";
 		$.ajax({
@@ -99,6 +110,37 @@ $.ajax({
 	}
 });
 }
+
+
+	function expdropdown() {
+		expdropdowndrop = '';
+		var url = "http://localhost:2000/experince";
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+				for (var i = 0; i < result[0].length; i++) {
+					expdropdowndrop = expdropdowndrop +
+						'<option value="' + result[0][i].Experinceid + '">' + result[0][i].Experince + '</option>';
+				}
+				$("#experience").html(expdropdowndrop);
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	function budropdown() {
 		var budropdown = "";
@@ -177,6 +219,7 @@ $.ajax({
 				}
 				$("#cus").html(customerdropdown);
 				$("#custedit").html(customerdropdown);
+				$("#jlocation").html(customerdropdown);
 			}
 		});
 	}
@@ -283,7 +326,8 @@ $.ajax({
 				$("#vendorpriloc").html(currentlocation);
 				$("#editvendorpriloc").html(currentlocation);
 				$("#peditcurrentlocation").html(currentlocation);
-                $("#peditdesiredlocation").html(currentlocation);
+				$("#peditdesiredlocation").html(currentlocation);
+				$("#jobaccount").html(currentlocation);
 
 			}
 		});
@@ -335,54 +379,35 @@ $.ajax({
     }
 
 	function joblistingdetails() {
-		var cardData = "";
+			var tableData = "";
 
-		var url = "http://localhost:2000/joblistingdetails";
-		$.ajax({
-			url: url,
-			type: "GET",
-			success: function (result) {
+			var url = "http://localhost:2000/joblistingdetails";
+			$.ajax({
+				url: url,
+				type: "GET",
+				success: function (result) {
 
-				for (var i = 0; i < result[0].length; i++) {
+					for (var i = 0; i < result[0].length; i++) {
 
 
-					var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
+						var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
+						tableData = tableData + "  <tr> " +
 
-					cardData = cardData + "<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>" +
+							//"<td id='' hidden>" + result[0][i].contactid + "</td>" +
+							"<td >" + result[0][i].requirmentId + "</td>" +
+							"<td >" + result[0][i].noofpositions + "</td>" +
+							"<td >" + result[0][i].experience + "</td>" +
+							"<td >" + result[0][i].role + "</td>" +
+							"<td >" + result[0][i].primaryskills + "</td>" +
+							"<td >" + "<a href='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
 
-						"<div class='row'>" +
-						"<div class='col-lg-1' style='margin-right:-7%'>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "Requirment ID :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].requirmentId + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "Job Type :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].role + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "Location :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].joblocation + "</span>" + "</div>" +
+							"</tr>";
 
-						"</div>" +
-						"<div class='row'>" +
-						"<div class='col-lg-1'  style='margin-right:-7%'>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "Job Type :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobdescription + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "No Of Positions :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].noofpositions + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label><b>" + "Experience :" + "</b></label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].experience + "</span>" + "</div>" +
-
-						"<div style='margin-top: -22px;  margin-left: 102px'>" +
-						"<a  data-toggle='modal' href='#jobModal'class='btn btn-info' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" +
-
-						"</div>" +
-						" </div>" +
-
-						"</div>"
-
+					}
+					$("#joblistingbody").html(tableData);
 				}
-				$("#joblistingbody").html(cardData);
-				
-			}
-		});
-	}
+			});
+		}
 
 	function jobdisplay(i) {
 		$("#updatehide").hide();
@@ -1653,9 +1678,67 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<div id="jobslisting" class="">
 								<br>
 								<div class="card" style="background-color:white ">
-									<h5 class="card-header" style="background-color: #73c7e7">Recently Added Jobs</h5>
-									<div class="card-body" id="joblistingbody" style="overflow-y: scroll;height:400px;">
+									<div class="card-header" style="color: black;font-size: 22px;">Total Jobs:</div>
+									
+										<div id="main" class="">               
+											<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
+												<div class="col-sm-1"></div>
+											   <br>
+												<div id="main-content" class="contact">													                    
+														<div class="row" style="color: black;font-size: 13px;">
+															<div class="col-sm-2"></div>
+															<div class="col-sm-2" style="margin:2px;">
+																<b>Account Name</b>
+															</div>
+															
+															<div class="col-sm-2" >
+																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+														</div>
+														<div class="col-sm-1" style="margin:2px;">
+															<b>Location</b>
+														</div>
+														<div class="col-sm-2" >
+																<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
+														</div>															
+															<div class="col-sm-1">
+																<button type="button" class="btn btn-primary"
+																	style="width:140%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Search</button>
+															</div>
+															<div class="col-sm-1"></div>
+																			
+												</div>
+									
+									<div id="main-content" class="contact">
+									
+										<div id="tbMarksContainer">
+									
+											<div class="entity-list" id="entity-list">
+									
+												<div class="table table-responsive" style="overflow: auto;height:440px">
+									
+													<table class="table table-bordered" id="jobtable">           
+														<thead
+															style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
+									
+															<tr style="  font-weight:bold ; ">
+																<th scope="col" >Recuriment Id</th>
+																<th scope="col">No.Of Positions</th>
+																<th scope="col">Experince</th>
+																<th scope="col">Role</th>
+																<th scope="col">Primary Skills</th>  
+																<th scope="col">Action</th>         
+															</tr>            
+														</thead>            
+														<tbody id="joblistingbody" style="color:black;">                                   
+														</tbody>       
+													</table> 							
+												</div>
+											</div>
+										</div>
 									</div>
+								</div>
+							</div>
+						</div>
 
 								</div>
 
@@ -2860,7 +2943,15 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 
 
-
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

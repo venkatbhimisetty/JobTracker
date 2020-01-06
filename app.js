@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 })); 
 app.use(bodyParser.json());
 
-const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
+const {getHomePage,getJobStatusdrop,getbusinessunit,getexpdropdown,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
     addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
@@ -58,6 +58,7 @@ app.get('/salesrep', getsalesrepunit);
 app.get('/customer', getcustomers);
 app.post('/jdescription', addjd);
 
+app.get('/experince', getexpdropdown);
 app.get('/jobstatus', getJobStatusdrop);
 
 app.get('/joblistingdetails', joblistingdetails);
