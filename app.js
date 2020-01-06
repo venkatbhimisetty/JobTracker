@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
-    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor} = require('./routes/index');
-const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID} = require('./routes/index');
+const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
 const port = 2000;
 
 // create connection to database
@@ -59,6 +59,7 @@ app.get('/customer', getcustomers);
 app.post('/jdescription', addjd);
 
 app.get('/jobstatus', getJobStatusdrop);
+
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
 app.post('/updatejoblisting/:id',updatejoblisting);
@@ -81,6 +82,8 @@ app.get('/highestqual', gethighestqual);
 app.get('/profilestatus', getprofilestatus);
 app.get('/profilecountry', getprofilecountry);
 app.get('/statebycountry/:profilecountry', getprofilestatebycountry);
+
+app.get('/jobreqid', getjobreqID);
 // set the app to listen on the port
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

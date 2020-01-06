@@ -23,7 +23,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 </head>
 <style>
@@ -37,6 +37,7 @@
 
 		budropdown();
 		jobstatus();
+		jobreqiddropdown()
 		salesdropdown();
 		salesrepdropdown();
 		customerdropdown();
@@ -80,6 +81,24 @@
 			}
 		});
 	}
+	function jobreqiddropdown() {
+
+jobreqID = '';
+var url = "http://localhost:2000/jobreqid";
+$.ajax({
+	url: url,
+	type: "GET",
+	success: function (result) {
+		//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
+		for (var i = 0; i < result[0].length; i++) {
+			jobreqID = jobreqID +
+				'<option value="' + result[0][i].jobdescriptionId + '">' + result[0][i].requirmentId + '</option>';
+		}
+		$("#jobrecid").html(jobreqID);
+		//$("#statuspedit").html(jobstatusdrop);
+	}
+});
+}
 
 	function budropdown() {
 		var budropdown = "";
@@ -620,7 +639,7 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-
+console.log(result);
 				for (var i = 0; i < result[0].length; i++) {
 
 					var profileID = "\"" + result[0][i].profileid + "\"";
@@ -629,7 +648,7 @@
 
 						"<div class='row'>" +
 						"<div class='col-lg-3'>" +
-						"<label>" + "Requirment ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobrecid + "</span>" + "</div>" +
+						"<label>" + "Requirment ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobreqcode + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
 						"<label>" + "Candidate Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].firstname + "&nbsp" + result[0][i].lastname + "</span>" + "</div>" +
 						"<div class='col-lg-3'>" +
@@ -670,7 +689,7 @@
 			
 				$("#editprofilehiddenId").text(result[0][0].profileid); 
 				$("#pprofileid").text(result[0][0].profileid);
-				$("#peditjobrecid").val(result[0][0].jobrecid);
+				$("#peditjobrecid").text(result[0][0].jobreqcode);
 				$("#peditsalutation").val(result[0][0].salutationid).attr('selected', 'selected');
 				$("#peditfirstname").val(result[0][0].firstname);
 				$("#peditlastname").val(result[0][0].lastname);
@@ -707,6 +726,7 @@
 
 		//            var Profileid = $('[name="profileid"]').val();
 		var Jobrecid = $('[name="pjob_recid"]').val();
+		var jobreqcode =$("#jobrecid option:selected").text();
 		var Salutation = $('[name="psalutation_id"]').val();
 		var Firstname = $('[name="pfirst_name"]').val();
 		var Lastname = $('[name="plast_name"]').val();
@@ -741,6 +761,7 @@
 
 			//            "Profileid": Profileid,
 			"Jobrecid": Jobrecid,
+			"jobreqcode":jobreqcode,
 			"Salutation": Salutation,
 			"Firstname": Firstname,
 			"Lastname": Lastname,
@@ -776,7 +797,7 @@
 		var url = "http://localhost:2000/addprofiles";
 	
 
-if (Jobrecid!="" && Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
+if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
 &&Address2!="" && City!="" && State!="" && Country!="" &&Postalcode!="" && Experience!="" && Highestquali!="" && Currentjobtitle!=""
 &&Currentsalary!="" && Expectedsalary!="" && Skillset!="" && Skypeid!="" &&Noticeperiod!="" && Currentlocation!="" && Desiredlocation!="" && Status!=""
 && Resume!="" && Vendorid!="")
@@ -891,7 +912,7 @@ if (Jobrecid!="" && Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" 
 		function enableprofileedit(){
     $("#profileeditbtn").hide();
     $("#updateeditprofile").show();
-                    $("#peditjobrecid").attr('disabled',false);
+                    //$("#peditjobrecid").attr('disabled',false);
                     $("#peditsalutation").attr('disabled',false);
                     $("#peditfirstname").attr('disabled',false);
                     $("#peditlastname").attr('disabled',false);
@@ -923,7 +944,7 @@ if (Jobrecid!="" && Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" 
 function disableprofileedit(){
     $("#profileeditbtn").show();
     $("#updateeditprofile").hide();
-                    $("#peditjobrecid").attr('disabled',true);
+                   // $("#peditjobrecid").attr('disabled',true);
                     $("#peditsalutation").attr('disabled',true);
                     $("#peditfirstname").attr('disabled',true);
                     $("#peditlastname").attr('disabled',true);
@@ -1439,8 +1460,10 @@ function disableprofileedit(){
 															<label><span style="color:red;">*</span>Experience:</label>
 														</div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="experience" name="experience"
-																class="form-control" required>
+															<!-- <input type="text" id="experience" name="experience" 
+																class="form-control" required>-->
+																<select id="experience" name="experience" class="form-control"
+																required></select>
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -1902,8 +1925,9 @@ function disableprofileedit(){
 								<label style="width: 113px;"><span style="color:red">*</span>Job Requirement ID:</label>
 							</div>
 							<div class="col-sm-3">
-
-								<input type="text" id="jobrecid" name="pjob_recid" class="form-control" required>
+								<select class="form-control"  id="jobrecid" name="pjob_recid" class="form-control" required>
+								</select>
+								<!-- <input type="text" id="jobrecid" name="pjob_recid" class="form-control" required> -->
 							</div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
@@ -2210,7 +2234,7 @@ function disableprofileedit(){
 							<label style="width: 113px;"><span style="color:red">*</span>Job Requirement ID:</label>
 						</div>
 						<div class="col-sm-3">
-							<input type="text" id="peditjobrecid" name="peditjob_recid" class="form-control" required disabled>
+							<p id="peditjobrecid" name="peditjob_recid" style="color: black;font-size: 13px;"></p>
 							<p id="editprofilehiddenId" name="editprofile_hiddenId" style="display:none;"></p>  
 						</div>
 						<div class="col-sm-2">

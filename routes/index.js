@@ -250,6 +250,7 @@ getprofilestatus: (req, res) => {
         
       //  let Profileid = req.body.Profileid;
         let Jobrecid = req.body.Jobrecid;
+       let  jobreqcode=req.body.jobreqcode;
         let Salutation = req.body.Salutation;
         let Firstname = req.body.Firstname;
         let Lastname = req.body.Lastname;
@@ -281,7 +282,7 @@ getprofilestatus: (req, res) => {
 
 
 
-        let query = "call procinsertprofile('" + Jobrecid + "', '" + Salutation + "', '" + Firstname + "','" + Lastname + "','" + 
+        let query = "call procinsertprofile('" + Jobrecid + "', '"+jobreqcode+"','" + Salutation + "', '" + Firstname + "','" + Lastname + "','" + 
         Email + "',  '" + Mobile + "','" + Dob + "', '" + Address1 + "', '" + Address2 + "','" +
             City + "','" + State + "','" + Country + "','" + Postalcode + "','" + Experience + 
             "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" + 
@@ -468,6 +469,20 @@ getprofilestatus: (req, res) => {
             }
             res.status(200).json(result);
            
+        });
+    },
+
+    getjobreqID:(req, res) => {
+      
+        let query = "CALL proclookupreqId()";
+        console.log(query);
+        db.query(query, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+            console.log(result);
         });
     },
 
