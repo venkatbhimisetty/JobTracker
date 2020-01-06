@@ -909,71 +909,71 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
             profileslistingdetails();
 
         }
-		function enableprofileedit(){
-    $("#profileeditbtn").hide();
-    $("#updateeditprofile").show();
-                    //$("#peditjobrecid").attr('disabled',false);
-                    $("#peditsalutation").attr('disabled',false);
-                    $("#peditfirstname").attr('disabled',false);
-                    $("#peditlastname").attr('disabled',false);
-                    $("#peditemail").attr('disabled',false);
-                    $("#peditmobile").attr('disabled',false);
-                    $("#peditdob").attr('disabled',false);
-                    
-                    $("#peditaddress1").attr('disabled',false);
-                    $("#peditaddress2").attr('disabled',false);
-                    $("#peditcity").attr('disabled',false);
-                    $("#peditstate").attr('disabled',false);
-                    $("#peditcountry").attr('disabled',false);
-                    $("#peditpostalcode").attr('disabled',false);
-                    $("#peditexperience").attr('disabled',false);
-                    $("#pedithighestquali").attr('disabled',false);
-                    $("#peditcurrentjobtitle").attr('disabled',false);
-                    $("#peditcurrentsalary").attr('disabled',false);
-                    $("#peditexpectedsalary").attr('disabled',false);
-                    $("#peditskillset").attr('disabled',false);
-                    $("#peditskypeid").attr('disabled',false);
-                    $("#peditnoticeperiod").attr('disabled',false);
-                    $("#peditcurrentlocation").attr('disabled',false);
-                    $("#peditdesiredlocation").attr('disabled',false);
-                    $("#peditstatus").attr('disabled',false);
-                    $("#peditvendorid").attr('disabled',false);
-                    $("#peditfilename").attr('disabled',false);
-}
+		function enableprofileedit() {
 
-function disableprofileedit(){
-    $("#profileeditbtn").show();
-    $("#updateeditprofile").hide();
-                   // $("#peditjobrecid").attr('disabled',true);
-                    $("#peditsalutation").attr('disabled',true);
-                    $("#peditfirstname").attr('disabled',true);
-                    $("#peditlastname").attr('disabled',true);
-                    $("#peditemail").attr('disabled',true);
-                    $("#peditmobile").attr('disabled',true);
-                    $("#peditdob").attr('disabled',true);
-                    
-                    $("#peditaddress1").attr('disabled',true);
-                    $("#peditaddress2").attr('disabled',true);
-                    $("#peditcity").attr('disabled',true);
-                    $("#peditstate").attr('disabled',true);
-                    $("#peditcountry").attr('disabled',true);
-                    $("#peditpostalcode").attr('disabled',true);
-                    $("#peditexperience").attr('disabled',true);
-                    $("#pedithighestquali").attr('disabled',true);
-                    $("#peditcurrentjobtitle").attr('disabled',true);
-                    $("#peditcurrentsalary").attr('disabled',true);
-                    $("#peditexpectedsalary").attr('disabled',true);
-                    $("#peditskillset").attr('disabled',true);
-                    $("#peditskypeid").attr('disabled',true);
-                    $("#peditnoticeperiod").attr('disabled',true);
-                    $("#peditcurrentlocation").attr('disabled',true);
-                    $("#peditdesiredlocation").attr('disabled',true);
-                    $("#peditstatus").attr('disabled',true);
-                    $("#peditvendorid").attr('disabled',true);
-                    $("#peditfilename").attr('disabled',true);
-}
+				$("#profileeditbtn").hide();
+				$("#updateeditprofile").show();
+			//	$("#peditjobrecid").attr('disabled', false);
+				$("#peditsalutation").attr('disabled', false);
+				$("#peditfirstname").attr('disabled', false);
+				$("#peditlastname").attr('disabled', false);
+				$("#peditemail").attr('disabled', false);
+				$("#peditmobile").attr('disabled', false);
+				$("#peditdob").attr('disabled', false);
+				$("#peditaddress1").attr('disabled', false);
+				$("#peditaddress2").attr('disabled', false);
+				$("#peditcity").attr('disabled', false);
+				$("#peditstate").attr('disabled', false);
+				$("#peditcountry").attr('disabled', false);
+				$("#peditpostalcode").attr('disabled', false);
+				$("#peditexperience").attr('disabled', false);
+				$("#pedithighestquali").attr('disabled', false);
+				$("#peditcurrentjobtitle").attr('disabled', false);
+				$("#peditcurrentsalary").attr('disabled', false);
+				$("#peditexpectedsalary").attr('disabled', false);
+				$("#peditskillset").attr('disabled', false);
+				$("#peditskypeid").attr('disabled', false);
+				$("#peditnoticeperiod").attr('disabled', false);
+				$("#peditcurrentlocation").attr('disabled', false);
+				$("#peditdesiredlocation").attr('disabled', false);
+				$("#peditstatus").attr('disabled', false);
+				$("#peditvendorid").attr('disabled', false);
+				$("#peditfilename").attr('disabled', false);
+			}
 
+			function disableprofileedit() {
+			
+				$("#profileeditbtn").show();
+				$("#updateeditprofile").hide();
+			//	$("#peditjobrecid").attr('disabled', true);
+				$("#peditsalutation").attr('disabled', true);
+				$("#peditfirstname").attr('disabled', true);
+				$("#peditlastname").attr('disabled', true);
+				$("#peditemail").attr('disabled', true);
+				$("#peditmobile").attr('disabled', true);
+				$("#peditdob").attr('disabled', true);
+				$("#peditaddress1").attr('disabled', true);
+				$("#peditaddress2").attr('disabled', true);
+				$("#peditcity").attr('disabled', true);
+				$("#peditstate").attr('disabled', true);
+				$("#peditcountry").attr('disabled', true);
+				$("#peditpostalcode").attr('disabled', true);
+				$("#peditexperience").attr('disabled', true);
+				$("#pedithighestquali").attr('disabled', true);
+				$("#peditcurrentjobtitle").attr('disabled', true);
+				$("#peditcurrentsalary").attr('disabled', true);
+				$("#peditexpectedsalary").attr('disabled', true);
+				$("#peditskillset").attr('disabled', true);
+				$("#peditskypeid").attr('disabled', true);
+				$("#peditnoticeperiod").attr('disabled', true);
+				$("#peditcurrentlocation").attr('disabled', true);
+				$("#peditdesiredlocation").attr('disabled', true);
+				$("#peditstatus").attr('disabled', true);
+				$("#peditvendorid").attr('disabled', true);
+				$("#peditfilename").attr('disabled', true);
+			}
 
+		
 
 	function addvendor() {
 
@@ -1205,6 +1205,79 @@ function disableprofileedit(){
 		vendorlistingdetails();
 
 	}
+
+	function clearFormJob() {
+
+			$("#bunit").val('');
+			$("#salesregion").val('');
+			$("#salesrepresent").val('');
+			$("#cus").val('');
+			$("#comment").val('');
+			$("#filename").val('');
+			$("#requirement").val('');
+			$("#role").val('');
+			$("#edate").val('');
+			$("#positions").val('');
+			$("#experience").val('');
+			$("#jobstatus").val('');
+			$("#piskills").val('');
+			$("#seskills").val('');
+			$("#jloc").val('');
+			$("#locflex").val('');
+			$("#jdesp").val('');
+			$("#comm").val('');
+			
+		}
+
+		function clearFormProfile() {
+
+				$("#jobrecid").val('');
+				$("#salutation").val('');
+				$("#firstname").val('');
+				$("#lastname").val('');
+				$("#dob").val('');
+				$("#mobile").val('');
+				$("#email").val('');
+				$("#address1").val('');
+				$("#address2").val('');
+				$("#country").val('');
+				$("#state").val('');
+				$("#city").val('');
+				$("#postalcode").val('');
+				$("#highestquali").val('');
+				$("#currentjobtitle").val('');
+				$("#currentsalary").val('');
+				$("#expectedsalary").val('');
+				$("#pskillset").val('');
+				$("#sskillset").val('');
+				$("#skypeid").val('');
+				$("#noticeperiod").val('');
+				$("#currentlocation").val('');
+				$("#desiredlocation").val('');
+				$("#profileexperience").val('');
+				$("#resignedy").val('');
+				$("#resignedn").val('');
+				$("#status").val('');
+				$("#profilevendorid").val('');
+				$("#profileresume").val('');
+
+
+			}
+	
+		function clearFormVendor() {
+
+			$("#vendorid").val('');
+			$("#vendorname").val('');
+			$("#vendorpriloc").val('');
+			$("#vendorspec").val('');
+			$("#vendoremail").val('');
+			$("#recruiterid").val('');
+			$("#recruitername").val('');
+			$("#recruitercontno").val('');
+			$("#vendorrating").val('');
+			$("#vendorcomments").val('');
+
+		}
 
 
 </script>
@@ -1454,28 +1527,7 @@ function disableprofileedit(){
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 													</div>
-													<div class="row">
-														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Experience:</label>
-														</div>
-														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<!-- <input type="text" id="experience" name="experience" 
-																class="form-control" required>-->
-																<select id="experience" name="experience" class="form-control"
-																required></select>
-														</div>
-
-														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Status:</label>
-														</div>
-														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<select id="jobstatus" name="status" class="form-control"
-																required></select>
-														</div>
-														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-
-													</div>
+													
 
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
@@ -1523,6 +1575,27 @@ function disableprofileedit(){
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+															<label><span style="color:red;">*</span>Experience:</label>
+														</div>
+														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+															<input type="text" id="experience" name="experience"
+																class="form-control" required>
+														</div>
+
+														<!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+															<label><span style="color:red;">*</span>Status:</label>
+														</div>
+														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+															<select id="jobstatus" name="status" class="form-control"
+																required></select>
+														</div> -->
+														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+
+													</div>
+
+													<div class="row">
+														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 															<label><span style="color:red;">*</span>Job
 																Description:</label></div>
 														<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
@@ -1562,9 +1635,9 @@ function disableprofileedit(){
 											<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"
 												style="margin-bottom:2%;left: 89px;">
 												<button type="submit" class="btn btn-sm btn-info"
-													onclick="addjd();">Submit</button>
-												<button type="button" id="canceljob"
-													class="btn btn-sm btn-info">Cancel</button>
+													onclick="addjd(),clearFormJob();">Submit</button>
+												<button type="button" id="canceljob" class="btn btn-sm btn-info"
+												onclick="clearFormJob()">Cancel</button>
 
 											</div>
 										</div>
@@ -1910,7 +1983,7 @@ function disableprofileedit(){
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #73c7e7">
 					<h5 class="modal-title">New Profile</h5>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" onclick="clearFormProfile();">&times;</button>
 
 				</div>
 				<div class="modal-body" style="overflow:auto;height:450px;">
@@ -2013,13 +2086,6 @@ function disableprofileedit(){
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>City:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="city" name="p_city" class="form-control" required>
-
-							</div>
-							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Country:</label>
 							</div>
 							<div class="col-sm-3">
@@ -2027,17 +2093,23 @@ function disableprofileedit(){
 									onclick="profiletabstatedropdown()" class="form-control" required>
 								</select>
 							</div>
-
-							<div class="col-sm-1"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>State:</label>
 							</div>
 							<div class="col-sm-3">
 								<select class="form-control" id="state" name="p_state" class="form-control" required>
 								</select>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label><span style="color:red">*</span>City:</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" id="city" name="p_city" class="form-control" required>
+
 							</div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
@@ -2074,7 +2146,7 @@ function disableprofileedit(){
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Current Salary:</label>
+								<label><span style="color:red">*</span>Current CTC:</label>
 							</div>
 							<div class="col-sm-3">
 
@@ -2083,7 +2155,7 @@ function disableprofileedit(){
 							</div>
 
 							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Expected Salary:</label>
+								<label style="width: 113px;"><span style="color:red">*</span>Expected CTC:</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="text" id="expectedsalary" name="pexpected_salary" class="form-control"
@@ -2095,23 +2167,31 @@ function disableprofileedit(){
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Skill Set:</label>
+								<label><span style="color:red">*</span>Primary Skill:</label>
 							</div>
 							<div class="col-sm-3">
 
-								<input type="text" id="skillset" name="pskill_set" class="form-control" required>
+								<input type="text" id="pskillset" name="pskill_set" class="form-control" required>
 							</div>
 
+							<div class="col-sm-2">
+								<label><span style="color:red">*</span>Secondary Skill:</label>
+							</div>
+							<div class="col-sm-3">
+
+								<input type="text" id="sskillset" name="sskill_set" class="form-control" required>
+							</div>
+							<div class="col-sm-1"> </div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="text" id="skypeid" name="pskype_id" class="form-control" required>
 							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
+
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Notice Period:</label>
 							</div>
@@ -2119,7 +2199,10 @@ function disableprofileedit(){
 								<input type="text" id="noticeperiod" name="pnotice_period" class="form-control"
 									required>
 							</div>
-
+							<div class="col-sm-1"> </div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
 							</div>
@@ -2127,27 +2210,34 @@ function disableprofileedit(){
 								<select class="form-control" id="currentlocation" name="pcurrent_location"
 									required></select>
 							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Desired Location:</label>
+								<label style="width: 113px;"><span style="color:red">*</span>Desired Location:</label>
 							</div>
 							<div class="col-sm-3">
 								<select class="form-control" id="desiredlocation" name="pdesired_location"
 									required></select>
 							</div>
-
-							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="profileexperience" name="p_experience" class="form-control" required>
-							</div>
 							<div class="col-sm-1"> </div>
 						</div>
 
+						<div class="row">
+							<div class="col-sm-1"></div>
+						<div class="col-sm-2">
+							<label><span style="color:red">*</span>Experience:</label>
+						</div>
+						<div class="col-sm-3">
+							<input type="text" id="profileexperience" name="p_experience" class="form-control" required>
+						</div>
+
+						<div class="col-sm-2">
+							<label><span style="color:red">*</span>Resigned:</label>
+						</div>
+						<div class="col-sm-3">
+							<input type="radio" value="yes" id="resignedy" name="resigned"><label>Yes</label>
+							<input type="radio" value="no" id="resignedn" name="resigned"><label>No</label>
+						</div>
+							<div class="col-sm-1"> </div>
+					    </div>
 
 						<div class="row">
 							<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
@@ -2157,7 +2247,7 @@ function disableprofileedit(){
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Status:</label>
+								<label><span style="color:red">*</span>Current Status:</label>
 							</div>
 							<div class="col-sm-3">
 								<select class="form-control" id="status" name="p_status" class="form-control" required>
@@ -2203,8 +2293,8 @@ function disableprofileedit(){
 
 				</div>
 				<div class="modal-footer">
-					<button type="Submit" class="btn btn-sm btn-info" data-dismiss="modal" onclick="addprofile()">Save</button>
-					<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>
+					<button type="Submit" class="btn btn-sm btn-info" data-dismiss="modal" onclick="addprofile(),clearFormProfile();">Save</button>
+					<button type="button" class="btn btn-sm btn-info" data-dismiss="modal" onclick="clearFormProfile();">Cancel</button>
 				</div>
 				</form>
 			</div>
@@ -2525,7 +2615,7 @@ function disableprofileedit(){
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #73c7e7">
 					<h5 class="modal-title">New Vendor</h5>
-					<button type="button" class="close" data-dismiss="modal" onclick="cancelenable()">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" onclick="clearFormVendor()">&times;</button>
 				</div>
 				<div class="modal-body" style="overflow:auto;height:390px;">
 					<form action="post" onsubmit="return false">
@@ -2626,8 +2716,8 @@ function disableprofileedit(){
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="Submit" class="btn btn-sm btn-info" onclick="addvendor()" data-dismiss="modal">Save</button>
-							<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Cancel</button>
+							<button type="Submit" class="btn btn-sm btn-info" onclick="addvendor(),clearFormVendor();" data-dismiss="modal">Save</button>
+							<button type="button" class="btn btn-sm btn-info" onclick="clearFormVendor();" data-dismiss="modal">Cancel</button>
 						</div>
 					</form>
 
