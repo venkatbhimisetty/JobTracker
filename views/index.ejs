@@ -18,7 +18,7 @@
 	<!-- <link rel="stylesheet" href="fonts/icomoon.css"> -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -1063,7 +1063,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 	function vendorlistingdetails() {
 
-		var cardData = "";
+		var tableData = "";
 
 		var url = "http://localhost:2000/vendorlistingdetails";
 		$.ajax({
@@ -1075,36 +1075,22 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 				for (var i = 0; i < result[0].length; i++) {
 
-					var vendorid = "\"" + result[0][i].vendorId + "\"";
 
-					cardData = cardData + "<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>" +
+					var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
+					tableData = tableData + "  <tr> " +
 
-						"<div class='row'>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Vendor ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorcode + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Vendor Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorname + "</span>" + "</div>" +
-						"<div class='col-lg-4'>" +
-						"<label>" + "Vendor Email :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendoremail + "</span>" + "</div>" +
-						"</div>" +
-						"<div class='row'>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Recruiter Id :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].recruiterId + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Recruiter Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].recruitername + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Vendor Rating :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].rating + "</span>" + "</div>" +
-						"<div style='margin-top: -22px;  margin-left: 102px'>" +
-						"<a href='#vendoreditmodal' data-toggle='modal' class='btn btn-info' onclick='vendordisplay( " + vendorid + ")'>" + "View" + "</a>" +
+						"<td >" + result[0][i].recruiterId + "</td>" +
+						"<td >" + result[0][i].vendorcode + "</td>" +
+						"<td >" + result[0][i].vendorname + "</td>" +
+						"<td >" + result[0][i].recruitername + "</td>" +
+						"<td >" + result[0][i].rating + "</td>" +
+						"<td >" + result[0][i].vendoremail + "</td>" +
+						"<td >" + "<a href='#vendorModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
 
-						"</div>" +
+						"</tr>";
 
-						" </div>" +
-						"</div>"
-
-				}
-
-				$("#vendorlistingbody").html(cardData);
+					}
+				$("#vendorlistingbody").html(tableData);
 
 			}
 		});
@@ -1390,16 +1376,14 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
 				data-scrollax-parent="true">
 				<div class="col-xl-12 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
-					<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have
+					<!-- <p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have
 						<span class="number" data-number="8">0</span> great job offers you observe!</p>
 					<h1 class="mb-5" style="font-weight: 100;font-size:40px;"
-						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1>
+						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1> -->
 
 
-					<div class="tab-content">
-						<div id="jobsTab" class="tab-pane fade in active"
-							style="
-                                                                                                                                background-color: white;">
+					<div class="tab-content" style="top:155px;position: relative;">
+						<div id="jobsTab" class="tab-pane fade in active" style=" background-color: white;">
 							<form class="search-job" method="post" onsubmit="return false">
 
 								<div id="jobdetails">
@@ -1676,20 +1660,25 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 						<div id="operationsTab" class="tab-pane fade">
 							<div id="jobslisting" class="">
-								<br>
-								<div class="card" style="background-color:white ">
-									<div class="card-header" style="color: black;font-size: 22px;">Total Jobs:</div>
+									<div class="container" style="background-color: white">
+									<div class="row" style="background-color: #65bddfc7;margin-bottom:12px;"><div class="col-sm-4">
+											<label style="color:black;font-size:26px;">Jobs:</label></div>
+											<div class="col-sm-7"></div>
+											<div class="col-sm-1" style="left: -12px; top: 6px;">
+											 <button type="button" data-toggle="modal" data-target="#jobModal" class="btn" style="font-size: 20px;">New</button></div>
+												 </div>
 									
-										<div id="main" class="">               
+										<div id="main" class="">    
+											           
 											<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
 												<div class="col-sm-1"></div>
-											   <br>
-												<div id="main-content" class="contact">													                    
-														<div class="row" style="color: black;font-size: 13px;">
-															<div class="col-sm-2"></div>
-															<div class="col-sm-2" style="margin:2px;">
-																<b>Account Name</b>
-															</div>
+												<div id="main-content" class="contact">	
+														<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">													                    
+														<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+														<div class="col-sm-1"></div>
+														<div class="col-sm-2" style="left:1px;margin:2px;">
+															<b>Account Name</b>
+														</div>
 															
 															<div class="col-sm-2" >
 																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
@@ -1700,14 +1689,16 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<div class="col-sm-2" >
 																<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
 														</div>															
-															<div class="col-sm-1">
-																<button type="button" class="btn btn-primary"
-																	style="width:140%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Search</button>
-															</div>
-															<div class="col-sm-1"></div>
-																			
+														<div class="col-sm-1">
+															<button type="button" class="btn btn-info" style="background-color:#66badb;top:-5px;position: relative">Search</button>
+														</div>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" style="top:1px;position: relative">
+														</div>
+														<div class="col-sm-1"></div>
+														</div>					
 												</div>
-									
+									<br>
 									<div id="main-content" class="contact">
 									
 										<div id="tbMarksContainer">
@@ -1717,10 +1708,10 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 												<div class="table table-responsive" style="overflow: auto;height:440px">
 									
 													<table class="table table-bordered" id="jobtable">           
-														<thead
-															style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
+														<thead style="background-color:#6199ae;
+														position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
 									
-															<tr style="  font-weight:bold ; ">
+															<tr style="font-size:small;color: black;font-size: small;  ">
 																<th scope="col" >Recuriment Id</th>
 																<th scope="col">No.Of Positions</th>
 																<th scope="col">Experince</th>
@@ -1729,7 +1720,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 																<th scope="col">Action</th>         
 															</tr>            
 														</thead>            
-														<tbody id="joblistingbody" style="color:black;">                                   
+														<tbody id="joblistingbody" style="color:black;font-size:small;">                                   
 														</tbody>       
 													</table> 							
 												</div>
@@ -1740,8 +1731,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							</div>
 						</div>
 
-								</div>
+								
 
+							</div>
 							</div>
 						</div>
 
@@ -1777,37 +1769,91 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							</div>
 						</div>
 							<div id="vendorsTab" class="tab-pane fade">
+							<div class="container" style="background-color: white">
+							<header>
+								<div class="row" style="background-color: #65bddfc7;margin-bottom:12px;"><div class="col-sm-4">
+							   <label style="color:black;font-size:26px;">Vendors:</label></div>
+							   <div class="col-sm-7"></div>
+							   <div class="col-sm-1" style="left: -12px; top: 6px;">
+								<button type="button" data-toggle="modal" data-target="#vendormodal" class="btn" style="font-size: 20px;">New</button></div>
+									</div>
+								</header>
+								
 								<div id="vendorslisting" class="">
+								             
+									<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
+										<div class="col-sm-1"></div>
+									   
+									   <div id="main-content" class="contact">
+											<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">						
+												<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+														<div class="col-sm-1"></div>
+														<div class="col-sm-1" style="left:1px;margin:2px;">
+															<b>Name</b>
+														</div>
+														<div class="col-sm-1"></div>
+															<div class="col-sm-2">
+																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+														</div>
+														<div class="col-sm-1" style="margin:2px;">
+															<b>Location</b>
+														</div>
+														<div class="col-sm-2" >
+															<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
+														</div>	
+													<div class="col-sm-1">
+															<button type="button" class="btn btn-info" style="background-color: #66badb;top:-5px;position: relative">Search</button>
+													</div>
+													<div class="col-sm-2">
+														<input type="text" class="form-control" style="top:1px;position: relative">
+													</div>
+													<div class="col-sm-1"></div>
+												</div>
+						  
+											</div>
+											<br>
 							
-								<div class="card">
-
-									<div class="card-header" style="background-color: #73c7e7">
-
-										<div class="row">
-											<div class="col-sm-11">
-												<h5>Vendors</h5>
-											</div>
-											<div class="col-sm-1"><button type="button" data-toggle="modal"
-													data-target="#vendormodal" class="btn">New</button>
-											</div>
 										</div>
 
+																		                    
+									
+							
+							<div id="main-content" class="">
+							
+								<div id="tbMarksContainer">
+							
+									<div class="entity-list" id="entity-list">
+							
+										<div class="table table-responsive" style="overflow: auto;">
+							
+											<table class="table table-bordered" id="jobtable">           
+												<thead
+													style="background-color: #6199ae;position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
+							
+													<tr style="color: black;font-size:small;">
+														<th scope="col" >Recruiter Id</th>
+														<th scope="col">Vendor Id</th>
+														<th scope="col">Vendor Name</th>
+														<th scope="col">Recruiter Name</th>
+														<th scope="col">Rating</th>  
+														<th scope="col">Vendor Email</th>    
+														<th scope="col">Action</th>       
+													</tr>            
+												</thead>            
+												<tbody id="vendorlistingbody" style="color:black;font-size:small; ">                                   
+												</tbody>       
+											</table> 							
+										</div>
 									</div>
-									<div class="card-body" id="vendorlistingbody" style="overflow-y: scroll;height:400px;">
-
-
-									</div>
-
-
 								</div>
-
-
+							</div>
+						
+					</div>
+				
 							</div>
 
-
-
 						</div>
-					
+					</div>
 				</div>
 			</div>
 		</div>
