@@ -679,7 +679,7 @@ $.ajax({
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a href='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='profilesdisplay(" + profileID + ")'>" + "<i class='far fa-edit' style='font-size: 20px;color:black'></i>" + "</a>" +"</td>" +
+						"<td >" + "<a >" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
 
 						"</tr>";
 
@@ -1539,8 +1539,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Secondary
-																Skill:</label></div>
+															<label>Secondary Skill:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 															<input type="text" id="seskills" name="secondry_skill"
 																class="form-control" required>
@@ -1548,6 +1547,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 													</div>
+													
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -1559,7 +1559,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label>Location Flexiblity:</label></div>
+															<label><span style="color:red;">*</span>Location Flexiblity:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 															<select id="locflex" class="form-control" name="loc_flex"
 																required>
@@ -1581,13 +1581,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 																class="form-control" required>
 														</div>
 
-														<!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+														 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 															<label><span style="color:red;">*</span>Status:</label>
 														</div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 															<select id="jobstatus" name="status" class="form-control"
 																required></select>
-														</div> -->
+														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 													</div>
@@ -1649,14 +1649,22 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 
 						<div id="operationsTab" class="tab-pane fade">
+							
 							<div id="jobslisting" class="">
-									<div class="container" style="background-color: white">
-									<div class="row" style="background-color: #65bddfc7;margin-bottom:12px;"><div class="col-sm-4">
-											<label style="color:black;font-size:26px;">Jobs:</label></div>
-											<div class="col-sm-7"></div>
-											<div class="col-sm-1" style="left: -12px; top: 6px;">
-											 <button type="button" data-toggle="modal" data-target="#jobModal" class="btn" style="font-size: 20px;">New</button></div>
-												 </div>
+									
+								<div class="container" style="background-color: white">
+
+												 <div class="row" style="background-color: #73c7e7; height: 56px;">
+
+													<div class="col-sm-11" style="margin-top: 9px;">
+														<h5>Jobs</h5>
+													</div>
+		
+													<div class="col-sm-1" style="margin-top: 9px;"><button type="button" data-toggle="modal"
+															data-target="#jobModal" class="btn">New</button>
+													</div>
+												</div>
+												<br>
 									
 										<div id="main" class="">    
 											           
@@ -1665,26 +1673,27 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 												<div id="main-content" class="contact">	
 														<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">													                    
 														<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
-														<div class="col-sm-1"></div>
-														<div class="col-sm-2" style="left:1px;margin:2px;">
-															<b>Account Name</b>
+														
+														<div class="col-sm-2" style="left:14px;margin:2px;">
+															<b>Account</b>
 														</div>
 															
 															<div class="col-sm-2" >
-																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -102px;"></select>
 														</div>
-														<div class="col-sm-1" style="margin:2px;">
+														<div class="col-sm-1" style="right:9%;margin:2px;">
 															<b>Location</b>
 														</div>
-														<div class="col-sm-2" >
+														<div class="col-sm-2" style="right:11%;">
 																<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
-														</div>															
-														<div class="col-sm-1">
-															<button type="button" class="btn btn-info" style="background-color:#66badb;top:-5px;position: relative">Search</button>
-														</div>
-														<div class="col-sm-2">
+														</div>	
+														<div class="col-sm-2" style="left:16%">
 															<input type="text" class="form-control" style="top:1px;position: relative">
+														</div>														
+														<div class="col-sm-1" style="left:15%;">
+															<button type="button" class="btn btn-sm btn-info">Search</button>
 														</div>
+														
 														<div class="col-sm-1"></div>
 														</div>					
 												</div>
@@ -1749,23 +1758,23 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 										<div style="background-color:  #73c7e726;border: 1px solid #e3e3e3;height: 52px;">                                                                     
 											<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
 												
-											<div class="col-sm-2" style="left:1px;margin:2px;">
+											<div class="col-sm-2" style="left:14px;margin:2px;">
 												<b>Requirement Id</b>
 											</div>
 												
 												<div class="col-sm-2" >
-													<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+													<select  class="form-control" id="reqiddrop" style="width:100%;height:30px;margin-left: -62px;"></select>
 											</div>
-											<div class="col-sm-1" style="right:8%;margin:2px;">
+											<div class="col-sm-1" style="right:6%;margin:2px;">
 												<b>Job Title</b>
 											</div>
-											<div class="col-sm-2" >
-													<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
+											<div class="col-sm-2" style="right:8%;">
+													<select  class="form-control" id="jlocation"  style="width:100%;"></select>
 											</div> 
-											<div class="col-sm-2">
+											<div class="col-sm-2" style="left:16%">
 												<input type="text" class="form-control" style="top:1px;position: relative">
 											</div>                                                         
-											<div class="col-sm-1">
+											<div class="col-sm-1" style="left:15%;">
 												<button type="button" class="btn btn-sm btn-info" >Search</button>
 											</div>
 											
@@ -1809,15 +1818,18 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						</div>
 							<div id="vendorsTab" class="tab-pane fade">
 							<div class="container" style="background-color: white">
-							<header>
-								<div class="row" style="background-color: #65bddfc7;margin-bottom:12px;"><div class="col-sm-4">
-							   <label style="color:black;font-size:26px;">Vendors:</label></div>
-							   <div class="col-sm-7"></div>
-							   <div class="col-sm-1" style="left: -12px; top: 6px;">
-								<button type="button" data-toggle="modal" data-target="#vendormodal" class="btn" style="font-size: 20px;">New</button></div>
+							
+								<div class="row" style="background-color: #65bddfc7; height: 56px;;">
+									
+									<div class="col-sm-11" style="margin-top: 9px;">
+										<h5>Vendors</h5>
 									</div>
-								</header>
+							   <div class="col-sm-1" style="margin-top: 2px;">
+								<button type="button" data-toggle="modal" data-target="#vendormodal" class="btn" style="margin-top: 9px;">New</button></div>
 								
+							</div>
+								
+								<br>
 								<div id="vendorslisting" class="">
 								             
 									<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
@@ -2168,9 +2180,14 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<div class="col-sm-3">
 								<select class="form-control"  id="jobrecid" name="pjob_recid" class="form-control" required>
 								</select>
-								<!-- <input type="text" id="jobrecid" name="pjob_recid" class="form-control" required> -->
 							</div>
-							
+							<div class="col-sm-2">
+								<label style="width: 113px;"><span style="color:red">*</span>Job Title:</label>
+							</div>
+							<div class="col-sm-3">
+								<select class="form-control"  id="jobtitle" name="pjob_title" class="form-control" required>
+								</select>
+							</div>
 							<div class="col-sm-1"> </div>
 						</div>
 						<div class="row">
@@ -2192,14 +2209,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<div class="col-sm-1"> </div>
 						</div>
 						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="date" id="dob" name="p_dob" class="form-control">
-							</div>
+							<div class="col-sm-1"></div>							
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Mobile:</label>
 							</div>
@@ -2207,12 +2217,6 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 								<input type="text" id="mobile" name="p_mobile" class="form-control" required>
 							</div>
-
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Email:</label>
 							</div>
@@ -2220,6 +2224,19 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 								<input type="text" id="email" name="p_email" class="form-control" required>
 							</div>
+
+							<div class="col-sm-1"> </div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label style="width: 113px;">Date of Birth:</label>
+							</div>
+							<div class="col-sm-3">
+
+								<input type="date" id="dob" name="p_dob" class="form-control">
+							</div>
+							
 							<div class="col-sm-1"> </div>
 						</div>
 
@@ -2399,8 +2416,44 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<input type="radio" value="no" id="resignedn" name="resigned"><label>No</label>
 						</div>
 							<div class="col-sm-1"> </div>
-					    </div>
-
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label style="width: 113px;"><span style="color:red">*</span>Evaluation Date:</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="evaldate" name="eval_date"
+									required>
+							</div>
+							<div class="col-sm-2">
+								<label style="width: 113px;"><span style="color:red">*</span>Internal Technical Decision:</label>
+							</div>
+							<div class="col-sm-3">
+								<select class="form-control" id="internaltd" name="internal_td"
+									required></select>
+							</div>
+							<div class="col-sm-1"> </div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="ppanel" name="p_panel"
+									required>
+							</div>
+							<div class="col-sm-2">
+								<label style="width: 113px;"><span style="color:red">*</span>Screening Slect:</label>
+							</div>
+							<div class="col-sm-3">
+								<select class="form-control" id="pscreening" name="p_screening"
+									required></select>
+							</div>
+							<div class="col-sm-1"> </div>
+						</div>
 						<div class="row">
 							<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 						</div>
@@ -2490,23 +2543,18 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<p id="editprofilehiddenId" name="editprofile_hiddenId" style="display:none;"></p>  
 						</div>
 						<div class="col-sm-2">
-							<label><span style="color:red">*</span>Email:</label>
+							<label style="width: 113px;"><span style="color:red">*</span>Job Title:</label>
 						</div>
 						<div class="col-sm-3">
-							
-							<input type="text" id="peditemail" name="pedit_email" class="form-control" required disabled>
+							<select class="form-control"  id="peditjobtitle" name="peditjob_title" class="form-control" required>
+							</select>
 						</div>
+						
 						
 						<div class="col-sm-1"> </div>
 					</div> 
 				<div class="row">
 				<div class="col-sm-1"></div>
-					<div class="col-sm-2">
-						 <label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
-					</div>
-					<div class="col-sm-3">
-					<select id="peditsalutation" name="peditsalutation_id" required class="form-control" required disabled></select>     
-					</div>
 					<div class="col-sm-2">
 						 <label style="width: 113px;"><span style="color:red">*</span>First Name:</label>
 					</div>
@@ -2514,27 +2562,15 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						
 						 <input type="text" id="peditfirstname" name="peditfirst_name" class="form-control" required disabled>
 					</div>
-					
-					<div class="col-sm-1"> </div>
-				</div> 
-				<div class="row">
-				<div class="col-sm-1"></div>
-					  <div class="col-sm-2">
+					<div class="col-sm-2">
 						<label style="width: 113px;"><span style="color:red">*</span>Last Name:</label>
 					</div>
 					<div class="col-sm-3">
 						  
 						<input type="text" id="peditlastname" name="peditlast_name" class="form-control" required disabled>
 					</div>
-					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
-					</div>
-					<div class="col-sm-3">
-					  
-						<input type="text" id="peditdob" name="pedit_dob" class="form-control" required disabled>
-					</div>
 					<div class="col-sm-1"> </div>
-				</div>  
+				</div> 
 				<div class="row">
 				<div class="col-sm-1"></div>
 					<div class="col-sm-2">
@@ -2546,14 +2582,26 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					</div>
 					
 					<div class="col-sm-2">
-						 
+						<label><span style="color:red">*</span>Email:</label>
 					</div>
 					<div class="col-sm-3">
-						  
 						
+						<input type="text" id="peditemail" name="pedit_email" class="form-control" required disabled>
 					</div>
 					<div class="col-sm-1"> </div>
 				</div> 
+				<div class="row">
+					<div class="col-sm-1"></div>
+						 
+						<div class="col-sm-2">
+							<label style="width: 113px;">Date of Birth:</label>
+						</div>
+						<div class="col-sm-3">
+						  
+							<input type="text" id="peditdob" name="pedit_dob" class="form-control" disabled>
+						</div>
+						<div class="col-sm-1"> </div>
+					</div>  
 			   
 				  <div class="row">
 				<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Address:</h4>
@@ -2562,35 +2610,35 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				<div class="row">
 				<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						<label><span style="color:red">*</span>Address1:<label>
+						<label>Address1:<label>
 					</div>
 					<div class="col-sm-3">
-							<input type="text"id="peditaddress1" name="pedit_address1" class="form-control" required disabled>
+							<input type="text"id="peditaddress1" name="pedit_address1" class="form-control" disabled>
 						
 					</div>
 					
 					<div class="col-sm-2">
-						 <label><span style="color:red">*</span>Address2:</label>
+						 <label>Address2:</label>
 					</div>
 					<div class="col-sm-3">
-						  <input type="text" id="peditaddress2" name="pedit_address2" class="form-control" required disabled> 
+						  <input type="text" id="peditaddress2" name="pedit_address2" class="form-control" disabled> 
 					</div>
 					<div class="col-sm-1"></div>
 				</div>
 				<div class="row">
 				<div class="col-sm-1"></div>	
 					<div class="col-sm-2">
-						<label><span style="color:red">*</span>Country:</label>
+						<label>Country:</label>
 				   </div>
 				   <div class="col-sm-3">
 						<select class="form-control"  id="peditcountry" name="pedit_country" onclick="editprofilestatedropdown()" class="form-control" required disabled>
 					   </select>                           
 				   </div>
 				   <div class="col-sm-2">
-					<label><span style="color:red">*</span>State:</label>
+					<label>State:</label>
 				 </div>
 			   <div class="col-sm-3">                       
-				   <select class="form-control" id="peditstate"  name="pedit_state" class="form-control" required disabled>
+				   <select class="form-control" id="peditstate"  name="pedit_state" class="form-control" disabled>
 				   </select>
 				</div>    
 					
@@ -2599,18 +2647,18 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				<div class="row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-2">
-					<label><span style="color:red">*</span>City:</label>
+					<label>City:</label>
 				</div>
 				<div class="col-sm-3">  
-				<input type="text" id="peditcity" name="pedit_city" class="form-control" required disabled>
+				<input type="text" id="peditcity" name="pedit_city" class="form-control" disabled>
 				   
 				</div>
 				           
 					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
+						<label style="width: 113px;">Postal Code:</label>
 					</div>
 					<div class="col-sm-3">                          
-						<input type="text"  id="peditpostalcode" name="pedit_postalcode" class="form-control" required disabled>
+						<input type="text"  id="peditpostalcode" name="pedit_postalcode" class="form-control" disabled>
 					</div>
 					<div class="col-sm-1"> </div>
 				</div>
@@ -2723,6 +2771,42 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					<input type="radio" value="yes" id="editresignedy" name="editresigned"><label>Yes</label>
 					<input type="radio" value="no" id="editresignedn" name="editresigned"><label>No</label>
 				</div>
+					<div class="col-sm-1"> </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label style="width: 113px;"><span style="color:red">*</span>Evaluation Date:</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="date" class="form-control" id="peditevaldate" name="pedit_evaldate"
+							required>
+					</div>
+					<div class="col-sm-2">
+						<label style="width: 113px;"><span style="color:red">*</span>Internal Technical Decision:</label>
+					</div>
+					<div class="col-sm-3">
+						<select class="form-control" id="peditinternaltd" name="pedit_internaltd"
+							required></select>
+					</div>
+					<div class="col-sm-1"> </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="peditpanel" name="pedit_panel"
+							required>
+					</div>
+					<div class="col-sm-2">
+						<label style="width: 113px;"><span style="color:red">*</span>Screening Slect:</label>
+					</div>
+					<div class="col-sm-3">
+						<select class="form-control" id="peditscreening" name="pedit_screening"
+							required></select>
+					</div>
 					<div class="col-sm-1"> </div>
 				</div>
 				  <div class="row">
