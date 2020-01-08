@@ -221,7 +221,8 @@ $.ajax({
 				}
 				$("#cus").html(customerdropdown);
 				$("#custedit").html(customerdropdown);
-				$("#jlocation").html(customerdropdown);
+				$("#jobaccount").html(customerdropdown);
+				
 			}
 		});
 	}
@@ -329,7 +330,7 @@ $.ajax({
 				$("#editvendorpriloc").html(currentlocation);
 				$("#peditcurrentlocation").html(currentlocation);
 				$("#peditdesiredlocation").html(currentlocation);
-				$("#jobaccount").html(currentlocation);
+				$("#jlocation").html(currentlocation);
 
 			}
 		});
@@ -475,6 +476,13 @@ $.ajax({
 		$("#custedit").attr('disabled', false);
 		$("#JD_comment").attr('disabled', false);
 		$("#BU_comment").attr('disabled', false);
+
+		$("#roleleveledit").attr('disabled', false);
+		$("#jdurationedit").attr('disabled', false);
+		$("#reqclosedateedit").attr('disabled', false);
+		$("#jstatusedit").attr('disabled', false);
+		$("#jobtitleedit").attr('disabled', false);
+		
 	}
 
 	function addjd() {
@@ -580,6 +588,11 @@ $.ajax({
 		$("#custedit").attr('disabled', true);
 		$("#JD_comment").attr('disabled', true);
 		$("#BU_comment").attr('disabled', true);
+		$("#roleleveledit").attr('disabled', true);
+		$("#jdurationedit").attr('disabled', true);
+		$("#reqclosedateedit").attr('disabled', true);
+		$("#jstatusedit").attr('disabled', true);
+		
 
 	}
 
@@ -1378,7 +1391,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 								<div id="jobdetails">
 
-									<h3 style="font-size:22px;font-weight: bold">New Job:</h3>
+									<h3 style="font-size:22px;font-weight: bold;margin-left: 22px;">New Job:</h3>
 
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
 										style="overflow-y: scroll;height:400px;">
@@ -1469,8 +1482,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 														<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" class="form-control" id="filename"
-																style="width: 100%;" disabled>
+															<input type="text" class="form-control" id="filename" style="width: 100%;" disabled>
 														</div>
 
 													</div>
@@ -1479,49 +1491,64 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<hr style="width: 110%;top: -3px;position: relative;">
 														</div>
 														<div class="col-sm-2"><label
-																style="left: 66px;position: relative;font-weight: bold">(
-																OR )</label></div>
+																style="left: 66px;position: relative;font-weight: bold">(OR )</label></div>
 														<div class="col-sm-5">
-															<hr
-																style="width: 107%;top: -3px;position: relative;left: -39px;">
+															<hr style="width: 107%;top: -3px;position: relative;left: -39px;">
 														</div>
 													</div>
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Requirement
-																I'd:</label></div>
+															<label><span style="color:red;">*</span>Requirement I'd:</label></div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="requirement" name="Requirementid"
-																class="form-control" required>
+															<input type="text" id="requirement" name="Requirementid" class="form-control" required>
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 															<label><span style="color:red;">*</span>Role/Domain:</label>
 														</div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="role" name="role"
-																class="form-control" required>
+															<input type="text" id="role" name="role" class="form-control" required>
 														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 													</div>
 													<div class="row">
+															<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																<label><span style="color:red;">*</span>Role Level:</label></div>
+															<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																
+																	<select id="rolelevel" class="form-control" name="role_level" required>
+																<option value="">Tech 1</option>
+																<option value="">Tech 2</option>
+																<option value="">Tech 3</option>
+															</select>
+															</div>
+	
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	<label><span style="color:red;">*</span>Job Title:</label></div>
+																<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																	<input type="text" id="jobtitle" class="form-control" name="jobtitle" required>
+																
+																</div>
+
+															<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+	
+														</div>
+
+													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Expected
-																Date:</label></div>
+															<label><span style="color:red;">*</span>Close Date:</label></div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="date" id="edate" name="ex_date"
-																class="form-control" required>
+															<input type="date" id="edate" name="ex_date" class="form-control" required>
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>No of Positions
-																:</label></div>
+															<label><span style="color:red;">*</span>No of Positions:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="positions" name="positions"
-																class="form-control" required>
+															<input type="text" id="positions" name="positions" class="form-control" required>
 														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
@@ -1531,18 +1558,15 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Primary
-																Skill:</label></div>
+															<label><span style="color:red;">*</span>Primary Skill:</label></div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" class="form-control" name="primary_skill"
-																id="piskills" required>
+															<input type="text" class="form-control" name="primary_skill" id="piskills" required>
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 															<label>Secondary Skill:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="seskills" name="secondry_skill"
-																class="form-control" required>
+															<input type="text" id="seskills" name="secondry_skill" class="form-control" required>
 														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
@@ -1551,25 +1575,44 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Job
-																Location:</label></div>
+															<label><span style="color:red;">*</span>Job Location:</label></div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="jloc" name="job_location"
-																class="form-control" required>
+															<input type="text" id="jloc" name="job_location" class="form-control" required>
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 															<label><span style="color:red;">*</span>Location Flexiblity:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<select id="locflex" class="form-control" name="loc_flex"
-																required>
+															<select id="locflex" class="form-control" name="loc_flex" required>
 																<option value="Y">Yes</option>
 																<option value="N">No</option>
 															</select>
 														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-
 													</div>
+
+													<div class="row">
+															<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	<label><span style="color:red;">*</span>Status:</label>
+															
+																</div> 
+															<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																	<select id="jstatus" class="form-control" name="jstatus" required>
+																			<option>Open</option>
+																			<option>Close</option>
+																			 </select>
+																
+															</div>
+															<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																	<label><span style="color:red;">*</span>Duration:</label></div>
+																<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																	<input type="text" id="jduration" name="jduration" class="form-control" required>
+																</div>
+															
+															<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+	
+														</div>
 
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
@@ -1577,17 +1620,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<label><span style="color:red;">*</span>Experience:</label>
 														</div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="experience" name="experience"
-																class="form-control" required>
+															<input type="text" id="experience" name="experience" class="form-control" required>
 														</div>
-
-														 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Status:</label>
-														</div>
-														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<select id="jobstatus" name="status" class="form-control"
-																required></select>
-														</div>
+														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+																</div>
+															<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+																
+															</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
 													</div>
@@ -1595,8 +1634,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<div class="row">
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>Job
-																Description:</label></div>
+															<label><span style="color:red;">*</span>Job Description:</label></div>
 														<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
 															<textarea id="jdesp" name="job_description"
 																style="width: 89%;border-radius: 5px;font-size:13px;"></textarea>
@@ -1613,15 +1651,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													</div>
 
 
-
-
 												</div>
 
 											</div>
 
 										</div>
-
-
 
 
 									</div>
@@ -1655,14 +1689,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 								<div class="container" style="background-color: white">
 
 												 <div class="row" style="background-color: #73c7e7; height: 56px;">
-
-													<div class="col-sm-11" style="margin-top: 9px;">
+													<div class="col-sm-12" style="margin-top: 9px;">
 														<h5>Jobs</h5>
-													</div>
-		
-													<div class="col-sm-1" style="margin-top: 9px;"><button type="button" data-toggle="modal"
-															data-target="#jobModal" class="btn">New</button>
-													</div>
+													</div>											
 												</div>
 												<br>
 									
@@ -1844,13 +1873,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>
 														<div class="col-sm-1"></div>
 															<div class="col-sm-2">
-																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+																<select  class="form-control" id=""style="width:100%;height:30px;margin-left: -80px;"></select>
 														</div>
 														<div class="col-sm-1" style="margin:2px;">
 															<b>Location</b>
 														</div>
 														<div class="col-sm-2" >
-															<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
+															<select  class="form-control" id=""  style="width:100%;height:30px;"></select>
 														</div>	
 													<div class="col-sm-1">
 															<button type="button" class="btn btn-info" style="background-color: #66badb;top:-5px;position: relative">Search</button>
@@ -1922,226 +1951,242 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 				</div>
 				<div class="modal-body" style="overflow:auto;height:450px;">
-					<form>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Requirement ID:</label>
+						<form>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Requirement ID:</label>
+								</div>
+								<div class="col-sm-3">
+									<p id="reqiddisplay" name="reqid_display" style="color: black;font-size: 13px;"></p>
+	
+								</div>							
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+											<label><span style="color:red;">*</span>Job Title</label></div>
+										<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+											<input type="text" id="jobtitleedit" name="jobtitleedit"
+												class="form-control" disabled>
+										</div>
+										
+								<div class="col-sm-1"> </div>
 							</div>
-							<div class="col-sm-3">
-								<p id="reqiddisplay" name="reqid_display" style="color: black;font-size: 13px;"></p>
+							<div class="row">
+									<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+										<label><span style="color:red;">*</span>Role Level:</label></div>
+									<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+											<select id="roleleveledit" class="form-control" name="role_leveledit"
+											disabled>
+										<option value="">Tech 1</option>
+										<option value="">Tech 2</option>
+										<option value="">Tech 3</option>
+									</select>
+									</div>
+								<div class="col-sm-2">
+									<label style="width: 113px;">Job Location:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="jlidedit" name="jlid_edit" class="form-control" disabled>
+								</div>
+									<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+								</div>
 
-							</div>
-
-							<div class="col-sm-2">
-								<label style="width: 113px;">Job Location:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="jlidedit" name="jlid_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Experience:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="expedit" name="exp_edit" class="form-control" disabled>
-							</div>
-
-							<div class="col-sm-2">
-								<label style="width: 113px;">Expected date:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="expdateedit" name="expdate_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Location Flexibility:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="lfedit" name="lf_edit" class="form-control" disabled>
-							</div>
-
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Job description:</label>
-							</div>
-							<div class="col-sm-3">
-								<p id="jdiddisplayhidden" name="jdiddisplay_hidden" style="display:none;"></p>
-								<input type="text" id="jdedit" name="jd_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label>Business Unit:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<select class="form-control" id="buedit" name="bu_edit" class="form-control" disabled>
-								</select>
+								<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Primary Skill:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="psedit" name="ps_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-2">
+									<label style="width: 113px;">Secondary Skill:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="ssedit" name="ss_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
 							</div>
 
-							<div class="col-sm-2">
-								<label>Sales Regions:</label>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>No of Positions: </label>
+								</div>
+								<div class="col-sm-3">
+	
+									<input type="text" id="nposedit" name="npos_edit" class="form-control" disabled>
+								</div>
+	
+								<div class="col-sm-2">
+									<label style="width: 113px;">Role/Domain:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="roleedit" name="role_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
 							</div>
-							<div class="col-sm-3">
+							
+								<div class="row">
+										<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+											<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+										<label><span style="color:red;">*</span>Duration:
+											:</label></div>
+									<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+										<input type="text" id="jdurationedit" name="jdurationedit"
+											class="form-control" disabled>
+									</div>	
+										<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+											<label><span style="color:red;">*</span>Status:</label></div>
+										<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+										<select id="jstatusedit" class="form-control" name="jstatusedit" disabled>
+										<option value="">Open</option>
+										<option value="">Close</option>
+										 </select>
+										</div>
+										<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+	
+									</div>
 
-								<select class="form-control" id="sregionedit" name="sregion_edit" class="form-control"
-									disabled>
-								</select>
-							</div>
-							<div class="col-sm-1"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label>Sales Representative:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<select class="form-control" id="srepedit" name="srep_edit" class="form-control"
-									disabled>
-								</select>
-							</div>
-
-							<div class="col-sm-2">
-								<label>Status:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<select class="form-control" id="statuspedit" name="statusp_edit" class="form-control"
-									disabled>
-								</select>
-							</div>
-							<div class="col-sm-1"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Primary Skill:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="psedit" name="ps_edit" class="form-control" disabled>
-							</div>
-
-							<div class="col-sm-2">
-								<label style="width: 113px;">Secondary Skill:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="ssedit" name="ss_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Created by:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="cbyedit" name="cby_edit" class="form-control" disabled>
+								<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+										<label><span style="color:red">*</span>Date of request:</label>
+								</div>
+								<div class="col-sm-3">
+										<input type="text" id="datereqedit" name="datereq_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-2">
+									<label style="width: 113px;">Close Date:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="expdateedit" name="expdate_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
 							</div>
 
-							<div class="col-sm-2">
-								<label style="width: 113px;">Updated by:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="ubyedit" name="uby_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>No of Positions: </label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="nposedit" name="npos_edit" class="form-control" disabled>
-							</div>
-
-							<div class="col-sm-2">
-								<label style="width: 113px;">Role/Domain:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="roleedit" name="role_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Created date:</label>
-							</div>
-							<div class="col-sm-3">
-
-								<input type="text" id="cbydateedit" name="cbydate_edit" class="form-control" disabled>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Location Flexibility:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="lfedit" name="lf_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Experience:</label>
+								</div>
+								<div class="col-sm-3">
+										<input type="text" id="expedit" name="exp_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
 							</div>
 
-							<div class="col-sm-2">
-								<label style="width: 113px;">Updated date:</label>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label>Business Unit:</label>
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control" id="buedit" name="bu_edit" class="form-control" disabled>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<label>Sales Regions:</label>
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control" id="sregionedit" name="sregion_edit" class="form-control"
+										disabled>
+									</select>
+								</div>
+								<div class="col-sm-1"></div>
 							</div>
-							<div class="col-sm-3">
-								<input type="text" id="ubydateedit" name="ubydate_edit" class="form-control" disabled>
-							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Date of request:</label>
-							</div>
-							<div class="col-sm-3">
 
-								<input type="text" id="datereqedit" name="datereq_edit" class="form-control" disabled>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label>Sales Representative:</label>
+								</div>
+								<div class="col-sm-3">
+	
+									<select class="form-control" id="srepedit" name="srep_edit" class="form-control" disabled>
+									</select>
+								</div>
+	
+								<div class="col-sm-2">
+									<label style="width: 113px;">Customers:</label>
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control" id="custedit" name="cust_edit" disabled></select>
+								</div>								
+								<div class="col-sm-1"></div>
+							</div>
+						
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Created by:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="cbyedit" name="cby_edit" class="form-control" disabled>
+								</div>	
+								<div class="col-sm-2">
+									<label style="width: 113px;">Updated by:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="ubyedit" name="uby_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
+							</div>
+											
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label><span style="color:red">*</span>Created date:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="cbydateedit" name="cbydate_edit" class="form-control" disabled>
+								</div>	
+								<div class="col-sm-2">
+									<label style="width: 113px;">Updated date:</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="ubydateedit" name="ubydate_edit" class="form-control" disabled>
+								</div>
+								<div class="col-sm-1"> </div>
 							</div>
 
-							<div class="col-sm-2">
-								<label style="width: 113px;">Customers:</label>
+							<div class="row">
+									<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+									</div>
+									<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+										<label>Job description:</label></div>
+									<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+										<p id="jdiddisplayhidden" name="jdiddisplay_hidden" style="display:none;"></p>
+										<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="jdedit" name="jd_edit" disabled></textarea>
+									</div>
+								</div>
+	
+							<div class="row">
+								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+								</div>
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+									<label>JD Comments:</label></div>
+								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="JD_comment" name="jdcomments" disabled></textarea>
+								</div>
 							</div>
-							<div class="col-sm-3">
-								<select class="form-control" id="custedit" name="cust_edit" disabled></select>
+							<div class="row">
+								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+								</div>
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+									<label>BU Comments:</label></div>
+								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="BU_comment" name="bucomments" disabled></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1"> </div>
-						</div>
-
-						<div class="row">
-							<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-							</div>
-							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-								<label>JD Comments:</label></div>
-							<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-								<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="JD_comment"
-									name="jdcomments"></textarea>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-							</div>
-							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-								<label>BU Comments:</label></div>
-							<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-								<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="BU_comment"
-									name="bucomments"></textarea>
-							</div>
-						</div>
-
-
-					</form>
-				</div>
+						</form>
+					</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-sm btn-info" id="edithide"
 						onclick="enablejoblist()">Edit</button>
@@ -2826,7 +2871,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					</div>
 				
 					<div class="col-sm-2">
-						<label><span style="color:red">*</span>Vendor ID:</label>
+						<label><span style="color:red">*</span>Vendor Name:</label>
 				   </div>
 				   <div class="col-sm-3">
 						<input type="text"  id="peditvendorid" name="pedit_vendorid" class="form-control" required disabled>
