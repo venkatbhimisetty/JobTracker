@@ -476,14 +476,14 @@ getprofilestatus: (req, res) => {
     getjobreqID:(req, res) => {
       
         let query = "CALL proclookupreqId()";
-        console.log(query);
+       
         db.query(query, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-            console.log(result);
+           
         });
     },
 

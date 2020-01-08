@@ -23,6 +23,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+	integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 </head>
@@ -657,46 +659,34 @@ $.ajax({
 
 	function profileslistingdetails() {
 
-		var cardData = "";
+		var tableData = "";
 
 		var url = "http://localhost:2000/profileslistingdetails";
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-console.log(result);
+
 				for (var i = 0; i < result[0].length; i++) {
 
 					var profileID = "\"" + result[0][i].profileid + "\"";
 
-					cardData = cardData + "<div class='card' style='background-color: #73c7e752;border: 2px solid rgba(0, 0, 0, 0.21)'>" +
+						tableData = tableData + "  <tr> " +
 
-						"<div class='row'>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Requirment ID :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].jobreqcode + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Candidate Name :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].firstname + "&nbsp" + result[0][i].lastname + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Skill :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].skillset + "</span>" + "</div>" +
-						"</div>" +
-						"<div class='row'>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Experience :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].experince + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Status :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].status + "</span>" + "</div>" +
-						"<div class='col-lg-3'>" +
-						"<label>" + "Vendor :" + "</label>" + "<span style='color: black;font-size: 13px;'>" + result[0][i].vendorid + "</span>" + "</div>" +
-						"<div style='margin-top: -22px;  margin-left: 102px'>" +
-						"<a href='#profileEditModal' data-toggle='modal' class='btn btn-info' onclick='profilesdisplay( " + profileID + ")'>" + "View" + "</a>" +
+						"<td >" + result[0][i].jobreqcode + "</td>" +
+						"<td >" + result[0][i].firstname + "&nbsp" + result[0][i].lastname + "</td>" +
+						"<td >" + result[0][i].skillset + "</td>" +
+						"<td >" + result[0][i].experince + "</td>" +
+						"<td >" + result[0][i].status + "</td>" +
+						"<td >" + result[0][i].vendorid + "</td>" +
+						"<td >" + "<a href='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='profilesdisplay(" + profileID + ")'>" + "<i class='far fa-edit' style='font-size: 20px;color:black'></i>" + "</a>" +"</td>" +
 
-						"</div>" +
+						"</tr>";
 
-						" </div>" +
-						"</div>"
 
 				}
 
-				$("#profileslistingbody").html(cardData);
+				$("#profileslistingbody").html(tableData);
 
 			}
 		});
@@ -1741,29 +1731,78 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<div id="profilesTab" class="tab-pane fade">
 							<div id="profileslisting" class="">
 
-								<div class="card">
+								 <div class="container" style="background-color:white"> 
 
-									<div class="card-header" style="background-color: #73c7e7">
+									<!-- <div class="card-header" style="background-color: #73c7e7"> -->
 
-										<div class="row">
+										<div class="row" style="background-color: #73c7e7; height: 56px;">
 
-											<div class="col-sm-11">
+											<div class="col-sm-11" style="margin-top: 9px;">
 												<h5>Profiles</h5>
 											</div>
 
-											<div class="col-sm-1"><button type="button" data-toggle="modal"
+											<div class="col-sm-1" style="margin-top: 9px;"><button type="button" data-toggle="modal"
 													data-target="#profilesmodal" class="btn">New</button>
 											</div>
 										</div>
-
+										<br>
+										<div style="background-color:  #73c7e726;border: 1px solid #e3e3e3;height: 52px;">                                                                     
+											<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+												
+											<div class="col-sm-2" style="left:1px;margin:2px;">
+												<b>Requirement Id</b>
+											</div>
+												
+												<div class="col-sm-2" >
+													<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -80px;"></select>
+											</div>
+											<div class="col-sm-1" style="right:8%;margin:2px;">
+												<b>Job Title</b>
+											</div>
+											<div class="col-sm-2" >
+													<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
+											</div> 
+											<div class="col-sm-2">
+												<input type="text" class="form-control" style="top:1px;position: relative">
+											</div>                                                         
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-sm btn-info" >Search</button>
+											</div>
+											
+												<div class="col-sm-1"></div>
+											</div>                  
 									</div>
-									<div class="card-body" id="profileslistingbody" style="overflow-y: scroll;height:400px;">
-
-
+									<br>
+									
+									<div id="tbMarksContainer">
+									
+										<div class="entity-list" id="entity-list">
+								
+											<div class="table table-responsive" style="overflow: auto;height:440px">
+								
+												<table class="table table-bordered" id="jobtable">           
+													<thead
+														style="background-color: #6199ae;position: relative;color: black;top: 0px; white-space: nowrap; font-size: small;">
+								
+														<tr >
+															<th scope="col" >Recuriment Id</th>
+															<th scope="col">Candidate Name</th>
+															<th scope="col">Skill</th>
+															<th scope="col">Experience</th>
+															<th scope="col">Status</th>  
+															<th scope="col">Vendor</th> 
+															<th scope="col">Action</th>         
+														</tr>            
+													</thead>            
+													<tbody id="profileslistingbody" style="color:black;font-size: small;">                                   
+													</tbody>       
+												</table> 							
+											</div>
+										</div>
 									</div>
+									
 
-
-								</div>
+							 </div> 
 
 
 							</div>
@@ -2131,13 +2170,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 								</select>
 								<!-- <input type="text" id="jobrecid" name="pjob_recid" class="form-control" required> -->
 							</div>
-							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Salutation:</label>
-							</div>
-							<div class="col-sm-3">
-								<select id="salutation" name="psalutation_id" required class="form-control"
-									required></select>
-							</div>
+							
 							<div class="col-sm-1"> </div>
 						</div>
 						<div class="row">
@@ -2165,7 +2198,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							</div>
 							<div class="col-sm-3">
 
-								<input type="date" id="dob" name="p_dob" class="form-control" required>
+								<input type="date" id="dob" name="p_dob" class="form-control">
 							</div>
 							<div class="col-sm-2">
 								<label><span style="color:red">*</span>Mobile:</label>
@@ -2197,36 +2230,36 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Address1:<label>
+								<label>Address1:<label>
 							</div>
 							<div class="col-sm-3">
-								<input type="text" id="address1" name="p_address1" class="form-control" required>
+								<input type="text" id="address1" name="p_address1" class="form-control">
 
 							</div>
 
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Address2:</label>
+								<label>Address2:</label>
 							</div>
 							<div class="col-sm-3">
-								<input type="text" id="address2" name="p_address2" class="form-control" required>
+								<input type="text" id="address2" name="p_address2" class="form-control">
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Country:</label>
+								<label>Country:</label>
 							</div>
 							<div class="col-sm-3">
 								<select class="form-control" id="country" name="p_country"
-									onclick="profiletabstatedropdown()" class="form-control" required>
+									onclick="profiletabstatedropdown()" class="form-control">
 								</select>
 							</div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>State:</label>
+								<label>State:</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control" id="state" name="p_state" class="form-control" required>
+								<select class="form-control" id="state" name="p_state" class="form-control">
 								</select>
 							</div>
 							<div class="col-sm-1"></div>
@@ -2234,17 +2267,17 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>City:</label>
+								<label>City:</label>
 							</div>
 							<div class="col-sm-3">
-								<input type="text" id="city" name="p_city" class="form-control" required>
+								<input type="text" id="city" name="p_city" class="form-control">
 
 							</div>
 							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
+								<label style="width: 113px;">Postal Code:</label>
 							</div>
 							<div class="col-sm-3">
-								<input type="text" id="postalcode" name="p_postalcode" class="form-control" required>
+								<input type="text" id="postalcode" name="p_postalcode" class="form-control">
 							</div>
 							<div class="col-sm-1"> </div>
 						</div>
@@ -2304,7 +2337,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							</div>
 
 							<div class="col-sm-2">
-								<label><span style="color:red">*</span>Secondary Skill:</label>
+								<label>Secondary Skill:</label>
 							</div>
 							<div class="col-sm-3">
 
@@ -2315,7 +2348,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
+								<label style="width: 113px;">Skype ID:</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="text" id="skypeid" name="pskype_id" class="form-control" required>
@@ -2545,14 +2578,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					<div class="col-sm-1"></div>
 				</div>
 				<div class="row">
-				<div class="col-sm-1"></div>
-					<div class="col-sm-2">
-						<label><span style="color:red">*</span>City:</label>
-					</div>
-					<div class="col-sm-3">  
-					<input type="text" id="peditcity" name="pedit_city" class="form-control" required disabled>
-					   
-					</div>
+				<div class="col-sm-1"></div>	
 					<div class="col-sm-2">
 						<label><span style="color:red">*</span>Country:</label>
 				   </div>
@@ -2560,18 +2586,26 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<select class="form-control"  id="peditcountry" name="pedit_country" onclick="editprofilestatedropdown()" class="form-control" required disabled>
 					   </select>                           
 				   </div>
-					
-					<div class="col-sm-1"></div>
-				</div>
-				<div class="row">
-				<div class="col-sm-1"></div>
-				 <div class="col-sm-2">
+				   <div class="col-sm-2">
 					<label><span style="color:red">*</span>State:</label>
 				 </div>
 			   <div class="col-sm-3">                       
 				   <select class="form-control" id="peditstate"  name="pedit_state" class="form-control" required disabled>
 				   </select>
-				</div>              
+				</div>    
+					
+					<div class="col-sm-1"></div>
+				</div>
+				<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<label><span style="color:red">*</span>City:</label>
+				</div>
+				<div class="col-sm-3">  
+				<input type="text" id="peditcity" name="pedit_city" class="form-control" required disabled>
+				   
+				</div>
+				           
 					<div class="col-sm-2">
 						<label style="width: 113px;"><span style="color:red">*</span>Postal Code:</label>
 					</div>
@@ -2606,7 +2640,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				<div class="row">
 				<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						 <label><span style="color:red">*</span>Current Salary:</label>
+						 <label><span style="color:red">*</span>Current CTC:</label>
 					</div>
 					<div class="col-sm-3">
 					   
@@ -2614,7 +2648,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					</div>
 					
 					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Expected Salary:</label>
+						<label style="width: 113px;"><span style="color:red">*</span>Expected CTC:</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="text"  id="peditexpectedsalary" name="peditexpected_salary" class="form-control" required disabled>
@@ -2625,19 +2659,20 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				<div class="row">
 				<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						 <label><span style="color:red">*</span>Skill Set:</label>
+						 <label><span style="color:red">*</span>Primary Skill:</label>
 					</div>
 					<div class="col-sm-3">
 						
 						 <input type="text"   id="peditskillset" name="peditskill_set"  class="form-control" required disabled>
 					</div>
-					
 					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
-					</div>
-					<div class="col-sm-3">
-						<input type="text"  id="peditskypeid" name="peditskype_id"  class="form-control" required disabled>
-					</div>
+						<label><span style="color:red">*</span>Secondary Skill:</label>
+				   </div>
+				   <div class="col-sm-3">
+					   
+						<input type="text"   id="seditskillset" name="seditskill_set"  class="form-control" required disabled>
+				   </div>
+					
 					<div class="col-sm-1"> </div>
 				</div>
 				<div class="row">
@@ -2648,34 +2683,48 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					<div class="col-sm-3">
 						 <input type="text"  id="peditnoticeperiod" name="peditnotice_period" class="form-control" required disabled>
 					</div>
-				
 					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
+						<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
 					</div>
 					<div class="col-sm-3">
-						  <select class="form-control" id="peditcurrentlocation" name="peditcurrent_location" required disabled></select>
+						<input type="text"  id="peditskypeid" name="peditskype_id"  class="form-control" required disabled>
 					</div>
+					
 					<div class="col-sm-1"> </div>
 				</div>
 					<div class="row">
 				<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Current Location:</label>
+				</div>
+				<div class="col-sm-3">
+					  <select class="form-control" id="peditcurrentlocation" name="peditcurrent_location" required disabled></select>
+				</div>
 					<div class="col-sm-2">
 						 <label><span style="color:red">*</span>Desired Location:</label>
 					</div>
 					<div class="col-sm-3">
 						<select class="form-control" id="peditdesiredlocation" name="peditdesired_location" required disabled></select>
 					</div>
-				
-					<div class="col-sm-2">
-						<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
-					</div>
-					<div class="col-sm-3">
-						   <input type="text"  id="peditexperience" name="pedit_experience" class="form-control" required disabled>
-					</div>
 					<div class="col-sm-1"> </div>
 				</div>
-				
-				
+				<div class="row">
+					<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<label style="width: 113px;"><span style="color:red">*</span>Experience:</label>
+				</div>
+				<div class="col-sm-3">
+					   <input type="text"  id="peditexperience" name="pedit_experience" class="form-control" required disabled>
+				</div>
+				<div class="col-sm-2">
+					<label><span style="color:red">*</span>Resigned:</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="radio" value="yes" id="editresignedy" name="editresigned"><label>Yes</label>
+					<input type="radio" value="no" id="editresignedn" name="editresigned"><label>No</label>
+				</div>
+					<div class="col-sm-1"> </div>
+				</div>
 				  <div class="row">
 				<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 				</div>
@@ -2684,7 +2733,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				 <div class="row">
 				<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						 <label><span style="color:red">*</span>Status:</label>
+						 <label><span style="color:red">*</span>Current Status:</label>
 					</div>
 					<div class="col-sm-3">
 					 <select class="form-control" id="peditstatus" name="pedit_status" class="form-control" required disabled>
