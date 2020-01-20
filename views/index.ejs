@@ -12,41 +12,122 @@
 	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="css/aos.css">
 	<link rel="stylesheet" href="css/ionicons.min.css">
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="css/jquery.timepicker.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap-datepicker.css"> -->
+	<!-- <link rel="stylesheet" href="css/jquery.timepicker.css"> -->
 	<!-- <link rel="stylesheet" href="fonts/flaticon.css"> -->
 	<!-- <link rel="stylesheet" href="fonts/icomoon.css"> -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="js/datatables.min.js"></script>
+	<script src="js/tableExport.js"></script>
+	<script src="js/jquery.base64.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
-	integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+		integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 </head>
 <style>
 	.dropdown-menu li:hover {
 		background-color: #ddd;
 	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	body {
+		font-size: 13px;
+	}
+
+	.container-fluid {
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.table td,
+	.table th {
+		font-size: 13px;
+		border-top-width: 0;
+		border-bottom: 1px solid;
+		border-color: #ebedf2 !important;
+		padding: .75rem !important;
+	}
+
+	table.dataTable {
+		clear: both;
+		margin-top: 15px !important;
+		margin-bottom: 15px !important;
+		max-width: none !important;
+		border-collapse: separate !important;
+	}
+
+	table.dataTable thead .sorting::after,
+	table.dataTable thead .sorting_asc::after {
+		display: none;
+	}
+
+	table.dataTable thead .sorting_desc::after {
+		display: none;
+	}
+
+	table.dataTable thead .sorting {
+		background-image: url(https://datatables.net/media/images/sort_both.png);
+		background-repeat: no-repeat;
+		background-position: center right;
+	}
+
+	table.dataTable thead .sorting_asc {
+		background-image: url(https://datatables.net/media/images/sort_asc.png);
+		background-repeat: no-repeat;
+		background-position: center right;
+	}
+
+	table.dataTable thead .sorting_desc {
+		background-image: url(https://datatables.net/media/images/sort_desc.png);
+		background-repeat: no-repeat;
+		background-position: center right;
+	}
+
+	div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+		margin: 2px 0;
+		white-space: nowrap;
+		justify-content: flex-end;
+	}
+
+	.pagination {
+		display: flex;
+		padding-left: 0;
+		list-style: none;
+		border-radius: .25rem;
+	}
+
+	.pagination>li>a,
+	.pagination>li>span {
+		border-radius: 100px !important;
+		margin: 0 2px;
+		color: #777;
+		border-color: #ddd;
+	}
+
+
+	#jobtable_filter {
+		margin-left: 310px !important;
+	}
+
+	.dataTables_length {
+		display: none;
+	}
 </style>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#datatable').dataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-		});
-    });
-    </script>
+
 <script>
 	$(document).ready(function () {
-
-
 		budropdown();
 		jobstatus();
 		jobreqiddropdown()
@@ -59,11 +140,62 @@
 		currentlocationdropdown();
 		profilestatusdropdown();
 		profiletabcountrydropdown();
-
-		
-
-
 	});
+
+	// <!-- TableToExcel fuction -->
+
+
+	// var tmp;
+	// function strip(html) {
+	// 	tmp = document.createElement("DIV");
+	// 	tmp.innerHTML = html;
+	// 	return tmp.textContent || tmp.innerText || "";
+	// } 
+
+
+	// var tableToExcel = (function () {
+	// 	console.log("tableToExcel");
+	// 	var uri = 'data:application/vnd.ms-excel;base64,',
+	// 		template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+
+	// 		base64 = function (s) {
+	// 			return window.btoa(unescape(encodeURIComponent(s)))
+	// 		},
+
+	// 		format = function (s, c) {
+	// 			return s.replace(/{(\w+)}/g, function (m, p) {
+	// 				return c[p];
+	// 			})
+	// 		}
+	// 	return function (table, name, filename) {
+	// 		if (!table.nodeType)
+	// 			table = $('#' + table).clone();
+
+	// 		var hyperLinks = table.find('a');
+	// 		for (i = 0; i < hyperLinks.length; i++) {
+
+	// 			var sp1 = document.createElement("span");
+	// 			var sp1_content = document.createTextNode($(hyperLinks[i]).text());
+	// 			sp1.appendChild(sp1_content);
+	// 			var sp2 = hyperLinks[i];
+	// 			var parentDiv = sp2.parentNode;
+	// 			parentDiv.replaceChild(sp1, sp2);
+	// 		}
+
+	// 		var ctx = {
+	// 			worksheet: name || 'Worksheet',
+	// 			table: table[0].innerHTML
+	// 		}
+
+	// 		document.getElementById("dlink").href = uri + base64(format(template, ctx));
+	// 		document.getElementById("dlink").download = filename;
+	// 		document.getElementById("dlink").click();
+
+	// 	}
+	// })()
+
+
+
 
 	function uploadOnChange() {
 		var path = $("#choosefile").val();
@@ -76,42 +208,42 @@
 	}
 
 	function jobstatus() {
-		jobstatusdrop = '';
-		var url = "http://localhost:2000/jobstatus";
-		$.ajax({
-			url: url,
-			type: "GET",
-			success: function (result) {
-				
-			//	jobstatusdrop = jobstatusdrop+"<option style='display:none;'></option>";
-				
-			for (var i = 0; i < result[0].length; i++) {
-					jobstatusdrop = jobstatusdrop +
-						'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
-				}
-				$("#jobstatus").html(jobstatusdrop);
-				$("#statuspedit").html(jobstatusdrop);
-			}
-		});
-	}
-	function jobreqiddropdown() {
+			jobstatusdrop = '';
+			var url = "http://localhost:2000/jobstatus";
+			$.ajax({
+				url: url,
+				type: "GET",
+				success: function (result) {
 
-jobreqID = '';
-var url = "http://localhost:2000/jobreqid";
-$.ajax({
-	url: url,
-	type: "GET",
-	success: function (result) {
-		//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
-		for (var i = 0; i < result[0].length; i++) {
-			jobreqID = jobreqID +
-				'<option value="' + result[0][i].jobdescriptionId + '">' + result[0][i].requirmentId + '</option>';
+					//	jobstatusdrop = jobstatusdrop+"<option style='display:none;'></option>";
+
+					for (var i = 0; i < result[0].length; i++) {
+						jobstatusdrop = jobstatusdrop +
+							'<option value="' + result[0][i].statusId + '">' + result[0][i].status + '</option>';
+					}
+					$("#jobstatus").html(jobstatusdrop);
+					$("#statuspedit").html(jobstatusdrop);
+				}
+			});
 		}
-		$("#jobrecid").html(jobreqID);
-		//$("#statuspedit").html(jobstatusdrop);
-	}
-});
-}
+		function jobreqiddropdown() {
+
+			jobreqID = '';
+			var url = "http://localhost:2000/jobreqid";
+			$.ajax({
+				url: url,
+				type: "GET",
+				success: function (result) {
+					//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
+					for (var i = 0; i < result[0].length; i++) {
+						jobreqID = jobreqID +
+							'<option value="' + result[0][i].jobdescriptionId + '">' + result[0][i].requirmentId + '</option>';
+					}
+					$("#jobrecid").html(jobreqID);
+					//$("#statuspedit").html(jobstatusdrop);
+				}
+			});
+		}
 
 
 	function expdropdown() {
@@ -129,20 +261,6 @@ $.ajax({
 			}
 		});
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	function budropdown() {
 		var budropdown = "";
@@ -389,11 +507,11 @@ $.ajax({
 				url: url,
 				type: "GET",
 				success: function (result) {
-
 					for (var i = 0; i < result[0].length; i++) {
 
 
 						var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
+
 						tableData = tableData + "  <tr> " +
 
 							//"<td id='' hidden>" + result[0][i].contactid + "</td>" +
@@ -405,9 +523,13 @@ $.ajax({
 							"<td >" + "<a href='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
 
 							"</tr>";
-
+							
+							
 					}
-					$("#joblistingbody").html(tableData);
+					$( "#jobtable tbody" ).append(tableData);
+					// $("#joblistingbody").html(tableData);
+					$("#jobtable").DataTable();
+
 				}
 			});
 		}
@@ -476,7 +598,6 @@ $.ajax({
 		$("#custedit").attr('disabled', false);
 		$("#JD_comment").attr('disabled', false);
 		$("#BU_comment").attr('disabled', false);
-
 		$("#roleleveledit").attr('disabled', false);
 		$("#jdurationedit").attr('disabled', false);
 		$("#reqclosedateedit").attr('disabled', false);
@@ -679,7 +800,6 @@ $.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-
 				for (var i = 0; i < result[0].length; i++) {
 
 					var profileID = "\"" + result[0][i].profileid + "\"";
@@ -1326,7 +1446,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 
 
-				<div class="col-sm-6">
+				<div class="col-sm-5">
 					<a class="navbar-brand" href="index.html">
 						<h1 style="font-weight:600;font-size:50px;color:#6bf682;">JobTracker</h1>
 					</a>
@@ -1335,7 +1455,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<span class="oi oi-menu"></span> Menu
 					</button>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-7">
 					<div class="collapse navbar-collapse" id="ftco-nav">
 						<ul class="nav">
 
@@ -1371,13 +1491,6 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 		</div>
 
 	</div>
-
-
-
-
-
-
-
 	<div class="hero-wrap js-fullheight" style="background-image: url('/assets/img/bg_2.jpg');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
@@ -1689,72 +1802,71 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 
 						<div id="operationsTab" class="tab-pane fade">
-							
+						
 							<div id="jobslisting" class="">
-									
+						
 								<div class="container" style="background-color: white">
-
-												 <div class="row" style="background-color: #73c7e7; height: 56px;">
-													<div class="col-sm-12" style="margin-top: 9px;">
-														<h5>Jobs</h5>
-													</div>											
-												</div>
-												<br>
-									
-										<div id="main" class="">    
-											           
-											<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
-												<div class="col-sm-1"></div>
-												<div id="main-content" class="contact">	
-														<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">													                    
-														<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
-														
+						
+									<div class="row" style="background-color: #73c7e7; height: 56px;">
+										<div class="col-sm-12" style="margin-top: 9px;">
+											<h5>Jobs</h5>
+										</div>
+									</div>
+									<br>
+						
+									<div id="main" class="">
+						
+										<div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
+											<div class="col-sm-1"></div>
+											<div id="main-content" class="contact">
+												<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">
+													<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+						
 														<div class="col-sm-2" style="left:14px;margin:2px;">
 															<b>Account</b>
 														</div>
-															
-															<div class="col-sm-2" >
-																<select  class="form-control" id="jobaccount"style="width:100%;height:30px;margin-left: -102px;"></select>
+						
+														<div class="col-sm-2">
+															<select class="form-control" id="jobaccount"
+																style="width:100%;height:30px;margin-left: -102px;"></select>
 														</div>
 														<div class="col-sm-1" style="right:9%;margin:2px;">
 															<b>Location</b>
 														</div>
 														<div class="col-sm-2" style="right:11%;">
-																<select  class="form-control" id="jlocation"  style="width:100%;height:30px;"></select>
-														</div>	
-														<div class="col-sm-2" style="left:16%">
-															<input type="text" class="form-control" style="top:1px;position: relative">
-														</div>														
-														<div class="col-sm-1" style="left:15%;">
-															<button type="button" class="btn btn-sm btn-info">Search</button>
+															<select class="form-control" id="jlocation"
+																style="width:100%;height:30px;"></select>
 														</div>
-														
+														<div class="col-sm-1">
+						
+														</div>
 														<div class="col-sm-1"></div>
-														</div>					
+						
+													</div>
+						
+													<div class="btn-group" style="top:-35px;position: relative;margin-left: 924px;">						
+														<button type="button" class="btn btn-primary"
+															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
+													</div>
 												</div>
-									<br>
-									<div id="main-content" class="contact">
 									
-										<div id="tbMarksContainer">
-									
-											<div class="entity-list" id="entity-list">
-									
-												<div class="table table-responsive" style="overflow: auto;height:440px">
-									
-													<table class="table table-bordered" id="jobtable">           
-														<thead style="background-color:#6199ae;
-														position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
-									
-															<tr style="font-size:small;color: black;font-size: small;  ">
-																<th scope="col" >Recuriment Id</th>
-																<th scope="col">No.Of Positions</th>
-																<th scope="col">Experince</th>
-																<th scope="col">Role</th>
+									<div id="main-content" class="contact">									
+										<div id="tbMarksContainer">									
+											<div class="entity-list" id="entity-list">							
+												<div class="table table-responsive" style="overflow: scroll;height: 450px;">	
+												
+													<table id="jobtable" class="display dataTable table-bordered" style="width:100%;color: black;">           
+														<thead style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
+															<tr style="  font-weight:bold ; ">															
+																<th scope="col" >Recuriment Id </th>
+																<th scope="col">No.Of Positions	</th>
+																<th scope="col">Experince </th>
+																<th scope="col">Role </th>
 																<th scope="col">Primary Skills</th>  
-																<th scope="col">Action</th>         
+																<th scope="col">Action	</th>        
 															</tr>            
 														</thead>            
-														<tbody id="joblistingbody" style="color:black;font-size:small;">                                   
+														<tbody id="joblistingbody" style="color:black;">          
 														</tbody>       
 													</table> 							
 												</div>
@@ -1828,8 +1940,8 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<thead
 														style="background-color: #6199ae;position: relative;color: black;top: 0px; white-space: nowrap; font-size: small;">
 								
-														<tr >
-															<th scope="col" >Recuriment Id</th>
+														<tr class>
+															<th scope="col"  >Recuriment Id <i class="up"></i><i class="down"></i></th>
 															<th scope="col">Candidate Name</th>
 															<th scope="col">Skill</th>
 															<th scope="col">Experience</th>
@@ -3169,20 +3281,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			</div>
 		</div>
 	</div>
-
-
-
-
-	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<!-- <script src="js/jquery-migrate-3.0.1.min.js"></script> -->
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
@@ -3192,12 +3291,12 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/aos.js"></script>
 	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/jquery.timepicker.min.js"></script>
+	<!-- <script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/jquery.timepicker.min.js"></script> -->
 	<script src="js/scrollax.min.js"></script>
-	<script
+	<!-- <script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
+	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 </body>
 
