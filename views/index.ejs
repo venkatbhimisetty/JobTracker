@@ -508,12 +508,8 @@
 				type: "GET",
 				success: function (result) {
 					for (var i = 0; i < result[0].length; i++) {
-
-
 						var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
-
 						tableData = tableData + "  <tr> " +
-
 							//"<td id='' hidden>" + result[0][i].contactid + "</td>" +
 							"<td >" + result[0][i].requirmentId + "</td>" +
 							"<td >" + result[0][i].noofpositions + "</td>" +
@@ -819,7 +815,10 @@
 
 				}
 
-				$("#profileslistingbody").html(tableData);
+			//	$("#profileslistingbody").html(tableData);
+				$( "#profiletable tbody" ).append(tableData);
+				
+					$("#profiletable").DataTable();
 
 			}
 		});
@@ -902,6 +901,10 @@
 		var Vendorid = $('[name="p_vendorid"]').val();
 		var Createdby = 'Admin';
 		var Updateby = 'Admin';
+		var Evaluationdate = $('[name="eval_date"]').val();
+		var Internal_technicaldecision = $('[name="internal_td"]').val();
+		var Panel = $('[name="p_panel"]').val();
+		var Screeningselect = $('[name="p_screening"]').val();
 
 
 
@@ -936,7 +939,11 @@
 			"Resume": Resume,
 			"Vendorid": Vendorid,
 			"Createdby": Createdby,
-			"Updateby": Updateby
+			"Updateby": Updateby,
+			"Evaluationdate": Evaluationdate,
+			"Internal_technicaldecision":Internal_technicaldecision,
+			"Panel": Panel,
+			"Screeningselect": Screeningselect
 
 		}
 
@@ -948,7 +955,7 @@
 if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
 &&Address2!="" && City!="" && State!="" && Country!="" &&Postalcode!="" && Experience!="" && Highestquali!="" && Currentjobtitle!=""
 &&Currentsalary!="" && Expectedsalary!="" && Skillset!="" && Skypeid!="" &&Noticeperiod!="" && Currentlocation!="" && Desiredlocation!="" && Status!=""
-&& Resume!="" && Vendorid!="")
+&& Resume!="" && Vendorid!="" && Evaluationdate!="" && Internal_technicaldecision!="" && Panel!="" && Screeningselect!="")
 {
 		$.ajax({
 			url: url,
@@ -1208,12 +1215,14 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						"<td >" + result[0][i].recruitername + "</td>" +
 						"<td >" + result[0][i].rating + "</td>" +
 						"<td >" + result[0][i].vendoremail + "</td>" +
-						"<td >" + "<a href='#vendorModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
+						"<td >" + "<a href='#vendormodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
 
 						"</tr>";
 
 					}
-				$("#vendorlistingbody").html(tableData);
+			//	$("#vendorlistingbody").html(tableData);
+				$( "#vendortable tbody" ).append(tableData);
+				$("#vendortable").DataTable();
 
 			}
 		});
@@ -1918,11 +1927,10 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											<div class="col-sm-2" style="right:8%;">
 													<select  class="form-control" id="jlocation"  style="width:100%;"></select>
 											</div> 
-											<div class="col-sm-2" style="left:16%">
-												<input type="text" class="form-control" style="top:1px;position: relative">
-											</div>                                                         
-											<div class="col-sm-1" style="left:15%;">
-												<button type="button" class="btn btn-sm btn-info" >Search</button>
+											                                                        
+											<div  class="btn-group col-sm-2" style="top:-46px;position: relative;margin-left: 924px;">						
+												<button type="button" class="btn btn-primary"
+													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
 											</div>
 											
 												<div class="col-sm-1"></div>
@@ -1936,11 +1944,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 								
 											<div class="table table-responsive" style="overflow: auto;height:440px">
 								
-												<table class="table table-bordered" id="jobtable">           
-													<thead
-														style="background-color: #6199ae;position: relative;color: black;top: 0px; white-space: nowrap; font-size: small;">
+												<table class="display dataTable table-bordered" style="width:100%;color: black;" id="profiletable">           
+													<thead style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
+
 								
-														<tr class>
+														<tr style="  font-weight:bold ; ">	
 															<th scope="col"  >Recuriment Id <i class="up"></i><i class="down"></i></th>
 															<th scope="col">Candidate Name</th>
 															<th scope="col">Skill</th>
@@ -1950,7 +1958,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<th scope="col">Action</th>         
 														</tr>            
 													</thead>            
-													<tbody id="profileslistingbody" style="color:black;font-size: small;">                                   
+													<tbody id="profileslistingbody" style="color:black;">                                   
 													</tbody>       
 												</table> 							
 											</div>
@@ -1999,12 +2007,10 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<div class="col-sm-2" >
 															<select  class="form-control" id=""  style="width:100%;height:30px;"></select>
 														</div>	
-													<div class="col-sm-1">
-															<button type="button" class="btn btn-info" style="background-color: #66badb;top:-5px;position: relative">Search</button>
-													</div>
-													<div class="col-sm-2">
-														<input type="text" class="form-control" style="top:1px;position: relative">
-													</div>
+														<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
+															<button type="button" class="btn btn-primary"
+																onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
+														</div>
 													<div class="col-sm-1"></div>
 												</div>
 						  
@@ -2022,13 +2028,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							
 									<div class="entity-list" id="entity-list">
 							
-										<div class="table table-responsive" style="overflow: auto;">
+										<div class="table table-responsive" style="overflow: scroll;height: 450px;">
 							
-											<table class="table table-bordered" id="jobtable">           
-												<thead
-													style="background-color: #6199ae;position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
-							
-													<tr style="color: black;font-size:small;">
+											<table id="vendortable" class="display dataTable table-bordered" style="width:100%;color: black;">           
+												<thead style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
+													<tr style="font-weight:bold;">	
 														<th scope="col" >Recruiter Id</th>
 														<th scope="col">Vendor Id</th>
 														<th scope="col">Vendor Name</th>
@@ -2038,7 +2042,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<th scope="col">Action</th>       
 													</tr>            
 												</thead>            
-												<tbody id="vendorlistingbody" style="color:black;font-size:small; ">                                   
+												<tbody id="vendorlistingbody" style="color:black">                                   
 												</tbody>       
 											</table> 							
 										</div>

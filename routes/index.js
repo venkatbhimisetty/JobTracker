@@ -272,33 +272,35 @@ module.exports = {
         let Skillset = req.body.Skillset;
         let Skypeid = req.body.Skypeid;
         let Noticeperiod = req.body.Noticeperiod;
-        let Currentlocation = req.body.Currentlocation;
-        let Desiredlocation = req.body.Desiredlocation;
-        let Status = req.body.Status;
-        let Resume = req.body.Resume;
-
-        let Vendorid = req.body.Vendorid;
-        let Createdby = req.body.Createdby;
-        let Updateby = req.body.Updateby;
-
-
-
-        let query = "call procinsertprofile('" + Jobrecid + "', '" + jobreqcode + "','" + Salutation + "', '" + Firstname + "','" + Lastname + "','" +
-            Email + "',  '" + Mobile + "','" + Dob + "', '" + Address1 + "', '" + Address2 + "','" +
-            City + "','" + State + "','" + Country + "','" + Postalcode + "','" + Experience +
-            "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" +
-            Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" +
-            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now())";
+        let Currentlocation =  req.body.Currentlocation;
+        let Desiredlocation =  req.body.Desiredlocation;
+        let Status =  req.body.Status;
+        let Resume =  req.body.Resume;
+        let Vendorid =  req.body.Vendorid;
+        let Createdby =  req.body.Createdby;
+        let Updateby =  req.body.Updateby;
+        let Evaluationdate=req.body.Evaluationdate;
+		let Internal_technicaldecision=req.body.Internal_technicaldecision;
+		let Panel= req.body.Panel;
+		let Screeningselect=req.body.Screeningselect;
 
 
 
+        let query = "call procinsertprofile('" + Jobrecid + "', '"+jobreqcode+"','" + Salutation + "', '" + Firstname + "','" + Lastname + "','" + 
+        Email + "',  '" + Mobile + "','" + Dob + "', '" + Address1 + "', '" + Address2 + "','" +
+            City + "','" + State + "','" + Country + "','" + Postalcode + "','" + Experience + 
+            "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" + 
+            Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
+            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate + "',now(),'" + Internal_technicaldecision + "','" + Panel + "','" + Screeningselect + "')";
+     
+         
+    
         db.query(query, (err, result) => {
             if (err) {
-
+              console.log(err);
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-
         });
     },
 
