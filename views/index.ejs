@@ -522,7 +522,7 @@
 							
 							
 					}
-					$( "#jobtable tbody" ).append(tableData);
+					$( "#jobtable tbody" ).html(tableData);
 					// $("#joblistingbody").html(tableData);
 					$("#jobtable").DataTable();
 
@@ -808,7 +808,7 @@
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a >" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
 
 						"</tr>";
 
@@ -816,9 +816,8 @@
 				}
 
 			//	$("#profileslistingbody").html(tableData);
-				$( "#profiletable tbody" ).append(tableData);
-				
-					$("#profiletable").DataTable();
+				$( "#profiletable tbody" ).html(tableData);				
+				$("#profiletable").DataTable();
 
 			}
 		});
@@ -1221,7 +1220,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 					}
 			//	$("#vendorlistingbody").html(tableData);
-				$( "#vendortable tbody" ).append(tableData);
+				$( "#vendortable tbody" ).html(tableData);
 				$("#vendortable").DataTable();
 
 			}
