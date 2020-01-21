@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getexpdropdown,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
-    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID} = require('./routes/index');
+    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
 const port = 2000;
 
@@ -82,9 +82,10 @@ app.get('/salutation', getsalutation);
 app.get('/highestqual', gethighestqual);
 app.get('/profilestatus', getprofilestatus);
 app.get('/profilecountry', getprofilecountry);
+app.get('/profilecountry', getprofilecountry);
 app.get('/statebycountry/:profilecountry', getprofilestatebycountry);
 
-app.get('/jobreqid', getjobreqID);
+app.get('/jobstatusnew', jobstatusnew);
 // set the app to listen on the port
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

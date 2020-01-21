@@ -118,7 +118,7 @@
 	}
 
 
-	#jobtable_filter {
+	#jobtable_filter,#profiletable_filter,#vendortable_filter {
 		margin-left: 310px !important;
 	}
 
@@ -146,6 +146,7 @@
 	$(document).ready(function () {
 		budropdown();
 		jobstatus();
+		jobstatusdropdown();
 		jobreqiddropdown()
 		expdropdown();
 		salesdropdown();
@@ -260,6 +261,25 @@
 				}
 			});
 		}
+
+function jobstatusdropdown() {
+console.log("coming");
+jobstatus = '';
+var url = "http://localhost:2000/jobstatusnew";
+$.ajax({
+	url: url,
+	type: "GET",
+	success: function (result) {
+		console.log(result);
+		for (var i = 0; i < result[0].length; i++) {
+			jobstatus = jobstatus +
+				'<option value="' + result[0][i].jobstatusId + '">' + result[0][i].jobstatus + '</option>';
+		}
+		$("#jstatus").html(jobstatus);
+		//$("#statuspedit").html(jobstatusdrop);
+	}
+});
+}
 
 
 	function expdropdown() {
@@ -532,7 +552,7 @@
 							"<td >" + result[0][i].experience + "</td>" +
 							"<td >" + result[0][i].role + "</td>" +
 							"<td >" + result[0][i].primaryskills + "</td>" +
-							"<td >" + "<a href='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
+							"<td >" + "<a>" + "<i class='far fa-edit' data-target='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='jobdisplay(" + jobdescriptionID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
 							"</tr>";													
 					}
 					$( "#jobtable tbody" ).html(tableData);
@@ -619,15 +639,18 @@
 		
 		var Requirement = $('[name="Requirementid"]').val();
 		var Role = $('[name="role"]').val();
+		var rolelevel = $('[name="role_level"]').val();	
+		var jobtitle = $('[name="jobtitle"]').val();	
 		var Position = $('[name="positions"]').val();
-		var Expected = $('[name="ex_date"]').val();
-		//var dateofreq = $('[name="sregion_edit"]').val();
+		var closedate = $('[name="ex_date"]').val();
+		var dateofreq = $('[name="req_date"]').val();
+		var jdduration = $('[name="jduration"]').val();
 		var Exp = $('[name="experience"]').val();
 		var PSkill = $('[name="primary_skill"]').val();
 		var SSkill = $('[name="secondry_skill"]').val();
 		var locationflex = $('[name="loc_flex"]').val();
 		var customerid = $('[name="customer"]').val();
-		var Status = $('[name="status"]').val();
+		var jdstatus = $('[name="jstatus"]').val();
 		var buid = $('[name="bu_unit"]').val();
 		var salesregionid = $('[name="sales_region"]').val();
 		var salesrepid = $('[name="sale_rep"]').val();
@@ -645,14 +668,18 @@
 		var data = {
 			"Requirement": Requirement,
 			"Role": Role,
+			"rolelevel":rolelevel,
+			"jobtitle":jobtitle,
 			"Position": Position,
-			"Expected": Expected,
+			"closedate": closedate,
+			"dateofreq": dateofreq,
+			"jdduration": jdduration,
 			"Exp": Exp,
 			"PSkill": PSkill,
 			"SSkill": SSkill,
 			"locationflex": locationflex,
 			"customerid": customerid,
-			"Status": Status,
+			"jdstatus": jdstatus,
 			"buid": buid,
 			"salesregionid": salesregionid,
 			"salesrepid": salesrepid,
@@ -668,9 +695,9 @@
 		data = JSON.stringify(data);
 		var url = "http://localhost:2000/jdescription";
 		
-		if(Requirement!="" && Role!="" && Position!=""&& Expected!=""&& Exp!=""&& PSkill!=""&& SSkill!=""&& locationflex!=""&& customerid!=""
-		&& Status!=""&& buid!=""&& salesregionid!=""&& joblocation!=""&& jDescription!="")
-		  {
+		// if(Requirement!="" && Role!="" && Position!=""&& Expected!=""&& Exp!=""&& PSkill!=""&& SSkill!=""&& locationflex!=""&& customerid!=""
+		// && Status!=""&& buid!=""&& salesregionid!=""&& joblocation!=""&& jDescription!="")
+		//   {
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -681,7 +708,7 @@
 			success: function (result) {
 
 				$('#successmodal').modal('show');
-				
+				clearFormJob();
 
 			},
 			error: function () {
@@ -689,7 +716,7 @@
 			}
 		});
 
-	}
+	// }
 	}
 
 
@@ -821,7 +848,7 @@
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
 
 						"</tr>";
 
@@ -1227,8 +1254,8 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						"<td >" + result[0][i].recruitername + "</td>" +
 						"<td >" + result[0][i].rating + "</td>" +
 						"<td >" + result[0][i].vendoremail + "</td>" +
-						"<td >" + "<a href='#vendormodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
-
+					
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#vendoreditmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
 						"</tr>";
 
 					}
@@ -1459,7 +1486,44 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			</div>
 
 		</div>
+		<div class="container">
+			<div class="modal fade " role="dialog" id="deletemodal">
+				<div class="modal-dialog">
+					<div class="modal-content" style="margin-top: 29%;">
+						<div class="modal-header" style="background: #dc3545;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body text-center">
+							<img src="/assets/img/delete.png" style="height: 105px;width:103px;">
+							<h4>Are you sure?</h4>
+							<p>Do you really want to delete these records? This process cannot be undone.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+							<button type="button" data-toggle="modal" data-target="#confirmdelete" data-dismiss="modal" class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
+		</div>
+		<div class="container">
+			<div class="modal fade " role="dialog" id="confirmdelete">
+				<div class="modal-dialog">
+					<div class="modal-content" style="margin-top: 29%;">
+						<div class="modal-header" style="background:#dc3545;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body text-center">
+							<img src="/assets/img/delete.png" style="height: 105px;width:103px;">
+							<h4>DELETED</h4>
+							<p>Deleted Successfully.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 	</div>
 	<div class="container">
@@ -1686,9 +1750,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>
 
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-															<label><span style="color:red;">*</span>No of Positions:</label></div>
+															<label><span style="color:red;">*</span>Date Of Request:</label>
+															</div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<input type="text" id="positions" name="positions" class="form-control" required>
+															
+															<input type="date" id="reqdate" name="req_date" class="form-control" required>
 														</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
@@ -1739,8 +1805,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 																</div> 
 															<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 																	<select id="jstatus" class="form-control" name="jstatus" required>
-																			<option>Open</option>
-																			<option>Close</option>
+																			
 																			 </select>
 																
 															</div>
@@ -1763,9 +1828,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<input type="text" id="experience" name="experience" class="form-control" required>
 														</div>
 														<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-																</div>
+															<label><span style="color:red;">*</span>No of Positions:</label></div>
 															<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-																
+																<input type="text" id="positions" name="positions" class="form-control" required>
 															</div>
 														<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 
@@ -1808,7 +1873,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"
 												style="margin-bottom:2%;left: 89px;">
 												<button type="submit" class="btn btn-sm btn-info"
-													onclick="addjd(),clearFormJob();">Submit</button>
+													onclick="addjd()">Submit</button>
 												<button type="button" id="canceljob" class="btn btn-sm btn-info"
 												onclick="clearFormJob()">Cancel</button>
 
