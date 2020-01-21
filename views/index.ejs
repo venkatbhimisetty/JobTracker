@@ -29,6 +29,7 @@
 
 </head>
 <style>
+
 	.dropdown-menu li:hover {
 		background-color: #ddd;
 	}
@@ -124,9 +125,24 @@
 	.dataTables_length {
 		display: none;
 	}
+
+
+
+	div.dataTables_filter input {
+    height: 16px;
+    width: 137px;
+    color: Gray;
+    margin: -22px;
+    margin-left: 54px;
+    margin-top: -18px;
+}
+
 </style>
 
 <script>
+
+// $('div.dataTables_filter input').addClass('search');
+
 	$(document).ready(function () {
 		budropdown();
 		jobstatus();
@@ -517,10 +533,7 @@
 							"<td >" + result[0][i].role + "</td>" +
 							"<td >" + result[0][i].primaryskills + "</td>" +
 							"<td >" + "<a href='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='jobdisplay(" + jobdescriptionID + ")'>" + "View" + "</a>" + "</td>" +
-
-							"</tr>";
-							
-							
+							"</tr>";													
 					}
 					$( "#jobtable tbody" ).html(tableData);
 					// $("#joblistingbody").html(tableData);
