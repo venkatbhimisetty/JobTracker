@@ -60,6 +60,7 @@ app.post('/jdescription', addjd);
 
 app.get('/experince', getexpdropdown);
 app.get('/jobstatus', getJobStatusdrop);
+app.get('/jobreqid', getjobreqID); 
 
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);

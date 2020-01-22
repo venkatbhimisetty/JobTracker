@@ -137,11 +137,44 @@
     margin-top: -18px;
 }
 
+
+.body {
+ background: #f5f3e7;
+}
+.wrapper {
+  padding: 50px 100px;
+}
+.svg-container { 
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: middle; 
+  overflow: hidden; 
+  background: #f5f3e7;
+}
+.svg-content { 
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 </style>
+<script>
+	var svg = document.getElementsByTagName("svg");
+	
+	var rect = document.getElementsByTagName("rect");
+	
+	var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	text.setAttribute('x', '10');
+	text.setAttribute('y', '20');
+	text.setAttribute('fill', '#000');
+	text.textContent = 'Hello, I am a blah blah blah blah blah';
+	
+	</script>
+
 
 <script>
-
-// $('div.dataTables_filter input').addClass('search');
 
 	$(document).ready(function () {
 		budropdown();
@@ -935,6 +968,11 @@ $.ajax({
 		var Noticeperiod = $('[name="pnotice_period"]').val();
 		var Currentlocation = $('[name="pcurrent_location"]').val();
 		var Desiredlocation = $('[name="pdesired_location"]').val();
+		var Resigned = $('[name="resigned"]').val();
+		var Evaldate = $('[name="eval_date"]').val();
+		var Internaltd = $('[name="internal_td"]').val();
+		var Panel = $('[name="p_panel"]').val();
+		var Screening = $('[name="p_screening"]').val();
 		var Status = $('[name="p_status"]').val();
 		var Resume = $('[name="presume_name"]').val();
 		var Vendorid = $('[name="p_vendorid"]').val();
@@ -974,6 +1012,11 @@ $.ajax({
 			"Noticeperiod": Noticeperiod,
 			"Currentlocation": Currentlocation,
 			"Desiredlocation": Desiredlocation,
+			"Resigned":Resigned,
+			"Evaldate":Evaldate,
+			"Internaltd":Internaltd,
+			"Panel":Panel,
+			"Screening":Screening,
 			"Status": Status,
 			"Resume": Resume,
 			"Vendorid": Vendorid,
@@ -1039,7 +1082,12 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
             var pedithighestquali = $('[name="pedit_highestquali"]').val();
             var peditcurrentjobtitle = $('[name="peditcurrent_jobtitle"]').val();
             var peditcurrentsalary = $('[name="peditcurrent_salary"]').val();
-            var peditexpectedsalary = $('[name="peditexpected_salary"]').val();
+			var peditexpectedsalary = $('[name="peditexpected_salary"]').val();
+			var peditresigned = $('[name="editresigned"]').val();
+			var peditevaldate = $('[name="pedit_evaldate"]').val();
+			var peditinternaltd = $('[name="pedit_internaltd"]').val();
+			var peditpanel = $('[name="pedit_panel"]').val();
+			var peditscreening = $('[name="pedit_screening"]').val();
             var peditskillset = $('[name="peditskill_set"]').val();
             var peditskypeid = $('[name="peditskype_id"]').val();
             var peditnoticeperiod = $('[name="peditnotice_period"]').val();
@@ -1075,8 +1123,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
                 "peditskypeid": peditskypeid,
                 "peditnoticeperiod": peditnoticeperiod,
                 "peditcurrentlocation": peditcurrentlocation,
-                "peditdesiredlocation": peditdesiredlocation,
-                "peditstatus": peditstatus,
+				"peditdesiredlocation": peditdesiredlocation,
+				"peditresigned": peditresigned,
+				"peditevaldate": peditevaldate,
+				"peditinternaltd": peditinternaltd,
+				"peditpanel": peditpanel,
+				"peditscreening": peditscreening,				
+				"peditstatus": peditstatus,
                 "peditresumename": peditresumename,
                 "peditvendorid": peditvendorid,
                 "peditupdatedby": 'Admin'
@@ -1130,6 +1183,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				$("#peditnoticeperiod").attr('disabled', false);
 				$("#peditcurrentlocation").attr('disabled', false);
 				$("#peditdesiredlocation").attr('disabled', false);
+				$("#peditresigned").attr('disabled', false);
+				$("#peditevaldate").attr('disabled', false);
+				$("#peditinternaltd").attr('disabled', false);
+				$("#peditpanel").attr('disabled', false);
+				$("#peditscreening").attr('disabled', false);
 				$("#peditstatus").attr('disabled', false);
 				$("#peditvendorid").attr('disabled', false);
 				$("#peditfilename").attr('disabled', false);
@@ -1162,6 +1220,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				$("#peditnoticeperiod").attr('disabled', true);
 				$("#peditcurrentlocation").attr('disabled', true);
 				$("#peditdesiredlocation").attr('disabled', true);
+				$("#peditresigned").attr('disabled', true);
+				$("#peditevaldate").attr('disabled', true);
+				$("#peditinternaltd").attr('disabled', true);
+				$("#peditpanel").attr('disabled', true);
+				$("#peditscreening").attr('disabled', true);
 				$("#peditstatus").attr('disabled', true);
 				$("#peditvendorid").attr('disabled', true);
 				$("#peditfilename").attr('disabled', true);
@@ -1930,9 +1993,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						
 													</div>
 						
-													<div class="btn-group" style="top:-35px;position: relative;margin-left: 924px;">						
-														<button type="button" class="btn btn-primary"
-															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
+													<div class="btn-group" style="top:-33px;position: relative;margin-left: 924px;">						
+														<button type="button" style="left: 96px;position: relative;"
+															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">
+															<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+														</button>
 													</div>
 												</div>
 									
@@ -2005,9 +2070,11 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<select  class="form-control" id="jlocation"  style="width:100%;"></select>
 											</div> 
 											                                                        
-											<div  class="btn-group col-sm-2" style="top:-46px;position: relative;margin-left: 924px;">						
-												<button type="button" class="btn btn-primary"
-													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
+											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
+												<button type="button" style="left: 110px;position: relative;"
+													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">
+													<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+												</button>
 											</div>
 											
 												<div class="col-sm-1"></div>
@@ -2084,9 +2151,12 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														<div class="col-sm-2" >
 															<select  class="form-control" id=""  style="width:100%;height:30px;"></select>
 														</div>	
-														<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
-															<button type="button" class="btn btn-primary"
-																onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">Export to Excel</button>
+														<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">
+																					
+															<button type="button" style="left: 110px;position: relative;"
+																onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
+																<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+															</button>
 														</div>
 													<div class="col-sm-1"></div>
 												</div>
@@ -2488,24 +2558,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Address:</h4>
 						</div>
 						<hr style="width: 100%;top: -9px;position: relative;">
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-2">
-								<label>Address1:<label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="address1" name="p_address1" class="form-control">
-
-							</div>
-
-							<div class="col-sm-2">
-								<label>Address2:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="address2" name="p_address2" class="form-control">
-							</div>
-							<div class="col-sm-1"></div>
-						</div>
+						
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
@@ -2534,13 +2587,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 								<input type="text" id="city" name="p_city" class="form-control">
 
 							</div>
-							<div class="col-sm-2">
-								<label style="width: 113px;">Postal Code:</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="text" id="postalcode" name="p_postalcode" class="form-control">
-							</div>
-							<div class="col-sm-1"> </div>
+							
 						</div>
 
 						<div class="row">
@@ -2851,24 +2898,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 				<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Address:</h4>
 				</div>
 				 <hr style="width: 100%;top: -9px;position: relative;">
-				<div class="row">
-				<div class="col-sm-1"></div>
-					<div class="col-sm-2">
-						<label>Address1:<label>
-					</div>
-					<div class="col-sm-3">
-							<input type="text"id="peditaddress1" name="pedit_address1" class="form-control" disabled>
-						
-					</div>
-					
-					<div class="col-sm-2">
-						 <label>Address2:</label>
-					</div>
-					<div class="col-sm-3">
-						  <input type="text" id="peditaddress2" name="pedit_address2" class="form-control" disabled> 
-					</div>
-					<div class="col-sm-1"></div>
-				</div>
+				
 				<div class="row">
 				<div class="col-sm-1"></div>	
 					<div class="col-sm-2">
@@ -3110,6 +3140,138 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			  <button type="button" class="btn btn-sm btn-info" onclick="disableprofileedit()" data-dismiss="modal">Cancel</button>                                                      
 			</div>
 		  </form>
+
+		  <div class="wrapper">
+			<div class="svg-container">
+			  <svg version="1.1" viewBox="0 0 700 600" preserveAspectRatio="xMinYMin meet" class="svg-content">
+				
+				<defs>
+				  <marker id="arrow" markerWidth="4" markerHeight="10" viewBox="-2 -4 4 4" refX="0" refY="0" markerUnits="strokeWidth" orient="auto">
+					<polyline points="2,-2 0,0 2,2" stroke="#443c3d" stroke-width="0.75px" fill="none"/>
+				  </marker>
+			  </defs>
+			 
+				
+				<g class="box-group">
+				  			
+				  <g transform="translate(10)">
+				  <rect fill="#08B2B2" x="2" y="70" rx="3" ry="3" width="100" height="50" />
+				  <text x="10" y="100" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Ltts Screening					
+				  </text>
+				  </g>
+
+				  <line x1="110" x2="160" y1="100" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+			
+				   <line x1="110" x2="170" y1="100" y2="170" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+				  
+
+				  <g transform="translate(150)">
+				  <rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="100" height="50" />
+				  <text x="26" y="53" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Reject
+				  </text>
+				  </g>
+			
+		
+				</g>
+				
+				<line x1="450" x2="400" y1="77" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+
+				<line x1="450" x2="400" y1="207" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+				
+				<g class="box-group" transform="translate(0,100)">
+				  
+			
+				  <g transform="translate(150)">
+				  <rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="100" height="50" />
+				  <text x="10" y="47" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Shortlist For
+					<tspan x="10" dy="17">Ltts Interview</tspan>
+				  </text>
+				  </g>
+			
+				   <line x1="251" x2="300" y1="50" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" /> 
+				  
+
+				  <g transform="translate(268)">
+					<rect fill="#08B2B2" x="30" y="25" rx="3" ry="3" width="100" height="50" />
+					<text x="50" y="47" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts
+					  <tspan x="50" dy="17">Interview</tspan>
+					</text>
+					</g>
+				  
+				</g>
+			
+				  
+				  <g transform="translate(410)">
+					<rect fill="#08B2B2" x="30" y="50" rx="3" ry="3" width="100" height="50" />
+					<text x="45" y="77" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts Reject
+					
+					</text>
+					</g> 
+
+					
+					<g transform="translate(410)">
+						<rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
+						<text x="45" y="210" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts Select
+						</text>
+						</g>  
+
+						 <g transform="translate(410)">
+							<rect fill="#08B2B2" x="30" y="270" rx="3" ry="3" width="100" height="50" />
+							<text x="45" y="290" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Customer 
+							<tspan x="46" dy="17">Screening</tspan>
+							</text>
+							</g>  
+
+							<line x1="485" x2="485" y1="229" y2="270" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+
+							<line x1="485" x2="485" y1="320" y2="370" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+
+							<line x1="485" x2="370" y1="320" y2="370" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+
+							<line x1="485" x2="610" y1="320" y2="370" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+							
+							<g transform="translate(550)">
+								<rect fill="#08B2B2" x="30" y="370" rx="3" ry="3" width="100" height="50" />
+								<text x="55" y="400" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Reject	
+								</text>
+							</g>  
+
+
+							<g transform="translate(410)">
+								<rect fill="#08B2B2" x="30" y="370" rx="3" ry="3" width="100" height="50" />
+								<text x="45" y="390" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Select For
+								<tspan x="46" dy="17">Interview</tspan>
+								</text>
+							</g>  
+
+							<g transform="translate(270)">
+								<rect fill="#08B2B2" x="30" y="370" rx="3" ry="3" width="100" height="50" />
+								<text x="45" y="390" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Awaiting
+								<tspan x="46" dy="17">Response</tspan>
+								</text>
+							</g>  
+
+
+							<line x1="490" x2="420" y1="420" y2="470" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" /> 
+
+						    <line x1="550" x2="490" y1="470" y2="420" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" /> 
+
+							<g transform="translate(310)">
+								<rect fill="#08B2B2" x="60" y="470" rx="3" ry="3" width="100" height="50" />
+								<text x="85" y="500" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Select
+								</text>
+							</g>
+
+							<g transform="translate(440)">
+								<rect fill="#08B2B2" x="60" y="470" rx="3" ry="3" width="100" height="50" />
+								<text x="85" y="500" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Reject
+								</text>
+							</g>
+			  
+				</svg>
+			</div>
+			</div>
+
 		  </div>
 		</div>
 	  </div>
