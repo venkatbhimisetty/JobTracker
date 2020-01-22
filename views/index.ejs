@@ -151,13 +151,15 @@
   padding-bottom: 35%;
   vertical-align: middle; 
   overflow: hidden; 
-  background: #f5f3e7;
+  background: white;
 }
 .svg-content { 
   display: inline-block;
   position: absolute;
   top: 0;
   left: 0;
+  font-size:16px;
+  font-weight: 600;
 }
 </style>
 <script>
@@ -1994,9 +1996,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													</div>
 						
 													<div class="btn-group" style="top:-33px;position: relative;margin-left: 924px;">						
-														<button type="button" style="left: 96px;position: relative;"
+														<button type="button" style="left: 103px;position: relative;"
 															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">
-															<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+															<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 														</button>
 													</div>
 												</div>
@@ -2071,9 +2073,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											</div> 
 											                                                        
 											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
-												<button type="button" style="left: 110px;position: relative;"
+												<button type="button" style="left: 117px;position: relative;"
 													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">
-													<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+													<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 												</button>
 											</div>
 											
@@ -2153,9 +2155,9 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>	
 														<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">
 																					
-															<button type="button" style="left: 110px;position: relative;"
+															<button type="button" style="left: 117px;position: relative;"
 																onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
-																<img src="/assets/img/export.png" style="height: 32px;width:31px;">
+																<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 															</button>
 														</div>
 													<div class="col-sm-1"></div>
@@ -2818,6 +2820,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 			  <button type="button" class="close" onclick="disableprofileedit()" data-dismiss="modal">&times;</button>
 			  
 			</div>
+			
 			<div class="modal-body" style="overflow:auto;height:450px;">
 			  <form action="" method="">
 				 <div class="row">
@@ -3132,6 +3135,147 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 					<div class="col-sm-1"> </div>
 			   
 				</div>
+
+				<div class="row">
+					<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Work Flow:</h4>
+					</div>
+				<hr style="width: 100%;top: -9px;position: relative;">
+
+				<div class="row">
+
+					<div class="svg-container">
+						<svg version="1.1" viewBox="0 0 1000 600" preserveAspectRatio="xMinYMin meet" class="svg-content">
+						  
+						  <defs>
+							<marker id="arrow" markerWidth="4" markerHeight="10" viewBox="-2 -4 4 4" refX="0" refY="0" markerUnits="strokeWidth" orient="auto">
+							  <polyline points="2,-2 0,0 2,2" stroke="#443c3d" stroke-width="0.75px" fill="none"/>
+							</marker>
+						</defs>
+					   
+						  
+						  <g class="box-group">
+										
+							<g transform="translate(10)">
+							<rect fill="#08B2B2" x="2" y="70" rx="3" ry="3" width="100" height="50" />
+							<text x="15" y="92" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Ltts					
+							<tspan x="15" dy="17">Screening</tspan>    
+							</text>
+							</g>
+		  
+							<line x1="110" x2="160" y1="100" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+					  
+							 <line x1="110" x2="170" y1="100" y2="170" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+							
+		  
+						  <g transform="translate(150)">
+							<rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="100" height="50" />
+							<text x="26" y="53" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Reject
+							</text>
+						  </g>
+					  
+				  
+						  </g>
+						  
+						  <line x1="450" x2="400" y1="77" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+		  
+						  <line x1="450" x2="400" y1="207" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+						  
+						  <g class="box-group" transform="translate(0,100)">
+							
+					  
+							<g transform="translate(150)">
+							<rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="103" height="50" />
+							<text x="10" y="47" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Shortlist For
+							  <tspan x="6" dy="17">Ltts Interview</tspan>
+							</text>
+							</g>
+					  
+							 <line x1="255" x2="300" y1="50" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" /> 
+							
+		  
+							<g transform="translate(268)">
+							  <rect fill="#08B2B2" x="30" y="25" rx="3" ry="3" width="100" height="50" />
+							  <text x="50" y="47" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Ltts
+								<tspan x="50" dy="17">Interview</tspan>
+							  </text>
+							  </g>
+							
+						  </g>
+					  
+							
+							<g transform="translate(410)">
+							  <rect fill="#08B2B2" x="30" y="50" rx="3" ry="3" width="100" height="50" />
+							  <text x="45" y="77" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Ltts Reject
+							  
+							  </text>
+							  </g> 
+		  
+							  
+							  <g transform="translate(410)">
+								  <rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
+								  <text x="45" y="210" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Ltts Select
+								  </text>
+								  </g>  
+		  
+								  <g transform="translate(560)">
+									  <rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
+									  <text x="45" y="200" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Customer
+									  <tspan x="46" dy="17">Screening</tspan>
+									  </text>
+									  </g> 
+		  
+									  <g transform="translate(710)">
+										  <rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
+										  <text x="45" y="200" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Select For
+										  <tspan x="46" dy="17">Interview</tspan>
+										  </text>
+										  </g> 
+			  
+										  <g transform="translate(700)">
+											  <rect fill="#08B2B2" x="40" y="80" rx="3" ry="3" width="100" height="50" />
+											  <text x="60" y="110" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Reject
+											  
+											  </text>
+											  </g> 
+		  
+		  
+											  <g transform="translate(680)">
+												  <rect fill="#08B2B2" x="60" y="280" rx="3" ry="3" width="100" height="50" />
+												  <text x="80" y="300" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Awaiting
+												  <tspan x="80" dy="17">Response</tspan>
+												  </text>
+												  </g> 
+		  
+									  <line x1="540" x2="590" y1="205" y2="205" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+		  
+									  <line x1="690" x2="740" y1="205" y2="205" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+		  
+									  <line x1="690" x2="740" y1="205" y2="105" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+		  
+									  <line x1="690" x2="740" y1="205" y2="305" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+									  
+								  
+									  <g transform="translate(850)">
+										  <rect fill="#08B2B2" x="40" y="130" rx="3" ry="3" width="100" height="50" />
+										  <text x="60" y="160" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Select
+										  </text>
+										  </g> 
+		  
+		  
+									  <g transform="translate(850)">
+										  <rect fill="#08B2B2" x="40" y="230" rx="3" ry="3" width="100" height="50" />
+										  <text x="60" y="260" font-family="Open Sans Condensed" stroke="none" fill="#f5f3e7">Reject
+										  </text>
+										  </g>
+		  
+									  <line x1="840" x2="890" y1="200" y2="150" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+		  
+									  <line x1="840" x2="890" y1="200" y2="260" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
+						
+						  </svg>
+					  </div>
+
+				</div>
 	
 			</div>
 			<div class="modal-footer">
@@ -3142,136 +3286,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 		  </form>
 
 		 
-			<div class="svg-container">
-			  <svg version="1.1" viewBox="0 0 1000 600" preserveAspectRatio="xMinYMin meet" class="svg-content">
-				
-				<defs>
-				  <marker id="arrow" markerWidth="4" markerHeight="10" viewBox="-2 -4 4 4" refX="0" refY="0" markerUnits="strokeWidth" orient="auto">
-					<polyline points="2,-2 0,0 2,2" stroke="#443c3d" stroke-width="0.75px" fill="none"/>
-				  </marker>
-			  </defs>
-			 
-				
-				<g class="box-group">
-				  			
-				  <g transform="translate(10)">
-				  <rect fill="#08B2B2" x="2" y="70" rx="3" ry="3" width="100" height="50" />
-				  <text x="10" y="100" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Ltts Screening					
-				  </text>
-				  </g>
-
-				  <line x1="110" x2="160" y1="100" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
 			
-				   <line x1="110" x2="170" y1="100" y2="170" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-				  
-
-				  <g transform="translate(150)">
-				  <rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="100" height="50" />
-				  <text x="26" y="53" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Reject
-				  </text>
-				  </g>
-			
-		
-				</g>
-				
-				<line x1="450" x2="400" y1="77" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-
-				<line x1="450" x2="400" y1="207" y2="140" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-				
-				<g class="box-group" transform="translate(0,100)">
-				  
-			
-				  <g transform="translate(150)">
-				  <rect fill="#08B2B2" x="2" y="25" rx="3" ry="3" width="100" height="50" />
-				  <text x="10" y="47" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800">Shortlist For
-					<tspan x="10" dy="17">Ltts Interview</tspan>
-				  </text>
-				  </g>
-			
-				   <line x1="251" x2="300" y1="50" y2="50" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" /> 
-				  
-
-				  <g transform="translate(268)">
-					<rect fill="#08B2B2" x="30" y="25" rx="3" ry="3" width="100" height="50" />
-					<text x="50" y="47" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts
-					  <tspan x="50" dy="17">Interview</tspan>
-					</text>
-					</g>
-				  
-				</g>
-			
-				  
-				  <g transform="translate(410)">
-					<rect fill="#08B2B2" x="30" y="50" rx="3" ry="3" width="100" height="50" />
-					<text x="45" y="77" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts Reject
-					
-					</text>
-					</g> 
-
-					
-					<g transform="translate(410)">
-						<rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
-						<text x="45" y="210" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Ltts Select
-						</text>
-						</g>  
-
-						<g transform="translate(560)">
-							<rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
-							<text x="45" y="200" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Customer
-							<tspan x="46" dy="17">Screening</tspan>
-							</text>
-							</g> 
-
-							<g transform="translate(710)">
-								<rect fill="#08B2B2" x="30" y="180" rx="3" ry="3" width="100" height="50" />
-								<text x="45" y="200" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Select For
-								<tspan x="46" dy="17">Interview</tspan>
-								</text>
-								</g> 
-	
-								<g transform="translate(700)">
-									<rect fill="#08B2B2" x="40" y="80" rx="3" ry="3" width="100" height="50" />
-									<text x="60" y="110" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Reject
-									
-									</text>
-									</g> 
-
-
-									<g transform="translate(680)">
-										<rect fill="#08B2B2" x="60" y="280" rx="3" ry="3" width="100" height="50" />
-										<text x="80" y="300" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Awaiting
-										<tspan x="80" dy="17">Response</tspan>
-										</text>
-										</g> 
-
-							<line x1="540" x2="590" y1="205" y2="205" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-
-							<line x1="690" x2="740" y1="205" y2="205" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-
-							<line x1="690" x2="740" y1="205" y2="105" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-
-							<line x1="690" x2="740" y1="205" y2="305" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-							
-						
-							<g transform="translate(850)">
-								<rect fill="#08B2B2" x="40" y="130" rx="3" ry="3" width="100" height="50" />
-								<text x="60" y="160" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Select
-								</text>
-								</g> 
-
-
-							<g transform="translate(850)">
-								<rect fill="#08B2B2" x="40" y="230" rx="3" ry="3" width="100" height="50" />
-								<text x="60" y="260" font-family="Open Sans Condensed" font-size="14" stroke="none" fill="#f5f3e7" font-weight="800" >Reject
-								</text>
-								</g>
-
-							<line x1="840" x2="890" y1="200" y2="150" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-
-							<line x1="840" x2="890" y1="200" y2="260" stroke-width="2" stroke="#443c3d" stroke-dasharray="2,1" />
-			  
-				</svg>
-			</div>
 			
 
 		  </div>
