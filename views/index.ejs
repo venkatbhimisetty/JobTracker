@@ -162,19 +162,36 @@
   font-size:16px;
   font-weight: 600;
 }
+
+
+
 </style>
 <script>
+
 	var svg = document.getElementsByTagName("svg");
-	
 	var rect = document.getElementsByTagName("rect");
-	
+
 	var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 	text.setAttribute('x', '10');
 	text.setAttribute('y', '20');
 	text.setAttribute('fill', '#000');
 	text.textContent = 'Hello, I am a blah blah blah blah blah';
+
+
+	// Dropdown filter
+
+	function filterText() {
+		var rex = new RegExp($('#jobaccount').children("option:selected").text());
+		var rex = new RegExp($('#vratingdrop').children("option:selected").text());
+			$('.content').hide();
+			$('.content').filter(function () {
+				return rex.test($(this).text());
+			}).show();
+		}
 	
-	</script>
+	
+
+</script>
 
 
 <script>
@@ -542,7 +559,7 @@ $.ajax({
 
 				for (var i = 0; i < result[0].length; i++) {
 					currentlocation = currentlocation +
-						'<option value="' + result[0][i].stateid + '">' + result[0][i].state + '</option>';
+						'<option value="' + result[0][i].locationId + '">' + result[0][i].location + '</option>';
 				}
 				$("#currentlocation").html(currentlocation);
 				$("#desiredlocation").html(currentlocation);
@@ -632,13 +649,14 @@ $.ajax({
 				success: function (result) {
 					for (var i = 0; i < result[0].length; i++) {
 						var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
-						tableData = tableData + "  <tr> " +
+						tableData = tableData + "  <tr class='content'> " +
 							//"<td id='' hidden>" + result[0][i].contactid + "</td>" +
 							"<td >" + result[0][i].requirmentId + "</td>" +
 							"<td >" + result[0][i].noofpositions + "</td>" +
 							"<td >" + result[0][i].experience + "</td>" +
 							"<td >" + result[0][i].role + "</td>" +
 							"<td >" + result[0][i].primaryskills + "</td>" +
+							"<td >" + result[0][i].customers + "</td>" +
 							"<td >" + "<a>" + "<i class='far fa-edit' data-target='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='jobdisplay(" + jobdescriptionID + ")' style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" +  "</td>" +
 							"</tr>";													
 					}
@@ -1363,7 +1381,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 
 
 					var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
-					tableData = tableData + "  <tr> " +
+					tableData = tableData + "  <tr class='content'> " +
 
 						"<td >" + result[0][i].recruiterId + "</td>" +
 						"<td >" + result[0][i].vendorcode + "</td>" +
@@ -2031,7 +2049,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						
 														<div class="col-sm-2">
 															<select class="form-control" id="jobaccount"
-																style="width:100%;height:30px;margin-left: -102px;"></select>
+																style="width:100%;height:30px;margin-left: -102px; " onchange='filterText()'></select>
 														</div>
 														<div class="col-sm-1" style="right:9%;margin:2px;">
 															<b>Location</b>
@@ -2045,10 +2063,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 														</div>
 														<div class="col-sm-1"></div>
 						
+						
+						
+						
 													</div>
 						
-													<div class="btn-group" style="top:-33px;position: relative;margin-left: 924px;">						
-														<a href="#" style="left: 116px;position: relative;"
+													<div class="col-sm-2" style="left: 95%; top: -58%;">						
+														<a href="#"
 															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">
 															<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 													    </a>
@@ -2068,6 +2089,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 																<th scope="col">Experince </th>
 																<th scope="col">Role </th>
 																<th scope="col">Primary Skills</th>  
+																<th scope="col">Account</th>  
 																<th  data-orderable="false"scope="col">Action	</th>        
 															</tr>            
 														</thead>            
@@ -2124,8 +2146,8 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													<select  class="form-control" id="profilejlocation"  style="width:100%;"></select>
 											</div> 
 											                                                        
-											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
-												<a href="#" style="left: 130px;position: relative;"
+											<div class="col-sm-2" style="left: 35%;">						
+												<a href="#"
 													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">
 													<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 												</a>
@@ -2152,7 +2174,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<th scope="col">Skill</th>
 															<th scope="col">Experience</th>
 															<th scope="col">Status</th>  
-															<th scope="col">Vendor</th> 
+															<th scope="col">Vendor Id</th> 
 															<th  data-orderable="false" scope="col">Action</th>         
 														</tr>            
 													</thead>            
@@ -2198,7 +2220,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											</div>
 												
 												<div class="col-sm-2" >
-													<select  class="form-control" id="vratingdrop" style="width:100%;height:30px;margin-left: -119px;"></select>
+													<select  class="form-control" id="vratingdrop" onchange="filterText()" style="width:100%;height:30px;margin-left: -119px;"></select>
 											</div>
 											<div class="col-sm-1" style="right:11%;margin:2px;">
 												<b>Location</b>
@@ -2206,15 +2228,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											<div class="col-sm-2" style="right:13%;">
 													<select  class="form-control" id="vendorlocation"  style="width:100%;"></select>
 											</div> 
-											                                                        
-											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
-												<a href="#" style="left: 130px;position: relative;"
+											<div class="col-sm-2" style="left: 35%;">                                                      
+												<a href="#" 
 													onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
 													<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 												</a>
-											</div>
-											
-												<div class="col-sm-1"></div>
+										</div>  
+												
 											</div>                  
 									</div>
 											<br>

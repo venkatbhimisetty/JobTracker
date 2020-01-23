@@ -130,7 +130,7 @@ module.exports = {
         });
     },
     getcurrentlocation: (req, res) => {
-        let query = "CALL proclookupstate()";
+        let query = "CALL proclookuplocation()";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
