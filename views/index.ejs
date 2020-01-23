@@ -122,9 +122,10 @@
 		margin-left: 310px !important;
 	}
 
-	.dataTables_length {
+	 .dataTables_length {
 		display: none;
-	}
+	} 
+	
 
 
 
@@ -194,6 +195,8 @@
 		profiletabcountrydropdown();
 	});
 
+	
+	
 	// <!-- TableToExcel fuction -->
 
 
@@ -245,7 +248,6 @@
 
 	// 	}
 	// })()
-
 
 
 
@@ -2016,7 +2018,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 																<th scope="col">Experince </th>
 																<th scope="col">Role </th>
 																<th scope="col">Primary Skills</th>  
-																<th scope="col">Action	</th>        
+																<th  data-orderable="false"scope="col">Action	</th>        
 															</tr>            
 														</thead>            
 														<tbody id="joblistingbody" style="color:black;">          
@@ -2040,7 +2042,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						<div id="profilesTab" class="tab-pane fade">
 							<div id="profileslisting" class="">
 
-								 <div class="container" style="background-color:white"> 
+								 <div class="container" style="background-color:white" > 
 
 									<!-- <div class="card-header" style="background-color: #73c7e7"> -->
 
@@ -2101,7 +2103,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 															<th scope="col">Experience</th>
 															<th scope="col">Status</th>  
 															<th scope="col">Vendor</th> 
-															<th scope="col">Action</th>         
+															<th  data-orderable="false" scope="col">Action</th>         
 														</tr>            
 													</thead>            
 													<tbody id="profileslistingbody" style="color:black;">                                   
@@ -2118,7 +2120,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							</div>
 						</div>
 							<div id="vendorsTab" class="tab-pane fade">
-							<div class="container" style="background-color: white">
+							<div class="container" style="background-color: white;height: 570px;">
 							
 								<div class="row" style="background-color: #65bddfc7; height: 56px;;">
 									
@@ -2177,29 +2179,31 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 							
 									<div class="entity-list" id="entity-list">
 							
-										<div class="table table-responsive" style="overflow: scroll;height: 450px;">
+										<div class="table table-responsive" style="overflow: auto;height: 400px;">
+
 							
-											<table id="vendortable" class="display dataTable table-bordered" style="width:100%;color: black;">           
-												<thead style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
-													<tr style="font-weight:bold;">	
-														<th scope="col" >Recruiter Id</th>
-														<th scope="col">Vendor Id</th>
-														<th scope="col">Vendor Name</th>
-														<th scope="col">Recruiter Name</th>
-														<th scope="col">Rating</th>  
-														<th scope="col">Vendor Email</th>    
-														<th scope="col">Action</th>       
-													</tr>            
-												</thead>            
-												<tbody id="vendorlistingbody" style="color:black">                                   
-												</tbody>       
-											</table> 							
+												<table id="vendortable" class="display dataTable table-bordered" style="width:100%;color: black;">
+													<thead
+														style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
+														<tr style="font-weight:bold;">
+															<th scope="col">Recruiter Id</th>
+															<th scope="col">Vendor Id</th>
+															<th scope="col">Vendor Name</th>
+															<th scope="col">Recruiter Name</th>
+															<th scope="col">Rating</th>
+															<th scope="col">Vendor Email</th>
+															<th data-orderable="false" scope="col">Action</th>
+														</tr>
+													</thead>
+													<tbody id="vendorlistingbody" style="color:black">
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
+							
 							</div>
-						
-					</div>
 				
 							</div>
 
