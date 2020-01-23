@@ -193,6 +193,8 @@
 		currentlocationdropdown();
 		profilestatusdropdown();
 		profiletabcountrydropdown();
+	
+	
 	});
 
 	
@@ -280,34 +282,61 @@
 				}
 			});
 		}
-		function jobreqiddropdown() {
-
+function jobreqiddropdown() {
+		
 			jobreqID = '';
 			var url = "http://localhost:2000/jobreqid";
 			$.ajax({
 				url: url,
 				type: "GET",
 				success: function (result) {
+				
 					//jobstatusdrop = jobstatusdrop+"<option>--Select--</option>";
 					for (var i = 0; i < result[0].length; i++) {
 						jobreqID = jobreqID +
 							'<option value="' + result[0][i].jobdescriptionId + '">' + result[0][i].requirmentId + '</option>';
 					}
 					$("#jobrecid").html(jobreqID);
+					$("#reqiddrop").html(jobreqID);
 					//$("#statuspedit").html(jobstatusdrop);
 				}
 			});
 		}
+		function jobtitilebyreqid() {
+		let reqId = $('[name="pjob_recid"]').find(":selected").val();
+
+
+		var jobtitilebyreqid = "";
+		var url = "http://localhost:2000/jobtitlebyreqid/" + reqId;
+	
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+
+				//profilestatebycountry = profilestatebycountry+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					jobtitilebyreqid = jobtitilebyreqid +
+						'<option value="' + result[0][i].jdtitle + '">' + result[0][i].jdtitle + '</option>';
+				}
+				$("#profilejobtitle").html(jobtitilebyreqid);
+				$("#profilejlocation").html(jobtitilebyreqid);
+			
+				
+			}
+		});
+	}
 
 function jobstatusdropdown() {
-console.log("coming");
+
 jobstatus = '';
 var url = "http://localhost:2000/jobstatusnew";
 $.ajax({
 	url: url,
 	type: "GET",
 	success: function (result) {
-		console.log(result);
+	
 		for (var i = 0; i < result[0].length; i++) {
 			jobstatus = jobstatus +
 				'<option value="' + result[0][i].jobstatusId + '">' + result[0][i].jobstatus + '</option>';
@@ -2065,13 +2094,13 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											</div>
 												
 												<div class="col-sm-2" >
-													<select  class="form-control" id="reqiddrop" style="width:100%;height:30px;margin-left: -62px;"></select>
+													<select  class="form-control" id="reqiddrop" onclick="jobtitilebyreqid()" style="width:100%;height:30px;margin-left: -62px;"></select>
 											</div>
 											<div class="col-sm-1" style="right:6%;margin:2px;">
 												<b>Job Title</b>
 											</div>
 											<div class="col-sm-2" style="right:8%;">
-													<select  class="form-control" id="jlocation"  style="width:100%;"></select>
+													<select  class="form-control" id="profilejlocation"  style="width:100%;"></select>
 											</div> 
 											                                                        
 											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
@@ -2498,14 +2527,14 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 								<label style="width: 113px;"><span style="color:red">*</span>Job Requirement ID:</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control"  id="jobrecid" name="pjob_recid" class="form-control" required>
+								<select class="form-control"  id="jobrecid" name="pjob_recid" onclick="jobtitilebyreqid()" class="form-control" required>
 								</select>
 							</div>
 							<div class="col-sm-2">
 								<label style="width: 113px;"><span style="color:red">*</span>Job Title:</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control"  id="jobtitle" name="pjob_title" class="form-control" required>
+								<select class="form-control"  id="profilejobtitle" name="pjob_title" class="form-control" required>
 								</select>
 							</div>
 							<div class="col-sm-1"> </div>

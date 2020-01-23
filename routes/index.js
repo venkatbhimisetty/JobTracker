@@ -105,6 +105,20 @@ module.exports = {
 
         });
     },
+    getprofilejobtitlebyreqId: (req, res) => {
+
+        let reqId = req.params.reqId;
+
+        let query = "CALL proclookupjobtitlebyreqid('" + reqId + "')";
+
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
+
+        });
+    },
     gethighestqual: (req, res) => {
         let query = "CALL proclookuphighestqualification()";
         db.query(query, (err, result) => {
@@ -138,11 +152,11 @@ module.exports = {
     joblistingdetails: (req, res) => {
        
         let customerquery = "CALL proclistjobdescription()";
-        console.log(customerquery);
+     
 
         db.query(customerquery, (err, result) => {
             if (err) {
-               console.log(err);
+      
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
@@ -167,16 +181,17 @@ module.exports = {
     },
     jobstatusnew: (req, res) => {
         
-       console.log("coming");
+   
         let query = "CALL proclookupjdstatus()";
       
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+               
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-            console.log(result);
+         
+        
         });
     },
 
@@ -256,11 +271,11 @@ module.exports = {
         Requirement + "', '" + Role + "','" + rolelevel + "','" + jobtitle + "','" + closedate + "','" + dateofreq + "','" + PSkill +
         "',  '" + SSkill + "','" + joblocation + "','" + locationflex + "', '" + jdstatus + "','" + jdduration + "','" + experince + "','" +
          Position + "', '" + jDescription + "','" + buComments + "','" + jdComments + "', '" + createdby + "',now(),'" + updateby + "',now())";
-     console.log(query);
+    
   
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+             
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
@@ -319,7 +334,7 @@ module.exports = {
     
         db.query(query, (err, result) => {
             if (err) {
-              console.log(err);
+        
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
