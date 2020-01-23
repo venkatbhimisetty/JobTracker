@@ -194,7 +194,19 @@ module.exports = {
         
         });
     },
+    vendorratingdropdown: (req, res) => {
 
+        let query = "CALL proclookuprating()"; // query database to get all the status
+
+        db.query(query, (err, result) => {
+            if (err) {
+                res.redirect('/');
+            }
+            else {
+                res.status(200).json(result);
+            }
+        });
+    },
 
     updatejoblisting: (req, res) => {
 
