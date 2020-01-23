@@ -618,7 +618,7 @@ $.ajax({
 							"<td >" + result[0][i].experience + "</td>" +
 							"<td >" + result[0][i].role + "</td>" +
 							"<td >" + result[0][i].primaryskills + "</td>" +
-							"<td >" + "<a>" + "<i class='far fa-edit' data-target='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='jobdisplay(" + jobdescriptionID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
+							"<td >" + "<a>" + "<i class='far fa-edit' data-target='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='jobdisplay(" + jobdescriptionID + ")' style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" +  "</td>" +
 							"</tr>";													
 					}
 					$( "#jobtable tbody" ).html(tableData);
@@ -914,7 +914,7 @@ $.ajax({
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" +  "</td>" +
 
 						"</tr>";
 
@@ -1351,7 +1351,7 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 						"<td >" + result[0][i].rating + "</td>" +
 						"<td >" + result[0][i].vendoremail + "</td>" +
 					
-						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#vendoreditmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  style='font-size: 20px;color:black;position:relative;left:15%;'></i>" + "<i class='far fa-trash-alt' data-target='#deletemodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' style='font-size: 20px;color:black;position:relative;left:38%;'></i>" + "</a>" +  "</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#vendoreditmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" +  "</td>" +
 						"</tr>";
 
 					}
@@ -2027,10 +2027,10 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 													</div>
 						
 													<div class="btn-group" style="top:-33px;position: relative;margin-left: 924px;">						
-														<button type="button" style="left: 103px;position: relative;"
+														<a href="#" style="left: 116px;position: relative;"
 															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">
 															<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
-														</button>
+													    </a>
 													</div>
 												</div>
 									
@@ -2104,10 +2104,10 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 											</div> 
 											                                                        
 											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
-												<button type="button" style="left: 117px;position: relative;"
+												<a href="#" style="left: 130px;position: relative;"
 													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">
 													<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
-												</button>
+												</a>
 											</div>
 											
 												<div class="col-sm-1"></div>
@@ -2168,33 +2168,34 @@ if (Jobrecid!="" &&jobreqcode!=""&& Salutation!="" && Firstname!="" && Lastname!
 										<div class="col-sm-1"></div>
 									   
 									   <div id="main-content" class="contact">
-											<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">						
-												<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
-														<div class="col-sm-1"></div>
-														<div class="col-sm-1" style="left:1px;margin:2px;">
-															<b>Name</b>
-														</div>
-														<div class="col-sm-1"></div>
-															<div class="col-sm-2">
-																<select  class="form-control" id=""style="width:100%;height:30px;margin-left: -80px;"></select>
-														</div>
-														<div class="col-sm-1" style="margin:2px;">
-															<b>Location</b>
-														</div>
-														<div class="col-sm-2" >
-															<select  class="form-control" id=""  style="width:100%;height:30px;"></select>
-														</div>	
-														<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">
-																					
-															<button type="button" style="left: 117px;position: relative;"
-																onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
-																<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
-															</button>
-														</div>
-													<div class="col-sm-1"></div>
-												</div>
-						  
+										
+										<div style="background-color:  #73c7e726;border: 1px solid #e3e3e3;height: 52px;">                                                                     
+											<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+												
+											<div class="col-sm-2" style="left:14px;margin:2px;">
+												<b>Name</b>
 											</div>
+												
+												<div class="col-sm-2" >
+													<select  class="form-control" id="vendorname" style="width:100%;height:30px;margin-left: -119px;"></select>
+											</div>
+											<div class="col-sm-1" style="right:11%;margin:2px;">
+												<b>Location</b>
+											</div>
+											<div class="col-sm-2" style="right:13%;">
+													<select  class="form-control" id="vendorlocation"  style="width:100%;"></select>
+											</div> 
+											                                                        
+											<div class="btn-group" style="top:-46px;position: relative;margin-left: 924px;">						
+												<a href="#" style="left: 130px;position: relative;"
+													onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
+													<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
+												</a>
+											</div>
+											
+												<div class="col-sm-1"></div>
+											</div>                  
+									</div>
 											<br>
 							
 										</div>
