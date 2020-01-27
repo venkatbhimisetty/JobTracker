@@ -344,20 +344,20 @@ module.exports = {
              "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
      
     
-    console.log(query);
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
+               
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-            console.log(result);
+           
         });
     },
 
     profilelistingdetails: (req, res) => {
 
         let query = "CALL proclistprofiles()";
+        
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -372,6 +372,7 @@ module.exports = {
         let prid = req.params.i;
 
         let query = "CALL proclistprofilesbyid('" + prid + "')";
+        
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -393,22 +394,22 @@ module.exports = {
         let Recruitername = req.body.Recruitername;
         let Recruitercontno = req.body.Recruitercontno;
         let Vendorcomments = req.body.Vendorcomments;
+        let VendorratingId = req.body.VendorratingId;
         let Vendorrating = req.body.Vendorrating;
         let Createdby = req.body.Createdby;
         let Updateby = req.body.Updateby;
 
 
-
         let query = "call procinsertvendor('" + Vendorcode + "', '" + Vendorname + "', '" + Vendorpriloc + "','" + Vendorspec + "','" +
-            Vendoremail + "',  '" + Recruiterid + "','" + Recruitername + "', '" + Recruitercontno + "','" + Vendorcomments + "', '" + Vendorrating + "','"
-            + Createdby + "',now(),'" + Updateby + "',now())";
-
+            Vendoremail + "', '" + Recruiterid + "','" + Recruitername + "', '" + Recruitercontno + "','" + Vendorcomments + "', '" + VendorratingId + "', '" 
+            + Vendorrating + "','" + Createdby + "',now(),'" + Updateby + "',now())";
 
 
         db.query(query, (err, result) => {
             if (err) {
-
+                
                 return res.status(500).send(err);
+               
             }
             res.status(200).json(result);
 
@@ -416,7 +417,9 @@ module.exports = {
     },
 
     vendorlistingdetails: (req, res) => {
+       
         let query = "CALL proclistvendors()";
+       
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -426,8 +429,11 @@ module.exports = {
         });
     },
     vendorlisting: (req, res) => {
+       
         let ivid = req.params.i;
+       
         let query = "CALL proclistvendorsbyid('" + ivid + "')";
+        
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -435,7 +441,9 @@ module.exports = {
             res.status(200).json(result);
         });
     },
+   
     updatevendor: (req, res) => {
+       
         let vendorid = req.body.vendorid;
         let Vendorcode = req.body.Vendorcode;
         let Vendorname = req.body.Vendorname;
@@ -445,14 +453,20 @@ module.exports = {
         let Recruiterid = req.body.Recruiterid;
         let Recruitername = req.body.Recruitername;
         let Recruitercontno = req.body.Recruitercontno;
+        let VendorratingId = req.body.VendorratingId;
         let Vendorrating = req.body.Vendorrating;
         let Vendorcomments = req.body.Vendorcomments;
         let Updateby = req.body.Updateby;
+       
+       
         let query = "CALL procUpdatevendor('" + vendorid + "','" + Vendorcode + "','" + Vendorname + "','" + Vendorpriloc +
             "','" + Vendorspec + "','" + Vendoremail + "','" + Recruiterid + "','" + Recruitername + "','" + Recruitercontno +
-            "','" + Vendorcomments + "','" + Vendorrating + "','" + Updateby + "', now() )";
-        db.query(query, (err, result) => {
+            "','" + Vendorcomments + "','" + VendorratingId + "','" + Vendorrating + "','" + Updateby + "', now() )";
+     
+
+            db.query(query, (err, result) => {
             if (err) {
+                
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
@@ -460,19 +474,18 @@ module.exports = {
     },
 
     updateprofile: (req, res) => {
-       // console.log("in update profile");
+       
+        // console.log("in update profile");
         let peditprofileId = req.body.peditprofileId;
         let peditjobdescriptionId = req.body.peditjobdescriptionId;
         let peditfirstname = req.body.peditfirstname;
         let peditlastname = req.body.peditlastname;
         let peditemail = req.body.peditemail;
         let peditmobile = req.body.peditmobile;
-        let peditdob = req.body.peditdob;
-      
+        let peditdob = req.body.peditdob;     
         let peditcity = req.body.peditcity;
         let peditstate = req.body.peditstate;
-        let peditcountry = req.body.peditcountry;
-       
+        let peditcountry = req.body.peditcountry;      
         let peditexperience = req.body.peditexperience;
         let pedithighestquali = req.body.pedithighestquali;
         let peditcurrentjobtitle = req.body.peditcurrentjobtitle;
@@ -487,11 +500,8 @@ module.exports = {
         let peditresumename = req.body.peditresumename;
         let peditvendorid = req.body.peditvendorid;
         let peditupdatedby = req.body.peditupdatedby;
-
-        let Evaluationdate = req.body.Evaluationdate;
-    
-        let Panel = req.body.Panel;
-       
+        let Evaluationdate = req.body.Evaluationdate;   
+        let Panel = req.body.Panel;      
         let Pjobtitle = req.body.Pjobtitle;
         let Psecondskill = req.body.Psecondskill;
 
@@ -501,10 +511,10 @@ module.exports = {
             "','" + peditmobile + "','" + peditdob + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditexperience + "','" + pedithighestquali + "','" + peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
             "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now(),'" +
             Evaluationdate + "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
-  //console.log(query);
+ 
         db.query(query, (err, result) => {
             if (err) {
-                //console.log(err);
+             
 
                 return res.status(500).send(err);
             }
@@ -512,6 +522,7 @@ module.exports = {
           
         });
     },
+  
     getjobreqID: (req, res) => {
         let query = "CALL proclookupreqId()";
        
