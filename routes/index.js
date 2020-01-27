@@ -297,22 +297,20 @@ module.exports = {
 
 
     addprofile: (req, res) => {
-
+     
         //  let Profileid = req.body.Profileid;
         let Jobrecid = req.body.Jobrecid;
         let jobreqcode = req.body.jobreqcode;
-        let Salutation = req.body.Salutation;
         let Firstname = req.body.Firstname;
         let Lastname = req.body.Lastname;
         let Email = req.body.Email;
         let Mobile = req.body.Mobile;
         let Dob = req.body.Dob;
-        let Address1 = req.body.Address1;
-        let Address2 = req.body.Address2;
+      
         let City = req.body.City;
         let State = req.body.State;
         let Country = req.body.Country;
-        let Postalcode = req.body.Postalcode;
+      
         let Experience = req.body.Experience;
         let Highestquali = req.body.Highestquali;
         let Currentjobtitle = req.body.Currentjobtitle;
@@ -329,27 +327,31 @@ module.exports = {
         let Createdby =  req.body.Createdby;
         let Updateby =  req.body.Updateby;
         let Evaluationdate=req.body.Evaluationdate;
-		let Internal_technicaldecision=req.body.Internal_technicaldecision;
+		
 		let Panel= req.body.Panel;
-		let Screeningselect=req.body.Screeningselect;
+       
+        let Pjobtitle= req.body.Pjobtitle;
+        let Psecondskill= req.body.Psecondskill;
 
 
 
-        let query = "call procinsertprofile('" + Jobrecid + "', '"+jobreqcode+"','" + Salutation + "', '" + Firstname + "','" + Lastname + "','" + 
-        Email + "',  '" + Mobile + "','" + Dob + "', '" + Address1 + "', '" + Address2 + "','" +
-            City + "','" + State + "','" + Country + "','" + Postalcode + "','" + Experience + 
+        let query = "call procinsertprofile('" + Jobrecid + "', '"+jobreqcode+"','" + Firstname + "','" + Lastname + "','" + 
+        Email + "',  '" + Mobile + "','" + Dob + "','" +
+            City + "','" + State + "','" + Country + "','" + Experience + 
             "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" + 
             Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
-            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate + "',now(),'" + Internal_technicaldecision + "','" + Panel + "','" + Screeningselect + "')";
+            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate +
+             "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
      
-         
     
+    console.log(query);
         db.query(query, (err, result) => {
             if (err) {
-        
+                console.log(err);
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
+            console.log(result);
         });
     },
 
@@ -458,20 +460,19 @@ module.exports = {
     },
 
     updateprofile: (req, res) => {
+       // console.log("in update profile");
         let peditprofileId = req.body.peditprofileId;
         let peditjobdescriptionId = req.body.peditjobdescriptionId;
-        let peditsalutationId = req.body.peditsalutationId;
         let peditfirstname = req.body.peditfirstname;
         let peditlastname = req.body.peditlastname;
         let peditemail = req.body.peditemail;
         let peditmobile = req.body.peditmobile;
         let peditdob = req.body.peditdob;
-        let peditaddress1 = req.body.peditaddress1;
-        let peditaddress2 = req.body.peditaddress2;
+      
         let peditcity = req.body.peditcity;
         let peditstate = req.body.peditstate;
         let peditcountry = req.body.peditcountry;
-        let peditpostalcode = req.body.peditpostalcode;
+       
         let peditexperience = req.body.peditexperience;
         let pedithighestquali = req.body.pedithighestquali;
         let peditcurrentjobtitle = req.body.peditcurrentjobtitle;
@@ -486,15 +487,29 @@ module.exports = {
         let peditresumename = req.body.peditresumename;
         let peditvendorid = req.body.peditvendorid;
         let peditupdatedby = req.body.peditupdatedby;
-        let query = "CALL procUpdateprofile('" + peditprofileId + "','" + peditjobdescriptionId + "','" + peditsalutationId + "','" + peditfirstname + "','" + peditlastname + "','" + peditemail +
-            "','" + peditmobile + "','" + peditdob + "','" + peditaddress1 + "','" + peditaddress2 + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditpostalcode +
-            "','" + peditexperience + "','" + pedithighestquali + "','" + peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
-            "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now())";
+
+        let Evaluationdate = req.body.Evaluationdate;
+    
+        let Panel = req.body.Panel;
+       
+        let Pjobtitle = req.body.Pjobtitle;
+        let Psecondskill = req.body.Psecondskill;
+
+
+
+        let query = "CALL procUpdateprofile('" + peditprofileId + "','" + peditjobdescriptionId + "','" + peditfirstname + "','" + peditlastname + "','" + peditemail +
+            "','" + peditmobile + "','" + peditdob + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditexperience + "','" + pedithighestquali + "','" + peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
+            "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now(),'" +
+            Evaluationdate + "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
+  //console.log(query);
         db.query(query, (err, result) => {
             if (err) {
+                //console.log(err);
+
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
+          
         });
     },
     getjobreqID: (req, res) => {

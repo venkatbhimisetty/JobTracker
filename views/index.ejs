@@ -29,6 +29,12 @@
 
 </head>
 <style>
+	@media (min-width: 1200px){
+.container {
+    max-width: 1076px;
+  
+}
+	}
 	.dropdown-menu li:hover {
 		background-color: #ddd;
 	}
@@ -45,7 +51,7 @@
 
 	.container-fluid {
 		width: 100%;
-		padding-right: 15px;
+		padding-right:48px;
 		padding-left: 15px;
 		margin-right: auto;
 		margin-left: auto;
@@ -346,7 +352,7 @@ else{
 		});
 	}
 	function jobtitilebyreqid() {
-		var reqId = $('[name="pjob_recid"]').find(":selected").val();
+		
 		var reqId = $('[name="reqid_drop"]').find(":selected").val();
 
 		var jobtitilebyreqid = "";
@@ -363,13 +369,36 @@ else{
 					jobtitilebyreqid = jobtitilebyreqid +
 						'<option value="' + result[0][i].jdtitle + '">' + result[0][i].jdtitle + '</option>';
 				}
-				$("#profilejobtitle").html(jobtitilebyreqid);
+				
 				$("#profilejlocation").html(jobtitilebyreqid);
-
-
 			}
 		});
 	}
+	
+
+	function editjobtitilebyreqid() {
+		var reqId = $('[name="pjob_recid"]').find(":selected").val();
+	
+
+		var jobtitilebyreqid = "";
+		var url = "http://localhost:2000/jobtitlebyreqid/" + reqId;
+
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function (result) {
+
+				//profilestatebycountry = profilestatebycountry+"<option>--Select--</option>";
+
+				for (var i = 0; i < result[0].length; i++) {
+					jobtitilebyreqid = jobtitilebyreqid +
+						'<option value="' + result[0][i].jdtitle + '">' + result[0][i].jdtitle + '</option>';
+				}
+				$("#profilejobtitle").html(jobtitilebyreqid);
+			}
+		});
+	}
+
 
 	function jobstatusdropdown() {
 
@@ -516,33 +545,27 @@ else{
 			url: url,
 			type: "GET",
 			success: function (result) {
-
 				//profilecountry = profilecountry+"<option>--Select--</option>";
-
 				for (var i = 0; i < result[0].length; i++) {
 					profilecountry = profilecountry +
 						'<option value="' + result[0][i].countryid + '">' + result[0][i].country + '</option>';
 				}
 				$("#country").html(profilecountry);
 				$("#peditcountry").html(profilecountry);
-
 			}
 		});
 	}
 	function profiletabstatedropdown() {
+
 		let profilecountry = $('[name="p_country"]').find(":selected").val();
-
-
+		console.log(profilecountry);
 		var profilestatebycountry = "";
 		var url = "http://localhost:2000/statebycountry/" + profilecountry;
-
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-
 				//profilestatebycountry = profilestatebycountry+"<option>--Select--</option>";
-
 				for (var i = 0; i < result[0].length; i++) {
 					profilestatebycountry = profilestatebycountry +
 						'<option value="' + result[0][i].stateid + '">' + result[0][i].state + '</option>';
@@ -968,7 +991,7 @@ else{
 			type: "GET",
 			success: function (result) {
 				for (var i = 0; i < result[0].length; i++) {
-
+				console.log(result);
 					var profileID = "\"" + result[0][i].profileid + "\"";
 					var statusId = "\"" + result[0][i].status + "\"";
 					tableData = tableData + "  <tr> " +
@@ -1007,7 +1030,7 @@ else{
 				$("#editprofilehiddenId").text(result[0][0].profileid);
 				$("#pprofileid").text(result[0][0].profileid);
 				$("#peditjobrecid").text(result[0][0].jobreqcode);
-				$("#peditsalutation").val(result[0][0].salutationid).attr('selected', 'selected');
+			
 				$("#peditfirstname").val(result[0][0].firstname);
 				$("#peditlastname").val(result[0][0].lastname);
 				$("#peditemail").val(result[0][0].email);
@@ -1032,6 +1055,12 @@ else{
 				$("#peditstatus").val(result[0][0].statusid).attr('selected', 'selected');
 				$("#peditvendorid").val(result[0][0].vendorid);
 				$("#peditfilename").val(result[0][0].resumename);
+				$("#peditevaldate").val(result[0][0].evaluationdate.slice(0, 19));
+				$("#peditinternaltd").val(result[0][0].internal_technicaldecision).attr('selected', 'selected');
+				$("#peditpanel").val(result[0][0].panel);
+				$("#peditscreening").val(result[0][0].screeningselect).attr('selected', 'selected');
+				$("#peditjobtitle").val(result[0][0].pjobtitle).attr('selected', 'selected');
+				$("#seditskillset").val(result[0][0].psecondaryskill);
 
 			}
 
@@ -1040,22 +1069,20 @@ else{
 	}
 
 	function addprofile() {
-
-		//            var Profileid = $('[name="profileid"]').val();
+	
+		//var Profileid = $('[name="profileid"]').val();
 		var Jobrecid = $('[name="pjob_recid"]').val();
-		var jobreqcode = $("#jobrecid option:selected").text();
-		var Salutation = $('[name="psalutation_id"]').val();
+		var jobreqcode =$("#jobrecid option:selected").text();
 		var Firstname = $('[name="pfirst_name"]').val();
 		var Lastname = $('[name="plast_name"]').val();
 		var Email = $('[name="p_email"]').val();
 		var Mobile = $('[name="p_mobile"]').val();
 		var Dob = $('[name="p_dob"]').val();
-		var Address1 = $('[name="p_address1"]').val();
-		var Address2 = $('[name="p_address2"]').val();
+		
 		var City = $('[name="p_city"]').val();
 		var State = $('[name="p_state"]').val();
 		var Country = $('[name="p_country"]').val();
-		var Postalcode = $('[name="p_postalcode"]').val();
+	
 		var Experience = $('[name="p_experience"]').val();
 		var Highestquali = $('[name="p_highestquali"]').val();
 		var Currentjobtitle = $('[name="pcurrent_jobtitle"]').val();
@@ -1077,29 +1104,26 @@ else{
 		var Createdby = 'Admin';
 		var Updateby = 'Admin';
 		var Evaluationdate = $('[name="eval_date"]').val();
-		var Internal_technicaldecision = $('[name="internal_td"]').val();
+	
 		var Panel = $('[name="p_panel"]').val();
-		var Screeningselect = $('[name="p_screening"]').val();
-
-
+	
+		var Pjobtitle = $('[name="pjob_title"]').val();
+		var Psecondskill = $('[name="sskill_set"]').val();
+		
 
 		var data = {
 
-			//            "Profileid": Profileid,
+			//"Profileid": Profileid,
 			"Jobrecid": Jobrecid,
-			"jobreqcode": jobreqcode,
-			"Salutation": Salutation,
+			"jobreqcode":jobreqcode,
 			"Firstname": Firstname,
 			"Lastname": Lastname,
 			"Email": Email,
 			"Mobile": Mobile,
 			"Dob": Dob,
-			"Address1": Address1,
-			"Address2": Address2,
 			"City": City,
 			"State": State,
 			"Country": Country,
-			"Postalcode": Postalcode,
 			"Experience": Experience,
 			"Highestquali": Highestquali,
 			"Currentjobtitle": Currentjobtitle,
@@ -1121,70 +1145,57 @@ else{
 			"Createdby": Createdby,
 			"Updateby": Updateby,
 			"Evaluationdate": Evaluationdate,
-			"Internal_technicaldecision": Internal_technicaldecision,
 			"Panel": Panel,
-			"Screeningselect": Screeningselect
-
+			"Pjobtitle": Pjobtitle,
+			"Psecondskill": Psecondskill
+			
 		}
 
 		data = JSON.stringify(data);
 
 		var url = "http://localhost:2000/addprofiles";
 
+// if (Jobrecid!="" &&jobreqcode!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
+// &&Address2!="" && City!="" && State!="" && Country!="" &&Postalcode!="" && Experience!="" && Highestquali!="" && Currentjobtitle!=""
+// &&Currentsalary!="" && Expectedsalary!="" && Skillset!="" && Skypeid!="" &&Noticeperiod!="" && Currentlocation!="" && Desiredlocation!="" && Status!=""
+// && Resume!="" && Vendorid!="" && Evaluationdate!="" && Internal_technicaldecision!="" && Panel!="" && Screeningselect!="")
 
-		if (Jobrecid != "" && jobreqcode != "" && Salutation != "" && Firstname != "" && Lastname != "" && Email != "" && Mobile != "" && Dob != "" && Address1 != ""
-			&& Address2 != "" && City != "" && State != "" && Country != "" && Postalcode != "" && Experience != "" && Highestquali != "" && Currentjobtitle != ""
-			&& Currentsalary != "" && Expectedsalary != "" && Skillset != "" && Skypeid != "" && Noticeperiod != "" && Currentlocation != "" && Desiredlocation != "" && Status != ""
-			&& Resume != "" && Vendorid != "" && Evaluationdate != "" && Internal_technicaldecision != "" && Panel != "" && Screeningselect != "") {
-			$.ajax({
-				url: url,
-				type: "POST",
-				async: false,
-				data: data,
-				contentType: "application/json",
-				dataType: "json",
-				success: function (result) {
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: false,
+			data: data,
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
 
-					$('#successmodal').modal('show');
-
-
-
-				},
-				error: function () {
-
-
-				}
-			});
-		}
-
+				$('#successmodal').modal('show');
+				profileslistingdetails();
+				
+			},
+			error: function () {
+			}
+		});
 	}
 
 	function updateprofile() {
 
 		var peditprofileId = $('[name="editprofile_hiddenId"]').text();
 		var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
-		var peditsalutationId = $('[name="peditsalutation_id"]').val();
 		var peditfirstname = $('[name="peditfirst_name"]').val();
 		var peditlastname = $('[name="peditlast_name"]').val();
 		var peditemail = $('[name="pedit_email"]').val();
 		var peditmobile = $('[name="pedit_mobile"]').val();
 		var peditdob = $('[name="pedit_dob"]').val();
-		var peditaddress1 = $('[name="pedit_address1"]').val();
-		var peditaddress2 = $('[name="pedit_address2"]').val();
 		var peditcity = $('[name="pedit_city"]').val();
 		var peditstate = $('[name="pedit_state"]').val();
 		var peditcountry = $('[name="pedit_country"]').val();
-		var peditpostalcode = $('[name="pedit_postalcode"]').val();
 		var peditexperience = $('[name="pedit_experience"]').val();
 		var pedithighestquali = $('[name="pedit_highestquali"]').val();
 		var peditcurrentjobtitle = $('[name="peditcurrent_jobtitle"]').val();
 		var peditcurrentsalary = $('[name="peditcurrent_salary"]').val();
 		var peditexpectedsalary = $('[name="peditexpected_salary"]').val();
 		var peditresigned = $('[name="editresigned"]').val();
-		var peditevaldate = $('[name="pedit_evaldate"]').val();
-		var peditinternaltd = $('[name="pedit_internaltd"]').val();
-		var peditpanel = $('[name="pedit_panel"]').val();
-		var peditscreening = $('[name="pedit_screening"]').val();
 		var peditskillset = $('[name="peditskill_set"]').val();
 		var peditskypeid = $('[name="peditskype_id"]').val();
 		var peditnoticeperiod = $('[name="peditnotice_period"]').val();
@@ -1193,7 +1204,8 @@ else{
 		var peditstatus = $('[name="pedit_status"]').val();
 		var peditresumename = $('[name="peditresume_name"]').val();
 		var peditvendorid = $('[name="pedit_vendorid"]').val();
-
+		var peditevaldate = $('[name="pedit_evaldate"]').val();
+		var peditpanel = $('[name="pedit_panel"]').val();
 
 		var data = {
 
@@ -1205,12 +1217,9 @@ else{
 			"peditemail": peditemail,
 			"peditmobile": peditmobile,
 			"peditdob": peditdob,
-			"peditaddress1": peditaddress1,
-			"peditaddress2": peditaddress2,
 			"peditcity": peditcity,
 			"peditstate": peditstate,
 			"peditcountry": peditcountry,
-			"peditpostalcode": peditpostalcode,
 			"peditexperience": peditexperience,
 			"pedithighestquali": pedithighestquali,
 			"peditcurrentjobtitle": peditcurrentjobtitle,
@@ -1223,9 +1232,7 @@ else{
 			"peditdesiredlocation": peditdesiredlocation,
 			"peditresigned": peditresigned,
 			"peditevaldate": peditevaldate,
-			"peditinternaltd": peditinternaltd,
 			"peditpanel": peditpanel,
-			"peditscreening": peditscreening,
 			"peditstatus": peditstatus,
 			"peditresumename": peditresumename,
 			"peditvendorid": peditvendorid,
@@ -1257,15 +1264,13 @@ else{
 
 		$("#profileeditbtn").hide();
 		$("#updateeditprofile").show();
-		//            $("#peditjobrecid").attr('disabled', false);
+		//$("#peditjobrecid").attr('disabled', false);
 		$("#peditsalutation").attr('disabled', false);
 		$("#peditfirstname").attr('disabled', false);
 		$("#peditlastname").attr('disabled', false);
 		$("#peditemail").attr('disabled', false);
 		$("#peditmobile").attr('disabled', false);
 		$("#peditdob").attr('disabled', false);
-		$("#peditaddress1").attr('disabled', false);
-		$("#peditaddress2").attr('disabled', false);
 		$("#peditcity").attr('disabled', false);
 		$("#peditstate").attr('disabled', false);
 		$("#peditcountry").attr('disabled', false);
@@ -1288,6 +1293,7 @@ else{
 		$("#peditstatus").attr('disabled', false);
 		$("#peditvendorid").attr('disabled', false);
 		$("#peditfilename").attr('disabled', false);
+		$("#seditskillset").attr('disabled', false);
 	}
 
 	function disableprofileedit() {
@@ -1306,7 +1312,7 @@ else{
 		$("#peditcity").attr('disabled', true);
 		$("#peditstate").attr('disabled', true);
 		$("#peditcountry").attr('disabled', true);
-		$("#peditpostalcode").attr('disabled', true);
+	
 		$("#peditexperience").attr('disabled', true);
 		$("#pedithighestquali").attr('disabled', true);
 		$("#peditcurrentjobtitle").attr('disabled', true);
@@ -1325,7 +1331,114 @@ else{
 		$("#peditstatus").attr('disabled', true);
 		$("#peditvendorid").attr('disabled', true);
 		$("#peditfilename").attr('disabled', true);
+			$("#seditskillset").attr('disabled', true);
 	}
+	function updateprofile(){
+        console.log("in update profile");
+        var peditprofileId = $('[name="editprofile_hiddenId"]').text(); 
+            var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
+          
+            var peditfirstname = $('[name="peditfirst_name"]').val();
+            var peditlastname= $('[name="peditlast_name"]').val();
+            var peditemail = $('[name="pedit_email"]').val();
+            var peditmobile = $('[name="pedit_mobile"]').val();
+            var peditdob = $('[name="pedit_dob"]').val();
+           
+            var peditcity = $('[name="pedit_city"]').val();
+            var peditstate = $('[name="pedit_state"]').val();
+            var peditcountry = $('[name="pedit_country"]').val();
+           
+            var peditexperience = $('[name="pedit_experience"]').val();
+            var pedithighestquali = $('[name="pedit_highestquali"]').val();
+            var peditcurrentjobtitle = $('[name="peditcurrent_jobtitle"]').val();
+            var peditcurrentsalary = $('[name="peditcurrent_salary"]').val();
+			var peditexpectedsalary = $('[name="peditexpected_salary"]').val();
+			var peditresigned = $('[name="editresigned"]').val();
+			var peditevaldate = $('[name="pedit_evaldate"]').val();
+			var peditinternaltd = $('[name="pedit_internaltd"]').val();
+			var peditpanel = $('[name="pedit_panel"]').val();
+			var peditscreening = $('[name="pedit_screening"]').val();
+            var peditskillset = $('[name="peditskill_set"]').val();
+            var peditskypeid = $('[name="peditskype_id"]').val();
+            var peditnoticeperiod = $('[name="peditnotice_period"]').val();
+            var peditcurrentlocation = $('[name="peditcurrent_location"]').val();
+            var peditdesiredlocation = $('[name="peditdesired_location"]').val();
+            var peditstatus = $('[name="pedit_status"]').val();
+            var peditresumename = $('[name="peditresume_name"]').val();
+			var peditvendorid = $('[name="pedit_vendorid"]').val();
+
+			var Evaluationdate = $('[name="pedit_evaldate"]').val();
+		
+			var Panel = $('[name="pedit_panel"]').val();
+		
+			var Pjobtitle = $('[name="peditjob_title"]').val();
+			var Psecondskill = $('[name="seditskill_set"]').val();
+		
+                        
+
+            var data = {
+                
+                "peditprofileId":peditprofileId,
+                "peditjobdescriptionId": peditjobdescriptionId,
+              
+                "peditfirstname": peditfirstname,
+                "peditlastname": peditlastname,
+                "peditemail": peditemail,
+                "peditmobile": peditmobile,
+                "peditdob": peditdob,
+               
+                "peditcity": peditcity,
+                "peditstate": peditstate,
+                "peditcountry": peditcountry,
+              
+                "peditexperience": peditexperience,
+                "pedithighestquali":pedithighestquali,
+                "peditcurrentjobtitle": peditcurrentjobtitle,
+                "peditcurrentsalary": peditcurrentsalary,
+                "peditexpectedsalary": peditexpectedsalary,
+                "peditskillset": peditskillset,
+                "peditskypeid": peditskypeid,
+                "peditnoticeperiod": peditnoticeperiod,
+                "peditcurrentlocation": peditcurrentlocation,
+				"peditdesiredlocation": peditdesiredlocation,
+				"peditresigned": peditresigned,
+				"peditevaldate": peditevaldate,
+				"peditinternaltd": peditinternaltd,
+				"peditpanel": peditpanel,
+				"peditscreening": peditscreening,				
+				"peditstatus": peditstatus,
+                "peditresumename": peditresumename,
+                "peditvendorid": peditvendorid,
+                "peditupdatedby": 'Admin',
+				"Evaluationdate": Evaluationdate,
+						
+				"Panel": Panel,
+            
+                "Pjobtitle": Pjobtitle,
+                "Psecondskill": Psecondskill
+            }
+            
+            data = JSON.stringify(data);
+            url="http://localhost:2000/updateprofile/"+peditprofileId,
+            
+            $.ajax({
+                url: url,
+                type: "POST",
+                async: false,
+                data: data,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    
+                },
+                error: function () {
+                }
+            });
+            
+            profileslistingdetails();
+
+        }
+	
 
 
 
@@ -2101,7 +2214,7 @@ else{
 													<div id="tbMarksContainer">
 														<div class="entity-list" id="entity-list">
 															<div class="table table-responsive"
-																style="overflow: auto;height: 450px;">
+																style="overflow: auto;height:337px;width:100%;">
 
 																<table id="jobtable"
 																	class="display dataTable table-bordered"
@@ -2195,7 +2308,7 @@ else{
 
 										<div class="entity-list" id="entity-list">
 
-											<div class="table table-responsive" style="overflow: auto;height:440px">
+											<div class="table table-responsive" style="overflow: auto;height:337px">
 
 												<table class="display dataTable table-bordered"
 													style="width:100%;color: black;" id="profiletable">
@@ -2228,7 +2341,7 @@ else{
 							</div>
 						</div>
 						<div id="vendorsTab" class="tab-pane fade">
-							<div class="container" style="background-color: white;height: 570px;">
+							<div class="container" style="background-color: white;height: 520px;">
 
 								<div class="row" style="background-color: #65bddfc7; height: 56px;;">
 
@@ -2295,7 +2408,7 @@ else{
 												<div class="entity-list" id="entity-list">
 
 													<div class="table table-responsive"
-														style="overflow: auto;height: 400px;">
+														style="overflow: auto;height:337px;">
 
 														<table id="vendortable" class="display dataTable table-bordered"
 															style="width:100%;color: black;">
@@ -2626,7 +2739,7 @@ else{
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="jobrecid" name="pjob_recid"
-										onclick="jobtitilebyreqid()" class="form-control" required>
+										onclick="editjobtitilebyreqid()" class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -2852,38 +2965,22 @@ else{
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Evaluation
-										Date:</label>
+									<label style="width: 113px;"><span style="color:red">*</span>Evaluation Date:</label>
 								</div>
 								<div class="col-sm-3">
 									<input type="date" class="form-control" id="evaldate" name="eval_date" required>
 								</div>
 								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Internal Technical
-										Decision:</label>
+										<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
+						
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="internaltd" name="internal_td" required></select>
+										<input type="text" class="form-control" id="ppanel" name="p_panel" required>
+								
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-							<div class="row">
-								<div class="col-sm-1"></div>
-								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
-								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="ppanel" name="p_panel" required>
-								</div>
-								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Screening
-										Slect:</label>
-								</div>
-								<div class="col-sm-3">
-									<select class="form-control" id="pscreening" name="p_screening" required></select>
-								</div>
-								<div class="col-sm-1"> </div>
-							</div>
+					
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 							</div>
@@ -3082,13 +3179,8 @@ else{
 
 								</div>
 
-								<div class="col-sm-2">
-									<label style="width: 113px;">Postal Code:</label>
-								</div>
-								<div class="col-sm-3">
-									<input type="text" id="peditpostalcode" name="pedit_postalcode" class="form-control"
-										disabled>
-								</div>
+								<div class="col-sm-2"></div>
+								<div class="col-sm-3"></div>
 								<div class="col-sm-1"> </div>
 							</div>
 
@@ -3228,33 +3320,15 @@ else{
 										required>
 								</div>
 								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Internal Technical
-										Decision:</label>
+										<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
+									
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="peditinternaltd" name="pedit_internaltd"
-										required></select>
+									<input type="text" class="form-control" id="peditpanel" name="pedit_panel" required>			
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-							<div class="row">
-								<div class="col-sm-1"></div>
-								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
-								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="peditpanel" name="pedit_panel" required>
-								</div>
-								<div class="col-sm-2">
-									<label style="width: 113px;"><span style="color:red">*</span>Screening
-										Slect:</label>
-								</div>
-								<div class="col-sm-3">
-									<select class="form-control" id="peditscreening" name="pedit_screening"
-										required></select>
-								</div>
-								<div class="col-sm-1"> </div>
-							</div>
+						
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 							</div>
