@@ -14,6 +14,7 @@ const {getHomePage,getJobStatusdrop,getbusinessunit,getexpdropdown,getsalesregio
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
     addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew,vendorratingdropdown,getprofilejobtitlebyreqId} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
+
 const port = 2000;
 
 // create connection to database

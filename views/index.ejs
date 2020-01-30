@@ -1144,16 +1144,9 @@ console.log(url);
 			type: "GET",
 			success: function (result) {
 				for (var i = 0; i < result[0].length; i++) {
-					console.log(result);
+					
 					var profileID = "\"" + result[0][i].profileid + "\"";
 					var statusId = "\"" + result[0][i].status + "\"";
-					// console.log(result[0][0].status);
-					
-                    // if (result[0][0].status=="Ltts Screening Reject"){
-						
-					// 	$("#interviewbutton").hide();
-
-					// }
 					
 					tableData = tableData + "  <tr> " +
 
@@ -1191,7 +1184,6 @@ console.log(url);
 				$("#editprofilehiddenId").text(result[0][0].profileid);
 				$("#pprofileid").text(result[0][0].profileid);
 				$("#peditjobrecid").text(result[0][0].jobreqcode);
-
 				$("#peditfirstname").val(result[0][0].firstname);
 				$("#peditlastname").val(result[0][0].lastname);
 				$("#peditemail").val(result[0][0].email);
@@ -1973,41 +1965,11 @@ console.log(url);
 				</div>
 				<div class="col-sm-7">
 					<div class="collapse navbar-collapse" id="ftco-nav">
-						<!-- <ul class="nav" style="margin-left: -48px;">
-
-							<li class="active"><a href="#" data-toggle="tab" data-target="#jobsTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 900;">REQUIREMENTS</li>
-							
-							<li><a href="#" data-toggle="tab" id="jobstabid" data-target="#operationsTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 800;padding: 0 32px;"
-									onclick="joblistingdetails()">JOBS</a></li>
-							<li><a href="#" data-target="#profilesTab" data-toggle="tab" id="profiletabid"
-									style="font-size: 20px;color: #73c7e7;font-weight: 800;padding: 0 0px;"
-									onclick="profileslistingdetails()">PROFILES</a></li>
-							<li><a href="#" data-target="#vendorsTab" data-toggle="tab" id="vendortabid"
-									style="font-size: 20px;color: #73c7e7;font-weight: 800;padding: 0 32px;"
-									onclick="vendorlistingdetails()">VENDORS</a></li>
-							<li class=""><a href="#" data-toggle="tab" href="/interviewTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 800;">INTERVIEWS</a></li>
-
-						</ul> -->
+						
 						<ul class="nav" >
 
                             <li class="active"><a href="#" data-toggle="tab" data-target="#jobsTab"
                                     style="font-size: 20px;color: #73c7e7;font-weight: 900;">Requirments</li>
-                            <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
-                                                                                                                                                style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 23px;">Operations 
-                                                                                                                                                <span class="caret"></span></a>
-                                                                                                                <ul class="dropdown-menu"
-                                                                                                                                                style="left: 19px;background-color: #73c7e7;text-align: center;">
-                                                                                                                                                <li><a  data-toggle="tab" id="jobstabid"  data-target="#operationsTab" style="color: white;"
-                                                                                                                                                                                onclick="joblistingdetails()">Jobs</a></li>
-                                                                                                                                                <li><a data-target="#profilesTab" data-toggle="tab" id="profiletabid" style="color: white;"
-                                                                                                                                           onclick="profileslistingdetails()">Profiles</a></li>
-                                                                                                                                                <li><a data-target="#vendorsTab" data-toggle="tab" id="vendortabid" style="color: white;"
-                                                                                                                                                                onclick="vendorlistingdetails()">Vendors</a></li>
-                                                                                                                                </ul> 
-                                                                                                                </li>-->
                             <li><a href="#" data-toggle="tab" id="jobstabid" data-target="#operationsTab"
                                     style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
                                     onclick="joblistingdetails()">Jobs</a></li>
@@ -2037,12 +1999,7 @@ console.log(url);
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
 				style="height:420px;" data-scrollax-parent="true">
 				<div class="col-xl-12 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
-					<!-- <p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have
-                                                                                                <span class="number" data-number="8">0</span> great job offers you observe!</p>
-                                                                                <h1 class="mb-5" style="font-weight: 100;font-size:40px;"
-                                                                                                data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Job Creation</h1> -->
-
-
+				
 					<div class="tab-content" style="top:155px;position: relative;">
 						<div id="jobsTab" class="tab-pane fade in active" style=" background-color: white;">
 							<form class="search-job" method="post" onsubmit="return false">
@@ -2656,7 +2613,7 @@ console.log(url);
 		</div>
 
 
-		<!-- jobeditModal -->
+		<!-- Job Edit Modal -->
 
 		<div class="modal fade" id="jobModal" role="dialog" style="margin-top: 3%;">
 			<div class="modal-dialog modal-lg">
@@ -2924,9 +2881,7 @@ console.log(url);
 			</div>
 		</div>
 
-
-
-		<!-- profilemodal -->
+		<!-- profile Modal -->
 
 		<div class="modal fade" id="profilesmodal" role="dialog" style="margin-top: 3%;">
 			<div class="modal-dialog modal-lg">
@@ -3631,6 +3586,7 @@ console.log(url);
 
 
 		<!-- Vendor Modal -->
+		
 		<div class="modal fade" id="vendormodal" role="dialog" style="margin-top: 10%;">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -3889,6 +3845,7 @@ console.log(url);
 		<script src="js/jquery.animateNumber.min.js"></script>
 		<script src="js/scrollax.min.js"></script>
 		<script src="js/main.js"></script>
-</body>
+
+	</body>
 
 </html>

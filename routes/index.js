@@ -506,7 +506,6 @@ module.exports = {
         let Psecondskill = req.body.Psecondskill;
 
 
-
         let query = "CALL procUpdateprofile('" + peditprofileId + "','" + peditjobdescriptionId + "','" + peditfirstname + "','" + peditlastname + "','" + peditemail +
             "','" + peditmobile + "','" + peditdob + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditexperience + "','" + pedithighestquali + "','" + peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
             "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now(),'" +
