@@ -337,14 +337,14 @@ module.exports = {
             Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate +
              "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
      
-    
+    console.log(query);
         db.query(query, (err, result) => {
             if (err) {
                
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-           
+           console.log(query);
         });
     },
 
@@ -409,7 +409,18 @@ module.exports = {
 
         });
     },
+    getprofilevendordropdown: (req, res) => {
+       
+        let query = "CALL procprofilevendor()";
+       
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.status(200).json(result);
 
+        });
+    },
     vendorlistingdetails: (req, res) => {
        
         let query = "CALL proclistvendors()";
@@ -471,7 +482,7 @@ module.exports = {
        
         // console.log("in update profile");
         let peditprofileId = req.body.peditprofileId;
-        let peditjobdescriptionId = req.body.peditjobdescriptionId;
+       // let peditjobdescriptionId = req.body.peditjobdescriptionId;
         let peditfirstname = req.body.peditfirstname;
         let peditlastname = req.body.peditlastname;
         let peditemail = req.body.peditemail;
@@ -496,22 +507,26 @@ module.exports = {
         let peditupdatedby = req.body.peditupdatedby;
         let Evaluationdate = req.body.Evaluationdate;   
         let Panel = req.body.Panel;      
-        let Pjobtitle = req.body.Pjobtitle;
+       // let Pjobtitle = req.body.Pjobtitle;
         let Psecondskill = req.body.Psecondskill;
 
 
-        let query = "CALL procUpdateprofile('" + peditprofileId + "','" + peditjobdescriptionId + "','" + peditfirstname + "','" + peditlastname + "','" + peditemail +
-            "','" + peditmobile + "','" + peditdob + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditexperience + "','" + pedithighestquali + "','" + peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
+
+        let query = "CALL procUpdateprofile('" + peditprofileId + "','" + peditfirstname + "','" + peditlastname + "','" + peditemail +
+            "','" + peditmobile + "','" + peditdob + "','" + peditcity + "','" + peditstate + "','" + peditcountry + "','" + peditexperience + "','" + pedithighestquali + "','" +
+             peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
             "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now(),'" +
-            Evaluationdate + "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
- 
+            Evaluationdate + "','" + Panel + "','" + Psecondskill + "')";
+ console.log(query);
         db.query(query, (err, result) => {
             if (err) {
-             
+                console.log(err);
 
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
+            console.log(result);
+
           
         });
     },

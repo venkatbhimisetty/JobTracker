@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getexpdropdown,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
-    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew,getvendornamedropdown,getprofilejobtitlebyreqId} = require('./routes/index');
+    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew,getvendornamedropdown,getprofilejobtitlebyreqId,getprofilevendordropdown} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
 
 const port = 2000;
@@ -61,8 +61,8 @@ app.post('/jdescription', addjd);
 
 app.get('/experince', getexpdropdown);
 app.get('/jobstatus', getJobStatusdrop);
-app.get('/jobreqid', getjobreqID); 
-
+app.get('/jobreqid', getjobreqID); 
+app.get('/profilevendor',getprofilevendordropdown); 
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
 app.post('/updatejoblisting/:id',updatejoblisting);

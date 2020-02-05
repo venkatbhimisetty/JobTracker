@@ -33,60 +33,64 @@
 		}
 	}
 
+	#lttsInterviewBtn,#customerInterviewBtn{
+		
+		font-size: 11px;
+		background: #4473a3;
+    border: 1px solid #4473a3!important;
+    color: #fff !important;
+	border-radius: 5px;
+    height: 39px;
+	}
+
 	#progressbar {
-
-		/*CSS counters to number the steps*/
-		counter-reset: step;
-	}
-
-	#progressbar li {
-		list-style-type: none;
-		color: black;
-		font-size: 12px;
-		width: 20%;
-		float: left;
-		position: relative;
-
-	}
-
-	#progressbar li:before {
-		content: "";
-		counter-increment: step;
-		width: 30px;
-		height: 30px;
-		border: 2px solid #bebebe;
-		line-height: 20px;
-		display: block;
-		font-size: 10px;
-		color: #bebebe;
-		background: white;
-		border-radius: 50%;
-		margin: 0 87px 10px auto;
-		text-align: center;
+	
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: black;
+	font-size: 12px;
+	width: 20%;
+	float: left;
+	position: relative;
 
 	}
+#progressbar li:before {
+	content: "";
+	counter-increment: step;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #bebebe;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color:#bebebe;
+	background: white;
+	border-radius: 50%;
+	margin: 0 87px 10px auto;
+	text-align: center;
 
-	/*progressbar connectors*/
-	#progressbar li:after {
-		content: '';
-		width: 79%;
-		height: 3px;
-		background: #979797;
-		position: absolute;
-		left: -61%;
-		top: 15px;
-		z-index: 0;
-		/*put it behind the numbers*/
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width:81%;
+	height: 3px;
+	background: #979797;
+	position: absolute;
+	left: -62%;
+	top: 15px;
+	z-index: 0; /*put it behind the numbers*/
 
 
-	}
-
-	#progressbar li:first-child:after {
-		/*connector not needed before the first step*/
-		content: none;
-	}
-
-	/* #progressbar li:nth-child(2):before {
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/* #progressbar li:nth-child(2):before {
 
 	background-color: red; 
 } */
@@ -252,86 +256,103 @@
 </style>
 
 <script type="text/javascript">
-
-	function statuschange(pstatusid) {
-		if (pstatusid == "Ltts Screening Reject") {
-			$("#lttsScreening").removeClass("active").addClass("is-reject");
-			$("#lttsInterview").removeClass("active submitted");
-			$("#customerScreening").removeClass("active submitted");
-			$("#customerInterview").removeClass("active submitted");
-			$("#onboarded").removeClass("active submitted");
-		}
-		else if (pstatusid == "Submitted For Ltts Screening") {
-			$("#lttsScreening").removeClass("is-reject active").addClass("submitted");
-			$("#lttsInterview").removeClass("active is-reject submitted");
-			$("#customerScreening").removeClass("active is-reject submitted");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Shortlist For Ltts Interview") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("active is-reject").addClass("submitted");
-			$("#customerScreening").removeClass("active is-reject submitted");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Ltts Interview Reject") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("active submitted").addClass("is-reject");
-			$("#customerScreening").removeClass("active is-reject submitted");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Ltts Interview Select") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("active is-reject submitted");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Submitted For Customer Screening") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("is-reject active").addClass("submitted");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Customer Screening Reject") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("submitted active").addClass("is-reject");
-			$("#customerInterview").removeClass("active is-reject submitted");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Shortlist For Customer Interview") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("is-reject active").addClass("submitted");
-			$("#customerInterview").removeClass("is-reject").addClass("active");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Customer Interview Reject") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-			$("#customerInterview").removeClass("submitted active").addClass("is-reject");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "Customer Interview Select") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-			$("#customerInterview").removeClass("is-reject").addClass("active");
-			$("#onboarded").removeClass("active is-reject submitted");
-		}
-		else if (pstatusid == "On-Boarded") {
-			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-			$("#customerInterview").removeClass("is-reject submitted").addClass("active");
-			$("#onboarded").removeClass("is-reject submitted").addClass("active");
-		}
+function statuschange(pstatusid){
+	console.log(pstatusid);
+	if(pstatusid=="Ltts Screening Reject"){
+		console.log("if loop");
+		$("#lttsScreening").removeClass("active").addClass("is-reject");
+		$("#lttsInterview").removeClass("active submitted");
+		$("#customerScreening").removeClass("active submitted");
+		$("#customerInterview").removeClass("active submitted");
+		$("#onboarded").removeClass("active submitted");
 	}
+	else if(pstatusid=="Submitted For Ltts Screening"){
+		console.log("else loop");
+
+		$("#lttsScreening").removeClass("is-reject active").addClass("submitted");
+		$("#lttsInterview").removeClass("active is-reject submitted");
+		$("#customerScreening").removeClass("active is-reject submitted");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Shortlist For Ltts Interview"){
+		console.log("else loop");
+		$("#lttsInterviewBtn").css("display","block");
+
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("active is-reject").addClass("submitted");
+		$("#customerScreening").removeClass("active is-reject submitted");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Ltts Interview Reject"){
+		console.log("if loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("active submitted").addClass("is-reject");
+		$("#customerScreening").removeClass("active is-reject submitted");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Ltts Interview Select"){
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("active is-reject submitted");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Submitted For Customer Screening"){
+		
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("is-reject active").addClass("submitted");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Customer Screening Reject"){
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("submitted active").addClass("is-reject");
+		$("#customerInterview").removeClass("active is-reject submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Shortlist For Customer Interview"){
+		console.log("else loop");
+		$("#customerInterviewBtn").css("display","block");
+
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+		$("#customerInterview").removeClass("is-reject active").addClass("submitted");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Customer Interview Reject"){
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+		$("#customerInterview").removeClass("submitted active").addClass("is-reject");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="Customer Interview Select"){
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+		$("#customerInterview").removeClass("is-reject submitted").addClass("active");
+		$("#onboarded").removeClass("active is-reject submitted");
+	}
+	else if(pstatusid=="On-Boarded"){
+		console.log("else loop");
+		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+		$("#customerInterview").removeClass("is-reject submitted").addClass("active");
+		$("#onboarded").removeClass("is-reject submitted").addClass("active");
+	}
+}
 
 </script>
 
@@ -385,8 +406,31 @@
 		profilestatusdropdown();
 		profiletabcountrydropdown();
 		getvendornamedropdown();
+		//vendorratingdropdown();
+		profilevendordropdown();
+
 
 	});
+
+
+	function profilevendordropdown() {
+
+profilevendor = '';
+var url = "http://localhost:2000/profilevendor";
+$.ajax({
+	url: url,
+	type: "GET",
+	success: function (result) {
+
+		for (var i = 0; i < result[0].length; i++) {
+			profilevendor = profilevendor +
+				'<option value="' + result[0][i].vendorId + '">' + result[0][i].vendorname + '</option>';
+		}
+		$("#profilevendorid").html(profilevendor);
+		//$("#statuspedit").html(jobstatusdrop);
+	}
+});
+}
 
 
 	function uploadOnChange() {
@@ -780,6 +824,7 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
+				console.log(result);
 				for (var i = 0; i < result[0].length; i++) {
 					var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
 					tableData = tableData + "  <tr class='content'> " +
@@ -1075,8 +1120,8 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
+				console.log(result);
 				for (var i = 0; i < result[0].length; i++) {
-
 					var profileID = "\"" + result[0][i].profileid + "\"";
 					var statusId = "\"" + result[0][i].status + "\"";
 
@@ -1088,7 +1133,7 @@
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "<i id='interviewbutton' class='btn btn-primary'  style='font-size:12px;margin-left:15%;display:none'>" + "Create Interview" + "</i>" + "</a>" + "</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "</a>" + "</td>" +
 
 						"</tr>";
 
@@ -1111,7 +1156,7 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-
+console.log(result);
 
 				$("#editprofilehiddenId").text(result[0][0].profileid);
 				$("#pprofileid").text(result[0][0].profileid);
@@ -1120,7 +1165,7 @@
 				$("#peditlastname").val(result[0][0].lastname);
 				$("#peditemail").val(result[0][0].email);
 				$("#peditmobile").val(result[0][0].mobile);
-				$("#peditdob").val(result[0][0].dob.slice(0, 19));
+				$("#peditdob").val(result[0][0].dob.slice(0, 10));
 				$("#peditaddress1").val(result[0][0].address1);
 				$("#peditaddress2").val(result[0][0].address2);
 				$("#peditcity").val(result[0][0].city);
@@ -1133,6 +1178,7 @@
 				$("#peditcurrentsalary").val(result[0][0].currentsalary);
 				$("#peditexpectedsalary").val(result[0][0].expectedsalary);
 				$("#peditskillset").val(result[0][0].skillset);
+				$("#seditskillset").val(result[0][0].psecondaryskill);
 				$("#peditskypeid").val(result[0][0].skypeid);
 				$("#peditnoticeperiod").val(result[0][0].noticeperiod);
 				$("#peditcurrentlocation").val(result[0][0].currentlocationid).attr('selected', 'selected');
@@ -1140,12 +1186,13 @@
 				$("#peditstatus").val(result[0][0].statusid).attr('selected', 'selected');
 				$("#peditvendorid").val(result[0][0].vendorid);
 				$("#peditfilename").val(result[0][0].resumename);
-				$("#peditevaldate").val(result[0][0].evaluationdate.slice(0, 19));
+				$("#peditevaldate").val(result[0][0].evaluationdate.slice(0, 10));
 				$("#peditinternaltd").val(result[0][0].internal_technicaldecision).attr('selected', 'selected');
 				$("#peditpanel").val(result[0][0].panel);
 				$("#peditscreening").val(result[0][0].screeningselect).attr('selected', 'selected');
-				$("#peditjobtitle").val(result[0][0].pjobtitle).attr('selected', 'selected');
-				$("#seditskillset").val(result[0][0].psecondaryskill);
+				$("#peditjobtitle").text(result[0][0].pjobtitle)
+				
+				
 
 			}
 
@@ -1266,7 +1313,7 @@
 	function updateprofile() {
 
 		var peditprofileId = $('[name="editprofile_hiddenId"]').text();
-		var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
+		//var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
 		var peditfirstname = $('[name="peditfirst_name"]').val();
 		var peditlastname = $('[name="peditlast_name"]').val();
 		var peditemail = $('[name="pedit_email"]').val();
@@ -1295,7 +1342,7 @@
 		var data = {
 
 			"peditprofileId": peditprofileId,
-			"peditjobdescriptionId": peditjobdescriptionId,
+			//"peditjobdescriptionId": peditjobdescriptionId,
 			"peditsalutationId": peditsalutationId,
 			"peditfirstname": peditfirstname,
 			"peditlastname": peditlastname,
@@ -1326,7 +1373,9 @@
 		}
 
 		data = JSON.stringify(data);
+		conosle.log(data);
 		url = "http://localhost:2000/updateprofile/" + peditprofileId,
+		conosle.log(url);
 
 			$.ajax({
 				url: url,
@@ -1423,7 +1472,7 @@
 	function updateprofile() {
 
 		var peditprofileId = $('[name="editprofile_hiddenId"]').text();
-		var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
+	//	var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
 		var peditfirstname = $('[name="peditfirst_name"]').val();
 		var peditlastname = $('[name="peditlast_name"]').val();
 		var peditemail = $('[name="pedit_email"]').val();
@@ -1452,14 +1501,14 @@
 		var peditvendorid = $('[name="pedit_vendorid"]').val();
 		var Evaluationdate = $('[name="pedit_evaldate"]').val();
 		var Panel = $('[name="pedit_panel"]').val();
-		var Pjobtitle = $('[name="peditjob_title"]').val();
+		//var Pjobtitle = $('[name="peditjob_title"]').text();
 		var Psecondskill = $('[name="seditskill_set"]').val();
 
 
 		var data = {
 
 			"peditprofileId": peditprofileId,
-			"peditjobdescriptionId": peditjobdescriptionId,
+			//"peditjobdescriptionId": peditjobdescriptionId,
 			"peditfirstname": peditfirstname,
 			"peditlastname": peditlastname,
 			"peditemail": peditemail,
@@ -1489,7 +1538,7 @@
 			"peditupdatedby": 'Admin',
 			"Evaluationdate": Evaluationdate,
 			"Panel": Panel,
-			"Pjobtitle": Pjobtitle,
+			//"Pjobtitle": Pjobtitle,
 			"Psecondskill": Psecondskill
 		}
 
@@ -1886,7 +1935,7 @@
 			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 
 
-				<div class="col-sm-5">
+				<div class="col-sm-7">
 					<a class="navbar-brand" href="index.html">
 						<h1 style="font-weight:600;font-size:50px;color:#6bf682;">JOB TRACKER</h1>
 					</a>
@@ -1895,7 +1944,7 @@
 						<span class="oi oi-menu"></span> Menu
 					</button>
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-5">
 					<div class="collapse navbar-collapse" id="ftco-nav">
 
 						<ul class="nav">
@@ -1912,7 +1961,7 @@
 									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
 									onclick="vendorlistingdetails()">Vendors</a></li>
 							<li class=""><a href="#" data-toggle="tab" href="/interviewTab"
-									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;display:none;">Interviews</a></li>
 
 						</ul>
 
@@ -3072,12 +3121,12 @@
 								</div>
 
 								<div class="col-sm-2">
-									<label><span style="color:red">*</span>Vendor ID:</label>
+									<label><span style="color:red">*</span>Vendor:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="profilevendorid" name="p_vendorid" class="form-control"
-										required>
-								</div>
+									<select  id="profilevendorid" name="p_vendorid" class="form-control"
+										required></select>
+															</div>
 								<div class="col-sm-1"> </div>
 
 							</div>
@@ -3134,7 +3183,12 @@
 					<div class="modal-body" style="overflow:auto;height:450px;">
 						<form action="" method="">
 							<div class="row">
+								<div class="col-sm-9">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Profile Status:</h4>
+							</div>
+							<div class="col-sm-3"><button  id="lttsInterviewBtn" style="display: none;">Schedule Ltts Interview</button>
+								<button  id="customerInterviewBtn" style="display: none;">Schedule Customer Interview</button>
+							</div>
 							</div>
 							<hr style="width: 100%;top: -9px;position: relative;">
 
@@ -3170,9 +3224,8 @@
 									<label style="width: 113px;"><span style="color:red">*</span>Job Title:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="peditjobtitle" name="peditjob_title"
-										class="form-control" required>
-									</select>
+									<p id="peditjobtitle" name="peditjob_title" style="color:black"></p>
+									
 								</div>
 
 
@@ -3405,7 +3458,7 @@
 										Date:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="date" class="form-control" id="peditevaldate" name="pedit_evaldate"
+									<input type="text" class="form-control" id="peditevaldate" name="pedit_evaldate"
 										required>
 								</div>
 								<div class="col-sm-2">
