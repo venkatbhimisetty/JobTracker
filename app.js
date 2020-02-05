@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const {getHomePage,getJobStatusdrop,getbusinessunit,getexpdropdown,getsalesregionunit,getsalesrepunit,getcustomers,addjd,joblistingdetails,
     joblisting,updatejoblisting,getcurrentlocation,getsalutation,gethighestqual,getprofilestatus,getprofilecountry,getprofilestatebycountry,
-    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew,vendorratingdropdown,getprofilejobtitlebyreqId} = require('./routes/index');
+    addprofile,profilelistingdetails,profilelisting,updateprofile,addvendor,vendorlistingdetails,vendorlisting,updatevendor,getjobreqID,jobstatusnew,getvendornamedropdown,getprofilejobtitlebyreqId} = require('./routes/index');
 const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage,} = require('./routes/player');
 
 const port = 2000;
@@ -61,7 +61,7 @@ app.post('/jdescription', addjd);
 
 app.get('/experince', getexpdropdown);
 app.get('/jobstatus', getJobStatusdrop);
-app.get('/jobreqid', getjobreqID); 
+app.get('/jobreqid', getjobreqID); 
 
 app.get('/joblistingdetails', joblistingdetails);
 app.get('/joblisting/:i', joblisting);
@@ -77,7 +77,6 @@ app.get('/vendorlistingdetails', vendorlistingdetails);
 app.get('/vendorlisting/:i', vendorlisting);
 app.post('/updatevendor/:id', updatevendor);
 
-
 //profileTab lookup's
 app.get('/curentlocation', getcurrentlocation);
 app.get('/salutation', getsalutation);
@@ -90,7 +89,7 @@ app.get('/statebycountry/:profilecountry', getprofilestatebycountry);
 app.get('/jobtitlebyreqid/:reqId', getprofilejobtitlebyreqId);
 
 app.get('/jobstatusnew', jobstatusnew);
-app.get('/vendorratingdropdown', vendorratingdropdown);
+app.get('/vendornamedropdown', getvendornamedropdown);
 
 // set the app to listen on the port
 app.listen(port, () => {

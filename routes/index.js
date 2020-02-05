@@ -180,23 +180,17 @@ module.exports = {
         });
     },
     jobstatusnew: (req, res) => {
-        
-   
         let query = "CALL proclookupjdstatus()";
-      
         db.query(query, (err, result) => {
-            if (err) {
-               
+            if (err) {              
                 return res.status(500).send(err);
             }
-            res.status(200).json(result);
-         
-        
+            res.status(200).json(result);       
         });
     },
-    vendorratingdropdown: (req, res) => {
+    getvendornamedropdown: (req, res) => {
 
-        let query = "CALL proclookuprating()"; // query database to get all the status
+        let query = "CALL proclookupvendorname()"; // query database to get all the status
 
         db.query(query, (err, result) => {
             if (err) {

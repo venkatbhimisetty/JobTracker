@@ -4,7 +4,7 @@
 <head>
 	<title>JobPortal</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -22,7 +22,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
 		integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-		
+
 
 </head>
 <style>
@@ -34,75 +34,82 @@
 	}
 
 	#progressbar {
-	
-	/*CSS counters to number the steps*/
-	counter-reset: step;
-}
-#progressbar li {
-	list-style-type: none;
-	color: black;
-	font-size: 12px;
-	width: 20%;
-	float: left;
-	position: relative;
+
+		/*CSS counters to number the steps*/
+		counter-reset: step;
+	}
+
+	#progressbar li {
+		list-style-type: none;
+		color: black;
+		font-size: 12px;
+		width: 20%;
+		float: left;
+		position: relative;
 
 	}
-#progressbar li:before {
-	content: "";
-	counter-increment: step;
-	width: 30px;
-	height: 30px;
-	border: 2px solid #bebebe;
-	line-height: 20px;
-	display: block;
-	font-size: 10px;
-	color:#bebebe;
-	background: white;
-	border-radius: 50%;
-	margin: 0 87px 10px auto;
-	text-align: center;
 
-}
-/*progressbar connectors*/
-#progressbar li:after {
-	content: '';
-	width:79%;
-	height: 3px;
-	background: #979797;
-	position: absolute;
-	left: -61%;
-	top: 15px;
-	z-index: 0; /*put it behind the numbers*/
+	#progressbar li:before {
+		content: "";
+		counter-increment: step;
+		width: 30px;
+		height: 30px;
+		border: 2px solid #bebebe;
+		line-height: 20px;
+		display: block;
+		font-size: 10px;
+		color: #bebebe;
+		background: white;
+		border-radius: 50%;
+		margin: 0 87px 10px auto;
+		text-align: center;
+
+	}
+
+	/*progressbar connectors*/
+	#progressbar li:after {
+		content: '';
+		width: 79%;
+		height: 3px;
+		background: #979797;
+		position: absolute;
+		left: -61%;
+		top: 15px;
+		z-index: 0;
+		/*put it behind the numbers*/
 
 
-}
-#progressbar li:first-child:after {
-	/*connector not needed before the first step*/
-	content: none; 
-}
-/* #progressbar li:nth-child(2):before {
+	}
+
+	#progressbar li:first-child:after {
+		/*connector not needed before the first step*/
+		content: none;
+	}
+
+	/* #progressbar li:nth-child(2):before {
 
 	background-color: red; 
 } */
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
-#progressbar li.active:before,  #progressbar li.active:after{
-	background: green;
-	color: white;
-	border: 2px solid green;
-}
+	/*marking active/completed steps green*/
+	/*The number of the step and the connector before it = green*/
+	#progressbar li.active:before,
+	#progressbar li.active:after {
+		background: green;
+		color: white;
+		border: 2px solid green;
+	}
 
-#progressbar li.submitted:before {
-	background-color: #157efb;
-	border: 2px solid #157efb;
+	#progressbar li.submitted:before {
+		background-color: #157efb;
+		border: 2px solid #157efb;
 
-  }
+	}
 
-#progressbar li.is-reject:before {
-	background-color: red;
-	border: 2px solid red;
+	#progressbar li.is-reject:before {
+		background-color: red;
+		border: 2px solid red;
 
-  }
+	}
 
 
 	.dropdown-menu li:hover {
@@ -245,100 +252,86 @@
 </style>
 
 <script type="text/javascript">
-function statuschange(pstatusid){
-	console.log(pstatusid);
-	if(pstatusid=="Ltts Screening Reject"){
-		console.log("if loop");
 
-		$("#lttsScreening").removeClass("active").addClass("is-reject");
-		$("#lttsInterview").removeClass("active submitted");
-		$("#customerScreening").removeClass("active submitted");
-		$("#customerInterview").removeClass("active submitted");
-		$("#onboarded").removeClass("active submitted");
+	function statuschange(pstatusid) {
+		if (pstatusid == "Ltts Screening Reject") {
+			$("#lttsScreening").removeClass("active").addClass("is-reject");
+			$("#lttsInterview").removeClass("active submitted");
+			$("#customerScreening").removeClass("active submitted");
+			$("#customerInterview").removeClass("active submitted");
+			$("#onboarded").removeClass("active submitted");
+		}
+		else if (pstatusid == "Submitted For Ltts Screening") {
+			$("#lttsScreening").removeClass("is-reject active").addClass("submitted");
+			$("#lttsInterview").removeClass("active is-reject submitted");
+			$("#customerScreening").removeClass("active is-reject submitted");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Shortlist For Ltts Interview") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("active is-reject").addClass("submitted");
+			$("#customerScreening").removeClass("active is-reject submitted");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Ltts Interview Reject") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("active submitted").addClass("is-reject");
+			$("#customerScreening").removeClass("active is-reject submitted");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Ltts Interview Select") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("active is-reject submitted");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Submitted For Customer Screening") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("is-reject active").addClass("submitted");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Customer Screening Reject") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("submitted active").addClass("is-reject");
+			$("#customerInterview").removeClass("active is-reject submitted");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Shortlist For Customer Interview") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("is-reject active").addClass("submitted");
+			$("#customerInterview").removeClass("is-reject").addClass("active");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Customer Interview Reject") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+			$("#customerInterview").removeClass("submitted active").addClass("is-reject");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "Customer Interview Select") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+			$("#customerInterview").removeClass("is-reject").addClass("active");
+			$("#onboarded").removeClass("active is-reject submitted");
+		}
+		else if (pstatusid == "On-Boarded") {
+			$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
+			$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
+			$("#customerScreening").removeClass("is-reject submitted").addClass("active");
+			$("#customerInterview").removeClass("is-reject submitted").addClass("active");
+			$("#onboarded").removeClass("is-reject submitted").addClass("active");
+		}
 	}
-	else if(pstatusid=="Submitted For Ltts Screening"){
-		console.log("else loop");
-
-		$("#lttsScreening").removeClass("is-reject active").addClass("submitted");
-		$("#lttsInterview").removeClass("active is-reject submitted");
-		$("#customerScreening").removeClass("active is-reject submitted");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Shortlist For Ltts Interview"){
-		console.log("else loop");
-
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("active is-reject").addClass("submitted");
-		$("#customerScreening").removeClass("active is-reject submitted");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Ltts Interview Reject"){
-		console.log("if loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("active submitted").addClass("is-reject");
-		$("#customerScreening").removeClass("active is-reject submitted");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Ltts Interview Select"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("active is-reject submitted");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Submitted For Customer Screening"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("is-reject active").addClass("submitted");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Customer Screening Reject"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("submitted active").addClass("is-reject");
-		$("#customerInterview").removeClass("active is-reject submitted");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Shortlist For Customer Interview"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("is-reject active").addClass("submitted");
-		$("#customerInterview").removeClass("is-reject").addClass("active");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Customer Interview Reject"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-		$("#customerInterview").removeClass("submitted active").addClass("is-reject");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="Customer Interview Select"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-		$("#customerInterview").removeClass("is-reject").addClass("active");
-		$("#onboarded").removeClass("active is-reject submitted");
-	}
-	else if(pstatusid=="On-Boarded"){
-		console.log("else loop");
-		$("#lttsScreening").removeClass("is-reject submitted").addClass("active");
-		$("#lttsInterview").removeClass("is-reject submitted").addClass("active");
-		$("#customerScreening").removeClass("is-reject submitted").addClass("active");
-		$("#customerInterview").removeClass("is-reject submitted").addClass("active");
-		$("#onboarded").removeClass("is-reject submitted").addClass("active");
-	}
-}
 
 </script>
 
@@ -346,16 +339,12 @@ function statuschange(pstatusid){
 
 	var svg = document.getElementsByTagName("svg");
 	var rect = document.getElementsByTagName("rect");
-
 	var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 	text.setAttribute('x', '10');
 	text.setAttribute('y', '20');
 	text.setAttribute('fill', '#000');
 	text.textContent = 'Hello, I am a blah blah blah blah blah';
-
-
 	// Dropdown filter
-
 	function filterText() {
 		var rex = new RegExp($('#jobaccount').children("option:selected").text());
 		$('.content').hide();
@@ -373,7 +362,7 @@ function statuschange(pstatusid){
 
 		}).show();
 	}
-
+	
 
 
 </script>
@@ -395,64 +384,9 @@ function statuschange(pstatusid){
 		currentlocationdropdown();
 		profilestatusdropdown();
 		profiletabcountrydropdown();
-		vendorratingdropdown();
+		getvendornamedropdown();
 
 	});
-
-
-	
-	// <!-- TableToExcel fuction -->
-
-
-	// var tmp;
-	// function strip(html) {
-	//            tmp = document.createElement("DIV");
-	//            tmp.innerHTML = html;
-	//            return tmp.textContent || tmp.innerText || "";
-	// } 
-
-
-	// var tableToExcel = (function () {
-	//            console.log("tableToExcel");
-	//            var uri = 'data:application/vnd.ms-excel;base64,',
-	//                            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-
-	//                            base64 = function (s) {
-	//                                            return window.btoa(unescape(encodeURIComponent(s)))
-	//                            },
-
-	//                            format = function (s, c) {
-	//                                            return s.replace(/{(\w+)}/g, function (m, p) {
-	//                                                            return c[p];
-	//                                            })
-	//                            }
-	//            return function (table, name, filename) {
-	//                            if (!table.nodeType)
-	//                                            table = $('#' + table).clone();
-
-	//                            var hyperLinks = table.find('a');
-	//                            for (i = 0; i < hyperLinks.length; i++) {
-
-	//                                            var sp1 = document.createElement("span");
-	//                                            var sp1_content = document.createTextNode($(hyperLinks[i]).text());
-	//                                            sp1.appendChild(sp1_content);
-	//                                            var sp2 = hyperLinks[i];
-	//                                            var parentDiv = sp2.parentNode;
-	//                                            parentDiv.replaceChild(sp1, sp2);
-	//                            }
-
-	//                            var ctx = {
-	//                                            worksheet: name || 'Worksheet',
-	//                                            table: table[0].innerHTML
-	//                            }
-
-	//                            document.getElementById("dlink").href = uri + base64(format(template, ctx));
-	//                            document.getElementById("dlink").download = filename;
-	//                            document.getElementById("dlink").click();
-
-	//            }
-	// })()
-
 
 
 	function uploadOnChange() {
@@ -510,7 +444,7 @@ function statuschange(pstatusid){
 
 		var jobtitilebyreqid = "";
 		var url = "http://localhost:2000/jobtitlebyreqid/" + reqId;
-console.log(url);
+		console.log(url);
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -554,14 +488,12 @@ console.log(url);
 
 
 	function jobstatusdropdown() {
-
 		jobstatus = '';
 		var url = "http://localhost:2000/jobstatusnew";
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-
 				for (var i = 0; i < result[0].length; i++) {
 					jobstatus = jobstatus +
 						'<option value="' + result[0][i].jobstatusId + '">' + result[0][i].jobstatus + '</option>';
@@ -820,9 +752,9 @@ console.log(url);
 		});
 	}
 
-	function vendorratingdropdown() {
+	function getvendornamedropdown() {
 		vendorratingdrop = '';
-		var url = "http://localhost:2000/vendorratingdropdown";
+		var url = "http://localhost:2000/vendornamedropdown";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -830,12 +762,11 @@ console.log(url);
 
 				for (var i = 0; i < result[0].length; i++) {
 					vendorratingdrop = vendorratingdrop +
-						'<option value="' + result[0][i].vendorratingId + '">' + result[0][i].vendorrating + '</option>';
+						'<option value="' + result[0][i].vendorId + '">' + result[0][i].vendorname + '</option>';
 				}
 				$("#vratingdrop").html(vendorratingdrop);
 				$("#vendorrating").html(vendorratingdrop);
 				$("#editvendorrating").html(vendorratingdrop);
-
 			}
 		});
 
@@ -857,7 +788,8 @@ console.log(url);
 						"<td >" + result[0][i].noofpositions + "</td>" +
 						"<td >" + result[0][i].experience + "</td>" +
 						"<td >" + result[0][i].role + "</td>" +
-						"<td >" + result[0][i].primaryskills + "</td>" +
+						// "<td >" + result[0][i].primaryskills + "</td>" +
+						"<td >" + result[0][i].jobstatus + "</td>" +
 						"<td >" + result[0][i].customers + "</td>" +
 						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#jobModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick='jobdisplay(" + jobdescriptionID + ")' style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" + "</td>" +
 						"</tr>";
@@ -1144,10 +1076,10 @@ console.log(url);
 			type: "GET",
 			success: function (result) {
 				for (var i = 0; i < result[0].length; i++) {
-					
+
 					var profileID = "\"" + result[0][i].profileid + "\"";
 					var statusId = "\"" + result[0][i].status + "\"";
-					
+
 					tableData = tableData + "  <tr> " +
 
 						"<td >" + result[0][i].jobreqcode + "</td>" +
@@ -1156,7 +1088,7 @@ console.log(url);
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
 						"<td >" + result[0][i].vendorid + "</td>" +
-						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "<i id='interviewbutton' class='btn btn-primary'  style='font-size:12px;margin-left:15%;display:none'>"+"Create Interview"+"</i>"+ "</a>" +"</td>" +
+						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "<i id='interviewbutton' class='btn btn-primary'  style='font-size:12px;margin-left:15%;display:none'>" + "Create Interview" + "</i>" + "</a>" + "</td>" +
 
 						"</tr>";
 
@@ -1164,7 +1096,7 @@ console.log(url);
 
 				// $("#profileslistingbody").html(tableData);
 				$("#profiletable tbody").html(tableData);
-			
+
 				$("#profiletable").DataTable();
 
 			}
@@ -1703,7 +1635,7 @@ console.log(url);
 						"<td >" + result[0][i].vendorcode + "</td>" +
 						"<td >" + result[0][i].vendorname + "</td>" +
 						"<td >" + result[0][i].recruitername + "</td>" +
-						"<td >" + result[0][i].vendorrating + "</td>" +
+						// "<td >" + result[0][i].vendorrating + "</td>" +
 						"<td >" + result[0][i].vendoremail + "</td>" +
 
 						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#vendoreditmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='vendordisplay(" + Vendorid + ")'  style='font-size: 20px;color:black;position:relative;left:37%;'></i>" + "</a>" + "</td>" +
@@ -1965,24 +1897,24 @@ console.log(url);
 				</div>
 				<div class="col-sm-7">
 					<div class="collapse navbar-collapse" id="ftco-nav">
-						
-						<ul class="nav" >
 
-                            <li class="active"><a href="#" data-toggle="tab" data-target="#jobsTab"
-                                    style="font-size: 20px;color: #73c7e7;font-weight: 900;">Requirments</li>
-                            <li><a href="#" data-toggle="tab" id="jobstabid" data-target="#operationsTab"
-                                    style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
-                                    onclick="joblistingdetails()">Jobs</a></li>
-                            <li><a href="#" data-target="#profilesTab" data-toggle="tab" id="profiletabid"
-                                    style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 0px;"
-                                    onclick="profileslistingdetails()">Profiles</a></li>
-                            <li><a href="#" data-target="#vendorsTab" data-toggle="tab" id="vendortabid"
-                                    style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
-                                    onclick="vendorlistingdetails()">Vendors</a></li>
-                            <li class=""><a href="#" data-toggle="tab" href="/interviewTab"
-                                    style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
+						<ul class="nav">
 
-                        </ul>
+							<li class="active"><a href="#" data-toggle="tab" data-target="#jobsTab"
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Requirments</li>
+							<li><a href="#" data-toggle="tab" id="jobstabid" data-target="#operationsTab"
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
+									onclick="joblistingdetails()">Jobs</a></li>
+							<li><a href="#" data-target="#profilesTab" data-toggle="tab" id="profiletabid"
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 0px;"
+									onclick="profileslistingdetails()">Profiles</a></li>
+							<li><a href="#" data-target="#vendorsTab" data-toggle="tab" id="vendortabid"
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;padding: 0 32px;"
+									onclick="vendorlistingdetails()">Vendors</a></li>
+							<li class=""><a href="#" data-toggle="tab" href="/interviewTab"
+									style="font-size: 20px;color: #73c7e7;font-weight: 900;">Interviews</a></li>
+
+						</ul>
 
 
 					</div>
@@ -1999,7 +1931,7 @@ console.log(url);
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
 				style="height:420px;" data-scrollax-parent="true">
 				<div class="col-xl-12 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
-				
+
 					<div class="tab-content" style="top:155px;position: relative;">
 						<div id="jobsTab" class="tab-pane fade in active" style=" background-color: white;">
 							<form class="search-job" method="post" onsubmit="return false">
@@ -2294,20 +2226,11 @@ console.log(url);
 																style="width: 89%;border-radius: 5px;font-size:13px;"></textarea>
 														</div>
 													</div>
-
-
 												</div>
-
 											</div>
-
 										</div>
-
-
 									</div>
-
-
 									<div class="submission" style="margin:3%;">
-
 										<div class="row">
 											<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9"></div>
 											<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"
@@ -2316,32 +2239,22 @@ console.log(url);
 													onclick="addjd()">Submit</button>
 												<button type="button" id="canceljob" class="btn btn-sm btn-info"
 													onclick="clearFormJob()">Cancel</button>
-
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</form>
-
 						</div>
-
-
 						<div id="operationsTab" class="tab-pane fade">
-
 							<div id="jobslisting">
-
 								<div class="container" style="background-color: white;height:600px;">
-
 									<div class="row" style="background-color: #73c7e7; height: 56px;">
 										<div class="col-sm-12" style="margin-top: 9px;">
 											<h5>JOBS</h5>
 										</div>
 									</div>
 									<br>
-
 									<div id="main" class="">
-
 										<div id="main-container" class="list-view contact"
 											style="box-shadow:none;border:none;">
 											<div class="col-sm-1"></div>
@@ -2387,11 +2300,11 @@ console.log(url);
 													<div id="tbMarksContainer">
 														<div class="entity-list" id="entity-list">
 															<div class="table table-responsive"
-																style="overflow: auto;height:400px;width:100%;">
+																style="overflow: auto;height:400px;width:104%;">
 
 																<table id="jobtable"
 																	class="display dataTable table-bordered"
-																	style="width:100%;color: black;">
+																	style="width:104%;color: black;">
 																	<thead
 																		style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
 																		<tr style="  font-weight:bold ; ">
@@ -2399,7 +2312,8 @@ console.log(url);
 																			<th scope="col">No.Of Positions </th>
 																			<th scope="col">Experince </th>
 																			<th scope="col">Role </th>
-																			<th scope="col">Primary Skills</th>
+																			<!-- <th scope="col">Primary Skills</th> -->
+																			<th scope="col">Status</th>
 																			<th scope="col">Account</th>
 																			<th data-orderable="false" scope="col">
 																				Action </th>
@@ -2482,9 +2396,8 @@ console.log(url);
 											<div class="table table-responsive" style="overflow: auto;height:400px">
 
 												<table class="display dataTable table-bordered"
-													style="width:100%;color: black;" id="profiletable">
-													<thead
-														style="font-weight: bold;background-color: rgb(51, 122, 183);
+													style="width:105%;color: black;" id="profiletable">
+													<thead style="font-weight: bold;background-color: rgb(51, 122, 183);
 														position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
 
 														<tr style="  font-weight:bold ; ">
@@ -2540,21 +2453,13 @@ console.log(url);
 													style="color: black;font-size: 13px;top: 12px;position: relative;">
 
 													<div class="col-sm-2" style="left:14px;margin:2px;">
-														<b>Rating</b>
+														<b>Vendor Name</b>
 													</div>
-
 													<div class="col-sm-2">
-														<select class="form-control" id="vratingdrop"
-															onchange="vendorfilterText()"
-															style="width:100%;height:30px;margin-left: -119px;"></select>
+														<select class="form-control" id="vratingdrop"onchange="vendorfilterText()"style="width:100%;height:30px;margin-left: -69px;"></select>
 													</div>
-													<div class="col-sm-1" style="right:11%;margin:2px;">
-														<!-- <b>Location</b> -->
-													</div>
-													<div class="col-sm-2" style="right:13%;">
-														<!-- <select class="form-control" id="vendorlocation"
-															style="width:100%;"></select> -->
-													</div>
+													<div class="col-sm-1" ></div>
+													<div class="col-sm-2" style="right:13%;"></div>
 													<div class="col-sm-2" style="left: 35%;">
 														<a href="#"
 															onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
@@ -2580,7 +2485,7 @@ console.log(url);
 														style="overflow: auto;height:400px;">
 
 														<table id="vendortable" class="display dataTable table-bordered"
-															style="width:100%;color: black;">
+															style="width:104%;color: black;">
 															<thead
 																style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
 																<tr style="font-weight:bold;">
@@ -2588,7 +2493,7 @@ console.log(url);
 																	<th scope="col">Vendor Id</th>
 																	<th scope="col">Vendor Name</th>
 																	<th scope="col">Recruiter Name</th>
-																	<th scope="col">Rating</th>
+																	<!-- <th scope="col">Rating</th>  -->
 																	<th scope="col">Vendor Email</th>
 																	<th data-orderable="false" scope="col">Action</th>
 																</tr>
@@ -3233,19 +3138,19 @@ console.log(url);
 							</div>
 							<hr style="width: 100%;top: -9px;position: relative;">
 
-							
+
 							<div class="row">
 								<div class="container">
-									 <ul id="progressbar">
-									   <li id="lttsScreening" class="active">Ltts Screening</li>
-									   <li id="lttsInterview">Ltts Interview</li>
-									   <li id="customerScreening">Customer Screening</li>
-									   <li id="customerInterview">Customer Interview</li>
-									   <li id="onboarded">On-boarded</li>
-									 </ul>
-								 </div>
-								</div><br>
-								 
+									<ul id="progressbar">
+										<li id="lttsScreening" class="active">Ltts Screening</li>
+										<li id="lttsInterview">Ltts Interview</li>
+										<li id="customerScreening">Customer Screening</li>
+										<li id="customerInterview">Customer Interview</li>
+										<li id="onboarded">On-boarded</li>
+									</ul>
+								</div>
+							</div><br>
+
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Basic Information:</h4>
 							</div>
@@ -3505,19 +3410,16 @@ console.log(url);
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Panel:</label>
-
 								</div>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" id="peditpanel" name="pedit_panel" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 							</div>
 							<hr style="width: 100%;top: -9px;position: relative;">
-
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
@@ -3527,9 +3429,7 @@ console.log(url);
 									<select class="form-control" id="peditstatus" name="pedit_status"
 										class="form-control" required disabled>
 									</select>
-
 								</div>
-
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Vendor Name:</label>
 								</div>
@@ -3538,11 +3438,7 @@ console.log(url);
 										required disabled>
 								</div>
 								<div class="col-sm-1"> </div>
-
 							</div>
-
-
-
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Attachment:</h4>
 							</div>
@@ -3555,20 +3451,14 @@ console.log(url);
 								<div class="col-sm-3">
 									<input type="file" id="resume" onchange="uploadOnChange()" name="myFile" multiple
 										style="color: black;font-size: 13px;" disabled>
-
 								</div>
 								<div class="col-sm-5">
 									<input type="text" class="form-control" id="peditfilename" name="peditresume_name"
 										style="width: 100%;" required disabled>
-
 								</div>
-
 								<div class="col-sm-1"> </div>
 
 							</div>
-
-							
-							
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-sm btn-info" id="profileeditbtn"
@@ -3586,7 +3476,7 @@ console.log(url);
 
 
 		<!-- Vendor Modal -->
-		
+
 		<div class="modal fade" id="vendormodal" role="dialog" style="margin-top: 10%;">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -3597,7 +3487,7 @@ console.log(url);
 					</div>
 					<div class="modal-body" style="overflow:auto;height:390px;">
 						<form action="post" onsubmit="return false">
-							
+
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
@@ -3672,7 +3562,7 @@ console.log(url);
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
 									<label>Vendor Rating:</label>
@@ -3681,7 +3571,7 @@ console.log(url);
 									<select id="vendorrating" name="vendor_rating" class="form-control"
 										required></select>
 								</div>
-							</div>
+							</div> -->
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
@@ -3716,9 +3606,9 @@ console.log(url);
 						<button type="button" class="close" data-dismiss="modal"
 							onclick="cancelenablevendor()">&times;</button>
 					</div>
-					<div class="modal-body" style="overflow:auto;height:390px;">
+					<div class="modal-body" style="overflow:auto;height:347px;">
 						<form action="" method="">
-							
+
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
@@ -3796,7 +3686,7 @@ console.log(url);
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Vendor Rating:</label>
@@ -3806,7 +3696,7 @@ console.log(url);
 										class="form-control" required disabled>
 								</div>
 								<div class="col-sm-1"> </div>
-							</div>
+							</div> -->
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
@@ -3833,7 +3723,7 @@ console.log(url);
 				</div>
 			</div>
 		</div>
-	
+
 		<script src="js/popper.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.easing.1.3.js"></script>
@@ -3846,6 +3736,6 @@ console.log(url);
 		<script src="js/scrollax.min.js"></script>
 		<script src="js/main.js"></script>
 
-	</body>
+</body>
 
 </html>
