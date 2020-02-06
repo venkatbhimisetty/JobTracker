@@ -1381,7 +1381,7 @@
 		var peditdesiredlocation = $('[name="peditdesired_location"]').val();
 		var peditstatus = $('[name="pedit_status"]').val();
 		var peditresumename = $('[name="peditresume_name"]').val();
-		var peditvendorid = $('[name="pedit_vendorid"]').val();
+		var peditvendorid = $("#peditvendorid option:selected").text();
 		var peditevaldate = $('[name="pedit_evaldate"]').val();
 		var peditpanel = $('[name="pedit_panel"]').val();
 
@@ -3509,7 +3509,7 @@
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Evaluation
@@ -3526,7 +3526,7 @@
 									<input type="text" class="form-control" id="peditpanel" name="pedit_panel" required>
 								</div>
 								<div class="col-sm-1"> </div>
-							</div>
+							</div> -->
 							<div class="row">
 								<h4 style="margin-left:2%;font-size: 15px;font-weight: bold;">Others:</h4>
 							</div>
