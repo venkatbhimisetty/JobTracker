@@ -541,7 +541,6 @@
 
 		var jobtitilebyreqid = "";
 		var url = "http://localhost:2000/jobtitlebyreqid/" + reqId;
-		console.log(url);
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -742,7 +741,7 @@
 	function profiletabstatedropdown() {
 
 		let profilecountry = $('[name="p_country"]').find(":selected").val();
-		console.log(profilecountry);
+	
 		var profilestatebycountry = "";
 		var url = "http://localhost:2000/statebycountry/" + profilecountry;
 		$.ajax({
@@ -881,7 +880,7 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-				console.log(result);
+			
 				for (var i = 0; i < result[0].length; i++) {
 					var jobdescriptionID = "\"" + result[0][i].jobdescriptionId + "\"";
 					tableData = tableData + "  <tr class='content'> " +
@@ -1177,7 +1176,7 @@
 			url: url,
 			type: "GET",
 			success: function (result) {
-				console.log(result);
+			
 				for (var i = 0; i < result[0].length; i++) {
 					var profileID = "\"" + result[0][i].profileid + "\"";
 					var statusId = "\"" + result[0][i].status + "\"";

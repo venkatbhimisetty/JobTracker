@@ -337,14 +337,12 @@ module.exports = {
             Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate +
              "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
      
-    console.log(query);
         db.query(query, (err, result) => {
             if (err) {
                
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-           console.log(query);
         });
     },
 
@@ -479,8 +477,6 @@ module.exports = {
     },
 
     updateprofile: (req, res) => {
-       
-        // console.log("in update profile");
         let peditprofileId = req.body.peditprofileId;
        // let peditjobdescriptionId = req.body.peditjobdescriptionId;
         let peditfirstname = req.body.peditfirstname;
@@ -517,17 +513,11 @@ module.exports = {
              peditcurrentjobtitle + "','" + peditcurrentsalary + "','" + peditexpectedsalary + "','" + peditskillset + "','" + peditskypeid + "','" + peditnoticeperiod +
             "','" + peditcurrentlocation + "','" + peditdesiredlocation + "','" + peditstatus + "','" + peditresumename + "','" + peditvendorid + "','" + peditupdatedby + "',now(),'" +
             Evaluationdate + "','" + Panel + "','" + Psecondskill + "')";
- console.log(query);
         db.query(query, (err, result) => {
             if (err) {
-                console.log(err);
-
                 return res.status(500).send(err);
             }
             res.status(200).json(result);
-            console.log(result);
-
-          
         });
     },
   
