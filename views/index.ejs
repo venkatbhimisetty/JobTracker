@@ -478,6 +478,7 @@
 						'<option value="' + result[0][i].vendorid + '">' + result[0][i].vendorname + '</option>';
 				}
 				$("#profilevendorid").html(profilevendor);
+				$("#peditvendorid").html(profilevendor);
 				//$("#statuspedit").html(jobstatusdrop);
 			}
 		});
@@ -3544,8 +3545,8 @@
 									<label><span style="color:red">*</span>Vendor Name:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="peditvendorid" name="pedit_vendorid" class="form-control"
-										required disabled>
+									<select id="peditvendorid" name="pedit_vendorid" class="form-control"
+										required disabled></select>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
