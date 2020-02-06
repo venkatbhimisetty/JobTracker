@@ -522,7 +522,7 @@ module.exports = {
     },
   
     getjobreqID: (req, res) => {
-        let query = "CALL proclookupreqId()";
+        let query = "CALL proclookupreqid()";
        
         db.query(query, (err, result) => {
             if (err) {
