@@ -320,9 +320,9 @@ module.exports = {
         let Vendorid =  req.body.Vendorid;
         let Createdby =  req.body.Createdby;
         let Updateby =  req.body.Updateby;
-        let Evaluationdate=req.body.Evaluationdate;
+        // let Evaluationdate=req.body.Evaluationdate;
 		
-		let Panel= req.body.Panel;
+	//	let Panel= req.body.Panel;
        
         let Pjobtitle= req.body.Pjobtitle;
         let Psecondskill= req.body.Psecondskill;
@@ -334,8 +334,7 @@ module.exports = {
             City + "','" + State + "','" + Country + "','" + Experience + 
             "','" + Highestquali + "','" + Currentjobtitle + "','" + Currentsalary + "','" + Expectedsalary + "','" + 
             Skillset + "','" + Skypeid + "','" + Noticeperiod + "','" + Currentlocation + "','" + Desiredlocation + "','" + 
-            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Evaluationdate +
-             "','" + Panel + "','" + Pjobtitle + "','" + Psecondskill + "')";
+            Status + "','" + Resume + "','" + Vendorid + "','" + Createdby + "',now(),'" + Updateby + "',now(),'" + Pjobtitle + "','" + Psecondskill + "')";
      
         db.query(query, (err, result) => {
             if (err) {
