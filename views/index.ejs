@@ -1190,7 +1190,7 @@
 						"<td >" + result[0][i].skillset + "</td>" +
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
-						"<td >" + result[0][i].vendorid + "</td>" +
+						"<td >" + result[0][i].vendor + "</td>" +
 						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "</a>" + "</td>" +
 
 						"</tr>";
@@ -1241,7 +1241,7 @@
 				$("#peditcurrentlocation").val(result[0][0].currentlocationid).attr('selected', 'selected');
 				$("#peditdesiredlocation").val(result[0][0].desiredlocationid).attr('selected', 'selected');
 				$("#peditstatus").val(result[0][0].statusid).attr('selected', 'selected');
-				$("#peditvendorid").val(result[0][0].vendorid);
+				$("#peditvendorid").val(result[0][0].vendorId);
 				$("#peditfilename").val(result[0][0].resumename);
 				$("#peditevaldate").val(result[0][0].evaluationdate.slice(0, 10));
 				$("#peditinternaltd").val(result[0][0].internal_technicaldecision).attr('selected', 'selected');
