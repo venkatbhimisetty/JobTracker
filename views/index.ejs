@@ -5,6 +5,8 @@
 	<title>JobPortal</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" type="text/css" href="all-ie-only.css" />  -->
+	<script src="//html5shiv.google.com/svn/trunk/html5.js"></script>
 	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -23,15 +25,38 @@
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
 		integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 
 </head>
 <style>
 	@media (min-width: 1200px) {
 		.container {
-			max-width: 1076px;
+			max-width: 1000px;
 
 		}
 	}
+	.select2-container--default .select2-selection--single {
+	width: 162px;
+	border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #888 transparent transparent transparent;
+    color:black;
+    left: 69px;
+   
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: black;
+   
+}
+.select2-container--open .select2-dropdown--below {
+	width: 159px !important;
+}
+
 
 	#lttsInterviewBtn,
 	#customerInterviewBtn {
@@ -213,7 +238,7 @@
 	#jobtable_filter,
 	#profiletable_filter,
 	#vendortable_filter {
-		margin-left: 310px !important;
+		margin-left:265px !important;
 	}
 
 	.dataTables_length {
@@ -221,14 +246,11 @@
 	}
 
 	div.dataTables_filter input {
-		height: 16px;
-		width: 137px;
-		color: Gray;
-		margin: -22px;
-		margin-left: 54px;
-		margin-top: -18px;
-	}
-
+    width: 137px;
+    margin: -22px;
+    margin-left: 50px;
+    margin-top: -18px;
+}
 	.body {
 		background: #f5f3e7;
 	}
@@ -255,6 +277,10 @@
 		font-size: 16px;
 		font-weight: 600;
 	}
+
+	/* :required {
+ 		background-color: black;
+	} */
 </style>
 
 <script type="text/javascript">
@@ -397,6 +423,12 @@
 
 <script>
 
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+
+
+
 	var svg = document.getElementsByTagName("svg");
 	var rect = document.getElementsByTagName("rect");
 	var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -414,14 +446,83 @@
 		}).show();
 	}
 
-	function vendorfilterText() {
-		var vendordrp = new RegExp($('#vratingdrop').children("option:selected").text());
+	function profilefilterText() {
+		var profiledrp = new RegExp($('#reqiddrop').children("option:selected").text());
+		var profilejdtitledrp = new RegExp($('#profilejlocation').children("option:selected").text());
 		$('.content').hide();
 		$('.content').filter(function () {
-			return vendordrp.test($(this).text());
+			return profiledrp.test($(this).text());
+			return profilejdtitledrp.test($(this).text());
 
 		}).show();
 	}
+
+	function ExportToExcel(tableid) {
+	console.log(tableid);
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+		tab = document.getElementById("joblistingbody");//.getElementsByTagName('table'); // id of table
+		console.log(tab);
+        if (tab==null) {
+            return false;
+        }
+        if (tab.rows.length == 0) {
+            return false;
+        }
+
+        for (j = 0 ; j < tab.rows.length ; j++) {
+			console.log(tab.rows.length);
+			tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+			console.log(tab_text);
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "download.xls");
+        }
+        else                 //other browser not tested on IE 11
+            //sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+            try {
+                var blob = new Blob([tab_text], { type: "application/vnd.ms-excel" });
+                window.URL = window.URL || window.webkitURL;
+                link = window.URL.createObjectURL(blob);
+                a = document.createElement("a");
+                if (document.getElementById("caption")!=null) {
+                    a.download=document.getElementById("caption").innerText;
+                }
+                else
+                {
+                    a.download = 'download';
+                }
+
+                a.href = link;
+
+                document.body.appendChild(a);
+
+                a.click();
+
+                document.body.removeChild(a);
+            } catch (e) {
+            }
+
+
+        return false;
+        //return (sa);
+    }
+
 
 
 
@@ -467,7 +568,7 @@
 	function profilevendordropdown() {
 
 		profilevendor = '';
-		var url = "http://35.193.36.106/profilevendor";
+		var url = "http://35.184.221.234/profilevendor";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -499,7 +600,7 @@
 
 	function jobstatus() {
 		jobstatusdrop = '';
-		var url = "http://35.193.36.106/jobstatus";
+		var url = "http://35.184.221.234/jobstatus";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -519,7 +620,7 @@
 	function jobreqiddropdown() {
 
 		jobreqID = '';
-		var url = "http://35.193.36.106/jobreqid";
+		var url = "http://35.184.221.234/jobreqid";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -541,7 +642,7 @@
 		var reqId = $('[name="reqid_drop"]').find(":selected").val();
 
 		var jobtitilebyreqid = "";
-		var url = "http://35.193.36.106/jobtitlebyreqid/" + reqId;
+		var url = "http://35.184.221.234/jobtitlebyreqid/" + reqId;
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -561,11 +662,12 @@
 
 
 	function editjobtitilebyreqid() {
+		console.log("editjobbyid");
 		var reqId = $('[name="pjob_recid"]').find(":selected").val();
 
-
+		console.log(reqId);
 		var jobtitilebyreqid = "";
-		var url = "http://35.193.36.106/jobtitlebyreqid/" + reqId;
+		var url = "http://35.184.221.234/jobtitlebyreqid/" + reqId;
 
 		$.ajax({
 			url: url,
@@ -586,7 +688,7 @@
 
 	function jobstatusdropdown() {
 		jobstatus = '';
-		var url = "http://35.193.36.106/jobstatusnew";
+		var url = "http://35.184.221.234/jobstatusnew";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -604,7 +706,7 @@
 
 	function expdropdown() {
 		expdropdowndrop = '';
-		var url = "http://35.193.36.106/experince";
+		var url = "http://35.184.221.234/experince";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -622,7 +724,7 @@
 		var budropdown = "";
 
 
-		var url = "http://35.193.36.106/bu";
+		var url = "http://35.184.221.234/bu";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -643,7 +745,7 @@
 
 	function salesdropdown() {
 		var salesdropdown = "";
-		var url = "http://35.193.36.106/sales";
+		var url = "http://35.184.221.234/sales";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -662,7 +764,7 @@
 
 	function salesrepdropdown() {
 		var salesrepdropdown = "";
-		var url = "http://35.193.36.106/salesrep";
+		var url = "http://35.184.221.234/salesrep";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -681,7 +783,7 @@
 
 	function customerdropdown() {
 		var customerdropdown = "";
-		var url = "http://35.193.36.106/customer";
+		var url = "http://35.184.221.234/customer";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -705,7 +807,7 @@
 	//profileTab lookup's
 	function salutationdropdown() {
 		var salutation = "";
-		var url = "http://35.193.36.106/salutation";
+		var url = "http://35.184.221.234/salutation";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -722,9 +824,10 @@
 			}
 		});
 	}
+
 	function profiletabcountrydropdown() {
 		var profilecountry = "";
-		var url = "http://35.193.36.106/profilecountry";
+		var url = "http://35.184.221.234/profilecountry";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -739,12 +842,13 @@
 			}
 		});
 	}
+	
 	function profiletabstatedropdown() {
 
 		let profilecountry = $('[name="p_country"]').find(":selected").val();
 	
 		var profilestatebycountry = "";
-		var url = "http://35.193.36.106/statebycountry/" + profilecountry;
+		var url = "http://35.184.221.234/statebycountry/" + profilecountry;
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -759,9 +863,10 @@
 			}
 		});
 	}
+	
 	function highestqualdropdown() {
 		var highestqual = "";
-		var url = "http://35.193.36.106/highestqual";
+		var url = "http://35.184.221.234/highestqual";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -782,7 +887,7 @@
 	
 	function currentlocationdropdown() {
 		var currentlocation = "";
-		var url = "http://35.193.36.106/curentlocation";
+		var url = "http://35.184.221.234/curentlocation";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -807,9 +912,10 @@
 			}
 		});
 	}
+	
 	function profilestatusdropdown() {
 		var profilestatus = "";
-		var url = "http://35.193.36.106/profilestatus";
+		var url = "http://35.184.221.234/profilestatus";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -834,7 +940,7 @@
 		var profilecountry = $('[name="pedit_country"]').find(":selected").val();
 
 		var profilestatebycountry = "";
-		var url = "http://35.193.36.106/statebycountry/" + profilecountry;
+		var url = "http://35.184.221.234/statebycountry/" + profilecountry;
 
 		$.ajax({
 			url: url,
@@ -855,7 +961,7 @@
 
 	function getvendornamedropdown() {
 		vendorratingdrop = '';
-		var url = "http://35.193.36.106/vendornamedropdown";
+		var url = "http://35.184.221.234/vendornamedropdown";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -876,13 +982,14 @@
 	function joblistingdetails() {
 		var tableData = "";
 
-		var url = "http://35.193.36.106/joblistingdetails";
+		var url = "http://35.184.221.234/joblistingdetails";
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
 			
 				for (var i = 0; i < result[0].length; i++) {
+					console.log(result[0].length);
 					var jobdescriptionID = "\"" + result[0][i].jobdescriptionid + "\"";
 					tableData = tableData + "  <tr class='content'> " +
 						//"<td id='' hidden>" + result[0][i].contactid + "</td>" +
@@ -905,8 +1012,8 @@
 	}
 
 	function jobdisplay(i) {
-		$("#updatehide").hide();
-		var url = "http://35.193.36.106/joblisting/" + i;
+		// $("#updatehide").hide();
+		var url = "http://35.184.221.234/joblisting/" + i;
 
 		$.ajax({
 			url: url,
@@ -915,7 +1022,11 @@
 
 
 				$("#jdiddisplayhidden").text(result[0][0].jobdescriptionid);
+
 				$("#reqiddisplay").text(result[0][0].requirmentid);
+				$("#jobtitleedit").val(result[0][0].jdtitle);
+				
+				$("#jdurationedit").val(result[0][0].duration);
 				$("#jlidedit").val(result[0][0].joblocation);
 				$("#expedit").val(result[0][0].experience);
 				$("#lfedit").val(result[0][0].locationflexibility);
@@ -930,10 +1041,10 @@
 				$("#ubyedit").val(result[0][0].updateby);
 				$("#nposedit").val(result[0][0].noofpositions);
 				$("#roleedit").val(result[0][0].role);
-				$("#cbydateedit").val(result[0][0].createddate.slice(0, 19));
-				$("#ubydateedit").val(result[0][0].updatedtime.slice(0, 19));
-				$("#datereqedit").val(result[0][0].dateofreq.slice(0, 19));
-				$("#expdateedit").val(result[0][0].expecteddate.slice(0, 19));
+				$("#cbydateedit").val(result[0][0].createddate.slice(0, 10));
+				$("#ubydateedit").val(result[0][0].updatedtime.slice(0, 10));
+				$("#datereqedit").val(result[0][0].dateofreq.slice(0, 10));
+				$("#expdateedit").val(result[0][0].closedate.slice(0, 10));
 				$("#custedit").val(result[0][0].customers).attr('selected', 'selected');
 				$("#JD_comment").val(result[0][0].jdcomments);
 				$("#BU_comment").val(result[0][0].bucomments);
@@ -941,11 +1052,10 @@
 		});
 	}
 
-
-
 	function enablejoblist() {
+		
 		$("#updatehide").show();
-		$("#edithide").hide();
+		// $("#edithide").hide();
 
 		$("#jlidedit").attr('disabled', false);
 		$("#expedit").attr('disabled', false);
@@ -1034,7 +1144,7 @@
 		}
 
 		data = JSON.stringify(data);
-		var url = "http://35.193.36.106/jdescription";
+		var url = "http://35.184.221.234/jdescription";
 
 		// if(Requirement!="" && Role!="" && Position!=""&& Expected!=""&& Exp!=""&& PSkill!=""&& SSkill!=""&& locationflex!=""&& customerid!=""
 		// && Status!=""&& buid!=""&& salesregionid!=""&& joblocation!=""&& jDescription!="")
@@ -1060,44 +1170,10 @@
 		// }
 	}
 
-
-	function cancelenable() {
-
-		$("#edithide").show();
-
-		$("#jlidedit").attr('disabled', true);
-		$("#expedit").attr('disabled', true);
-		$("#lfedit").attr('disabled', true);
-		$("#jdedit").attr('disabled', true);
-		$("#buedit").attr('disabled', true);
-		$("#sregionedit").attr('disabled', true);
-		$("#srepedit").attr('disabled', true);
-		$("#statuspedit").attr('disabled', true);
-		$("#psedit").attr('disabled', true);
-		$("#ssedit").attr('disabled', true);
-		$("#cbyedit").attr('disabled', true);
-		$("#ubyedit").attr('disabled', true);
-		$("#nposedit").attr('disabled', true);
-		$("#roleedit").attr('disabled', true);
-		$("#cbydateedit").attr('disabled', true);
-		$("#ubydateedit").attr('disabled', true);
-		$("#datereqedit").attr('disabled', true);
-		$("#expdateedit").attr('disabled', true);
-		$("#custedit").attr('disabled', true);
-		$("#JD_comment").attr('disabled', true);
-		$("#BU_comment").attr('disabled', true);
-		$("#roleleveledit").attr('disabled', true);
-		$("#jdurationedit").attr('disabled', true);
-		$("#reqclosedateedit").attr('disabled', true);
-		$("#jstatusedit").attr('disabled', true);
-
-
-	}
-
 	function updatejd() {
 
-		$("#edithide").show();
-		$("#updatehide").hide();
+		// $("#edithide").show();
+		$("#updatehide").show();
 
 		var jobdescriptionId = $('[name="jdiddisplay_hidden"]').text();
 		var reqid = $('[name="reqid_display"]').text();
@@ -1151,7 +1227,7 @@
 		data = JSON.stringify(data);
 
 		$.ajax({
-			url: "http://35.193.36.106/updatejoblisting/" + jobdescriptionId,
+			url: "http://35.184.221.234/updatejoblisting/" + jobdescriptionId,
 			type: "post",
 			async: false,
 			data: data,
@@ -1172,13 +1248,13 @@
 
 		var tableData = "";
 
-		var url = "http://35.193.36.106/profileslistingdetails";
+		var url = "http://35.184.221.234/profileslistingdetails";
 		
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-			
+				
 				for (var i = 0; i < result[0].length; i++) {
 				
 					var profileID = "\"" + result[0][i].profileid + "\"";
@@ -1187,11 +1263,12 @@
 					tableData = tableData + "  <tr> " +
 
 						"<td >" + result[0][i].jobreqcode + "</td>" +
+						"<td >" + result[0][i].pjobtitle + "</td>" +
 						"<td >" + result[0][i].firstname + "&nbsp" + result[0][i].lastname + "</td>" +
 						"<td >" + result[0][i].skillset + "</td>" +
 						"<td >" + result[0][i].experince + "</td>" +
 						"<td >" + result[0][i].status + "</td>" +
-						//"<td >" + result[0][i].vendorid+ "</td>" +
+						"<td >" + result[0][i].pvendorname+ "</td>" +
 						"<td >" + "<a>" + "<i class='far fa-edit' data-target='#profileEditModal' data-toggle='modal' data-backdrop='static' data-keyboard='false'  onclick=' statuschange(" + statusId + "),profilesdisplay(" + profileID + ")' style='font-size: 20px;color:black;position:relative;left:3%;'></i>" + "</a>" + "</td>" +
 
 						"</tr>";
@@ -1208,14 +1285,21 @@
 	}
 
 	function profilesdisplay(i) {
-		$("#updateeditprofile").hide();
-		var url = "http://35.193.36.106/profilelisting/" + i;
+		// $("#updateeditprofile").hide();
+		var url = "http://35.184.221.234/profilelisting/" + i;
 
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function (result) {
-
+	 // console.log(result);
+	  if(result[0][0].Resignation=='Y'){
+		$("#editresignedy").prop('checked', true);
+		
+	  }
+	  else if(result[0][0].Resignation=='N'){
+		$("#editresignedn").prop('checked', true);
+	  }
 				$("#editprofilehiddenId").text(result[0][0].profileid);
 				$("#pprofileid").text(result[0][0].profileid);
 				$("#peditjobrecid").text(result[0][0].jobreqcode);
@@ -1224,19 +1308,15 @@
 				$("#peditemail").val(result[0][0].email);
 				$("#peditmobile").val(result[0][0].mobile);
 				$("#peditdob").val(result[0][0].dob.slice(0, 10));
-				$("#peditaddress1").val(result[0][0].address1);
-				$("#peditaddress2").val(result[0][0].address2);
 				$("#peditcity").val(result[0][0].city);
 				$("#peditstate").val(result[0][0].stateid).attr('selected', 'selected');
 				$("#peditcountry").val(result[0][0].countryid).attr('selected', 'selected');
-				$("#peditpostalcode").val(result[0][0].postalcode);
 				$("#peditexperience").val(result[0][0].experince);
 				$("#pedithighestquali").val(result[0][0].highestqualificationid).attr('selected', 'selected');
 				$("#peditcurrentjobtitle").val(result[0][0].currentjobtitle);
 				$("#peditcurrentsalary").val(result[0][0].currentsalary);
 				$("#peditexpectedsalary").val(result[0][0].expectedsalary);
 				$("#peditskillset").val(result[0][0].skillset);
-				$("#seditskillset").val(result[0][0].psecondaryskill);
 				$("#peditskypeid").val(result[0][0].skypeid);
 				$("#peditnoticeperiod").val(result[0][0].noticeperiod);
 				$("#peditcurrentlocation").val(result[0][0].currentlocationid).attr('selected', 'selected');
@@ -1244,12 +1324,9 @@
 				$("#peditstatus").val(result[0][0].statusid).attr('selected', 'selected');
 				$("#peditvendorid").val(result[0][0].vendorid);
 				$("#peditfilename").val(result[0][0].resumename);
-				$("#peditevaldate").val(result[0][0].evaluationdate.slice(0, 10));
-				$("#peditinternaltd").val(result[0][0].internal_technicaldecision).attr('selected', 'selected');
-				$("#peditpanel").val(result[0][0].panel);
-				$("#peditscreening").val(result[0][0].screeningselect).attr('selected', 'selected');
 				$("#peditjobtitle").text(result[0][0].pjobtitle)
-
+				$("#seditskillset").val(result[0][0].psecondaryskill);
+				$("#peditjobtitle").text(result[0][0].pjobtitle);
 			}
 
 		});
@@ -1257,7 +1334,7 @@
 	}
 
 	function addprofile() {
-
+	
 		//var Profileid = $('[name="profileid"]').val();
 		var Jobrecid = $('[name="pjob_recid"]').val();
 		var jobreqcode = $("#jobrecid option:selected").text();
@@ -1279,19 +1356,15 @@
 		var Noticeperiod = $('[name="pnotice_period"]').val();
 		var Currentlocation = $('[name="pcurrent_location"]').val();
 		var Desiredlocation = $('[name="pdesired_location"]').val();
-		var Resigned = $('[name="resigned"]').val();
-		var Screening = $('[name="p_screening"]').val();
 		var Status = $('[name="p_status"]').val();
 		var Resume = $('[name="presume_name"]').val();
-		var Vendorid = $("#profilevendorid option:selected").text();
+		var Vendorid = $("#profilevendorid option:selected").val();
 		var Createdby = 'Admin';
 		var Updateby = 'Admin';
-		var Evaluationdate = $('[name="eval_date"]').val();
-		var Panel = $('[name="p_panel"]').val();
 		var Pjobtitle = $('[name="pjob_title"]').val();
 		var Psecondskill = $('[name="sskill_set"]').val();
-
-
+		var Resigned = $('input[name=resigned]:checked').val();
+		var Vendorname =  $("#profilevendorid option:selected").text();
 		var data = {
 
 			//"Profileid": Profileid,
@@ -1315,29 +1388,28 @@
 			"Noticeperiod": Noticeperiod,
 			"Currentlocation": Currentlocation,
 			"Desiredlocation": Desiredlocation,
-			"Resigned": Resigned,
-			"Screening": Screening,
 			"Status": Status,
 			"Resume": Resume,
 			"Vendorid": Vendorid,
 			"Createdby": Createdby,
 			"Updateby": Updateby,
-			"Evaluationdate": Evaluationdate,
-			"Panel": Panel,
+			// "Evaluationdate": Evaluationdate,
+			// "Panel": Panel,
 			"Pjobtitle": Pjobtitle,
-			"Psecondskill": Psecondskill
-
+			"Psecondskill": Psecondskill,
+			"Resigned": Resigned,
+			"Vendorname": Vendorname,
 		}
 
 		data = JSON.stringify(data);
 
-		var url = "http://35.193.36.106/addprofiles";
+		var url = "http://35.184.221.234/addprofiles";
 
-		// if (Jobrecid!="" &&jobreqcode!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!="" && Dob!="" && Address1!=""
-		// &&Address2!="" && City!="" && State!="" && Country!="" &&Postalcode!="" && Experience!="" && Highestquali!="" && Currentjobtitle!=""
-		// &&Currentsalary!="" && Expectedsalary!="" && Skillset!="" && Skypeid!="" &&Noticeperiod!="" && Currentlocation!="" && Desiredlocation!="" && Status!=""
-		// && Resume!="" && Vendorid!="" && Evaluationdate!="" && Internal_technicaldecision!="" && Panel!="" && Screeningselect!="")
-
+		 if (Jobrecid!="" &&jobreqcode!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!=""
+		 && Experience!="" && Highestquali!="" && Currentjobtitle!="" &&Currentsalary!="" 
+		 && Expectedsalary!="" && Skillset!="" &&Noticeperiod!="" && Currentlocation!="" && Desiredlocation!="" 
+		 && Status!="" && Experience!="" && Resigned!="" && Vendorid!="" && Pjobtitle!="" && Vendorname!="")
+{
 		$.ajax({
 			url: url,
 			type: "post",
@@ -1347,19 +1419,25 @@
 			dataType: "json",
 			success: function (result) {
 
+				$('#profilesmodal').modal('hide');
 				$('#successmodal').modal('show');
-				profileslistingdetails();
+				clearFormProfile();
+				
 
 			},
 			error: function () {
 			}
 		});
+		
 	}
+	
+	profileslistingdetails();
 
+	}
+	
 	function updateprofile() {
 
 		var peditprofileId = $('[name="editprofile_hiddenId"]').text();
-		//var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
 		var peditfirstname = $('[name="peditfirst_name"]').val();
 		var peditlastname = $('[name="peditlast_name"]').val();
 		var peditemail = $('[name="pedit_email"]').val();
@@ -1381,15 +1459,15 @@
 		var peditdesiredlocation = $('[name="peditdesired_location"]').val();
 		var peditstatus = $('[name="pedit_status"]').val();
 		var peditresumename = $('[name="peditresume_name"]').val();
-		var peditvendorid = $("#peditvendorid option:selected").text();
-		var peditevaldate = $('[name="pedit_evaldate"]').val();
-		var peditpanel = $('[name="pedit_panel"]').val();
+		var peditvendorid = $('[name="pedit_vendorid"]').val();
+		var editresigned = $('input[name=editresigned]:checked').val();
+	   var peditvendorname = $("#peditvendorid option:selected").text();
+			
+		
 
 		var data = {
 
 			"peditprofileId": peditprofileId,
-			//"peditjobdescriptionId": peditjobdescriptionId,
-			"peditsalutationId": peditsalutationId,
 			"peditfirstname": peditfirstname,
 			"peditlastname": peditlastname,
 			"peditemail": peditemail,
@@ -1409,19 +1487,18 @@
 			"peditcurrentlocation": peditcurrentlocation,
 			"peditdesiredlocation": peditdesiredlocation,
 			"peditresigned": peditresigned,
-			"peditevaldate": peditevaldate,
-			"peditpanel": peditpanel,
 			"peditstatus": peditstatus,
 			"peditresumename": peditresumename,
 			"peditvendorid": peditvendorid,
-			"peditupdatedby": 'Admin'
-
+			"peditupdatedby": 'Admin',
+			"peditresignation": editresigned,
+			"peditvendorname": peditvendorname,
 		}
 
 		data = JSON.stringify(data);
-		conosle.log(data);
-		url = "http://35.193.36.106/updateprofile/" + peditprofileId,
-			conosle.log(url);
+	
+		url = "http://35.184.221.234/updateprofile/" + peditprofileId,
+			
 
 		$.ajax({
 			url: url,
@@ -1442,9 +1519,8 @@
 	}
 	function enableprofileedit() {
 
-		$("#profileeditbtn").hide();
+		// $("#profileeditbtn").hide();
 		$("#updateeditprofile").show();
-		//$("#peditjobrecid").attr('disabled', false);
 		$("#peditsalutation").attr('disabled', false);
 		$("#peditfirstname").attr('disabled', false);
 		$("#peditlastname").attr('disabled', false);
@@ -1475,173 +1551,6 @@
 		$("#peditfilename").attr('disabled', false);
 		$("#seditskillset").attr('disabled', false);
 	}
-
-	function disableprofileedit() {
-
-		$("#profileeditbtn").show();
-		$("#updateeditprofile").hide();
-		//            $("#peditjobrecid").attr('disabled', true);
-		$("#peditsalutation").attr('disabled', true);
-		$("#peditfirstname").attr('disabled', true);
-		$("#peditlastname").attr('disabled', true);
-		$("#peditemail").attr('disabled', true);
-		$("#peditmobile").attr('disabled', true);
-		$("#peditdob").attr('disabled', true);
-		$("#peditaddress1").attr('disabled', true);
-		$("#peditaddress2").attr('disabled', true);
-		$("#peditcity").attr('disabled', true);
-		$("#peditstate").attr('disabled', true);
-		$("#peditcountry").attr('disabled', true);
-		$("#peditexperience").attr('disabled', true);
-		$("#pedithighestquali").attr('disabled', true);
-		$("#peditcurrentjobtitle").attr('disabled', true);
-		$("#peditcurrentsalary").attr('disabled', true);
-		$("#peditexpectedsalary").attr('disabled', true);
-		$("#peditskillset").attr('disabled', true);
-		$("#peditskypeid").attr('disabled', true);
-		$("#peditnoticeperiod").attr('disabled', true);
-		$("#peditcurrentlocation").attr('disabled', true);
-		$("#peditdesiredlocation").attr('disabled', true);
-		$("#peditresigned").attr('disabled', true);
-		$("#peditevaldate").attr('disabled', true);
-		$("#peditinternaltd").attr('disabled', true);
-		$("#peditpanel").attr('disabled', true);
-		$("#peditscreening").attr('disabled', true);
-		$("#peditstatus").attr('disabled', true);
-		$("#peditvendorid").attr('disabled', true);
-		$("#peditfilename").attr('disabled', true);
-		$("#seditskillset").attr('disabled', true);
-
-	}
-
-
-	function updateprofile() {
-
-		var peditprofileId = $('[name="editprofile_hiddenId"]').text();
-		//	var peditjobdescriptionId = $('[name="peditjob_recid"]').val();
-		var peditfirstname = $('[name="peditfirst_name"]').val();
-		var peditlastname = $('[name="peditlast_name"]').val();
-		var peditemail = $('[name="pedit_email"]').val();
-		var peditmobile = $('[name="pedit_mobile"]').val();
-		var peditdob = $('[name="pedit_dob"]').val();
-		var peditcity = $('[name="pedit_city"]').val();
-		var peditstate = $('[name="pedit_state"]').val();
-		var peditcountry = $('[name="pedit_country"]').val();
-		var peditexperience = $('[name="pedit_experience"]').val();
-		var pedithighestquali = $('[name="pedit_highestquali"]').val();
-		var peditcurrentjobtitle = $('[name="peditcurrent_jobtitle"]').val();
-		var peditcurrentsalary = $('[name="peditcurrent_salary"]').val();
-		var peditexpectedsalary = $('[name="peditexpected_salary"]').val();
-		var peditresigned = $('[name="editresigned"]').val();
-		var peditscreening = $('[name="pedit_screening"]').val();
-		var peditskillset = $('[name="peditskill_set"]').val();
-		var peditskypeid = $('[name="peditskype_id"]').val();
-		var peditnoticeperiod = $('[name="peditnotice_period"]').val();
-		var peditcurrentlocation = $('[name="peditcurrent_location"]').val();
-		var peditdesiredlocation = $('[name="peditdesired_location"]').val();
-		var peditstatus = $('[name="pedit_status"]').val();
-		var peditresumename = $('[name="peditresume_name"]').val();
-		var peditvendorid = $('[name="pedit_vendorid"]').val();
-		var Evaluationdate = $('[name="pedit_evaldate"]').val();
-		var Panel = $('[name="pedit_panel"]').val();
-		//var Pjobtitle = $('[name="peditjob_title"]').text();
-		var Psecondskill = $('[name="seditskill_set"]').val();
-
-
-		var data = {
-
-			"peditprofileId": peditprofileId,
-			//"peditjobdescriptionId": peditjobdescriptionId,
-			"peditfirstname": peditfirstname,
-			"peditlastname": peditlastname,
-			"peditemail": peditemail,
-			"peditmobile": peditmobile,
-			"peditdob": peditdob,
-			"peditcity": peditcity,
-			"peditstate": peditstate,
-			"peditcountry": peditcountry,
-			"peditexperience": peditexperience,
-			"pedithighestquali": pedithighestquali,
-			"peditcurrentjobtitle": peditcurrentjobtitle,
-			"peditcurrentsalary": peditcurrentsalary,
-			"peditexpectedsalary": peditexpectedsalary,
-			"peditskillset": peditskillset,
-			"peditskypeid": peditskypeid,
-			"peditnoticeperiod": peditnoticeperiod,
-			"peditcurrentlocation": peditcurrentlocation,
-			"peditdesiredlocation": peditdesiredlocation,
-			"peditresigned": peditresigned,
-			"peditscreening": peditscreening,
-			"peditstatus": peditstatus,
-			"peditresumename": peditresumename,
-			"peditvendorid": peditvendorid,
-			"peditupdatedby": 'Admin',
-			"Evaluationdate": Evaluationdate,
-			"Panel": Panel,
-			//"Pjobtitle": Pjobtitle,
-			"Psecondskill": Psecondskill
-		}
-
-		data = JSON.stringify(data);
-		url = "http://35.193.36.106/updateprofile/" + peditprofileId,
-
-			$.ajax({
-				url: url,
-				type: "post",
-				async: false,
-				data: data,
-				contentType: "application/json",
-				dataType: "json",
-				success: function (result) {
-
-				},
-				error: function () {
-				}
-			});
-
-		profileslistingdetails();
-
-	}
-
-
-	function disableprofileedit() {
-
-		$("#profileeditbtn").show();
-		$("#updateeditprofile").hide();
-		//	$("#peditjobrecid").attr('disabled', true);
-		$("#peditsalutation").attr('disabled', true);
-		$("#peditfirstname").attr('disabled', true);
-		$("#peditlastname").attr('disabled', true);
-		$("#peditemail").attr('disabled', true);
-		$("#peditmobile").attr('disabled', true);
-		$("#peditdob").attr('disabled', true);
-		$("#peditaddress1").attr('disabled', true);
-		$("#peditaddress2").attr('disabled', true);
-		$("#peditcity").attr('disabled', true);
-		$("#peditstate").attr('disabled', true);
-		$("#peditcountry").attr('disabled', true);
-		$("#peditpostalcode").attr('disabled', true);
-		$("#peditexperience").attr('disabled', true);
-		$("#pedithighestquali").attr('disabled', true);
-		$("#peditcurrentjobtitle").attr('disabled', true);
-		$("#peditcurrentsalary").attr('disabled', true);
-		$("#peditexpectedsalary").attr('disabled', true);
-		$("#peditskillset").attr('disabled', true);
-		$("#peditskypeid").attr('disabled', true);
-		$("#peditnoticeperiod").attr('disabled', true);
-		$("#peditcurrentlocation").attr('disabled', true);
-		$("#peditdesiredlocation").attr('disabled', true);
-		$("#peditresigned").attr('disabled', true);
-		$("#peditevaldate").attr('disabled', true);
-		$("#peditinternaltd").attr('disabled', true);
-		$("#peditpanel").attr('disabled', true);
-		$("#peditscreening").attr('disabled', true);
-		$("#peditstatus").attr('disabled', true); 1
-		$("#peditvendorid").attr('disabled', true);
-		$("#peditfilename").attr('disabled', true);
-
-	}
-
 
 	function addvendor() {
 
@@ -1680,9 +1589,9 @@
 
 		data = JSON.stringify(data);
 
-		var url = "http://35.193.36.106/addvendor";
+		var url = "http://35.184.221.234/addvendor";
 
-		//	if (Vendorid != "" && Vendorname != "" && Vendorpriloc != "" && Vendorspec != "" && Vendoremail != "" && Recruiterid != "" && Recruitername != "" && Recruitercontno != "" && Vendorrating != "") {
+		if (Vendorid != "" && Vendorname != "" && Vendorpriloc != "" && Vendorspec != "" && Vendoremail != "" && Recruiterid != "" && Recruitername != "" && Recruitercontno != "" && Vendorrating != "") {
 
 
 		$.ajax({
@@ -1694,21 +1603,25 @@
 			dataType: "json",
 			success: function (result) {
 
+				$('#vendormodal').modal('hide');
 				$('#successmodal').modal('show');
-				vendorlistingdetails();
+				clearFormVendor();
 
 			},
 			error: function () {
 			}
 		});
-		//	}
-
+		
+		}
+		
+		vendorlistingdetails();
+		
 	}
 
 
 	function vendorlistingdetails() {
 		var tableData = "";
-		var url = "http://35.193.36.106/vendorlistingdetails";
+		var url = "http://35.184.221.234/vendorlistingdetails";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -1740,8 +1653,8 @@
 
 	function vendordisplay(i) {
 
-		$("#updatevendor").hide();
-		var url = "http://35.193.36.106/vendorlisting/" + i;
+		// $("#updatevendor").hide();
+		var url = "http://35.184.221.234/vendorlisting/" + i;
 
 		$.ajax({
 			url: url,
@@ -1767,7 +1680,7 @@
 
 	function enablevendorlist() {
 
-		$("#editvendor").hide();
+		// $("#editvendor").hide();
 		$("#updatevendor").show();
 		$("#editvendorid").attr('disabled', false);
 		$("#editvendorname").attr('disabled', false);
@@ -1782,26 +1695,9 @@
 
 	}
 
-	function cancelenablevendor() {
-
-		$("#editvendor").show();
-		$("#updatevendor").hide();
-		$("#editvendorid").attr('disabled', true);
-		$("#editvendorname").attr('disabled', true);
-		$("#editvendorpriloc").attr('disabled', true);
-		$("#editvendorspec").attr('disabled', true);
-		$("#editvendoremail").attr('disabled', true);
-		$("#editrecruiterid").attr('disabled', true);
-		$("#editrecruitername").attr('disabled', true);
-		$("#editrecruitercontno").attr('disabled', true);
-		$("#editvendorcomments").attr('disabled', true);
-		$("#editvendorrating").attr('disabled', true);
-
-	}
-
 	function updatevendorbyid() {
 
-		$("#editvendor").show();
+		// $("#editvendor").show();
 		var vendorid = $('[name="vendorid_hidden"]').text();
 		var Vendorcode = $('[name="editvendor_id"]').val();
 		var Vendorname = $('[name="editvendor_name"]').val();
@@ -1832,7 +1728,7 @@
 			"Updateby": Updateby
 		}
 		data = JSON.stringify(data);
-		var url = "http://35.193.36.106/updatevendor/" + vendorid;
+		var url = "http://35.184.221.234/updatevendor/" + vendorid;
 		$.ajax({
 			url: url,
 			type: "post",
@@ -1874,6 +1770,7 @@
 	function clearFormProfile() {
 
 		$("#jobrecid").val('');
+		$("#profilejobtitle").val('');
 		$("#salutation").val('');
 		$("#firstname").val('');
 		$("#lastname").val('');
@@ -1985,10 +1882,10 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
 
 
-				<div class="col-sm-7">
+				<div class="col-sm-6">
 					<a class="navbar-brand" href="/">
 						<h1 style="font-weight:600;font-size:50px;color:#6bf682;">JOB TRACKER</h1>
 					</a>
@@ -2034,9 +1931,10 @@
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
 				style="height:420px;" data-scrollax-parent="true">
 				<div class="col-xl-12 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
+					
 
 					<div class="tab-content" style="top:155px;position: relative;">
-						<div id="jobsTab" class="tab-pane fade in active" style=" background-color: white;">
+						<div id="jobsTab" class="tab-pane fade" style=" background-color: white;">
 							<form class="search-job" method="post" onsubmit="return false">
 
 								<div id="jobdetails">
@@ -2051,7 +1949,7 @@
 										<div class="card"
 											style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)">
 
-											<h5 class="card-header" style="background-color: #73c7e7">DETAILS</h5>
+											<h5 class="card-header" style="background-color: #73c7e7;width: 101.5%;right: 6px;position: relative;">DETAILS</h5>
 											<div class="card-body">
 
 												<div class="row">
@@ -2117,7 +2015,7 @@
 											<br>
 											<div class="card"
 												style="background-color: #73c7e72e;border: 2px solid rgba(0, 0, 0, 0.21)">
-												<h5 class="card-header" style="background-color: #73c7e7">JOB
+												<h5 class="card-header" style="background-color: #73c7e7;width: 101.5%;right: 6px;position: relative;">JOB
 													DESCRIPTION</h5>
 												<div class="card-body">
 
@@ -2177,11 +2075,11 @@
 														</div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 
-															<select id="rolelevel" class="form-control"
-																name="role_level" required>
-																<option value="">Tech 1</option>
-																<option value="">Tech 2</option>
-																<option value="">Tech 3</option>
+															<select id="rolelevel" class="form-control" name="role_level" required>
+																<!-- <option value="">Select</option> -->
+																<option value="1">Tech 1</option>
+																<option value="2">Tech 2</option>
+																<option value="3">Tech 3</option>
 															</select>
 														</div>
 
@@ -2256,8 +2154,8 @@
 															<label><span style="color:red;">*</span>Location
 																Flexiblity:</label></div>
 														<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<select id="locflex" class="form-control" name="loc_flex"
-																required>
+															<select id="locflex" class="form-control" name="loc_flex" required>
+																<!-- <option value="">Select</option> -->
 																<option value="Y">Yes</option>
 																<option value="N">No</option>
 															</select>
@@ -2272,9 +2170,8 @@
 
 														</div>
 														<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-															<select id="jstatus" class="form-control" name="jstatus"
-																required>
-
+															<select id="jstatus" class="form-control" name="jstatus" required>
+																<option value=""></option>
 															</select>
 
 														</div>
@@ -2362,48 +2259,28 @@
 											style="box-shadow:none;border:none;">
 											<div class="col-sm-1"></div>
 											<div id="main-content" class="contact">
-												<div
-													style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">
-													<div class="row"
-														style="color: black;font-size: 13px;top: 12px;position: relative;">
-
-														<div class="col-sm-2" style="left:14px;margin:2px;">
-															<b>Account</b>
+												<div style="background-color: #73c7e72e;border: 1px solid #e3e3e3;height: 52px;">
+													<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
+													
+														<div class="col-sm-2" style="left:21px;margin:3px;"><b>Account</b></div>
+														
+														<div class="col-sm-2" style="right:58px;">
+															<select class="form-control" id="jobaccount" onchange='filterText()'></select>
 														</div>
-
-														<div class="col-sm-2">
-															<select class="form-control" id="jobaccount"
-																style="width:100%;height:30px;margin-left: -102px; "
-																onchange='filterText()'></select>
-														</div>
-														<div class="col-sm-1" style="right:9%;margin:2px;">
-															<!-- <b>Location</b> -->
-														</div>
-														<div class="col-sm-2" style="right:11%;">
-															<!-- <select class="form-control" id="jlocation"
-																style="width:100%;height:30px;"></select> -->
-														</div>
-														<div class="col-sm-1">
-
-														</div>
-														<div class="col-sm-1"></div>
-
-													</div>
-
-													<div class="col-sm-2" style="left: 95%; top: -58%;">
-														<a href="#"
-															onClick="$('#jobtable').tableExport({type:'excel',escape:'false'});">
-															<img src="/assets/img/export-to-excel-image.png"
-																style="height: 28px;width:24px;">
+														<div class="col-sm-2" ></div>
+														<div class="col-sm-2"></div>
+													<div class="col-sm-2"  style="left:25%">
+														<a href="#" onClick="ExportToExcel($('#jobtable'));">
+															<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 														</a>
 													</div>
+												</div>
 												</div>
 
 												<div id="main-content" class="contact">
 													<div id="tbMarksContainer">
 														<div class="entity-list" id="entity-list">
-															<div class="table table-responsive"
-																style="overflow: auto;height:400px;width:104%;">
+															<div class="table table-responsive" style="overflow: auto;height:415px;width:100%;">
 
 																<table id="jobtable"
 																	class="display dataTable table-bordered"
@@ -2462,32 +2339,27 @@
 										<div class="row"
 											style="color: black;font-size: 13px;top: 12px;position: relative;">
 
-											<div class="col-sm-2" style="left:14px;margin:2px;">
+											<div class="col-sm-2" style="left:14px;margin:3px;">
 												<b>Requirement Id</b>
 											</div>
 
-											<div class="col-sm-2">
-												<select class="form-control" name="reqid_drop" id="reqiddrop"
-													onclick="jobtitilebyreqid()"
-													style="width:100%;height:30px;margin-left: -62px;"></select>
+											<div class="col-sm-2"  style="right:30px">
+												<select class="form-control" name="reqid_drop" id="reqiddrop" onclick="jobtitilebyreqid()"></select>
 											</div>
-											<div class="col-sm-1" style="right:6%;margin:2px;">
+											<div class="col-sm-2" style="margin:2px;">
 												<b>Job Title</b>
 											</div>
 											<div class="col-sm-2" style="right:8%;">
-												<select class="form-control" id="profilejlocation"
-													style="width:100%;"></select>
+												<select class="form-control" id="profilejlocation" style="width:100%;"></select>
 											</div>
 
-											<div class="col-sm-2" style="left: 35%;">
-												<a href="#"
-													onClick="$('#profiletable').tableExport({type:'excel',escape:'false'});">
-													<img src="/assets/img/export-to-excel-image.png"
-														style="height: 28px;width:24px;">
+											<div class="col-sm-2" style="left:25%;float:left;">
+												<a href="#" onClick="ExportToExcel($('#profiletable'))">
+												<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 												</a>
 											</div>
 
-											<div class="col-sm-1"></div>
+											
 										</div>
 									</div>
 									<br>
@@ -2498,19 +2370,19 @@
 
 											<div class="table table-responsive" style="overflow: auto;height:400px">
 
-												<table class="display dataTable table-bordered"
-													style="width:105%;color: black;" id="profiletable">
+												<table class="display dataTable table-bordered" style="width:105%;color: black;" id="profiletable">
 													<thead style="font-weight: bold;background-color: rgb(51, 122, 183);
 														position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
 
 														<tr style="  font-weight:bold ; ">
 															<th scope="col">Recuriment Id <i class="up"></i><i
 																	class="down"></i></th>
+																	<th scope="col">Job Title</th>
 															<th scope="col">Candidate Name</th>
 															<th scope="col">Skill</th>
 															<th scope="col">Experience</th>
 															<th scope="col">Status</th>
-															<!-- <th scope="col">Vendor Id</th> -->
+															 <th scope="col">Vendor Id</th> 
 															<th data-orderable="false" scope="col">Action</th>
 														</tr>
 													</thead>
@@ -2552,24 +2424,19 @@
 
 											<div
 												style="background-color:  #73c7e726;border: 1px solid #e3e3e3;height: 52px;">
-												<div class="row"
-													style="color: black;font-size: 13px;top: 12px;position: relative;">
+												<div class="row" style="color: black;font-size: 13px;top: 12px;position: relative;">
 
-													<div class="col-sm-2" style="left:14px;margin:2px;">
+													<div class="col-sm-2" style="left:14px;margin:3px;">
 														<b>Vendor Name</b>
 													</div>
-													<div class="col-sm-2">
-														<select class="form-control" id="vratingdrop"
-															onchange="vendorfilterText()"
-															style="width:100%;height:30px;margin-left: -69px;"></select>
+													<div class="col-sm-2" style="right:3%">
+														<select class="form-control" id="vratingdrop" onchange="vendorfilterText()"></select>
 													</div>
-													<div class="col-sm-1"></div>
-													<div class="col-sm-2" style="right:13%;"></div>
-													<div class="col-sm-2" style="left: 35%;">
-														<a href="#"
-															onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
-															<img src="/assets/img/export-to-excel-image.png"
-																style="height: 28px;width:24px;">
+													<div class="col-sm-2"></div>
+													<div class="col-sm-2"></div>
+													<div class="col-sm-2" style="left:25%;">
+														<a href="#" onClick="$('#vendortable').tableExport({type:'excel',escape:'false'});">
+															<img src="/assets/img/export-to-excel-image.png" style="height: 28px;width:24px;">
 														</a>
 													</div>
 
@@ -2648,8 +2515,7 @@
 								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 									<label><span style="color:red;">*</span>Job Title</label></div>
 								<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-									<input type="text" id="jobtitleedit" name="jobtitleedit" class="form-control"
-										disabled>
+									<input type="text" id="jobtitleedit" name="jobtitleedit" class="form-control">
 								</div>
 
 								<div class="col-sm-1"> </div>
@@ -2659,7 +2525,7 @@
 								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 									<label><span style="color:red;">*</span>Role Level:</label></div>
 								<div class=" col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-									<select id="roleleveledit" class="form-control" name="role_leveledit" disabled>
+									<select id="roleleveledit" class="form-control" name="role_leveledit">
 										<option value="">Tech 1</option>
 										<option value="">Tech 2</option>
 										<option value="">Tech 3</option>
@@ -2669,7 +2535,7 @@
 									<label style="width: 113px;">Job Location:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="jlidedit" name="jlid_edit" class="form-control" disabled>
+									<input type="text" id="jlidedit" name="jlid_edit" class="form-control">
 								</div>
 								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 							</div>
@@ -2680,13 +2546,13 @@
 									<label><span style="color:red">*</span>Primary Skill:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="psedit" name="ps_edit" class="form-control" disabled>
+									<input type="text" id="psedit" name="ps_edit" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;">Secondary Skill:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="ssedit" name="ss_edit" class="form-control" disabled>
+									<input type="text" id="ssedit" name="ss_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2698,14 +2564,14 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="nposedit" name="npos_edit" class="form-control" disabled>
+									<input type="text" id="nposedit" name="npos_edit" class="form-control">
 								</div>
 
 								<div class="col-sm-2">
 									<label style="width: 113px;">Role/Domain:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="roleedit" name="role_edit" class="form-control" disabled>
+									<input type="text" id="roleedit" name="role_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2716,15 +2582,15 @@
 									<label><span style="color:red;">*</span>Duration:
 										:</label></div>
 								<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-									<input type="text" id="jdurationedit" name="jdurationedit" class="form-control"
-										disabled>
+									<input type="text" id="jdurationedit" name="jdurationedit" class="form-control">
 								</div>
 								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
 									<label><span style="color:red;">*</span>Status:</label></div>
 								<div class="  col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-									<select id="jstatusedit" class="form-control" name="jstatusedit" disabled>
-										<option value="">Open</option>
-										<option value="">Close</option>
+									<select id="jstatusedit" class="form-control" name="jstatusedit">
+										<!-- <option value=""></option> -->
+										<option value="1">Open</option>
+										<option value="2">Close</option>
 									</select>
 								</div>
 								<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
@@ -2737,15 +2603,13 @@
 									<label><span style="color:red">*</span>Date of request:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="datereqedit" name="datereq_edit" class="form-control"
-										disabled>
+									<input type="text" id="datereqedit" name="datereq_edit" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;">Close Date:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="expdateedit" name="expdate_edit" class="form-control"
-										disabled>
+									<input type="text" id="expdateedit" name="expdate_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2756,13 +2620,13 @@
 									<label><span style="color:red">*</span>Location Flexibility:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="lfedit" name="lf_edit" class="form-control" disabled>
+									<input type="text" id="lfedit" name="lf_edit" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Experience:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="expedit" name="exp_edit" class="form-control" disabled>
+									<input type="text" id="expedit" name="exp_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2773,16 +2637,14 @@
 									<label>Business Unit:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="buedit" name="bu_edit" class="form-control"
-										disabled>
+									<select class="form-control" id="buedit" name="bu_edit" class="form-control">
 									</select>
 								</div>
 								<div class="col-sm-2">
 									<label>Sales Regions:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="sregionedit" name="sregion_edit"
-										class="form-control" disabled>
+									<select class="form-control" id="sregionedit" name="sregion_edit" class="form-control">
 									</select>
 								</div>
 								<div class="col-sm-1"></div>
@@ -2794,9 +2656,7 @@
 									<label>Sales Representative:</label>
 								</div>
 								<div class="col-sm-3">
-
-									<select class="form-control" id="srepedit" name="srep_edit" class="form-control"
-										disabled>
+									<select class="form-control" id="srepedit" name="srep_edit" class="form-control">
 									</select>
 								</div>
 
@@ -2804,7 +2664,7 @@
 									<label style="width: 113px;">Customers:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="custedit" name="cust_edit" disabled></select>
+									<select class="form-control" id="custedit" name="cust_edit"></select>
 								</div>
 								<div class="col-sm-1"></div>
 							</div>
@@ -2815,13 +2675,13 @@
 									<label><span style="color:red">*</span>Created by:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="cbyedit" name="cby_edit" class="form-control" disabled>
+									<input type="text" id="cbyedit" name="cby_edit" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;">Updated by:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="ubyedit" name="uby_edit" class="form-control" disabled>
+									<input type="text" id="ubyedit" name="uby_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2832,15 +2692,13 @@
 									<label><span style="color:red">*</span>Created date:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="cbydateedit" name="cbydate_edit" class="form-control"
-										disabled>
+									<input type="text" id="cbydateedit" name="cbydate_edit" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;">Updated date:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="ubydateedit" name="ubydate_edit" class="form-control"
-										disabled>
+									<input type="text" id="ubydateedit" name="ubydate_edit" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -2852,8 +2710,7 @@
 									<label>Job description:</label></div>
 								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
 									<p id="jdiddisplayhidden" name="jdiddisplay_hidden" style="display:none;"></p>
-									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="jdedit"
-										name="jd_edit" disabled></textarea>
+									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="jdedit" name="jd_edit"></textarea>
 								</div>
 							</div>
 
@@ -2864,7 +2721,7 @@
 									<label>JD Comments:</label></div>
 								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
 									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="JD_comment"
-										name="jdcomments" disabled></textarea>
+										name="jdcomments"></textarea>
 								</div>
 							</div>
 							<div class="row">
@@ -2874,16 +2731,16 @@
 									<label>BU Comments:</label></div>
 								<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
 									<textarea style="width: 89%;border-radius: 5px; font-size:13px;" id="BU_comment"
-										name="bucomments" disabled></textarea>
+										name="bucomments"></textarea>
 								</div>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-sm btn-info" id="edithide"
-							onclick="enablejoblist()">Edit</button>
+						<!-- <button type="button" class="btn btn-sm btn-info" id="edithide"
+							onclick="enablejoblist()">Edit</button> -->
 						<button type="submit" class="btn btn-sm btn-info" id="updatehide" data-dismiss="modal"
-							onclick="updatejd();cancelenable()">Update</button>
+							onclick="updatejd()">Update</button>
 						<button type="button" class="btn btn-sm btn-info" data-dismiss="modal" onclick="cancelenable()">
 							Cancel</button>
 					</div>
@@ -2915,9 +2772,12 @@
 										ID:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="jobrecid" name="pjob_recid"
+									<select onchange="editjobtitilebyreqid()" class="js-example-basic-single form-control" id="jobrecid" name="pjob_recid" >
+										
+									  </select>
+									<!-- <select class="form-control" id="jobrecid" name="pjob_recid"
 										onclick="editjobtitilebyreqid()" class="form-control" required>
-									</select>
+									</select> -->
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Job Title:</label>
@@ -2954,14 +2814,14 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="mobile" name="p_mobile" class="form-control" required>
+									<input type="tel" id="mobile" name="p_mobile" class="form-control" pattern="[0-9]{10}" required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Email:</label>
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="email" name="p_email" class="form-control" required>
+									<input type="email" id="email" name="p_email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
 								</div>
 
 								<div class="col-sm-1"> </div>
@@ -2969,11 +2829,11 @@
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label style="width: 113px;">Date of Birth:</label>
+									<label style="width: 113px;"><span style="color:red">*</span>Date of Birth:</label>
 								</div>
 								<div class="col-sm-3">
 
-									<input type="date" id="dob" name="p_dob" class="form-control">
+									<input type="date" id="dob" name="p_dob" class="form-control" required>
 								</div>
 
 								<div class="col-sm-1"> </div>
@@ -2987,18 +2847,18 @@
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label>Country:</label>
+									<label><span style="color:red">*</span>Country:</label>
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="country" name="p_country"
-										onclick="profiletabstatedropdown()" class="form-control">
+										onclick="profiletabstatedropdown()" class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-2">
-									<label>State:</label>
+									<label><span style="color:red">*</span>State:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="state" name="p_state" class="form-control">
+									<select class="form-control" id="state" name="p_state" class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-1"></div>
@@ -3006,10 +2866,10 @@
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label>City:</label>
+									<label><span style="color:red">*</span>City:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="city" name="p_city" class="form-control">
+									<input type="text" id="city" name="p_city" class="form-control" required>
 
 								</div>
 
@@ -3076,14 +2936,14 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="sskillset" name="sskill_set" class="form-control" required>
+									<input type="text" id="sskillset" name="sskill_set" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
 							<div class="row">
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label style="width: 113px;">Skype ID:</label>
+									<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="skypeid" name="pskype_id" class="form-control" required>
@@ -3133,8 +2993,8 @@
 									<label><span style="color:red">*</span>Resigned:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="radio" value="yes" id="resignedy" name="resigned"><label>Yes</label>
-									<input type="radio" value="no" id="resignedn" name="resigned"><label>No</label>
+									<input type="radio" value="Y" id="resignedy" name="resigned"><label>Yes</label>
+									<input type="radio" value="N" id="resignedn" name="resigned"><label>No</label>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3213,8 +3073,8 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="Submit" class="btn btn-sm btn-info" data-dismiss="modal"
-							onclick="addprofile(),clearFormProfile();">Save</button>
+						<button type="Submit" class="btn btn-sm btn-info"
+							onclick="addprofile()">Save</button>
 						<button type="button" class="btn btn-sm btn-info" data-dismiss="modal"
 							onclick="clearFormProfile();">Cancel</button>
 					</div>
@@ -3297,7 +3157,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="peditfirstname" name="peditfirst_name" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Last Name:</label>
@@ -3305,7 +3165,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="peditlastname" name="peditlast_name" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3316,8 +3176,7 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="peditmobile" name="pedit_mobile" class="form-control"
-										required disabled>
+									<input type="tel" id="peditmobile" name="pedit_mobile" class="form-control" pattern="[0-9]{10}"	required>
 								</div>
 
 								<div class="col-sm-2">
@@ -3325,8 +3184,7 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="peditemail" name="pedit_email" class="form-control" required
-										disabled>
+									<input type="email" id="peditemail" name="pedit_email" class="form-control"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3338,7 +3196,7 @@
 								</div>
 								<div class="col-sm-3">
 
-									<input type="text" id="peditdob" name="pedit_dob" class="form-control" disabled>
+									<input type="text" id="peditdob" name="pedit_dob" class="form-control">
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3355,15 +3213,14 @@
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="peditcountry" name="pedit_country"
-										onclick="editprofilestatedropdown()" class="form-control" required disabled>
+										onclick="editprofilestatedropdown()" class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-2">
 									<label>State:</label>
 								</div>
 								<div class="col-sm-3">
-									<select class="form-control" id="peditstate" name="pedit_state" class="form-control"
-										disabled>
+									<select class="form-control" id="peditstate" name="pedit_state" class="form-control">
 									</select>
 								</div>
 
@@ -3375,7 +3232,7 @@
 									<label>City:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="peditcity" name="pedit_city" class="form-control" disabled>
+									<input type="text" id="peditcity" name="pedit_city" class="form-control">
 
 								</div>
 
@@ -3395,7 +3252,7 @@
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="pedithighestquali" name="pedit_highestquali"
-										required disabled></select>
+										required></select>
 
 								</div>
 
@@ -3405,7 +3262,7 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="peditcurrentjobtitle" name="peditcurrent_jobtitle"
-										class="form-control" required disabled>
+										class="form-control" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3417,7 +3274,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="peditcurrentsalary" name="peditcurrent_salary"
-										class="form-control" required disabled>
+										class="form-control" required>
 								</div>
 
 								<div class="col-sm-2">
@@ -3425,7 +3282,7 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="peditexpectedsalary" name="peditexpected_salary"
-										class="form-control" required disabled>
+										class="form-control" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3438,7 +3295,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="peditskillset" name="peditskill_set" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Secondary Skill:</label>
@@ -3446,7 +3303,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="seditskillset" name="seditskill_set" class="form-control"
-										required disabled>
+										required>
 								</div>
 
 								<div class="col-sm-1"> </div>
@@ -3458,14 +3315,14 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="peditnoticeperiod" name="peditnotice_period"
-										class="form-control" required disabled>
+										class="form-control" required>
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Skype ID:</label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="peditskypeid" name="peditskype_id" class="form-control"
-										required disabled>
+										required>
 								</div>
 
 								<div class="col-sm-1"> </div>
@@ -3478,14 +3335,14 @@
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="peditcurrentlocation" name="peditcurrent_location"
-										required disabled></select>
+										required></select>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Desired Location:</label>
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="peditdesiredlocation" name="peditdesired_location"
-										required disabled></select>
+										required></select>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3496,15 +3353,15 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="peditexperience" name="pedit_experience" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Resigned:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="radio" value="yes" id="editresignedy"
+									<input type="radio" value="Y" id="editresignedy"
 										name="editresigned"><label>Yes</label>
-									<input type="radio" value="no" id="editresignedn"
+									<input type="radio" value="N" id="editresignedn"
 										name="editresigned"><label>No</label>
 								</div>
 								<div class="col-sm-1"> </div>
@@ -3538,7 +3395,7 @@
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="peditstatus" name="pedit_status"
-										class="form-control" required disabled>
+										class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -3546,7 +3403,7 @@
 								</div>
 								<div class="col-sm-3">
 									<select id="peditvendorid" name="pedit_vendorid" class="form-control"
-										required disabled></select>
+										required></select>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3561,21 +3418,21 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="file" id="resume" onchange="uploadOnChange()" name="myFile" multiple
-										style="color: black;font-size: 13px;" disabled>
+										style="color: black;font-size: 13px;">
 								</div>
 								<div class="col-sm-5">
 									<input type="text" class="form-control" id="peditfilename" name="peditresume_name"
-										style="width: 100%;" required disabled>
+										style="width: 100%;" required>
 								</div>
 								<div class="col-sm-1"> </div>
 
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-sm btn-info" id="profileeditbtn"
-							onclick="enableprofileedit()">Edit</button>
+						<!-- <button type="button" class="btn btn-sm btn-info" id="profileeditbtn"
+							onclick="enableprofileedit()">Edit</button> -->
 						<button type="submit" id="updateeditprofile" class="btn btn-sm btn-info" data-dismiss="modal"
-							onclick="updateprofile(),disableprofileedit()">Update</button>
+							onclick="updateprofile()">Update</button>
 						<button type="button" class="btn btn-sm btn-info" onclick="disableprofileedit()"
 							data-dismiss="modal">Cancel</button>
 					</div>
@@ -3588,7 +3445,7 @@
 
 		<!-- Vendor Modal -->
 
-		<div class="modal fade" id="vendormodal" role="dialog" style="margin-top: 10%;">
+		<div class="modal fade" id="vendormodal" role="dialog" style="margin-top: 14%;">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color: #73c7e7">
@@ -3596,7 +3453,7 @@
 						<button type="button" class="close" data-dismiss="modal"
 							onclick="clearFormVendor()">&times;</button>
 					</div>
-					<div class="modal-body" style="overflow:auto;height:390px;">
+					<div class="modal-body" style="height:329px;">
 						<form action="post" onsubmit="return false">
 
 							<div class="row">
@@ -3642,8 +3499,7 @@
 									<label style="width: 113px;"><span style="color:red">*</span>Vendor Email:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="vendoremail" name="vendor_email" class="form-control"
-										required>
+									<input type="email" id="vendoremail" name="vendor_email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Recruiter Id:</label>
@@ -3668,8 +3524,7 @@
 									<label><span style="color:red">*</span>Recruiter Contact Number:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="recruitercontno" name="recruiter_contno" class="form-control"
-										required>
+									<input type="tel" id="recruitercontno" name="recruiter_contno" class="form-control" pattern="[0-9]{10}" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3695,7 +3550,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="Submit" class="btn btn-sm btn-info"
-									onclick="addvendor(),clearFormVendor();" data-dismiss="modal">Save</button>
+									onclick="addvendor()">Save</button>
 								<button type="button" class="btn btn-sm btn-info" onclick="clearFormVendor();"
 									data-dismiss="modal">Cancel</button>
 							</div>
@@ -3728,7 +3583,7 @@
 								<div class="col-sm-3">
 									<P id="vendoridhidden" name="vendorid_hidden" style="color:black; display:none"></P>
 									<input type="text" id="editvendorid" name="editvendor_id" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-2">
 									<label style="width: 113px;"><span style="color:red">*</span>Vendor Name:</label>
@@ -3736,7 +3591,7 @@
 								<div class="col-sm-3">
 
 									<input type="text" id="editvendorname" name="editvendor_name" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3747,7 +3602,7 @@
 								</div>
 								<div class="col-sm-3">
 									<select class="form-control" id="editvendorpriloc" name="editvendor_priloc"
-										class="form-control" required disabled>
+										class="form-control" required>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -3755,7 +3610,7 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="editvendorspec" name="editvendor_spec" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3766,15 +3621,14 @@
 									<label style="width: 113px;"><span style="color:red">*</span>Vendor Email:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="editvendoremail" name="editvendor_email" class="form-control"
-										required disabled>
+									<input type="email" id="editvendoremail" name="editvendor_email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Recruiter Id:</label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="editrecruiterid" name="editrecruiter_id" class="form-control"
-										required disabled>
+										required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3786,14 +3640,13 @@
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="editrecruitername" name="editrecruiter_name"
-										class="form-control" required disabled>
+										class="form-control" required>
 								</div>
 								<div class="col-sm-2">
 									<label><span style="color:red">*</span>Recruiter Contact Number:</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="editrecruitercontno" name="editrecruiter_contno"
-										class="form-control" required disabled>
+									<input type="tel" id="editrecruitercontno" name="editrecruiter_contno" class="form-control" pattern="[0-9]{10}" required>
 								</div>
 								<div class="col-sm-1"> </div>
 							</div>
@@ -3815,14 +3668,14 @@
 								</div>
 								<div class="col-sm-9">
 									<textarea id="editvendorcomments" name="editvendor_comments"
-										style="width: 89%;border-radius: 5px;font-size:13px;" disabled></textarea>
+										style="width: 89%;border-radius: 5px;font-size:13px;" ></textarea>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-sm btn-info" id="editvendor"
-									onclick="enablevendorlist()" data-toggle="modal">Edit</button>
+								<!-- <button type="button" class="btn btn-sm btn-info" id="editvendor"
+									onclick="enablevendorlist()" data-toggle="modal">Edit</button> -->
 								<button type="Submit" class="btn btn-sm btn-info" id="updatevendor"
-									onclick="updatevendorbyid(),cancelenablevendor()"
+									onclick="updatevendorbyid()"
 									data-dismiss="modal">update</button>
 								<button type="button" class="btn btn-sm btn-info" onclick="cancelenablevendor()"
 									data-dismiss="modal">Cancel</button>
