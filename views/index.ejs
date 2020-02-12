@@ -568,7 +568,7 @@ $(document).ready(function() {
 	function profilevendordropdown() {
 
 		profilevendor = '';
-		var url = "http://52.230.96.207/profilevendor";
+		var url = "http://35.202.40.11/profilevendor";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -600,7 +600,7 @@ $(document).ready(function() {
 
 	function jobstatus() {
 		jobstatusdrop = '';
-		var url = "http://52.230.96.207/jobstatus";
+		var url = "http://35.202.40.11/jobstatus";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -620,7 +620,7 @@ $(document).ready(function() {
 	function jobreqiddropdown() {
 
 		jobreqID = '';
-		var url = "http://52.230.96.207/jobreqid";
+		var url = "http://35.202.40.11/jobreqid";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -642,7 +642,7 @@ $(document).ready(function() {
 		var reqId = $('[name="reqid_drop"]').find(":selected").val();
 
 		var jobtitilebyreqid = "";
-		var url = "http://52.230.96.207/jobtitlebyreqid/" + reqId;
+		var url = "http://35.202.40.11/jobtitlebyreqid/" + reqId;
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -667,7 +667,7 @@ $(document).ready(function() {
 
 		console.log(reqId);
 		var jobtitilebyreqid = "";
-		var url = "http://52.230.96.207/jobtitlebyreqid/" + reqId;
+		var url = "http://35.202.40.11/jobtitlebyreqid/" + reqId;
 
 		$.ajax({
 			url: url,
@@ -688,7 +688,7 @@ $(document).ready(function() {
 
 	function jobstatusdropdown() {
 		jobstatus = '';
-		var url = "http://52.230.96.207/jobstatusnew";
+		var url = "http://35.202.40.11/jobstatusnew";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -706,7 +706,7 @@ $(document).ready(function() {
 
 	function expdropdown() {
 		expdropdowndrop = '';
-		var url = "http://52.230.96.207/experince";
+		var url = "http://35.202.40.11/experince";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -724,7 +724,7 @@ $(document).ready(function() {
 		var budropdown = "";
 
 
-		var url = "http://52.230.96.207/bu";
+		var url = "http://35.202.40.11/bu";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -745,7 +745,7 @@ $(document).ready(function() {
 
 	function salesdropdown() {
 		var salesdropdown = "";
-		var url = "http://52.230.96.207/sales";
+		var url = "http://35.202.40.11/sales";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -764,7 +764,7 @@ $(document).ready(function() {
 
 	function salesrepdropdown() {
 		var salesrepdropdown = "";
-		var url = "http://52.230.96.207/salesrep";
+		var url = "http://35.202.40.11/salesrep";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -783,7 +783,7 @@ $(document).ready(function() {
 
 	function customerdropdown() {
 		var customerdropdown = "";
-		var url = "http://52.230.96.207/customer";
+		var url = "http://35.202.40.11/customer";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -807,7 +807,7 @@ $(document).ready(function() {
 	//profileTab lookup's
 	function salutationdropdown() {
 		var salutation = "";
-		var url = "http://52.230.96.207/salutation";
+		var url = "http://35.202.40.11/salutation";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -827,7 +827,7 @@ $(document).ready(function() {
 
 	function profiletabcountrydropdown() {
 		var profilecountry = "";
-		var url = "http://52.230.96.207/profilecountry";
+		var url = "http://35.202.40.11/profilecountry";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -848,7 +848,7 @@ $(document).ready(function() {
 		let profilecountry = $('[name="p_country"]').find(":selected").val();
 	
 		var profilestatebycountry = "";
-		var url = "http://52.230.96.207/statebycountry/" + profilecountry;
+		var url = "http://35.202.40.11/statebycountry/" + profilecountry;
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -866,7 +866,7 @@ $(document).ready(function() {
 	
 	function highestqualdropdown() {
 		var highestqual = "";
-		var url = "http://52.230.96.207/highestqual";
+		var url = "http://35.202.40.11/highestqual";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -887,7 +887,7 @@ $(document).ready(function() {
 	
 	function currentlocationdropdown() {
 		var currentlocation = "";
-		var url = "http://52.230.96.207/curentlocation";
+		var url = "http://35.202.40.11/curentlocation";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -915,7 +915,7 @@ $(document).ready(function() {
 	
 	function profilestatusdropdown() {
 		var profilestatus = "";
-		var url = "http://52.230.96.207/profilestatus";
+		var url = "http://35.202.40.11/profilestatus";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -940,7 +940,7 @@ $(document).ready(function() {
 		var profilecountry = $('[name="pedit_country"]').find(":selected").val();
 
 		var profilestatebycountry = "";
-		var url = "http://52.230.96.207/statebycountry/" + profilecountry;
+		var url = "http://35.202.40.11/statebycountry/" + profilecountry;
 
 		$.ajax({
 			url: url,
@@ -961,7 +961,7 @@ $(document).ready(function() {
 
 	function getvendornamedropdown() {
 		vendorratingdrop = '';
-		var url = "http://52.230.96.207/vendornamedropdown";
+		var url = "http://35.202.40.11/vendornamedropdown";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -982,7 +982,7 @@ $(document).ready(function() {
 	function joblistingdetails() {
 		var tableData = "";
 
-		var url = "http://52.230.96.207/joblistingdetails";
+		var url = "http://35.202.40.11/joblistingdetails";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -1013,7 +1013,7 @@ $(document).ready(function() {
 
 	function jobdisplay(i) {
 		// $("#updatehide").hide();
-		var url = "http://52.230.96.207/joblisting/" + i;
+		var url = "http://35.202.40.11/joblisting/" + i;
 
 		$.ajax({
 			url: url,
@@ -1144,7 +1144,7 @@ $(document).ready(function() {
 		}
 
 		data = JSON.stringify(data);
-		var url = "http://52.230.96.207/jdescription";
+		var url = "http://35.202.40.11/jdescription";
 
 		// if(Requirement!="" && Role!="" && Position!=""&& Expected!=""&& Exp!=""&& PSkill!=""&& SSkill!=""&& locationflex!=""&& customerid!=""
 		// && Status!=""&& buid!=""&& salesregionid!=""&& joblocation!=""&& jDescription!="")
@@ -1227,7 +1227,7 @@ $(document).ready(function() {
 		data = JSON.stringify(data);
 
 		$.ajax({
-			url: "http://52.230.96.207/updatejoblisting/" + jobdescriptionId,
+			url: "http://35.202.40.11/updatejoblisting/" + jobdescriptionId,
 			type: "post",
 			async: false,
 			data: data,
@@ -1248,7 +1248,7 @@ $(document).ready(function() {
 
 		var tableData = "";
 
-		var url = "http://52.230.96.207/profileslistingdetails";
+		var url = "http://35.202.40.11/profileslistingdetails";
 		
 		$.ajax({
 			url: url,
@@ -1286,7 +1286,7 @@ $(document).ready(function() {
 
 	function profilesdisplay(i) {
 		// $("#updateeditprofile").hide();
-		var url = "http://52.230.96.207/profilelisting/" + i;
+		var url = "http://35.202.40.11/profilelisting/" + i;
 
 		$.ajax({
 			url: url,
@@ -1403,7 +1403,7 @@ $(document).ready(function() {
 
 		data = JSON.stringify(data);
 
-		var url = "http://52.230.96.207/addprofiles";
+		var url = "http://35.202.40.11/addprofiles";
 
 		 if (Jobrecid!="" &&jobreqcode!="" && Firstname!="" && Lastname!="" &&Email!="" && Mobile!=""
 		 && Experience!="" && Highestquali!="" && Currentjobtitle!="" &&Currentsalary!="" 
@@ -1497,7 +1497,7 @@ $(document).ready(function() {
 
 		data = JSON.stringify(data);
 	
-		url = "http://52.230.96.207/updateprofile/" + peditprofileId,
+		url = "http://35.202.40.11/updateprofile/" + peditprofileId,
 			
 
 		$.ajax({
@@ -1589,7 +1589,7 @@ $(document).ready(function() {
 
 		data = JSON.stringify(data);
 
-		var url = "http://52.230.96.207/addvendor";
+		var url = "http://35.202.40.11/addvendor";
 
 		if (Vendorid != "" && Vendorname != "" && Vendorpriloc != "" && Vendorspec != "" && Vendoremail != "" && Recruiterid != "" && Recruitername != "" && Recruitercontno != "" && Vendorrating != "") {
 
@@ -1621,7 +1621,7 @@ $(document).ready(function() {
 
 	function vendorlistingdetails() {
 		var tableData = "";
-		var url = "http://52.230.96.207/vendorlistingdetails";
+		var url = "http://35.202.40.11/vendorlistingdetails";
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -1654,7 +1654,7 @@ $(document).ready(function() {
 	function vendordisplay(i) {
 
 		// $("#updatevendor").hide();
-		var url = "http://52.230.96.207/vendorlisting/" + i;
+		var url = "http://35.202.40.11/vendorlisting/" + i;
 
 		$.ajax({
 			url: url,
@@ -1728,7 +1728,7 @@ $(document).ready(function() {
 			"Updateby": Updateby
 		}
 		data = JSON.stringify(data);
-		var url = "http://52.230.96.207/updatevendor/" + vendorid;
+		var url = "http://35.202.40.11/updatevendor/" + vendorid;
 		$.ajax({
 			url: url,
 			type: "post",
